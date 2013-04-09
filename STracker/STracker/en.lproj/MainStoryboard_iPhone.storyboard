@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="54U-IR-u3W">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="7py-ca-ZJP">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="54U-IR-u3W" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackTranslucent" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackTranslucent" id="ZDh-6g-53f">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="50Y-45-8tl" kind="relationship" relationship="rootViewController" id="zZh-dB-WGC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TKF-e8-1zA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-140" y="-40"/>
+        </scene>
+        <!--View Controller - STracker-->
+        <scene sceneID="NTH-sV-1WC">
+            <objects>
+                <viewController id="50Y-45-8tl" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Aly-A5-a0t">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TiZ-Dp-9To">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="87U-UI-vkO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9g9-fl-SFG">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="304" id="Cx1-FJ-5TQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPN-H8-xgm">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Seasons">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showSeasons:" destination="50Y-45-8tl" eventType="touchDown" id="hG9-60-aNB"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gPN-H8-xgm" firstAttribute="centerX" secondItem="9g9-fl-SFG" secondAttribute="centerX" type="default" id="AUK-pl-2Iu"/>
+                            <constraint firstItem="9g9-fl-SFG" firstAttribute="top" secondItem="TiZ-Dp-9To" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="JGX-Y2-uro"/>
+                            <constraint firstAttribute="trailing" secondItem="9g9-fl-SFG" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Ld4-6o-VXJ"/>
+                            <constraint firstAttribute="bottom" secondItem="gPN-H8-xgm" secondAttribute="bottom" constant="46" id="NWz-VB-5vC"/>
+                            <constraint firstItem="TiZ-Dp-9To" firstAttribute="leading" secondItem="Aly-A5-a0t" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="P0b-hR-gEC"/>
+                            <constraint firstItem="TiZ-Dp-9To" firstAttribute="top" secondItem="Aly-A5-a0t" secondAttribute="top" constant="95" id="WOu-Y6-CBh"/>
+                            <constraint firstAttribute="trailing" secondItem="TiZ-Dp-9To" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="fUT-ut-Tuf"/>
+                            <constraint firstItem="9g9-fl-SFG" firstAttribute="leading" secondItem="Aly-A5-a0t" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="puf-tc-7Ij"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="STracker" id="Txu-UX-Ywx">
+                        <barButtonItem key="rightBarButtonItem" title="Testing" id="iTZ-V8-5NU">
+                            <connections>
+                                <action selector="getInfo:" destination="50Y-45-8tl" id="NPY-3Q-fwS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="getInfoButton" destination="iTZ-V8-5NU" id="o8w-wi-9in"/>
+                        <outlet property="infoSummary" destination="9g9-fl-SFG" id="Vxe-xF-TC5"/>
+                        <outlet property="showSeasonsButton" destination="gPN-H8-xgm" id="NYU-xE-ZyH"/>
+                        <outlet property="tvShowName" destination="TiZ-Dp-9To" id="PXO-e6-SIM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9pP-VC-UKF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="406" y="-40"/>
+        </scene>
+        <!--Seasons Table View Controller-->
+        <scene sceneID="qHU-fd-r0Z">
+            <objects>
+                <tableViewController storyboardIdentifier="SeasonsTableView" id="dmL-el-6XP" customClass="SeasonsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="TQL-z4-dfm">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="season_cell" id="DZB-tk-vFZ">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="dmL-el-6XP" id="xoD-zd-HpQ"/>
+                            <outlet property="delegate" destination="dmL-el-6XP" id="nrQ-XD-V3n"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xu7-nt-ZiL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="865" y="-40"/>
+        </scene>
+        <!--Episode Table View Controller-->
+        <scene sceneID="ynM-fV-tgE">
+            <objects>
+                <tableViewController storyboardIdentifier="EpisodesTable" id="rso-FC-hef" customClass="EpisodeTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="FG9-XZ-7dN">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="episode_cell" id="Vwz-mg-KLK">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="rso-FC-hef" id="a6h-XM-e7L"/>
+                            <outlet property="delegate" destination="rso-FC-hef" id="rrd-Ux-W6G"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AFL-GL-vsj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="865" y="653"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="EpisodeTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EpisodeTableViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="SeasonsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SeasonsTableViewController.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="getInfo:"/>
+                <relationship kind="action" name="showSeasons:"/>
+                <relationship kind="outlet" name="getInfoButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="infoSummary" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="showSeasonsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="tvShowName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
