@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C6D9BC81750268D000C2E99 /* SearchByNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BC71750268D000C2E99 /* SearchByNameViewController.m */; };
+		8C6D9BCC17502954000C2E99 /* SearchByGenreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BCB17502954000C2E99 /* SearchByGenreViewController.m */; };
+		8C6D9BD017502F30000C2E99 /* TvShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BCF17502F30000C2E99 /* TvShow.m */; };
+		8C6D9BD3175030B2000C2E99 /* ShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BD2175030B2000C2E99 /* ShowsViewController.m */; };
+		8C6D9BD6175032FD000C2E99 /* InformationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BD5175032FD000C2E99 /* InformationManager.m */; };
 		D8782EC0174E6E160025CF79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EBF174E6E160025CF79 /* UIKit.framework */; };
 		D8782EC2174E6E160025CF79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EC1174E6E160025CF79 /* Foundation.framework */; };
 		D8782EC4174E6E160025CF79 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EC3174E6E160025CF79 /* CoreGraphics.framework */; };
@@ -18,7 +23,6 @@
 		D8782ED6174E6E160025CF79 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8782ED5174E6E160025CF79 /* Default-568h@2x.png */; };
 		D8782ED9174E6E160025CF79 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8782ED7174E6E160025CF79 /* MainStoryboard_iPhone.storyboard */; };
 		D8782EDC174E6E160025CF79 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8782EDA174E6E160025CF79 /* MainStoryboard_iPad.storyboard */; };
-		D8782EDF174E6E160025CF79 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8782EDE174E6E160025CF79 /* SearchViewController.m */; };
 		D891AE2D174FE191001625C6 /* BackgroundPattern.png in Resources */ = {isa = PBXBuildFile; fileRef = D891AE2C174FE191001625C6 /* BackgroundPattern.png */; };
 		D891AE30174FE7E6001625C6 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D891AE2F174FE7E6001625C6 /* CalendarViewController.m */; };
 		D891AE36174FEB0C001625C6 /* Search.png in Resources */ = {isa = PBXBuildFile; fileRef = D891AE35174FEB0C001625C6 /* Search.png */; };
@@ -31,6 +35,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C6D9BC61750268D000C2E99 /* SearchByNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchByNameViewController.h; sourceTree = "<group>"; };
+		8C6D9BC71750268D000C2E99 /* SearchByNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchByNameViewController.m; sourceTree = "<group>"; };
+		8C6D9BCA17502954000C2E99 /* SearchByGenreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchByGenreViewController.h; sourceTree = "<group>"; };
+		8C6D9BCB17502954000C2E99 /* SearchByGenreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchByGenreViewController.m; sourceTree = "<group>"; };
+		8C6D9BCE17502F30000C2E99 /* TvShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TvShow.h; sourceTree = "<group>"; };
+		8C6D9BCF17502F30000C2E99 /* TvShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShow.m; sourceTree = "<group>"; };
+		8C6D9BD1175030B2000C2E99 /* ShowsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowsViewController.h; sourceTree = "<group>"; };
+		8C6D9BD2175030B2000C2E99 /* ShowsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowsViewController.m; sourceTree = "<group>"; };
+		8C6D9BD4175032FD000C2E99 /* InformationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationManager.h; sourceTree = "<group>"; };
+		8C6D9BD5175032FD000C2E99 /* InformationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationManager.m; sourceTree = "<group>"; };
 		D8782EBC174E6E160025CF79 /* STracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8782EBF174E6E160025CF79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D8782EC1174E6E160025CF79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -46,8 +60,6 @@
 		D8782ED5174E6E160025CF79 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D8782ED8174E6E160025CF79 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		D8782EDB174E6E160025CF79 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		D8782EDD174E6E160025CF79 /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
-		D8782EDE174E6E160025CF79 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		D891AE2C174FE191001625C6 /* BackgroundPattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundPattern.png; sourceTree = "<group>"; };
 		D891AE2E174FE7E6001625C6 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		D891AE2F174FE7E6001625C6 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
@@ -75,6 +87,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C6D9BCD17502F1A000C2E99 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8C6D9BCE17502F30000C2E99 /* TvShow.h */,
+				8C6D9BCF17502F30000C2E99 /* TvShow.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		D8782EB3174E6E160025CF79 = {
 			isa = PBXGroup;
 			children = (
@@ -106,16 +127,23 @@
 		D8782EC5174E6E160025CF79 /* STracker */ = {
 			isa = PBXGroup;
 			children = (
+				8C6D9BCD17502F1A000C2E99 /* Models */,
 				D8782ED7174E6E160025CF79 /* MainStoryboard_iPhone.storyboard */,
 				D8782EDA174E6E160025CF79 /* MainStoryboard_iPad.storyboard */,
 				D8782ECE174E6E160025CF79 /* AppDelegate.h */,
 				D8782ECF174E6E160025CF79 /* AppDelegate.m */,
-				D8782EDD174E6E160025CF79 /* SearchViewController.h */,
-				D8782EDE174E6E160025CF79 /* SearchViewController.m */,
 				D891AE2E174FE7E6001625C6 /* CalendarViewController.h */,
 				D891AE2F174FE7E6001625C6 /* CalendarViewController.m */,
 				D891AE41174FFA49001625C6 /* OptionsViewController.h */,
 				D891AE42174FFA49001625C6 /* OptionsViewController.m */,
+				8C6D9BC61750268D000C2E99 /* SearchByNameViewController.h */,
+				8C6D9BC71750268D000C2E99 /* SearchByNameViewController.m */,
+				8C6D9BCA17502954000C2E99 /* SearchByGenreViewController.h */,
+				8C6D9BCB17502954000C2E99 /* SearchByGenreViewController.m */,
+				8C6D9BD1175030B2000C2E99 /* ShowsViewController.h */,
+				8C6D9BD2175030B2000C2E99 /* ShowsViewController.m */,
+				8C6D9BD4175032FD000C2E99 /* InformationManager.h */,
+				8C6D9BD5175032FD000C2E99 /* InformationManager.m */,
 				D8782EC6174E6E160025CF79 /* Supporting Files */,
 			);
 			path = STracker;
@@ -225,9 +253,13 @@
 			files = (
 				D8782ECC174E6E160025CF79 /* main.m in Sources */,
 				D8782ED0174E6E160025CF79 /* AppDelegate.m in Sources */,
-				D8782EDF174E6E160025CF79 /* SearchViewController.m in Sources */,
 				D891AE30174FE7E6001625C6 /* CalendarViewController.m in Sources */,
 				D891AE43174FFA49001625C6 /* OptionsViewController.m in Sources */,
+				8C6D9BC81750268D000C2E99 /* SearchByNameViewController.m in Sources */,
+				8C6D9BCC17502954000C2E99 /* SearchByGenreViewController.m in Sources */,
+				8C6D9BD017502F30000C2E99 /* TvShow.m in Sources */,
+				8C6D9BD3175030B2000C2E99 /* ShowsViewController.m in Sources */,
+				8C6D9BD6175032FD000C2E99 /* InformationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

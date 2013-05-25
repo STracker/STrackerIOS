@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchByNameViewController.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 
-@interface CalendarViewController : UITableViewController
+@interface CalendarViewController : UITableViewController <UIActionSheetDelegate>
+
+- (IBAction)searchOptions:(UIBarButtonItem *)sender;
 
 @end
