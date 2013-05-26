@@ -8,9 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+@interface TvShowSynopse : NSObject
+
+@property(nonatomic, copy) NSString *imdbId;
+@property(nonatomic, copy) NSString *name;
+
+@end
+
 @interface TvShow : NSObject
 
-@property(nonatomic, retain) NSString *imdbid;
-@property(nonatomic, retain) NSString *name;
+@property(nonatomic, copy) NSString *imdbId;
+@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy) NSString *description;
+
+- (TvShowSynopse *)getSynopse;
 
 @end

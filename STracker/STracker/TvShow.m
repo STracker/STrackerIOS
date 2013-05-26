@@ -10,6 +10,18 @@
 
 @implementation TvShow
 
-@synthesize imdbid, name;
+@synthesize imdbId, name, description;
+
+- (TvShowSynopse *)getSynopse
+{
+    return [[TvShowSynopse alloc] init];
+}
+
+@end
+
+#pragma mark - Synopsis object.
+@implementation TvShowSynopse
+
+@synthesize imdbId, name;
 
 @end

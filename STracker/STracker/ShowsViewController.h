@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "InformationManager.h"
+#import "InfoDownloadManager.h"
 #import "TvShow.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 
 @interface ShowsViewController : UITableViewController
 {
-    NSArray *_tvshows;
+    NSMutableArray *_tvshows;
 }
 
 @property(nonatomic, retain) NSString *genre;

@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C4D51CB1752B86400739A25 /* InfoDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4D51CA1752B86400739A25 /* InfoDownloadManager.m */; };
 		8C6D9BC81750268D000C2E99 /* SearchByNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BC71750268D000C2E99 /* SearchByNameViewController.m */; };
 		8C6D9BCC17502954000C2E99 /* SearchByGenreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BCB17502954000C2E99 /* SearchByGenreViewController.m */; };
 		8C6D9BD017502F30000C2E99 /* TvShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BCF17502F30000C2E99 /* TvShow.m */; };
 		8C6D9BD3175030B2000C2E99 /* ShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BD2175030B2000C2E99 /* ShowsViewController.m */; };
-		8C6D9BD6175032FD000C2E99 /* InformationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BD5175032FD000C2E99 /* InformationManager.m */; };
 		D8782EC0174E6E160025CF79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EBF174E6E160025CF79 /* UIKit.framework */; };
 		D8782EC2174E6E160025CF79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EC1174E6E160025CF79 /* Foundation.framework */; };
 		D8782EC4174E6E160025CF79 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EC3174E6E160025CF79 /* CoreGraphics.framework */; };
@@ -35,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C4D51C91752B86400739A25 /* InfoDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoDownloadManager.h; sourceTree = "<group>"; };
+		8C4D51CA1752B86400739A25 /* InfoDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoDownloadManager.m; sourceTree = "<group>"; };
 		8C6D9BC61750268D000C2E99 /* SearchByNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchByNameViewController.h; sourceTree = "<group>"; };
 		8C6D9BC71750268D000C2E99 /* SearchByNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchByNameViewController.m; sourceTree = "<group>"; };
 		8C6D9BCA17502954000C2E99 /* SearchByGenreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchByGenreViewController.h; sourceTree = "<group>"; };
@@ -43,8 +45,6 @@
 		8C6D9BCF17502F30000C2E99 /* TvShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShow.m; sourceTree = "<group>"; };
 		8C6D9BD1175030B2000C2E99 /* ShowsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowsViewController.h; sourceTree = "<group>"; };
 		8C6D9BD2175030B2000C2E99 /* ShowsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowsViewController.m; sourceTree = "<group>"; };
-		8C6D9BD4175032FD000C2E99 /* InformationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationManager.h; sourceTree = "<group>"; };
-		8C6D9BD5175032FD000C2E99 /* InformationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationManager.m; sourceTree = "<group>"; };
 		D8782EBC174E6E160025CF79 /* STracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8782EBF174E6E160025CF79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D8782EC1174E6E160025CF79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -87,6 +87,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C4D51C4175296DE00739A25 /* InformationManager */ = {
+			isa = PBXGroup;
+			children = (
+				8C4D51C91752B86400739A25 /* InfoDownloadManager.h */,
+				8C4D51CA1752B86400739A25 /* InfoDownloadManager.m */,
+			);
+			name = InformationManager;
+			sourceTree = "<group>";
+		};
+		8C4D51C817529C3700739A25 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D891AE2E174FE7E6001625C6 /* CalendarViewController.h */,
+				D891AE2F174FE7E6001625C6 /* CalendarViewController.m */,
+				D891AE41174FFA49001625C6 /* OptionsViewController.h */,
+				D891AE42174FFA49001625C6 /* OptionsViewController.m */,
+				8C6D9BC61750268D000C2E99 /* SearchByNameViewController.h */,
+				8C6D9BC71750268D000C2E99 /* SearchByNameViewController.m */,
+				8C6D9BCA17502954000C2E99 /* SearchByGenreViewController.h */,
+				8C6D9BCB17502954000C2E99 /* SearchByGenreViewController.m */,
+				8C6D9BD1175030B2000C2E99 /* ShowsViewController.h */,
+				8C6D9BD2175030B2000C2E99 /* ShowsViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		8C6D9BCD17502F1A000C2E99 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,7 +125,6 @@
 		D8782EB3174E6E160025CF79 = {
 			isa = PBXGroup;
 			children = (
-				D891AE2B174FE172001625C6 /* Images */,
 				D8782EC5174E6E160025CF79 /* STracker */,
 				D8782EBE174E6E160025CF79 /* Frameworks */,
 				D8782EBD174E6E160025CF79 /* Products */,
@@ -127,23 +152,13 @@
 		D8782EC5174E6E160025CF79 /* STracker */ = {
 			isa = PBXGroup;
 			children = (
+				8C4D51C4175296DE00739A25 /* InformationManager */,
 				8C6D9BCD17502F1A000C2E99 /* Models */,
+				8C4D51C817529C3700739A25 /* Controllers */,
 				D8782ED7174E6E160025CF79 /* MainStoryboard_iPhone.storyboard */,
 				D8782EDA174E6E160025CF79 /* MainStoryboard_iPad.storyboard */,
 				D8782ECE174E6E160025CF79 /* AppDelegate.h */,
 				D8782ECF174E6E160025CF79 /* AppDelegate.m */,
-				D891AE2E174FE7E6001625C6 /* CalendarViewController.h */,
-				D891AE2F174FE7E6001625C6 /* CalendarViewController.m */,
-				D891AE41174FFA49001625C6 /* OptionsViewController.h */,
-				D891AE42174FFA49001625C6 /* OptionsViewController.m */,
-				8C6D9BC61750268D000C2E99 /* SearchByNameViewController.h */,
-				8C6D9BC71750268D000C2E99 /* SearchByNameViewController.m */,
-				8C6D9BCA17502954000C2E99 /* SearchByGenreViewController.h */,
-				8C6D9BCB17502954000C2E99 /* SearchByGenreViewController.m */,
-				8C6D9BD1175030B2000C2E99 /* ShowsViewController.h */,
-				8C6D9BD2175030B2000C2E99 /* ShowsViewController.m */,
-				8C6D9BD4175032FD000C2E99 /* InformationManager.h */,
-				8C6D9BD5175032FD000C2E99 /* InformationManager.m */,
 				D8782EC6174E6E160025CF79 /* Supporting Files */,
 			);
 			path = STracker;
@@ -152,6 +167,7 @@
 		D8782EC6174E6E160025CF79 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D891AE2B174FE172001625C6 /* Images */,
 				D8782EC7174E6E160025CF79 /* STracker-Info.plist */,
 				D8782EC8174E6E160025CF79 /* InfoPlist.strings */,
 				D8782ECB174E6E160025CF79 /* main.m */,
@@ -175,6 +191,7 @@
 				D891AE2C174FE191001625C6 /* BackgroundPattern.png */,
 			);
 			name = Images;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,7 +276,7 @@
 				8C6D9BCC17502954000C2E99 /* SearchByGenreViewController.m in Sources */,
 				8C6D9BD017502F30000C2E99 /* TvShow.m in Sources */,
 				8C6D9BD3175030B2000C2E99 /* ShowsViewController.m in Sources */,
-				8C6D9BD6175032FD000C2E99 /* InformationManager.m in Sources */,
+				8C4D51CB1752B86400739A25 /* InfoDownloadManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
