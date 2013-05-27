@@ -7,15 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Entity.h"
 
-@interface TvShowSynopse : NSObject
+@interface TvShowSynopse : Entity
 
 @property(nonatomic, copy) NSString *imdbId;
 @property(nonatomic, copy) NSString *name;
 
 @end
 
-@interface TvShow : NSObject
+@interface TvShow : Entity
 
 @property(nonatomic, copy) NSString *imdbId;
 @property(nonatomic, copy) NSString *name;

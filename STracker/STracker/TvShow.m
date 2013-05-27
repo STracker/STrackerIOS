@@ -17,11 +17,30 @@
     return [[TvShowSynopse alloc] init];
 }
 
+- (id)initWithDictionary:(NSDictionary *)dictionary
+{
+    if (self = [super init]) {
+        imdbId = [dictionary objectForKey:@"TvShowId"];
+        name = [dictionary objectForKey:@"Name"];
+        description = [dictionary objectForKey:@"Description"];
+    }
+    return self;
+}
+
 @end
 
 #pragma mark - Synopsis object.
 @implementation TvShowSynopse
 
 @synthesize imdbId, name;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary
+{
+    if (self = [super init]) {
+        imdbId = [dictionary objectForKey:@"Id"];
+        name = [dictionary objectForKey:@"Name"];
+    }
+    return self;
+}
 
 @end

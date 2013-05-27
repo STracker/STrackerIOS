@@ -7,12 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ShowsViewController.h"
+#import "BaseTableViewController.h"
+#import "TvShowsByGenreViewController.h"
 
-#define BACKGROUND @"BackgroundPattern.png"
-
-@interface SearchByGenreViewController : UITableViewController {
-    NSArray *_genres;
-}
+@interface GenresViewController : BaseTableViewController
 
 @end

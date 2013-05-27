@@ -10,17 +10,28 @@
 
 @implementation CalendarViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
-}
-
 - (IBAction)searchOptions:(UIBarButtonItem *)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Search" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Show by name", @"Shows by genre", @"Friend", nil];
     
     [actionSheet showFromBarButtonItem:sender animated:YES];
+}
+
+#pragma mark - BaseTableViewController override methods.
+- (void)initHook
+{
+    _navTitle = @"Calendar";
+    _cellIdentifier = @"CalendarCell";
+    _numberOfSections = 1; // For change!
+}
+
+- (void)viewDidLoadHook
+{
+    // Nothing todo...
+}
+
+- (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
+{
+    // TODO, implement this method!
 }
 
 #pragma mark - Action sheet delegate
@@ -28,13 +39,13 @@
     NSString *viewName;
     switch (buttonIndex) {
         case 0:
-            viewName = @"SearchByName";
+            // TODO...
             break;
         case 1:
             viewName = @"SearchByGenre";
             break;
         case 2:
-            viewName = @"SearchFriend";
+            // TODO...
             break;
         default:
             viewName = nil;
@@ -45,6 +56,8 @@
     
     UIViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:viewName];
     [self.navigationController pushViewController:view animated:YES];
+    
+    [actionSheet setDelegate:nil];
 }
 
 @end
