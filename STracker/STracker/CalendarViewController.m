@@ -19,14 +19,13 @@
 #pragma mark - BaseTableViewController override methods.
 - (void)initHook
 {
-    _navTitle = @"Calendar";
     _cellIdentifier = @"CalendarCell";
     _numberOfSections = 1; // For change!
 }
 
 - (void)viewDidLoadHook
 {
-    // Nothing todo...
+    self.navigationItem.title = @"Calendar";
 }
 
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath

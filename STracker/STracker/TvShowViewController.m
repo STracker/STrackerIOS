@@ -20,26 +20,45 @@
      {
          _tvshow = [[TvShow alloc] initWithDictionary:(NSDictionary *)result];
          
-         _name.text = _tvshow.name;
-         _imdbId.text = _tvshow.imdbId;
+         self.navigationItem.title = _tvshow.name;
          _description.text = _tvshow.description;
+         _runtime.text = [NSString stringWithFormat:@"%@", _tvshow.runtime];
+         _airDay.text = _tvshow.airDay;
+         _firstAired.text = _tvshow.firstAired;
+         
+         _poster.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_tvshow.poster]]];
+         
+         NSMutableString *str = [[NSMutableString alloc] init];
+         for (id genre in _tvshow.genres) {
+             [str appendString:[NSString stringWithFormat:@"- %@\n", genre]];
+         }
+         _genres.text = str;
          
      } failure:^(AFJSONRequestOperation *operation, NSError *error)
      {
-         NSLog(@"failure");
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+         
+         [alert show];
      }];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
+    
     [self getInfo];
 }
 
-- (void)viewDidUnload {
-    _name = nil;
-    _imdbId = nil;
+- (void)viewDidUnload
+{
     _description = nil;
+    _airDay = nil;
+    _runtime = nil;
+    _poster = nil;
+    _firstAired = nil;
+    _genres = nil;
     [super viewDidUnload];
 }
 @end

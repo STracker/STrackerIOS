@@ -12,4 +12,6 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
++ (id)verifyValue: (id)value defaultValue:(id)defaultValue;
+
 @end

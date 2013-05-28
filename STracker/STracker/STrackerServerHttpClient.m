@@ -36,7 +36,7 @@
 }
 
 #pragma mark - Tv shows operations.
-- (void)getByGenre:(NSString *)genre success:(Success)success failure:(Failure) failure
+- (void)getByGenre:(NSString *)genre success:(Success)success failure:(Failure)failure
 {
     NSDictionary *query = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObject:genre] forKeys:[NSArray arrayWithObject:@"genre"]];
     

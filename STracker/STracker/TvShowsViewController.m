@@ -47,7 +47,7 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TvShowViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"ShowView"];
+    TvShowViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"TvShowView"];
     
     TvShowSynopse *synopse = [_data objectAtIndex:indexPath.row];
     view.imdbId = synopse.imdbId;

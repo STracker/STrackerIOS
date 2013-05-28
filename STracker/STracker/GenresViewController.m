@@ -13,17 +13,15 @@
 #pragma mark - BaseTableViewController override methods.
 - (void)viewDidLoadHook
 {
-    // Nothing todo...
+    self.navigationItem.title = @"Genres";
 }
 
 - (void)initHook
 {
-    _navTitle = @"Genres";
     _numberOfSections = 1;
     _cellIdentifier = @"GenreCell";
     
     _data = [[NSMutableArray alloc] initWithObjects:@"Action", @"Adventure", @"Animation", @"Biography", @"Comedy", @"Crime", @"Documentary", @"Drama", @"Family", @"Fantasy", @"Film-Noir", @"History", @"Horror", @"Music", @"Musical", @"Mystery", @"Romance", @"Sci-Fi", @"Short", @"Sport", @"Thriller", @"War", @"Western", nil];
-    
 }
 
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath

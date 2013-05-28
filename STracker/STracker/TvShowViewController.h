@@ -10,12 +10,17 @@
 #import "STrackerServerHttpClient.h"
 #import "TvShow.h"
 
+#define BACKGROUND @"BackgroundPattern.png"
+
 @interface TvShowViewController : UIViewController
 {
     TvShow *_tvshow;
-    __weak IBOutlet UILabel *_name;
-    __weak IBOutlet UILabel *_imdbId;
     __weak IBOutlet UITextView *_description;
+    __weak IBOutlet UILabel *_airDay;
+    __weak IBOutlet UILabel *_firstAired;
+    __weak IBOutlet UILabel *_runtime;
+    __weak IBOutlet UIImageView *_poster;
+    __weak IBOutlet UITextView *_genres;
 }
 
 @property(nonatomic, copy) NSString *imdbId;

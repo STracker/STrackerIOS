@@ -15,12 +15,11 @@
 #pragma mark - Override TvShowsViewController methods.
 - (void)viewDidLoadHook
 {
-    //TODO...
+    self.navigationItem.title = name;
 }
 
 - (void)initHook
 {
-    _navTitle = name;
     _cellIdentifier = @"TvShowSynopseCell";
     _numberOfSections = 1;
 }

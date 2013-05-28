@@ -16,4 +16,9 @@
     return nil;
 }
 
++ (id)verifyValue: (id)value defaultValue:(id)defaultValue
+{
+    return [[NSString stringWithFormat:@"%@", value] isEqual:@"<null>"] ? defaultValue : value;
+}
+
 @end

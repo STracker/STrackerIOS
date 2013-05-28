@@ -12,7 +12,6 @@
 
 @interface BaseTableViewController : UITableViewController
 {
-    NSString *_navTitle;
     NSMutableArray *_data;
     int _numberOfSections;
     NSString *_cellIdentifier;

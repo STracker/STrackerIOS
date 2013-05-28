@@ -15,6 +15,8 @@
 #pragma mark - Override TvShowsViewController methods.
 - (void)viewDidLoadHook
 {
+    self.navigationItem.title = genre;
+    
     // Get information from server.
     [[STrackerServerHttpClient sharedClient] getByGenre:genre success:^(AFJSONRequestOperation * operation, id result)
      {
@@ -28,7 +30,6 @@
 
 - (void)initHook
 {
-    _navTitle = genre;
     _cellIdentifier = @"TvShowSynopseCell";
     _numberOfSections = 1;
 }

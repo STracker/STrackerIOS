@@ -21,6 +21,11 @@
 @property(nonatomic, copy) NSString *imdbId;
 @property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSString *description;
+@property(nonatomic, copy) NSString *runtime;
+@property(nonatomic, copy) NSString *airDay;
+@property(nonatomic, copy) NSString *firstAired;
+@property(nonatomic, copy) NSString *poster;
+@property(nonatomic, retain) NSMutableArray *genres;
 
 - (TvShowSynopse *)getSynopse;
 
