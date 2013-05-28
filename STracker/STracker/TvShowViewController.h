@@ -21,6 +21,8 @@
     __weak IBOutlet UILabel *_runtime;
     __weak IBOutlet UIImageView *_poster;
     __weak IBOutlet UITextView *_genres;
+    
+    UIActivityIndicatorView *_activity;
 }
 
 @property(nonatomic, copy) NSString *imdbId;

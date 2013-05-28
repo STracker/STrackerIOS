@@ -26,19 +26,32 @@
          _airDay.text = _tvshow.airDay;
          _firstAired.text = _tvshow.firstAired;
          
-         _poster.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_tvshow.poster]]];
-         
          NSMutableString *str = [[NSMutableString alloc] init];
          for (id genre in _tvshow.genres) {
              [str appendString:[NSString stringWithFormat:@"- %@\n", genre]];
          }
          _genres.text = str;
          
+         dispatch_queue_t downloadQueue = dispatch_queue_create("get_image", nil);
+         dispatch_async(downloadQueue, ^{
+             UIImage *img = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_tvshow.poster]]];
+             
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 _poster.image = img;
+                 
+                 [_activity stopAnimating];      
+                 _activity = nil;
+             });
+         });
+         
      } failure:^(AFJSONRequestOperation *operation, NSError *error)
      {
          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
          
          [alert show];
+         
+         [_activity stopAnimating];    
+         _activity = nil;
      }];
 }
 
@@ -47,6 +60,12 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
+    
+    _activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    
+    UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithCustomView:_activity];
+    self.navigationItem.rightBarButtonItem = button;
+    
     
     [self getInfo];
 }
