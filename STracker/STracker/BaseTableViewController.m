@@ -10,27 +10,6 @@
 
 @implementation BaseTableViewController
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder])
-        [self initHook];
-    
-    return self;
-}
-
-- (id)init
-{
-    if (self = [super init])
-        [self initHook];
-    
-    return self;
-}
-
-- (void)initHook
-{
-    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
-}
-
 - (void)viewDidLoadHook
 {
     [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
@@ -41,14 +20,54 @@
     [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
 }
 
+- (void)configureViewStyle
+{
+    self.tableView.backgroundView = nil;
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+}
+
+- (void)configureCellView:(UITableViewCell *)cell
+{
+    [cell.textLabel setFont:[UIFont fontWithName:@"Tamil Sangam MN" size:22.0]];
+    [cell.textLabel setTextColor:[UIColor whiteColor]];
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+}
+
+- (id)initWithData:(NSMutableArray *)data
+{
+    self = [super init];
+    if (self)
+    {
+        _data = data;
+    }
+    
+    return self;
+}
+
+- (void)startAnimating
+{
+    [_indicator startAnimating];
+}
+
+- (void)stopAnimating
+{
+    [_indicator stopAnimating];
+    
+    // Libertar o ponteiro.
+    _indicator = nil;
+}
+
 # pragma mark - UIView Controller delegate.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
+    _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [_indicator setCenter:self.view.center];
+    [self.view addSubview:_indicator];
     
+    [self configureViewStyle];
     [self viewDidLoadHook];
 }
 
@@ -65,9 +84,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLIDENTIFIER];
     if (cell == nil)
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_cellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELLIDENTIFIER];
+    
+    [self configureCellView:cell];
     
     [self configureCellHook:cell inIndexPath:indexPath];
     

@@ -1,0 +1,55 @@
+//
+//  SeasonsViewController.m
+//  STracker
+//
+//  Created by Ricardo Sousa on 6/9/13.
+//  Copyright (c) 2013 STracker. All rights reserved.
+//
+
+#import "SeasonsViewController.h"
+
+@implementation SeasonsViewController
+
+#pragma mark - BaseTableViewController override methods.
+- (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
+{
+    SeasonSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"Season %@", synopsis.number];
+}
+
+- (void)viewDidLoadHook
+{
+    _numberOfSections = 1;
+    self.navigationItem.title = @"Seasons";
+}
+
+#pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self startAnimating];
+    SeasonSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
+    [[STrackerServerHttpClient sharedClient] getSeason:synopsis success:^(AFJSONRequestOperation *operation, id result) {
+        
+        NSMutableArray *episodes = [[NSMutableArray alloc] init];
+        NSDictionary *res = (NSDictionary *)result;
+        
+        for (NSDictionary *item in [res objectForKey:@"EpisodeSynopses"])
+        {
+            EpisodeSynopsis *episode = [[EpisodeSynopsis alloc] initWithDictionary:item];
+            [episodes addObject:episode];
+        }
+        
+        SeasonViewController *view = [[SeasonViewController alloc] initWithData:episodes];
+        NSString *seasonNumber = [res objectForKey:@"SeasonNumber"];
+        view.title = [NSString stringWithFormat:@"Season %@", seasonNumber];
+        [self stopAnimating];
+        [self.navigationController pushViewController:view animated:YES];
+    
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[STrackerServerHttpClient getAlertForError:error] show];
+        [self stopAnimating];
+    }];
+}
+
+@end

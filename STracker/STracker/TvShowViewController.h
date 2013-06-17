@@ -9,22 +9,25 @@
 #import <UIKit/UIKit.h>
 #import "STrackerServerHttpClient.h"
 #import "TvShow.h"
+#import "Genre.h"
+#import "SeasonsViewController.h"
+#import "PersonsViewController.h"
+#import "DownloadFiles.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 
-@interface TvShowViewController : UIViewController
+@interface TvShowViewController : UIViewController <UIActionSheetDelegate>
 {
-    TvShow *_tvshow;
     __weak IBOutlet UITextView *_description;
     __weak IBOutlet UILabel *_airDay;
     __weak IBOutlet UILabel *_firstAired;
     __weak IBOutlet UILabel *_runtime;
     __weak IBOutlet UIImageView *_poster;
     __weak IBOutlet UITextView *_genres;
-    
-    UIActivityIndicatorView *_activity;
 }
 
-@property(nonatomic, copy) NSString *imdbId;
+@property(nonatomic, retain) TvShow *tvshow;
+
+- (IBAction)options:(UIBarButtonItem *)sender;
 
 @end

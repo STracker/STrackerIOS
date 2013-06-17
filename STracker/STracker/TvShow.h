@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "Entity.h"
+#import "Genre.h"
+#import "Season.h"
 
 @interface TvShowSynopse : Entity
 
 @property(nonatomic, copy) NSString *imdbId;
 @property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy) NSString *uri;
 
 @end
 
@@ -26,6 +29,8 @@
 @property(nonatomic, copy) NSString *firstAired;
 @property(nonatomic, copy) NSString *poster;
 @property(nonatomic, retain) NSMutableArray *genres;
+@property(nonatomic, retain) NSMutableArray *seasons;
+@property(nonatomic, retain) NSMutableArray *actors;
 
 - (TvShowSynopse *)getSynopse;
 

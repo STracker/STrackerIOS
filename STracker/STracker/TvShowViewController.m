@@ -10,64 +10,47 @@
 
 @implementation TvShowViewController
 
-@synthesize imdbId;
+@synthesize tvshow;
 
-- (void)getInfo
+- (void)getPoster
 {
-    STrackerServerHttpClient *client = [STrackerServerHttpClient sharedClient];
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [indicator setCenter:_poster.center];
+    [_poster addSubview:indicator];
     
-    [client getByImdbId:imdbId success:^(AFJSONRequestOperation * operation, id result)
-     {
-         _tvshow = [[TvShow alloc] initWithDictionary:(NSDictionary *)result];
-         
-         self.navigationItem.title = _tvshow.name;
-         _description.text = _tvshow.description;
-         _runtime.text = [NSString stringWithFormat:@"%@", _tvshow.runtime];
-         _airDay.text = _tvshow.airDay;
-         _firstAired.text = _tvshow.firstAired;
-         
-         NSMutableString *str = [[NSMutableString alloc] init];
-         for (id genre in _tvshow.genres) {
-             [str appendString:[NSString stringWithFormat:@"- %@\n", genre]];
-         }
-         _genres.text = str;
-         
-         dispatch_queue_t downloadQueue = dispatch_queue_create("get_image", nil);
-         dispatch_async(downloadQueue, ^{
-             UIImage *img = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_tvshow.poster]]];
-             
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 _poster.image = img;
-                 
-                 [_activity stopAnimating];      
-                 _activity = nil;
-             });
-         });
-         
-     } failure:^(AFJSONRequestOperation *operation, NSError *error)
-     {
-         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-         
-         [alert show];
-         
-         [_activity stopAnimating];    
-         _activity = nil;
-     }];
+    [indicator startAnimating];
+    
+    [DownloadFiles downloadImageFromUrl:[NSURL URLWithString:tvshow.poster] finish:^(UIImage *image) {
+        _poster.image = image;
+        [indicator stopAnimating];
+        [indicator removeFromSuperview];
+    }];
+}
+
+- (void)configureView
+{
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
+    self.navigationItem.title = tvshow.name;
+    
+    _description.text = tvshow.description;
+    _runtime.text = [NSString stringWithFormat:@"%@", tvshow.runtime];
+    _airDay.text = tvshow.airDay;
+    _firstAired.text = tvshow.firstAired;
+    
+    NSMutableString *str = [[NSMutableString alloc] init];
+    for (GenreSynopsis *genre in tvshow.genres)
+    {
+        [str appendString:[NSString stringWithFormat:@"- %@\n", genre.name]];
+    }
+    _genres.text = str;
+    
+    [self getPoster];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
-    
-    _activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    
-    UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithCustomView:_activity];
-    self.navigationItem.rightBarButtonItem = button;
-    
-    
-    [self getInfo];
+    [self configureView];
 }
 
 - (void)viewDidUnload
@@ -80,4 +63,41 @@
     _genres = nil;
     [super viewDidUnload];
 }
+
+- (IBAction)options:(UIBarButtonItem *)sender
+{ 
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Seasons", @"Cast", @"Comments", nil];
+    
+    [actionSheet showFromBarButtonItem:sender animated:YES];
+}
+
+- (void)seasons
+{
+    SeasonsViewController *view = [[SeasonsViewController alloc] initWithData:tvshow.seasons];
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+- (void)cast
+{
+    PersonsViewController *view = [[PersonsViewController alloc] initWithData:tvshow.actors];
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+#pragma mark - Action sheet delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex)
+    {
+        case 0:
+            [self seasons];
+            break;
+        case 1:
+            [self cast];
+            break;
+        case 2:
+            // TODO...
+            break;
+    }
+    [actionSheet setDelegate:nil];
+}
+
 @end

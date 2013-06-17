@@ -14,29 +14,43 @@
 - (void)viewDidLoadHook
 {
     self.navigationItem.title = @"Genres";
-}
-
-- (void)initHook
-{
     _numberOfSections = 1;
-    _cellIdentifier = @"GenreCell";
-    
-    _data = [[NSMutableArray alloc] initWithObjects:@"Action", @"Adventure", @"Animation", @"Biography", @"Comedy", @"Crime", @"Documentary", @"Drama", @"Family", @"Fantasy", @"Film-Noir", @"History", @"Horror", @"Music", @"Musical", @"Mystery", @"Romance", @"Sci-Fi", @"Short", @"Sport", @"Thriller", @"War", @"Western", nil];
 }
 
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
 {
-    cell.textLabel.text = [_data objectAtIndex:indexPath.row];
+    GenreSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [synopsis.name capitalizedString];
 }
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TvShowsByGenreViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"TvShowsSynopses"];
+    [self startAnimating];
     
-    view.genre = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
-    
-    [self.navigationController pushViewController:view animated:YES];
+    [[STrackerServerHttpClient sharedClient] getTvShowsByGenre:[_data objectAtIndex:indexPath.row] success:^(AFJSONRequestOperation *operation, id result) {
+        
+        NSMutableArray *data = [[NSMutableArray alloc] init];        
+        for (NSDictionary *item in result)
+        {
+            TvShowSynopse *synopse = [[TvShowSynopse alloc] initWithDictionary:item];
+            [data addObject:synopse];
+        }
+        
+        [self stopAnimating];
+        
+        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:data];
+        GenreSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
+        view.title = [synopsis.name capitalizedString];
+        
+        [self.navigationController pushViewController:view animated:YES];
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[STrackerServerHttpClient getAlertForError:error] show];
+        [self stopAnimating];
+    }];
 }
 
 @end

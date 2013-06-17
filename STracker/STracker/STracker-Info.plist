@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>STrackerServerBaseTvShowsURI</key>
+	<string>tvshows</string>
+	<key>STrackerServerBaseGenresURI</key>
+	<string>genres</string>
+	<key>STrackerServerBaseTopRatedURI</key>
+	<string>tvshows/toprated</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -25,7 +31,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>STrackerServerBaseURL</key>
-	<string>http://strackerserverdev.apphb.com</string>
+	<string>http://strackerserverdev.apphb.com/api</string>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard_iPhone</string>
 	<key>UIMainStoryboardFile~ipad</key>

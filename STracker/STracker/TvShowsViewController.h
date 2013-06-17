@@ -11,12 +11,10 @@
 #import "STrackerServerHttpClient.h"
 #import "TvShow.h"
 #import "TvShowViewController.h"
-
-#define BACKGROUND @"BackgroundPattern.png"
+#import "AppDelegate.h"
 
 @interface TvShowsViewController : BaseTableViewController
 
-- (void)fillTable:(NSDictionary *)data;
-- (void)failure:(NSError *)error;
+@property(nonatomic, copy) NSString *title;
 
 @end

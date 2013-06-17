@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseTableViewController.h"
+#import "GenresViewController.h"
+#import "STrackerServerHttpClient.h"
+#import "Genre.h"
+#import "TvShow.h"
+#import "TvShowsViewController.h"
 
-@interface CalendarViewController : BaseTableViewController <UIActionSheetDelegate>
+@interface HomeViewController : BaseTableViewController <UIActionSheetDelegate, UIAlertViewDelegate>
 
+- (id)init;
 - (IBAction)searchOptions:(UIBarButtonItem *)sender;
 
 @end

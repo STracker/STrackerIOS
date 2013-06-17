@@ -7,9 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C67EDDD1764D779003278F8 /* Genre.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDDC1764D779003278F8 /* Genre.m */; };
+		8C67EDE31764FC5A003278F8 /* SeasonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDE21764FC59003278F8 /* SeasonsViewController.m */; };
+		8C67EDE71764FD38003278F8 /* Season.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDE61764FD38003278F8 /* Season.m */; };
+		8C67EDEA1765044A003278F8 /* SeasonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDE91765044A003278F8 /* SeasonViewController.m */; };
+		8C67EDED1765053D003278F8 /* Episode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDEC1765053D003278F8 /* Episode.m */; };
+		8C67EDF11765162D003278F8 /* EpisodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDF01765162D003278F8 /* EpisodeViewController.m */; };
+		8C67EDF417651D5D003278F8 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDF317651D5D003278F8 /* Person.m */; };
+		8C67EDF717651E55003278F8 /* Actor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDF617651E55003278F8 /* Actor.m */; };
+		8C67EDFB176525E9003278F8 /* PersonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDFA176525E9003278F8 /* PersonsViewController.m */; };
 		8C6D9BCC17502954000C2E99 /* GenresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BCB17502954000C2E99 /* GenresViewController.m */; };
 		8C6D9BD017502F30000C2E99 /* TvShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BCF17502F30000C2E99 /* TvShow.m */; };
 		8C6D9BD3175030B2000C2E99 /* TvShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BD2175030B2000C2E99 /* TvShowsViewController.m */; };
+		8CD10DC2176E81BD00F81F7C /* DownloadFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD10DC1176E81BD00F81F7C /* DownloadFiles.m */; };
+		8CD10DCE176E8DA300F81F7C /* Calendar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CD10DCD176E8DA300F81F7C /* Calendar_icon.png */; };
 		958B692C8AB84E8FB6B7F544 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86A72A6102254A888262B579 /* libPods.a */; };
 		D8782EC0174E6E160025CF79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EBF174E6E160025CF79 /* UIKit.framework */; };
 		D8782EC2174E6E160025CF79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EC1174E6E160025CF79 /* Foundation.framework */; };
@@ -26,10 +37,8 @@
 		D887E38C1753C8F000E3BABB /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = D887E38B1753C8F000E3BABB /* Entity.m */; };
 		D887E38F1753CC6C00E3BABB /* TvShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D887E38E1753CC6C00E3BABB /* TvShowViewController.m */; };
 		D887E3921753FA2200E3BABB /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D887E3911753FA2200E3BABB /* BaseTableViewController.m */; };
-		D887E3951754088A00E3BABB /* TvShowsByGenreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D887E3941754088A00E3BABB /* TvShowsByGenreViewController.m */; };
-		D887E398175409AD00E3BABB /* TvShowsByNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D887E397175409AC00E3BABB /* TvShowsByNameViewController.m */; };
 		D891AE2D174FE191001625C6 /* BackgroundPattern.png in Resources */ = {isa = PBXBuildFile; fileRef = D891AE2C174FE191001625C6 /* BackgroundPattern.png */; };
-		D891AE30174FE7E6001625C6 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D891AE2F174FE7E6001625C6 /* CalendarViewController.m */; };
+		D891AE30174FE7E6001625C6 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D891AE2F174FE7E6001625C6 /* HomeViewController.m */; };
 		D891AE36174FEB0C001625C6 /* Search.png in Resources */ = {isa = PBXBuildFile; fileRef = D891AE35174FEB0C001625C6 /* Search.png */; };
 		D891AE38174FECE2001625C6 /* Options.png in Resources */ = {isa = PBXBuildFile; fileRef = D891AE37174FECE2001625C6 /* Options.png */; };
 		D891AE43174FFA49001625C6 /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D891AE42174FFA49001625C6 /* OptionsViewController.m */; };
@@ -37,20 +46,39 @@
 		D891AE5D174FFF88001625C6 /* Profile_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D891AE59174FFF88001625C6 /* Profile_icon.png */; };
 		D891AE5E174FFF88001625C6 /* Shows_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D891AE5A174FFF88001625C6 /* Shows_icon.png */; };
 		D891AE5F174FFF88001625C6 /* Messages_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D891AE5B174FFF88001625C6 /* Messages_icon.png */; };
-		D8AECA2017550EE100C4139C /* SeasonsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D8AECA1E17550EE100C4139C /* SeasonsButton.png */; };
-		D8AECA2117550EE100C4139C /* CastButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D8AECA1F17550EE100C4139C /* CastButton.png */; };
 		D8AECA251755108F00C4139C /* star_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D8AECA241755108F00C4139C /* star_icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		00925DCD2FE44C7AB3E9BD97 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		86A72A6102254A888262B579 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C67EDDB1764D779003278F8 /* Genre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Genre.h; sourceTree = "<group>"; };
+		8C67EDDC1764D779003278F8 /* Genre.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Genre.m; sourceTree = "<group>"; };
+		8C67EDE11764FC59003278F8 /* SeasonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeasonsViewController.h; sourceTree = "<group>"; };
+		8C67EDE21764FC59003278F8 /* SeasonsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeasonsViewController.m; sourceTree = "<group>"; };
+		8C67EDE51764FD38003278F8 /* Season.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Season.h; sourceTree = "<group>"; };
+		8C67EDE61764FD38003278F8 /* Season.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Season.m; sourceTree = "<group>"; };
+		8C67EDE81765044A003278F8 /* SeasonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeasonViewController.h; sourceTree = "<group>"; };
+		8C67EDE91765044A003278F8 /* SeasonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeasonViewController.m; sourceTree = "<group>"; };
+		8C67EDEB1765053D003278F8 /* Episode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Episode.h; sourceTree = "<group>"; };
+		8C67EDEC1765053D003278F8 /* Episode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Episode.m; sourceTree = "<group>"; };
+		8C67EDEF1765162D003278F8 /* EpisodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpisodeViewController.h; sourceTree = "<group>"; };
+		8C67EDF01765162D003278F8 /* EpisodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EpisodeViewController.m; sourceTree = "<group>"; };
+		8C67EDF217651D5D003278F8 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		8C67EDF317651D5D003278F8 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		8C67EDF517651E55003278F8 /* Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Actor.h; sourceTree = "<group>"; };
+		8C67EDF617651E55003278F8 /* Actor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Actor.m; sourceTree = "<group>"; };
+		8C67EDF9176525E9003278F8 /* PersonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonsViewController.h; sourceTree = "<group>"; };
+		8C67EDFA176525E9003278F8 /* PersonsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonsViewController.m; sourceTree = "<group>"; };
 		8C6D9BCA17502954000C2E99 /* GenresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenresViewController.h; sourceTree = "<group>"; };
 		8C6D9BCB17502954000C2E99 /* GenresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenresViewController.m; sourceTree = "<group>"; };
 		8C6D9BCE17502F30000C2E99 /* TvShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TvShow.h; sourceTree = "<group>"; };
 		8C6D9BCF17502F30000C2E99 /* TvShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShow.m; sourceTree = "<group>"; };
 		8C6D9BD1175030B2000C2E99 /* TvShowsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TvShowsViewController.h; sourceTree = "<group>"; };
 		8C6D9BD2175030B2000C2E99 /* TvShowsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShowsViewController.m; sourceTree = "<group>"; };
+		8CD10DC0176E81BD00F81F7C /* DownloadFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadFiles.h; sourceTree = "<group>"; };
+		8CD10DC1176E81BD00F81F7C /* DownloadFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadFiles.m; sourceTree = "<group>"; };
+		8CD10DCD176E8DA300F81F7C /* Calendar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Calendar_icon.png; sourceTree = "<group>"; };
 		D8782EBC174E6E160025CF79 /* STracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8782EBF174E6E160025CF79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D8782EC1174E6E160025CF79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -74,13 +102,9 @@
 		D887E38E1753CC6C00E3BABB /* TvShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShowViewController.m; sourceTree = "<group>"; };
 		D887E3901753FA2200E3BABB /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
 		D887E3911753FA2200E3BABB /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
-		D887E3931754088A00E3BABB /* TvShowsByGenreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TvShowsByGenreViewController.h; sourceTree = "<group>"; };
-		D887E3941754088A00E3BABB /* TvShowsByGenreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShowsByGenreViewController.m; sourceTree = "<group>"; };
-		D887E396175409AC00E3BABB /* TvShowsByNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TvShowsByNameViewController.h; sourceTree = "<group>"; };
-		D887E397175409AC00E3BABB /* TvShowsByNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShowsByNameViewController.m; sourceTree = "<group>"; };
 		D891AE2C174FE191001625C6 /* BackgroundPattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundPattern.png; sourceTree = "<group>"; };
-		D891AE2E174FE7E6001625C6 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
-		D891AE2F174FE7E6001625C6 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		D891AE2E174FE7E6001625C6 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		D891AE2F174FE7E6001625C6 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		D891AE35174FEB0C001625C6 /* Search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Search.png; sourceTree = "<group>"; };
 		D891AE37174FECE2001625C6 /* Options.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Options.png; sourceTree = "<group>"; };
 		D891AE41174FFA49001625C6 /* OptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsViewController.h; sourceTree = "<group>"; };
@@ -89,8 +113,6 @@
 		D891AE59174FFF88001625C6 /* Profile_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Profile_icon.png; sourceTree = "<group>"; };
 		D891AE5A174FFF88001625C6 /* Shows_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shows_icon.png; sourceTree = "<group>"; };
 		D891AE5B174FFF88001625C6 /* Messages_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Messages_icon.png; sourceTree = "<group>"; };
-		D8AECA1E17550EE100C4139C /* SeasonsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SeasonsButton.png; sourceTree = "<group>"; };
-		D8AECA1F17550EE100C4139C /* CastButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CastButton.png; sourceTree = "<group>"; };
 		D8AECA241755108F00C4139C /* star_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +136,8 @@
 			children = (
 				D887E3841753B22000E3BABB /* STrackerServerHttpClient.h */,
 				D887E3851753B22000E3BABB /* STrackerServerHttpClient.m */,
+				8CD10DC0176E81BD00F81F7C /* DownloadFiles.h */,
+				8CD10DC1176E81BD00F81F7C /* DownloadFiles.m */,
 			);
 			name = HttpClients;
 			sourceTree = "<group>";
@@ -128,10 +152,52 @@
 				D887E3901753FA2200E3BABB /* BaseTableViewController.h */,
 				D887E3911753FA2200E3BABB /* BaseTableViewController.m */,
 				D887E39B17540AAC00E3BABB /* OptionsController */,
-				D887E39917540A0500E3BABB /* CalendarController */,
-				D887E39A17540A0E00E3BABB /* TvShowsViewControllers */,
+				D887E39917540A0500E3BABB /* HomeController */,
+				8C67EDF8176525CB003278F8 /* PersonsController */,
+				8C67EDDA1764D5AC003278F8 /* GenresController */,
+				D887E39A17540A0E00E3BABB /* TvShowsControllers */,
+				8C67EDE41764FC5F003278F8 /* SeasonsControllers */,
+				8C67EDEE176515E7003278F8 /* EpisodesController */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		8C67EDDA1764D5AC003278F8 /* GenresController */ = {
+			isa = PBXGroup;
+			children = (
+				8C6D9BCA17502954000C2E99 /* GenresViewController.h */,
+				8C6D9BCB17502954000C2E99 /* GenresViewController.m */,
+			);
+			name = GenresController;
+			sourceTree = "<group>";
+		};
+		8C67EDE41764FC5F003278F8 /* SeasonsControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8C67EDE11764FC59003278F8 /* SeasonsViewController.h */,
+				8C67EDE21764FC59003278F8 /* SeasonsViewController.m */,
+				8C67EDE81765044A003278F8 /* SeasonViewController.h */,
+				8C67EDE91765044A003278F8 /* SeasonViewController.m */,
+			);
+			name = SeasonsControllers;
+			sourceTree = "<group>";
+		};
+		8C67EDEE176515E7003278F8 /* EpisodesController */ = {
+			isa = PBXGroup;
+			children = (
+				8C67EDEF1765162D003278F8 /* EpisodeViewController.h */,
+				8C67EDF01765162D003278F8 /* EpisodeViewController.m */,
+			);
+			name = EpisodesController;
+			sourceTree = "<group>";
+		};
+		8C67EDF8176525CB003278F8 /* PersonsController */ = {
+			isa = PBXGroup;
+			children = (
+				8C67EDF9176525E9003278F8 /* PersonsViewController.h */,
+				8C67EDFA176525E9003278F8 /* PersonsViewController.m */,
+			);
+			name = PersonsController;
 			sourceTree = "<group>";
 		};
 		8C6D9BCD17502F1A000C2E99 /* Models */ = {
@@ -141,6 +207,16 @@
 				D887E38B1753C8F000E3BABB /* Entity.m */,
 				8C6D9BCE17502F30000C2E99 /* TvShow.h */,
 				8C6D9BCF17502F30000C2E99 /* TvShow.m */,
+				8C67EDDB1764D779003278F8 /* Genre.h */,
+				8C67EDDC1764D779003278F8 /* Genre.m */,
+				8C67EDE51764FD38003278F8 /* Season.h */,
+				8C67EDE61764FD38003278F8 /* Season.m */,
+				8C67EDEB1765053D003278F8 /* Episode.h */,
+				8C67EDEC1765053D003278F8 /* Episode.m */,
+				8C67EDF217651D5D003278F8 /* Person.h */,
+				8C67EDF317651D5D003278F8 /* Person.m */,
+				8C67EDF517651E55003278F8 /* Actor.h */,
+				8C67EDF617651E55003278F8 /* Actor.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -200,30 +276,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D887E39917540A0500E3BABB /* CalendarController */ = {
+		D887E39917540A0500E3BABB /* HomeController */ = {
 			isa = PBXGroup;
 			children = (
-				D891AE2E174FE7E6001625C6 /* CalendarViewController.h */,
-				D891AE2F174FE7E6001625C6 /* CalendarViewController.m */,
+				D891AE2E174FE7E6001625C6 /* HomeViewController.h */,
+				D891AE2F174FE7E6001625C6 /* HomeViewController.m */,
 			);
-			name = CalendarController;
+			name = HomeController;
 			sourceTree = "<group>";
 		};
-		D887E39A17540A0E00E3BABB /* TvShowsViewControllers */ = {
+		D887E39A17540A0E00E3BABB /* TvShowsControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8C6D9BCA17502954000C2E99 /* GenresViewController.h */,
-				8C6D9BCB17502954000C2E99 /* GenresViewController.m */,
 				8C6D9BD1175030B2000C2E99 /* TvShowsViewController.h */,
 				8C6D9BD2175030B2000C2E99 /* TvShowsViewController.m */,
-				D887E3931754088A00E3BABB /* TvShowsByGenreViewController.h */,
-				D887E3941754088A00E3BABB /* TvShowsByGenreViewController.m */,
-				D887E396175409AC00E3BABB /* TvShowsByNameViewController.h */,
-				D887E397175409AC00E3BABB /* TvShowsByNameViewController.m */,
 				D887E38D1753CC6C00E3BABB /* TvShowViewController.h */,
 				D887E38E1753CC6C00E3BABB /* TvShowViewController.m */,
 			);
-			name = TvShowsViewControllers;
+			name = TvShowsControllers;
 			sourceTree = "<group>";
 		};
 		D887E39B17540AAC00E3BABB /* OptionsController */ = {
@@ -238,8 +308,7 @@
 		D891AE2B174FE172001625C6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				D8AECA1E17550EE100C4139C /* SeasonsButton.png */,
-				D8AECA1F17550EE100C4139C /* CastButton.png */,
+				8CD10DCD176E8DA300F81F7C /* Calendar_icon.png */,
 				D8AECA241755108F00C4139C /* star_icon.png */,
 				D891AE58174FFF88001625C6 /* Friends_icon.png */,
 				D891AE59174FFF88001625C6 /* Profile_icon.png */,
@@ -319,9 +388,8 @@
 				D891AE5D174FFF88001625C6 /* Profile_icon.png in Resources */,
 				D891AE5E174FFF88001625C6 /* Shows_icon.png in Resources */,
 				D891AE5F174FFF88001625C6 /* Messages_icon.png in Resources */,
-				D8AECA2017550EE100C4139C /* SeasonsButton.png in Resources */,
-				D8AECA2117550EE100C4139C /* CastButton.png in Resources */,
 				D8AECA251755108F00C4139C /* star_icon.png in Resources */,
+				8CD10DCE176E8DA300F81F7C /* Calendar_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,7 +433,7 @@
 			files = (
 				D8782ECC174E6E160025CF79 /* main.m in Sources */,
 				D8782ED0174E6E160025CF79 /* AppDelegate.m in Sources */,
-				D891AE30174FE7E6001625C6 /* CalendarViewController.m in Sources */,
+				D891AE30174FE7E6001625C6 /* HomeViewController.m in Sources */,
 				D891AE43174FFA49001625C6 /* OptionsViewController.m in Sources */,
 				8C6D9BCC17502954000C2E99 /* GenresViewController.m in Sources */,
 				8C6D9BD017502F30000C2E99 /* TvShow.m in Sources */,
@@ -374,8 +442,16 @@
 				D887E38C1753C8F000E3BABB /* Entity.m in Sources */,
 				D887E38F1753CC6C00E3BABB /* TvShowViewController.m in Sources */,
 				D887E3921753FA2200E3BABB /* BaseTableViewController.m in Sources */,
-				D887E3951754088A00E3BABB /* TvShowsByGenreViewController.m in Sources */,
-				D887E398175409AD00E3BABB /* TvShowsByNameViewController.m in Sources */,
+				8C67EDDD1764D779003278F8 /* Genre.m in Sources */,
+				8C67EDE31764FC5A003278F8 /* SeasonsViewController.m in Sources */,
+				8C67EDE71764FD38003278F8 /* Season.m in Sources */,
+				8C67EDEA1765044A003278F8 /* SeasonViewController.m in Sources */,
+				8C67EDED1765053D003278F8 /* Episode.m in Sources */,
+				8C67EDF11765162D003278F8 /* EpisodeViewController.m in Sources */,
+				8C67EDF417651D5D003278F8 /* Person.m in Sources */,
+				8C67EDF717651E55003278F8 /* Actor.m in Sources */,
+				8C67EDFB176525E9003278F8 /* PersonsViewController.m in Sources */,
+				8CD10DC2176E81BD00F81F7C /* DownloadFiles.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

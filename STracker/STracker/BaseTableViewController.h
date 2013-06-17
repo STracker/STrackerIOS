@@ -9,20 +9,22 @@
 #import <UIKit/UIKit.h>
 
 #define BACKGROUND @"BackgroundPattern.png"
+#define CELLIDENTIFIER @"BaseTableCell"
 
 @interface BaseTableViewController : UITableViewController
 {
     NSMutableArray *_data;
     int _numberOfSections;
-    NSString *_cellIdentifier;
+    UIActivityIndicatorView *_indicator;
 }
 
-// Override of initWithCoder and init.
-- (id)initWithCoder:(NSCoder *)aDecoder;
-- (id)init;
+- (id)initWithData:(NSMutableArray *)data;
+
+// Methods for indicator.
+- (void)startAnimating;
+- (void)stopAnimating;
 
 // Hook methods.
-- (void)initHook;
 - (void)viewDidLoadHook;
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath;
 

@@ -10,9 +10,16 @@
 
 @implementation AppDelegate
 
+@synthesize storyboard;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // Set storyboard.
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
+        storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
+    else
+        storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+
     return YES;
 }
 							

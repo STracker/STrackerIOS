@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseTableViewController.h"
-#import "TvShowsByGenreViewController.h"
+#import "STrackerServerHttpClient.h"
+#import "TvShowsViewController.h"
+#import "Genre.h"
+#import "TvShow.h"
 
 @interface GenresViewController : BaseTableViewController
 
