@@ -224,6 +224,7 @@
 		D8782EB3174E6E160025CF79 = {
 			isa = PBXGroup;
 			children = (
+				D8EC0312176F838900BBC5C1 /* Unit Tests */,
 				D8782EC5174E6E160025CF79 /* STracker */,
 				D8782EBE174E6E160025CF79 /* Frameworks */,
 				D8782EBD174E6E160025CF79 /* Products */,
@@ -320,6 +321,13 @@
 			);
 			name = Images;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		D8EC0312176F838900BBC5C1 /* Unit Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Unit Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

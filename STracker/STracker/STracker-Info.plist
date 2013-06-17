@@ -31,7 +31,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>STrackerServerBaseURL</key>
-	<string>http://strackerserverdev.apphb.com/api</string>
+	<string>http://stracker.apphb.com/api</string>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard_iPhone</string>
 	<key>UIMainStoryboardFile~ipad</key>
