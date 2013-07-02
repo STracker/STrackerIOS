@@ -1,10 +1,16 @@
 PODS:
   - AFNetworking (1.2.1)
+  - Base64 (1.0.1)
+  - HawkClient (1.1.0):
+    - Base64 (~> 1.0.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 1.2)
+  - HawkClient (~> 1.1.0)
 
 SPEC CHECKSUMS:
   AFNetworking: a44069e3c9c89867544f6639482f155c7e5f9b41
+  Base64: eaac9f2088ba659c5db1db960576eb0f2969ebaf
+  HawkClient: 88bc66a6e6c702a02a1fd24b25ef4bcef0020ba5
 
 COCOAPODS: 0.20.2
