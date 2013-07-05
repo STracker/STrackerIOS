@@ -12,12 +12,18 @@
 #import "Genre.h"
 #import "TvShow.h"
 #import "Episode.h"
+#import "HawkClient_iOS.h"
+
+#define TIME_FORMAT @"yyyy-MM-dd HH:mm:ss"
 
 // Define the callbacks.
 typedef void (^Success)(AFJSONRequestOperation *operation, id result);
 typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 
 @interface STrackerServerHttpClient : AFHTTPClient
+{
+    HawkClient_iOS *hawkClient;
+}
 
 // Class method that returns a shared singleton instance.
 + (id)sharedClient;
@@ -39,5 +45,8 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 
 // Episodes operations.
 - (void)getEpisode:(EpisodeSynopsis *)episode success:(Success)success failure:(Failure) failure;
+
+// Users operations.
+- (void)getUserInfo:(Success)success failure:(Failure) failure;
 
 @end

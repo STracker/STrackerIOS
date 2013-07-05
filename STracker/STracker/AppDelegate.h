@@ -14,4 +14,6 @@
 
 @property(nonatomic, strong) UIStoryboard *storyboard;
 
+@property(nonatomic, strong) NSString *serverTime;
+
 @end

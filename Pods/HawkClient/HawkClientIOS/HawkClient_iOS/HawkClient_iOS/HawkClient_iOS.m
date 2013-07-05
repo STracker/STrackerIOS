@@ -33,10 +33,10 @@
     NSString *query = (url.query == nil) ? @"" : url.query;
     NSString *uri = [NSString stringWithFormat:@"%@%@", url.path, query];
     NSString *host = url.host;
-    NSString *port = [url.port stringValue];
+    // NSString *port = [url.port stringValue];
     
     // Creating the normalized string.
-    return [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n", header, timestamp, nonce, method, uri, host, port, payload, ext];
+    return [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n", header, timestamp, nonce, method, uri, host, payload, ext];
 }
 
 - (NSString *)generateAuthorizationHeader:(NSURL *)url method:(NSString *)method timestamp:(NSString *)timestamp nonce:(NSString *)nonce credentials:(HawkCredentials *)credentials payload:(NSString *)payload ext:(NSString *)ext

@@ -10,7 +10,7 @@
 
 @implementation AppDelegate
 
-@synthesize storyboard;
+@synthesize storyboard, serverTime;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -19,7 +19,7 @@
         storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
     else
         storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
-
+    
     return YES;
 }
 							

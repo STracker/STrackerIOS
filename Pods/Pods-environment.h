@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_Base64 0
 #define COCOAPODS_VERSION_PATCH_Base64 1
 
+// FXReachability
+#define COCOAPODS_POD_AVAILABLE_FXReachability
+#define COCOAPODS_VERSION_MAJOR_FXReachability 1
+#define COCOAPODS_VERSION_MINOR_FXReachability 1
+#define COCOAPODS_VERSION_PATCH_FXReachability 0
+
 // HawkClient
 #define COCOAPODS_POD_AVAILABLE_HawkClient
 #define COCOAPODS_VERSION_MAJOR_HawkClient 1

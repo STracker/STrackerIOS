@@ -39,7 +39,6 @@
 - (void)viewDidLoadHook
 {
     self.navigationItem.title = @"Home";
-    [self getTopRated];
 }
 
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
@@ -63,7 +62,7 @@
             [self fillGenres];
             break;
         case 2:
-            // TODO...
+            [self getTopRated];
             break;
     }
     
@@ -72,8 +71,9 @@
 
 - (void) getTopRated
 {
+    /*
     _data = [[NSMutableArray alloc] initWithObjects:@"asdasd", @"asdad", nil];
-    /*[self startAnimating];
+    [self startAnimating];
     [[STrackerServerHttpClient sharedClient] getTopRated:^(AFJSONRequestOperation *operation, id result) {
         _data = [[NSMutableArray alloc] init];
         for (NSDictionary *item in result)
@@ -89,6 +89,12 @@
         
         [self stopAnimating];
     }];*/
+    
+    [[STrackerServerHttpClient sharedClient] getUserInfo:^(AFJSONRequestOperation *operation, id result) {
+        NSLog(@"sucess");
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        NSLog(@"failure");
+    }];
 }
 
 - (void) fillTvshowsByName:(NSString *)name
