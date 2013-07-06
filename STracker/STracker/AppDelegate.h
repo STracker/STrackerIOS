@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FacebookSDK/FacebookSDK.h>
+#import "User.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property(nonatomic, strong) UIWindow *window;
-
 @property(nonatomic, strong) UIStoryboard *storyboard;
-
-@property(nonatomic, strong) NSString *serverTime;
+@property(nonatomic, strong) User *user;
 
 @end

@@ -62,11 +62,17 @@
             [self fillGenres];
             break;
         case 2:
-            [self getTopRated];
+            [self fac];
             break;
     }
     
     [actionSheet setDelegate:nil];
+}
+
+- (void)fac
+{
+    FacebookViewController *fb = [[FacebookViewController alloc] init];
+    [self.navigationController pushViewController:fb animated:YES];
 }
 
 - (void) getTopRated

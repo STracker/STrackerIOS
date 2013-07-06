@@ -13,6 +13,7 @@
 #import "Genre.h"
 #import "TvShow.h"
 #import "TvShowsViewController.h"
+#import "FacebookViewController.h"
 
 @interface HomeViewController : BaseTableViewController <UIActionSheetDelegate, UIAlertViewDelegate>
 

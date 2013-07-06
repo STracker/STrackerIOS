@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string></string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb516839011711939</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>516839011711939</string>
+	<key>STrackerServerBaseURL</key>
+	<string>http://strackerserverdev.apphb.com/api</string>
 	<key>STrackerUserInfoURI</key>
 	<string>user</string>
 	<key>STrackerServerBaseTvShowsURI</key>
@@ -32,8 +47,6 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>STrackerServerBaseURL</key>
-	<string>http://strackerserverdev.apphb.com/api</string>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard_iPhone</string>
 	<key>UIMainStoryboardFile~ipad</key>
