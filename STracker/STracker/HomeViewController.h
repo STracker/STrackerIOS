@@ -18,6 +18,8 @@
 #import "Genre.h"
 #import "TvShow.h"
 
+#import "SlideshowViewController.h"
+
 @interface HomeViewController : BaseTableViewController <UIActionSheetDelegate, UIAlertViewDelegate>
 {
     AppDelegate *_app;

@@ -11,6 +11,7 @@
 @interface Person : Entity
 
 @property(nonatomic, copy) NSString *name;
-@property(nonatomic, copy) NSString *photo;
+@property(nonatomic, copy) NSString *photoURL;
+@property(nonatomic, copy) UIImage *image;
 
 @end

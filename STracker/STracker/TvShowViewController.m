@@ -47,6 +47,10 @@
     }
     
     _genres.text = str;
+    
+    [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:tvshow.poster] finish:^(UIImage *image) {
+        _poster.image = image;
+    }];
 }
 
 # pragma mark - IBActions.

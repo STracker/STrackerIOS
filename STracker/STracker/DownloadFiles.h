@@ -11,7 +11,12 @@
 typedef void (^Finish)(UIImage *image);
 
 @interface DownloadFiles : NSObject
+{
+    dispatch_queue_t downloadImagesQueue;
+}
 
-+ (void)downloadImageFromUrl:(NSURL *) url finish:(Finish) finish;
++ (id)sharedObject;
+
+- (void)downloadImageFromUrl:(NSURL *) url finish:(Finish) finish;
 
 @end

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import "DownloadFiles.h"
 #import "PersonsViewController.h"
 #import "Episode.h"
 #import "Person.h"

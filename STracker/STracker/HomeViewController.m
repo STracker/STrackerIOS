@@ -77,8 +77,6 @@
 // available in STracker.
 - (void)searchGenres
 {
-    [self startAnimating];
-    
     [[STrackerServerHttpClient sharedClient] getGenres:^(AFJSONRequestOperation *operation, id result) {
         NSMutableArray *data = [[NSMutableArray alloc] init];
         for (NSDictionary *item in result)
@@ -86,30 +84,26 @@
             GenreSynopsis *synopsis = [[GenreSynopsis alloc] initWithDictionary:item];
             [data addObject:synopsis];
         }
-        
-        [self stopAnimating];
         GenresViewController *view = [[GenresViewController alloc] initWithData:data];
         [self.navigationController pushViewController:view animated:YES];
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         
         [[STrackerServerHttpClient getAlertForError:error] show];
-        [self stopAnimating];
     }];
 }
 
 // Auxiliary method for search users by name.
 - (void)searchUsers
 {
-    // TODO
+    SlideshowViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"Profile"];
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 // Auxiliary method for fill tv shows with name or partial of the name
 // equal to the name inserted by user.
 - (void)fillTvshowsByName:(NSString *)name
 {
-    [self startAnimating];
-    
     [[STrackerServerHttpClient sharedClient] getTvshowsByName:name success:^(AFJSONRequestOperation *operation, id result) {
         NSMutableArray *data = [[NSMutableArray alloc] init];
         for (NSDictionary *item in result)
@@ -118,7 +112,6 @@
             [data addObject:synopsis];
         }
         
-        [self stopAnimating];
         TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:data];
         view.title = [NSString stringWithFormat:@"Search results"];
         [self.navigationController pushViewController:view animated:YES];
@@ -126,7 +119,6 @@
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         
         [[STrackerServerHttpClient getAlertForError:error] show];
-        [self stopAnimating];
     }];
 }
 

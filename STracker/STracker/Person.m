@@ -10,7 +10,7 @@
 
 @implementation Person
 
-@synthesize name, photo;
+@synthesize name, photoURL;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
@@ -22,7 +22,7 @@
         @try
         {
             NSDictionary *artwork = [dictionary objectForKey:@"Photo"];
-            photo = [Entity verifyValue:[artwork objectForKey:@"ImageUrl"] defaultValue:@"N/A"];
+            photoURL = [Entity verifyValue:[artwork objectForKey:@"ImageUrl"] defaultValue:@"N/A"];
         }
         @catch (NSException *exception) {}
     }

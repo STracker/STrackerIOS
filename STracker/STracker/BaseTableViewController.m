@@ -12,10 +12,7 @@
 
 - (void)viewDidLoadHook
 {
-    _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [_indicator setCenter:self.view.center];
-    [self.view addSubview:_indicator];
-
+    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
 }
 
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
@@ -44,19 +41,6 @@
         _data = data;
     
     return self;
-}
-
-- (void)startAnimating
-{
-    [_indicator startAnimating];
-}
-
-- (void)stopAnimating
-{
-    [_indicator stopAnimating];
-    
-    // Release the pointer.
-    _indicator = nil;
 }
 
 # pragma mark - UIView Controller delegate.

@@ -35,7 +35,6 @@
     if (self = [super initWithBaseURL:[NSURL URLWithString:baseURL]])
     {
         hawkClient = [[HawkClient_iOS alloc] init];
-        
         [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
         [self setDefaultHeader:@"Accept" value:@"application/json"];
     }
@@ -46,12 +45,15 @@
 #pragma mark - Genres operations.
 - (void)getGenres:(Success)success failure:(Failure)failure
 {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self getPath:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerServerBaseGenresURI"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
+         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          success((AFJSONRequestOperation *)operation, responseObject);
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
+         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          failure((AFJSONRequestOperation *)operation, error);
      }];
 }
@@ -59,12 +61,15 @@
 #pragma mark - Tv shows operations.
 - (void)getTvshow:(TvShowSynopse *)tvshow success:(Success)success failure:(Failure) failure
 {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self getPath:tvshow.uri parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
+         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          success((AFJSONRequestOperation *)operation, responseObject);
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
+         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          failure((AFJSONRequestOperation *)operation, error);
      }];
 }
@@ -73,12 +78,15 @@
 {
     NSDictionary *query = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObject:name] forKeys:[NSArray arrayWithObject:@"name"]];
     
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self getPath:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerServerBaseTvShowsURI"] parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
+         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          success((AFJSONRequestOperation *)operation, responseObject);
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
+         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          failure((AFJSONRequestOperation *)operation, error);
      }];
 }
@@ -87,25 +95,30 @@
 {
     NSDictionary *query = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObject:genre.name] forKeys:[NSArray arrayWithObject:@"genre"]];
     
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self getPath:genre.uri parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
+         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          success((AFJSONRequestOperation *)operation, responseObject);
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
+         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          failure((AFJSONRequestOperation *)operation, error);
      }];
 }
 
 - (void)getTopRated:(Success)success failure:(Failure) failure
 {
-    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self getPath:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerServerBaseTopRatedURI"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
+         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          success((AFJSONRequestOperation *)operation, responseObject);
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
+         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          failure((AFJSONRequestOperation *)operation, error);
      }];
 }
@@ -113,12 +126,15 @@
 #pragma mark - Seasons operations.
 - (void)getSeason:(SeasonSynopsis *)season success:(Success)success failure:(Failure) failure
 {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self getPath:season.uri parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
+         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          success((AFJSONRequestOperation *)operation, responseObject);
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
+         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          failure((AFJSONRequestOperation *)operation, error);
      }];
 }
@@ -126,12 +142,15 @@
 #pragma mark - Episodes operations.
 - (void)getEpisode:(EpisodeSynopsis *)episode success:(Success)success failure:(Failure) failure
 {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self getPath:episode.uri parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         success((AFJSONRequestOperation *)operation, responseObject);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         failure((AFJSONRequestOperation *)operation, error);
     }];
 }

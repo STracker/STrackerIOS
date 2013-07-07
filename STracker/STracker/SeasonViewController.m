@@ -35,11 +35,9 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self startAnimating];
     EpisodeSynopsis *sinopsis = [_data objectAtIndex:indexPath.row];
     [[STrackerServerHttpClient sharedClient] getEpisode:sinopsis success:^(AFJSONRequestOperation *operation, id result) {
-        
-        [self stopAnimating];        
+      
         AppDelegate *app = [[UIApplication sharedApplication] delegate];
         EpisodeViewController *view = [app.storyboard instantiateViewControllerWithIdentifier:@"Episode"];
         view.episode = [[Episode alloc] initWithDictionary:result];
@@ -48,7 +46,6 @@
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         
         [[STrackerServerHttpClient getAlertForError:error] show];
-        [self stopAnimating];
     }];
 }
 

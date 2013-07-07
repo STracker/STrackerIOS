@@ -34,6 +34,8 @@ install_resource 'DLStarRating/DLStarRating/images/star_highlighted-darker.png'
 install_resource 'DLStarRating/DLStarRating/images/star_highlighted-darker@2x.png'
 install_resource 'DLStarRating/DLStarRating/images/star_highlighted.png'
 install_resource 'DLStarRating/DLStarRating/images/star_highlighted@2x.png'
+install_resource 'KIImagePager/KIImagePager/KIImagePager/KICamera.png'
+install_resource 'KIImagePager/KIImagePager/KIImagePager/KICamera@2x.png'
 
 rsync -avr --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 rm "$RESOURCES_TO_COPY"

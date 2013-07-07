@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "STrackerServerHttpClient.h"
+#import "DownloadFiles.h"
 #import "SeasonsViewController.h"
 #import "PersonsViewController.h"
 #import "TvShow.h"

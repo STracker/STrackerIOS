@@ -36,6 +36,12 @@
 #define COCOAPODS_VERSION_MINOR_HawkClient 1
 #define COCOAPODS_VERSION_PATCH_HawkClient 0
 
+// KIImagePager
+#define COCOAPODS_POD_AVAILABLE_KIImagePager
+#define COCOAPODS_VERSION_MAJOR_KIImagePager 0
+#define COCOAPODS_VERSION_MINOR_KIImagePager 0
+#define COCOAPODS_VERSION_PATCH_KIImagePager 2
+
 // KNSemiModalViewController
 #define COCOAPODS_POD_AVAILABLE_KNSemiModalViewController
 #define COCOAPODS_VERSION_MAJOR_KNSemiModalViewController 0

@@ -143,6 +143,10 @@ freely, subject to the following restrictions:
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
 
+## KIImagePager
+
+LICENSE
+
 ## KNSemiModalViewController
 
 UIViewController+KNSemiModal is licensed under MIT License

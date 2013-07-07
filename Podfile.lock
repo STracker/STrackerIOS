@@ -5,6 +5,7 @@ PODS:
   - FXReachability (1.1)
   - HawkClient (1.1.0):
     - Base64 (~> 1.0.1)
+  - KIImagePager (0.0.2)
   - KNSemiModalViewController (0.3)
 
 DEPENDENCIES:
@@ -12,6 +13,7 @@ DEPENDENCIES:
   - DLStarRating (~> 1.1)
   - FXReachability (~> 1.1)
   - HawkClient (~> 1.1.0)
+  - KIImagePager (~> 0.0.2)
   - KNSemiModalViewController (~> 0.3)
 
 SPEC CHECKSUMS:
@@ -20,6 +22,7 @@ SPEC CHECKSUMS:
   DLStarRating: 11ffb061ea68acd28cb9580e2bd0e718c6088e6f
   FXReachability: afd163afb55d92199a1359526474882af17f4436
   HawkClient: 88bc66a6e6c702a02a1fd24b25ef4bcef0020ba5
+  KIImagePager: 29fedf1aaa77fa341bd694b41749956efc8ff65a
   KNSemiModalViewController: 976b739f57aa595359a2cfdf6aadde991ada8f99
 
 COCOAPODS: 0.20.2

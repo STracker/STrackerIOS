@@ -26,7 +26,6 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self startAnimating];
     SeasonSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
     [[STrackerServerHttpClient sharedClient] getSeason:synopsis success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -37,8 +36,7 @@
             EpisodeSynopsis *episode = [[EpisodeSynopsis alloc] initWithDictionary:item];
             [episodes addObject:episode];
         }
-        
-        [self stopAnimating];
+
         NSString *seasonNumber = [res objectForKey:@"SeasonNumber"];        
         SeasonViewController *view = [[SeasonViewController alloc] initWithData:episodes andSeasonNumber:[NSString stringWithFormat:@"Season %@", seasonNumber]];
         [self.navigationController pushViewController:view animated:YES];
@@ -46,7 +44,6 @@
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         
         [[STrackerServerHttpClient getAlertForError:error] show];
-        [self stopAnimating];
     }];
 }
 

@@ -35,6 +35,10 @@
     
     _date.text = episode.date;
     _description.text = episode.description;
+    
+    [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:episode.poster] finish:^(UIImage *image) {
+        _poster.image = image;
+    }];
 }
 
 #pragma mark - IBActions.

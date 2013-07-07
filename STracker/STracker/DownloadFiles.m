@@ -10,13 +10,34 @@
 
 @implementation DownloadFiles
 
-+ (void)downloadImageFromUrl:(NSURL *) url finish:(Finish) finish
++ (id)sharedObject
 {
-    dispatch_queue_t downloadQueue = dispatch_queue_create("getImage", nil);
-    dispatch_async(downloadQueue, ^{
+    static DownloadFiles *sharedObject = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedObject = [[DownloadFiles alloc] init];
+    });
+    
+    return sharedObject;
+}
+
+- (id)init
+{
+    if (self = [super init]) 
+      downloadImagesQueue = dispatch_queue_create("images", nil);
+    
+    return self;
+}
+
+- (void)downloadImageFromUrl:(NSURL *) url finish:(Finish) finish
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    dispatch_async(downloadImagesQueue, ^{
         UIImage *img = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             finish(img);
         });
     });

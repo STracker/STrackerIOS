@@ -22,22 +22,26 @@
             </objects>
             <point key="canvasLocation" x="-414" y="-287"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Slideshow View Controller-->
         <scene sceneID="wi3-bR-JDk">
             <objects>
-                <viewController storyboardIdentifier="Profile" id="Dc2-he-CPY" customClass="ProfileViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Slideshow" id="Dc2-he-CPY" customClass="SlideshowViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gKP-xu-8SU">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="W4c-lH-Yf7">
-                                <rect key="frame" x="77" y="49" width="166" height="134"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Xv-lU-9He">
-                                <rect key="frame" x="20" y="21" width="280" height="21"/>
+                            <view contentMode="scaleToFill" id="f0U-6s-4sN" customClass="KIImagePager">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="331"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="20"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Dc2-he-CPY" id="1xH-zx-T2Z"/>
+                                    <outlet property="delegate" destination="Dc2-he-CPY" id="oAi-vD-tic"/>
+                                </connections>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sOX-Uf-a7u">
+                                <rect key="frame" x="20" y="351" width="280" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="22"/>
                                 <color key="textColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -46,13 +50,13 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="name" destination="3Xv-lU-9He" id="Gjv-AC-J2M"/>
-                        <outlet property="photo" destination="W4c-lH-Yf7" id="9fK-Ge-27r"/>
+                        <outlet property="imagePager" destination="f0U-6s-4sN" id="xUg-83-fxN"/>
+                        <outlet property="title" destination="sOX-Uf-a7u" id="gZD-Fn-aBg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HWg-bn-bFl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="443" y="303"/>
+            <point key="canvasLocation" x="6" y="300"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="Jc6-5A-tzC">
@@ -443,14 +447,21 @@
                 <relationship kind="action" name="userOptions:"/>
             </relationships>
         </class>
+        <class className="KIImagePager" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/KIImagePager.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dataSource"/>
+                <relationship kind="outlet" name="delegate"/>
+            </relationships>
+        </class>
         <class className="OptionsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionsViewController.h"/>
         </class>
-        <class className="ProfileViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
+        <class className="SlideshowViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SlideshowViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="photo" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imagePager" candidateClass="KIImagePager"/>
+                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="TvShowViewController" superclassName="UIViewController">

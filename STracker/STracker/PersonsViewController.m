@@ -14,6 +14,21 @@
 {
     self.navigationItem.title = @"Cast";
     _numberOfSections = 1;
+  
+    int count = 1;
+    for (Person *person in _data)
+    {
+        [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:person.photoURL] finish:^(UIImage *image) {
+            person.image = image;
+            if (count == _data.count)
+            {
+                // Reload data for show the images.
+                [self.tableView reloadData];
+            }   
+        }];
+        
+        count++;
+    }
 }
 
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
@@ -23,14 +38,10 @@
     Person *person = [_data objectAtIndex:indexPath.row];
     cell.textLabel.text = person.name;
     
-    /*
-    [DownloadFiles downloadImageFromUrl:[NSURL URLWithString:actor.photo] finish:^(UIImage *image) {
-        [cell.imageView setImage:image];
-        
-        if (indexPath.row == _data.count)
-            [self.tableView reloadData];
-    }];
-     */
+    if ([person isKindOfClass:[Actor class]]) {
+        cell.detailTextLabel.text = ((Actor *)person).characterName;
+        cell.imageView.image = ((Actor *)person).image;
+    }
 }
 
 @end

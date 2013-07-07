@@ -26,8 +26,6 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self startAnimating];
-    
     // Get all tvshows from this selected genre.
     [[STrackerServerHttpClient sharedClient] getTvShowsByGenre:[_data objectAtIndex:indexPath.row] success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -38,7 +36,6 @@
             [data addObject:synopse];
         }
         
-        [self stopAnimating];
         GenreSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
         TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:data andGenre:synopsis.name];
         [self.navigationController pushViewController:view animated:YES];
@@ -46,7 +43,6 @@
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         
         [[STrackerServerHttpClient getAlertForError:error] show];
-        [self stopAnimating];
     }];
 }
 

@@ -15,15 +15,10 @@
 {
     NSMutableArray *_data;
     int _numberOfSections;
-    UIActivityIndicatorView *_indicator;
 }
 
 // Init method.
 - (id)initWithData:(NSMutableArray *)data;
-
-// Methods for indicator.
-- (void)startAnimating;
-- (void)stopAnimating;
 
 // Hook methods.
 - (void)viewDidLoadHook;
