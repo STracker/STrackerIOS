@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_Base64 0
 #define COCOAPODS_VERSION_PATCH_Base64 1
 
+// DLStarRating
+#define COCOAPODS_POD_AVAILABLE_DLStarRating
+#define COCOAPODS_VERSION_MAJOR_DLStarRating 1
+#define COCOAPODS_VERSION_MINOR_DLStarRating 1
+#define COCOAPODS_VERSION_PATCH_DLStarRating 0
+
 // FXReachability
 #define COCOAPODS_POD_AVAILABLE_FXReachability
 #define COCOAPODS_VERSION_MAJOR_FXReachability 1
@@ -29,4 +35,10 @@
 #define COCOAPODS_VERSION_MAJOR_HawkClient 1
 #define COCOAPODS_VERSION_MINOR_HawkClient 1
 #define COCOAPODS_VERSION_PATCH_HawkClient 0
+
+// KNSemiModalViewController
+#define COCOAPODS_POD_AVAILABLE_KNSemiModalViewController
+#define COCOAPODS_VERSION_MAJOR_KNSemiModalViewController 0
+#define COCOAPODS_VERSION_MINOR_KNSemiModalViewController 3
+#define COCOAPODS_VERSION_PATCH_KNSemiModalViewController 0
 

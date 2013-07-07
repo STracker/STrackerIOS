@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "STrackerServerHttpClient.h"
-#import "TvShow.h"
-#import "Genre.h"
 #import "SeasonsViewController.h"
 #import "PersonsViewController.h"
-#import "DownloadFiles.h"
+#import "TvShow.h"
+#import "Genre.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 
@@ -26,7 +25,7 @@
     __weak IBOutlet UITextView *_genres;
 }
 
-@property(nonatomic, retain) TvShow *tvshow;
+@property(nonatomic, strong) TvShow *tvshow;
 
 - (IBAction)options:(UIBarButtonItem *)sender;
 

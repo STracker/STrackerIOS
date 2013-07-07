@@ -6,13 +6,16 @@
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "BaseTableViewController.h"
-#import "Episode.h"
 #import "STrackerServerHttpClient.h"
+#import "BaseTableViewController.h"
 #import "EpisodeViewController.h"
+#import "Episode.h"
 
 @interface SeasonViewController : BaseTableViewController
+{
+    NSString *title;
+}
 
-@property(nonatomic, copy) NSString *title;
+- (id)initWithData:(NSMutableArray *)data andSeasonNumber:(NSString *)seasonNumber;
 
 @end

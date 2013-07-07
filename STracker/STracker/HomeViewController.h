@@ -7,17 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
+#import "FacebookView.h"
+#import "UIViewController+KNSemiModal.h"
+#import "STrackerServerHttpClient.h"
+#import "OptionsViewController.h"
 #import "BaseTableViewController.h"
 #import "GenresViewController.h"
-#import "STrackerServerHttpClient.h"
+#import "TvShowsViewController.h"
 #import "Genre.h"
 #import "TvShow.h"
-#import "TvShowsViewController.h"
-#import "FacebookViewController.h"
 
 @interface HomeViewController : BaseTableViewController <UIActionSheetDelegate, UIAlertViewDelegate>
+{
+    AppDelegate *_app;
+}
 
-- (id)init;
 - (IBAction)searchOptions:(UIBarButtonItem *)sender;
+
+- (IBAction)userOptions:(id)sender;
 
 @end

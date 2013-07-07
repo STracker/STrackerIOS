@@ -10,7 +10,14 @@
 
 @implementation TvShowsViewController
 
-@synthesize title;
+- (id)initWithData:(NSMutableArray *)data andGenre:(NSString *)genre
+{
+    self = [super initWithData:data];
+    if (self)
+        title = genre;
+    
+    return self;
+}
 
 #pragma mark - BaseTableViewController override methods.
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
@@ -34,9 +41,7 @@
 
         AppDelegate *app = [[UIApplication sharedApplication] delegate];
         TvShowViewController *view = [app.storyboard instantiateViewControllerWithIdentifier:@"TvShow"];
-        
         view.tvshow = [[TvShow alloc] initWithDictionary:result];
-        
         [self stopAnimating];
         [self.navigationController pushViewController:view animated:YES];
         

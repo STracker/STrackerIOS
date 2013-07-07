@@ -20,7 +20,6 @@
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
 {
     GenreSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
-    
     cell.textLabel.text = [synopsis.name capitalizedString];
 }
 
@@ -29,6 +28,7 @@
 {
     [self startAnimating];
     
+    // Get all tvshows from this selected genre.
     [[STrackerServerHttpClient sharedClient] getTvShowsByGenre:[_data objectAtIndex:indexPath.row] success:^(AFJSONRequestOperation *operation, id result) {
         
         NSMutableArray *data = [[NSMutableArray alloc] init];        
@@ -39,11 +39,8 @@
         }
         
         [self stopAnimating];
-        
-        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:data];
         GenreSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
-        view.title = [synopsis.name capitalizedString];
-        
+        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:data andGenre:synopsis.name];
         [self.navigationController pushViewController:view animated:YES];
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {

@@ -32,17 +32,15 @@
         
         NSMutableArray *episodes = [[NSMutableArray alloc] init];
         NSDictionary *res = (NSDictionary *)result;
-        
         for (NSDictionary *item in [res objectForKey:@"EpisodeSynopses"])
         {
             EpisodeSynopsis *episode = [[EpisodeSynopsis alloc] initWithDictionary:item];
             [episodes addObject:episode];
         }
         
-        SeasonViewController *view = [[SeasonViewController alloc] initWithData:episodes];
-        NSString *seasonNumber = [res objectForKey:@"SeasonNumber"];
-        view.title = [NSString stringWithFormat:@"Season %@", seasonNumber];
         [self stopAnimating];
+        NSString *seasonNumber = [res objectForKey:@"SeasonNumber"];        
+        SeasonViewController *view = [[SeasonViewController alloc] initWithData:episodes andSeasonNumber:[NSString stringWithFormat:@"Season %@", seasonNumber]];
         [self.navigationController pushViewController:view animated:YES];
     
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {

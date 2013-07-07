@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Episode.h"
 #import "AppDelegate.h"
-#import "Person.h"
 #import "PersonsViewController.h"
+#import "Episode.h"
+#import "Person.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 

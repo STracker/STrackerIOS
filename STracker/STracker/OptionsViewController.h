@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
+#import "FacebookView.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 
 @interface OptionsViewController : UITableViewController
+{
+    AppDelegate *_app;
+}
 
 @end

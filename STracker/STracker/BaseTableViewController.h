@@ -18,6 +18,7 @@
     UIActivityIndicatorView *_indicator;
 }
 
+// Init method.
 - (id)initWithData:(NSMutableArray *)data;
 
 // Methods for indicator.

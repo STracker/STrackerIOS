@@ -46,7 +46,7 @@
 #pragma mark - Genres operations.
 - (void)getGenres:(Success)success failure:(Failure)failure
 {
-    [self getPath:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUTCTimeURI"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
+    [self getPath:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerServerBaseGenresURI"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          success((AFJSONRequestOperation *)operation, responseObject);
          

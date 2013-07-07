@@ -15,6 +15,25 @@
     
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
+    
+    _app = [[UIApplication sharedApplication] delegate];
+    
+    self.navigationItem.title = _app.user.name;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section)
+    {
+        case 0:
+            NSLog(@"Calendar");
+            break;
+        case 1:
+            
+            break;
+        default:
+            break;
+    }
 }
 
 @end

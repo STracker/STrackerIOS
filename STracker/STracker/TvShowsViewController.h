@@ -7,14 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseTableViewController.h"
-#import "STrackerServerHttpClient.h"
-#import "TvShow.h"
-#import "TvShowViewController.h"
 #import "AppDelegate.h"
+#import "STrackerServerHttpClient.h"
+#import "BaseTableViewController.h"
+#import "TvShowViewController.h"
+#import "TvShow.h"
 
 @interface TvShowsViewController : BaseTableViewController
+{
+    NSString *title;
+}
 
-@property(nonatomic, copy) NSString *title;
+// Init method that receives the data and the name of the genre.
+- (id)initWithData:(NSMutableArray *)data andGenre:(NSString *)genre;
 
 @end

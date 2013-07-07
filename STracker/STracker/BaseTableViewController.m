@@ -12,7 +12,10 @@
 
 - (void)viewDidLoadHook
 {
-    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
+    _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [_indicator setCenter:self.view.center];
+    [self.view addSubview:_indicator];
+
 }
 
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
@@ -38,9 +41,7 @@
 {
     self = [super init];
     if (self)
-    {
         _data = data;
-    }
     
     return self;
 }
@@ -54,7 +55,7 @@
 {
     [_indicator stopAnimating];
     
-    // Libertar o ponteiro.
+    // Release the pointer.
     _indicator = nil;
 }
 
@@ -63,12 +64,8 @@
 {
     [super viewDidLoad];
     
-    _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [_indicator setCenter:self.view.center];
-    [self.view addSubview:_indicator];
-    
-    [self configureViewStyle];
     [self viewDidLoadHook];
+    [self configureViewStyle];
 }
 
 #pragma mark - Table view data source.
@@ -89,7 +86,6 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELLIDENTIFIER];
     
     [self configureCellView:cell];
-    
     [self configureCellHook:cell inIndexPath:indexPath];
     
     return cell;

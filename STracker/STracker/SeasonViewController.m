@@ -10,7 +10,14 @@
 
 @implementation SeasonViewController
 
-@synthesize title;
+- (id)initWithData:(NSMutableArray *)data andSeasonNumber:(NSString *)seasonNumber
+{
+    self = [super initWithData:data];
+    if (self)
+        title = seasonNumber;
+    
+    return self;
+}
 
 #pragma mark - BaseTableViewController override methods.
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
@@ -32,11 +39,10 @@
     EpisodeSynopsis *sinopsis = [_data objectAtIndex:indexPath.row];
     [[STrackerServerHttpClient sharedClient] getEpisode:sinopsis success:^(AFJSONRequestOperation *operation, id result) {
         
+        [self stopAnimating];        
         AppDelegate *app = [[UIApplication sharedApplication] delegate];
         EpisodeViewController *view = [app.storyboard instantiateViewControllerWithIdentifier:@"Episode"];
         view.episode = [[Episode alloc] initWithDictionary:result];
-        
-        [self stopAnimating];
         [self.navigationController pushViewController:view animated:YES];
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {

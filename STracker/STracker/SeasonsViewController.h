@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "BaseTableViewController.h"
-#import "Season.h"
 #import "STrackerServerHttpClient.h"
+#import "BaseTableViewController.h"
 #import "SeasonViewController.h"
+#import "Season.h"
 
 @interface SeasonsViewController : BaseTableViewController
 
