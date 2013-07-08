@@ -10,17 +10,30 @@
 
 @implementation HomeViewController
 
-# pragma mark - BaseTableViewController override methods.
-- (void)viewDidLoadHook
+// Auxiliary method for get the top 5 tvshows.
+- (void)getTopRated
 {
-    self.navigationItem.title = @"Home";
-    _app = [[UIApplication sharedApplication] delegate];
+    [[STrackerServerHttpClient sharedClient] getTopRated:^(AFJSONRequestOperation *operation, id result) {
+       
+        for (NSDictionary *item in result)
+        {
+            TvShowSynopse *synopsis = [[TvShowSynopse alloc] initWithDictionary:item];
+            [_top5 addObject:synopsis];
+        }
+        
+        [imagePager reloadData];
+        
+    } failure:nil];
 }
 
-- (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
+- (void)viewDidLoad
 {
-    TvShowSynopse *synopse = [_data objectAtIndex:indexPath.row];
-    cell.textLabel.text = synopse.name;
+    [super viewDidLoad];
+    
+    self.navigationItem.title = @"STracker Top Series";
+    _top5 = [[NSMutableArray alloc] initWithCapacity:5];
+    
+    [self getTopRated];
 }
 
 # pragma mark - IBActions.
@@ -43,6 +56,39 @@
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Search" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Shows", @"Genres", @"Friends", nil];
     
     [actionSheet showFromBarButtonItem:sender animated:YES];
+}
+
+#pragma mark - KIImagePager DataSource
+- (NSArray *) arrayWithImageUrlStrings
+{
+    NSMutableArray *urls = [[NSMutableArray alloc] initWithCapacity:5];
+    for (TvShowSynopse *synopse in _top5)
+        [urls addObject:synopse.poster];
+    
+    if (urls.count == 0)
+        [urls addObject:@"N/A"];
+        
+    
+    return urls;
+}
+
+- (UIViewContentMode) contentModeForImage:(NSUInteger)image
+{
+    return UIViewContentModeScaleAspectFit;
+}
+
+#pragma mark - KIImagePager Delegate
+- (void) imagePager:(KIImagePager *)imagePager didSelectImageAtIndex:(NSUInteger)index
+{
+    TvShowSynopse *synopse = [_top5 objectAtIndex:index];
+    
+    [[STrackerServerHttpClient sharedClient] getTvshow:synopse success:^(AFJSONRequestOperation *operation, id result) {
+        
+        TvShowViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"TvShow"];
+        view.tvshow = [[TvShow alloc] initWithDictionary:result];
+        [self.navigationController pushViewController:view animated:YES];
+        
+    } failure:nil];
 }
 
 #pragma mark - Action sheet delegate.
@@ -87,24 +133,20 @@
         GenresViewController *view = [[GenresViewController alloc] initWithData:data];
         [self.navigationController pushViewController:view animated:YES];
         
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[STrackerServerHttpClient getAlertForError:error] show];
-    }];
+    } failure:nil];
 }
 
 // Auxiliary method for search users by name.
 - (void)searchUsers
 {
-    SlideshowViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"Profile"];
-    [self.navigationController pushViewController:view animated:YES];
+    // TODO
 }
 
 // Auxiliary method for fill tv shows with name or partial of the name
 // equal to the name inserted by user.
-- (void)fillTvshowsByName:(NSString *)name
+- (void)fillTvshowsByName:(NSString *)tvName
 {
-    [[STrackerServerHttpClient sharedClient] getTvshowsByName:name success:^(AFJSONRequestOperation *operation, id result) {
+    [[STrackerServerHttpClient sharedClient] getTvshowsByName:tvName success:^(AFJSONRequestOperation *operation, id result) {
         NSMutableArray *data = [[NSMutableArray alloc] init];
         for (NSDictionary *item in result)
         {
@@ -116,10 +158,7 @@
         view.title = [NSString stringWithFormat:@"Search results"];
         [self.navigationController pushViewController:view animated:YES];
         
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[STrackerServerHttpClient getAlertForError:error] show];
-    }];
+    } failure:nil];
 }
 
 #pragma mark - Alert View delegates.
@@ -132,4 +171,9 @@
     alertView = nil;
 }
 
+- (void)viewDidUnload
+{
+    imagePager = nil;
+    [super viewDidUnload];
+}
 @end

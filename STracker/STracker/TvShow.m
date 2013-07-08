@@ -10,7 +10,7 @@
 
 @implementation TvShow
 
-@synthesize imdbId, name, description, runtime, airDay, firstAired, poster, genres, seasons, actors;
+@synthesize imdbId, name, description, runtime, airDay, firstAired, poster, genres, seasons, actors, rating, totalUsers;
 
 - (TvShowSynopse *)getSynopse
 {
@@ -27,11 +27,7 @@
         runtime = [Entity verifyValue:[dictionary objectForKey:@"Runtime"] defaultValue:@"N/A"];
         airDay = [Entity verifyValue:[dictionary objectForKey:@"AirDay"] defaultValue:@"N/A"];
         firstAired = [Entity verifyValue:[dictionary objectForKey:@"FirstAired"] defaultValue:@"N/A"];
-        
-        NSDictionary *artwork = [dictionary objectForKey:@"Poster"];
-        if ([artwork objectForKey:@"ImageUrl"] != nil) {
-            poster = [Entity verifyValue:[artwork objectForKey:@"ImageUrl"] defaultValue:@"N/A"];
-        }
+        poster = [Entity verifyValue:[dictionary objectForKey:@"Poster"] defaultValue:@"N/A"];
         
         genres = [[NSMutableArray alloc] init];
         for (id item in [dictionary objectForKey:@"Genres"])
@@ -62,7 +58,7 @@
 #pragma mark - Synopsis object.
 @implementation TvShowSynopse
 
-@synthesize imdbId, name, uri;
+@synthesize imdbId, name, poster, uri;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
@@ -70,6 +66,7 @@
     {
         imdbId = [Entity verifyValue:[dictionary objectForKey:@"Id"] defaultValue:@"N/A"];
         name = [Entity verifyValue:[dictionary objectForKey:@"Name"] defaultValue:@"N/A"];
+        poster = [Entity verifyValue:[dictionary objectForKey:@"Poster"] defaultValue:@"N/A"];
         uri = [Entity verifyValue:[dictionary objectForKey:@"Uri"] defaultValue:@"N/A"];
     }
     return self;

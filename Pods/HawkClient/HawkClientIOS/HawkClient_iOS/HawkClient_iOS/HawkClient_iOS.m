@@ -36,7 +36,9 @@
     // NSString *port = [url.port stringValue];
     
     // Creating the normalized string.
-    return [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n", header, timestamp, nonce, method, uri, host, payload, ext];
+    NSString *normalized = [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n", header, timestamp, nonce, method, uri, host, payload, ext];
+    
+    return normalized;
 }
 
 - (NSString *)generateAuthorizationHeader:(NSURL *)url method:(NSString *)method timestamp:(NSString *)timestamp nonce:(NSString *)nonce credentials:(HawkCredentials *)credentials payload:(NSString *)payload ext:(NSString *)ext
@@ -44,7 +46,6 @@
     if (url == nil || method == nil || timestamp == nil || nonce == nil || credentials == nil)
         [NSException raise:@"Invalid arguments." format:@"url, method, timestamp, nonce and credentials are required!"];
     
-    // Preparing the variables.
     payload = (payload == nil) ? @"" : payload;
     ext = (ext == nil) ? @"" : ext;
     
@@ -56,21 +57,19 @@
     return authorization_header;
 }
 
-- (NSString *)generateAuthorizationHeaderWithPayloadValidation:(NSURL *)url method:(NSString *)method timestamp:(NSString *)timestamp nonce:(NSString *)nonce credentials:(HawkCredentials *)credentials payload:(NSString *)payload ext:(NSString *)ext contentType:(NSString *)contentType
+- (NSString *)generateAuthorizationHeaderWithPayloadValidation:(NSURL *)url method:(NSString *)method timestamp:(NSString *)timestamp nonce:(NSString *)nonce credentials:(HawkCredentials *)credentials payload:(NSString *)payload ext:(NSString *)ext
 {
-    if (url == nil || method == nil || timestamp == nil || nonce == nil || credentials == nil || contentType == nil)
-        [NSException raise:@"Invalid arguments." format:@"url, method, timestamp, nonce, credentials and content type are required!"];
+    if (url == nil || method == nil || timestamp == nil || nonce == nil || credentials == nil || payload == nil)
+        [NSException raise:@"Invalid arguments." format:@"url, method, timestamp, nonce, credentials and payload type are required!"];
     
-    // Preparing the variables.
-    NSString *header = @"hawk.1.payload";
-    contentType = [contentType lowercaseString];
     payload = (payload == nil) ? @"" : payload;
     ext = (ext == nil) ? @"" : ext;
     
-    NSString *normalized = [NSString stringWithFormat:@"%@\n%@\n%@\n", header, contentType, payload];
-    NSString *hash = [self generateMAC:normalized credentials:credentials];
+    NSString *hash = [self generateMAC:payload credentials:credentials];
     
-    NSString *MAC = [self generateMAC:[self generateNormalizedString:url method:method timestamp:timestamp nonce:nonce credentials:credentials payload:hash ext:ext] credentials:credentials];
+    NSString *normalized = [self generateNormalizedString:url method:method timestamp:timestamp nonce:nonce credentials:credentials payload:hash ext:ext];
+    
+    NSString *MAC = [self generateMAC:normalized credentials:credentials];
     
     // Construct the header.
     NSString *authorization_header = [NSString stringWithFormat:@"Hawk id=\"%@\", ts=\"%@\", nonce=\"%@\", hash=\"%@\", ext=\"%@\", mac=\"%@\"", credentials.identifier, timestamp, nonce, hash, ext, MAC];

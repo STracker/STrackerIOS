@@ -41,10 +41,7 @@
         SeasonViewController *view = [[SeasonViewController alloc] initWithData:episodes andSeasonNumber:[NSString stringWithFormat:@"Season %@", seasonNumber]];
         [self.navigationController pushViewController:view animated:YES];
     
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[STrackerServerHttpClient getAlertForError:error] show];
-    }];
+    } failure:nil];
 }
 
 @end

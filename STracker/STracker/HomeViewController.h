@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "FacebookView.h"
 #import "UIViewController+KNSemiModal.h"
+#import "KIImagePager.h"
 #import "STrackerServerHttpClient.h"
 #import "OptionsViewController.h"
 #import "BaseTableViewController.h"
@@ -18,10 +19,10 @@
 #import "Genre.h"
 #import "TvShow.h"
 
-#import "SlideshowViewController.h"
-
-@interface HomeViewController : BaseTableViewController <UIActionSheetDelegate, UIAlertViewDelegate>
+@interface HomeViewController : UIViewController <KIImagePagerDelegate, KIImagePagerDataSource, UIActionSheetDelegate, UIAlertViewDelegate>
 {
+    __weak IBOutlet KIImagePager *imagePager;
+    NSMutableArray *_top5;
     AppDelegate *_app;
 }
 

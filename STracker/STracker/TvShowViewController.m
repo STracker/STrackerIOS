@@ -12,10 +12,23 @@
 
 @synthesize tvshow;
 
+- (void)getRating
+{
+    [[STrackerServerHttpClient sharedClient] getTvShowRating:tvshow success:^(AFJSONRequestOperation *operation, id result) {
+        
+        NSDictionary *data = (NSDictionary *)result;
+        _average.text = [NSString stringWithFormat:@"%@/5", [data objectForKey:@"Rating"]];
+        _numberOfUsers.text = [NSString stringWithFormat:@"%@ Users", [data objectForKey:@"Total"]];
+        
+    } failure:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self configureView];
+    
+    [self getRating];
 }
 
 - (void)viewDidUnload
@@ -26,6 +39,9 @@
     _poster = nil;
     _firstAired = nil;
     _genres = nil;
+    _rating = nil;
+    _average = nil;
+    _numberOfUsers = nil;
     [super viewDidUnload];
 }
 
@@ -36,7 +52,7 @@
     self.navigationItem.title = tvshow.name;
     
     _description.text = tvshow.description;
-    _runtime.text = [NSString stringWithFormat:@"%@", tvshow.runtime];
+    _runtime.text = [NSString stringWithFormat:@"%@ min", tvshow.runtime];
     _airDay.text = tvshow.airDay;
     _firstAired.text = tvshow.firstAired;
     
@@ -98,6 +114,27 @@
 - (void)comments
 {
     // TODO
+}
+
+#pragma mark - DLStarRatingControl delegate
+-(void)newRating:(DLStarRatingControl *)control :(float)rating
+{
+    _userRating = rating;
+    [_rating setRating:_userRating];
+    
+	AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    if (app.user == nil)
+    {
+        FacebookView *fb = [[FacebookView alloc] initWithController:self];
+        [self presentSemiView:fb];
+        return;
+    }
+    
+    [[STrackerServerHttpClient sharedClient] postTvShowRating:self.tvshow rating:_userRating success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Nothing to do...
+        
+    } failure:nil];
 }
 
 @end

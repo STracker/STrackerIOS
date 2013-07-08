@@ -43,10 +43,7 @@
         view.episode = [[Episode alloc] initWithDictionary:result];
         [self.navigationController pushViewController:view animated:YES];
         
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[STrackerServerHttpClient getAlertForError:error] show];
-    }];
+    } failure:nil];
 }
 
 @end

@@ -10,6 +10,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "AppDelegate.h"
 #import "UIViewController+KNSemiModal.h"
+#import "STrackerServerHttpClient.h"
 
 @interface FacebookView : UIView<FBLoginViewDelegate>
 {

@@ -51,10 +51,25 @@
     
     User *me = [[User alloc] init];
     me.identifier = user.id;
-    me.name = user.name;  
+    me.name = user.name;
+    me.photoURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large", me.identifier];
     
-    // Create the user in application.
-    _app.user = me;
+    me.email = @"test@test.com";
+    
+    // Set Hawk credentials for authenticated requests to server.
+    HawkCredentials *credentials = [[HawkCredentials alloc] init];
+    credentials.identifier = me.identifier;
+    credentials.key = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"HawkKey"];
+    [[STrackerServerHttpClient sharedClient] setHawkCredentials:credentials];
+    
+    // Register in STracker server.
+    [[STrackerServerHttpClient sharedClient] postUser:me success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Create the user in application.
+        _app.user = me;
+        
+    } failure:nil];
+    
     
     // Dismiss this view.
     [_controller dismissSemiModalView];

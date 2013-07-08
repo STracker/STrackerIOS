@@ -15,6 +15,7 @@
 
 @property(nonatomic, copy) NSString *imdbId;
 @property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy) NSString *poster;
 @property(nonatomic, copy) NSString *uri;
 
 @end
@@ -31,6 +32,8 @@
 @property(nonatomic, retain) NSMutableArray *genres;
 @property(nonatomic, retain) NSMutableArray *seasons;
 @property(nonatomic, retain) NSMutableArray *actors;
+@property(nonatomic) double rating;
+@property(nonatomic) int totalUsers;
 
 - (TvShowSynopse *)getSynopse;
 

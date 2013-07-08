@@ -11,5 +11,6 @@
 @interface User : Person
 
 @property(nonatomic, copy) NSString *identifier;
+@property(nonatomic, copy) NSString *email;
 
 @end

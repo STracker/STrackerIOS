@@ -18,13 +18,7 @@
     if (self)
     {
         name = [Entity verifyValue:[dictionary objectForKey:@"Name"] defaultValue:@"N/A"];
-
-        @try
-        {
-            NSDictionary *artwork = [dictionary objectForKey:@"Photo"];
-            photoURL = [Entity verifyValue:[artwork objectForKey:@"ImageUrl"] defaultValue:@"N/A"];
-        }
-        @catch (NSException *exception) {}
+        photoURL = [Entity verifyValue:[dictionary objectForKey:@"Photo"] defaultValue:@"N/A"];
     }
     
     return self;

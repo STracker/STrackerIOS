@@ -20,12 +20,7 @@
         name = [Entity verifyValue:[dictionary objectForKey:@"Name"] defaultValue:@"N/A"];
         description = [Entity verifyValue:[dictionary objectForKey:@"Description"] defaultValue:@"N/A"];
         date = [Entity verifyValue:[dictionary objectForKey:@"Date"] defaultValue:@"N/A"];
-        
-        NSDictionary *artwork = [dictionary objectForKey:@"Poster"];
-        if ([artwork objectForKey:@"ImageUrl"] != nil)
-        {
-            poster = [Entity verifyValue:[artwork objectForKey:@"ImageUrl"] defaultValue:@"N/A"];
-        }
+        poster = [Entity verifyValue:[dictionary objectForKey:@"Poster"] defaultValue:@"N/A"];
         
         directors = [[NSMutableArray alloc] init];
         for (id item in [dictionary objectForKey:@"Directors"])
@@ -50,7 +45,7 @@
 #pragma mark - Synopsis object.
 @implementation EpisodeSynopsis
 
-@synthesize number, name, uri;
+@synthesize number, name, date, uri;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
@@ -58,6 +53,7 @@
     {
         number = [Entity verifyValue:[dictionary objectForKey:@"EpisodeNumber"] defaultValue:@"N/A"];
         name = [Entity verifyValue:[dictionary objectForKey:@"Name"] defaultValue:@"N/A"];
+        date = [Entity verifyValue:[dictionary objectForKey:@"Date"] defaultValue:@"N/A"];
         uri = [Entity verifyValue:[dictionary objectForKey:@"Uri"] defaultValue:@"N/A"];
     }
     

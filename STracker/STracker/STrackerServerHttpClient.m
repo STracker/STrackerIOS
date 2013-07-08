@@ -10,6 +10,20 @@
 
 @implementation STrackerServerHttpClient
 
+- (id)init
+{
+    NSString *baseURL = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerServerBaseURL"];
+    
+    if (self = [super initWithBaseURL:[NSURL URLWithString:baseURL]])
+    {
+        _hawkClient = [[HawkClient_iOS alloc] init];
+        [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
+        [self setDefaultHeader:@"Accept" value:@"application/json"];
+    }
+    
+    return self;
+}
+
 + (id)sharedClient
 {
     static STrackerServerHttpClient *sharedClient = nil;
@@ -22,24 +36,68 @@
     return sharedClient;
 }
 
-+ (UIAlertView *)getAlertForError:(NSError *)error
+- (void)setHawkCredentials:(HawkCredentials *)credentials
+{
+    _credentials = credentials;
+}
+
+- (UIAlertView *)getAlertForError:(NSError *)error
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error occured" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     return alert;
 }
 
-- (id)init
+// Auxiliary method for get the timestamp.
+- (NSString *)getTimestamp
 {
-    NSString *baseURL = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerServerBaseURL"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    [dateFormatter setDateFormat:TIME_FORMAT];
+    [dateFormatter setTimeZone:timeZone];
+    NSDate * date = [dateFormatter dateFromString:[dateFormatter stringFromDate:[NSDate date]]];
+    NSTimeInterval interval = [date timeIntervalSince1970];
+    long timestamp = interval;
+    return [NSString stringWithFormat:@"%ld", timestamp];
+}
+
+// Auxiliary method for set the authorization header with Hawk protocol.
+- (void)setAuthorizationHeader:(NSURL *)url method:(NSString *)method
+{
+    NSString *timestamp = [self getTimestamp];
     
-    if (self = [super initWithBaseURL:[NSURL URLWithString:baseURL]])
-    {
-        hawkClient = [[HawkClient_iOS alloc] init];
-        [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-        [self setDefaultHeader:@"Accept" value:@"application/json"];
-    }
+    // Generate random nonce.
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    NSString *nonce = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
+    CFRelease(uuid);
     
-    return self;
+    NSString *header = [_hawkClient generateAuthorizationHeader:url method:method timestamp:timestamp nonce:nonce credentials:_credentials payload:nil ext:nil];
+    
+    [self setDefaultHeader:@"Authorization" value:header];
+}
+
+#pragma mark - Users operations.
+- (void)postUser:(User *)user success:(Success)success failure:(Failure)failure
+{
+    NSString *path = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserInfoURI"];
+    
+    [self setAuthorizationHeader:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.baseURL, path]] method:@"POST"];
+    
+    NSArray *objs = [NSArray arrayWithObjects:user.identifier, user.name, user.email, user.photoURL, nil];
+    NSArray *keys = [NSArray arrayWithObjects:@"Id", @"Name", @"Email", @"Photo", nil];
+    
+    NSDictionary *params = [[NSDictionary alloc] initWithObjects:objs forKeys:keys];
+    
+    [self postPath:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        success((AFJSONRequestOperation *)operation, responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        [self getAlertForError:error];
+        failure((AFJSONRequestOperation *)operation, error);
+    }];
 }
 
 #pragma mark - Genres operations.
@@ -54,6 +112,7 @@
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+         [self getAlertForError:error];
          failure((AFJSONRequestOperation *)operation, error);
      }];
 }
@@ -70,6 +129,7 @@
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+         [self getAlertForError:error];
          failure((AFJSONRequestOperation *)operation, error);
      }];
 }
@@ -87,6 +147,7 @@
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+         [self getAlertForError:error];
          failure((AFJSONRequestOperation *)operation, error);
      }];
 }
@@ -104,6 +165,7 @@
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+         [self getAlertForError:error];
          failure((AFJSONRequestOperation *)operation, error);
      }];
 }
@@ -119,6 +181,7 @@
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+         [self getAlertForError:error];
          failure((AFJSONRequestOperation *)operation, error);
      }];
 }
@@ -135,6 +198,7 @@
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+         [self getAlertForError:error];
          failure((AFJSONRequestOperation *)operation, error);
      }];
 }
@@ -151,60 +215,63 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        [self getAlertForError:error];
         failure((AFJSONRequestOperation *)operation, error);
     }];
 }
 
-#pragma mark - Users operations.
-
-- (NSString *)getTimestamp
+#pragma mark - Ratings operations.
+- (void)getTvShowRating:(TvShow *)tvshow success:(Success)success failure:(Failure) failure;
 {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
-    [dateFormatter setDateFormat:TIME_FORMAT];
-    [dateFormatter setTimeZone:timeZone];
-    NSDate * date = [dateFormatter dateFromString:[dateFormatter stringFromDate:[NSDate date]]];
-    NSTimeInterval interval = [date timeIntervalSince1970];
-    long timestamp = interval / 1000L;
-    return [NSString stringWithFormat:@"%ld", timestamp];
-}
-
-- (NSString *)getAuthorizeHeader:(NSString *)uri parameters:(NSDictionary *)parameters payload:(NSString *)payload method:(NSString *)method
-{
-    NSString *timestamp = [self getTimestamp];
-    NSURL *url;
-    if (parameters == nil) 
-    url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.baseURL, uri]];
-    else
-        // TODO
-        url = nil;
+    NSString *path = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerRatingsURL"];
+    path = [path stringByReplacingOccurrencesOfString:@"id" withString:tvshow.imdbId];
     
-    HawkCredentials *credentials = [[HawkCredentials alloc] init];
-    credentials.key = @"werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn";
-    credentials.identifier = @"100005516760836";
-    
-    NSString *header = [hawkClient generateAuthorizationHeader:url method:method timestamp:timestamp nonce:@"LawkW" credentials:credentials payload:payload ext:nil];
-    
-    return header;
-}
-
-- (void)getUserInfo:(Success)success failure:(Failure) failure
-{
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserInfoURI"];
-    NSString *header = [self getAuthorizeHeader:uri parameters:nil payload:nil method:@"GET"];
-    NSLog(@"%@", header);
-    [self setDefaultHeader:@"Authorization" value:header];
-    
-    [self getPath:uri parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [self getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         success((AFJSONRequestOperation *)operation, responseObject);
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error)
-    {
-        NSLog(@"%@", error.localizedDescription);
-        NSLog(@"%@", error.localizedFailureReason);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        [self getAlertForError:error];
         failure((AFJSONRequestOperation *)operation, error);
     }];
+}
+
+- (void)postTvShowRating:(TvShow *)tvshow rating:(float)rating success:(Success)success failure:(Failure) failure
+{
+    NSString *path = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerRatingsURL"];
+    path = [path stringByReplacingOccurrencesOfString:@"id" withString:tvshow.imdbId];
+    
+    NSString * ratingStr = [NSString stringWithFormat:@"%f", rating];
+    NSDictionary *params = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:tvshow.imdbId, ratingStr, nil] forKeys:[NSArray arrayWithObjects:@"id", @"rating", nil]];
+    
+    [self setAuthorizationHeader:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.baseURL, path]] method:@"POST"];
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [self postPath:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        success((AFJSONRequestOperation *)operation, responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        [self getAlertForError:error];
+        
+        NSLog(@"%@", error.description);
+        failure((AFJSONRequestOperation *)operation, error);
+    }];
+}
+- (void)getEpisodeRating:(Episode *)episode success:(Success)success failure:(Failure) failure
+{
+    // TODO
+}
+- (void)postEpisodeRating:(Episode *)episode rating:(float)rating success:(Success)success failure:(Failure) failure
+{
+    // TODO
 }
 
 @end

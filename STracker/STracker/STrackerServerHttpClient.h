@@ -12,6 +12,7 @@
 #import "Genre.h"
 #import "TvShow.h"
 #import "Episode.h"
+#import "User.h"
 #import "HawkClient_iOS.h"
 
 #define TIME_FORMAT @"yyyy-MM-dd HH:mm:ss"
@@ -22,14 +23,17 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 
 @interface STrackerServerHttpClient : AFHTTPClient
 {
-    HawkClient_iOS *hawkClient;
+    HawkClient_iOS *_hawkClient;
+    HawkCredentials *_credentials;
 }
 
 // Class method that returns a shared singleton instance.
 + (id)sharedClient;
 
-// For errors.
-+ (UIAlertView *)getAlertForError:(NSError *)error;
+- (void)setHawkCredentials:(HawkCredentials *)credentials;
+
+// Users operations.
+- (void)postUser:(User *)user success:(Success)success failure:(Failure)failure;
 
 // Genres operations.
 - (void)getGenres:(Success)success failure:(Failure)failure;
@@ -46,7 +50,10 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 // Episodes operations.
 - (void)getEpisode:(EpisodeSynopsis *)episode success:(Success)success failure:(Failure) failure;
 
-// Users operations.
-- (void)getUserInfo:(Success)success failure:(Failure) failure;
+// Ratings operations.
+- (void)getTvShowRating:(TvShow *)tvshow success:(Success)success failure:(Failure) failure;
+- (void)postTvShowRating:(TvShow *)tvshow rating:(float)rating success:(Success)success failure:(Failure) failure;
+- (void)getEpisodeRating:(Episode *)episode success:(Success)success failure:(Failure) failure;
+- (void)postEpisodeRating:(Episode *)episode rating:(float)rating success:(Success)success failure:(Failure) failure;
 
 @end

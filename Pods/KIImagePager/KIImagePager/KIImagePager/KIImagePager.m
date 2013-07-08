@@ -93,18 +93,20 @@
 
 - (void) initalizeImageCounter
 {
-    _indicatorBackground = [[UIView alloc] initWithFrame:CGRectMake(_scrollView.frame.size.width-(kOverlayWidth-4),
+    /*_indicatorBackground = [[UIView alloc] initWithFrame:CGRectMake(_scrollView.frame.size.width-(kOverlayWidth-4),
                                                                     _scrollView.frame.size.height-kOverlayHeight,
                                                                     kOverlayWidth,
                                                                     kOverlayHeight)];
+     
     _indicatorBackground.backgroundColor = [UIColor whiteColor];
     _indicatorBackground.alpha = 0.7f;
     _indicatorBackground.layer.cornerRadius = 5.0f;
     
-    //UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 18, 18)];
-    //[icon setImage:[UIImage imageNamed:@"KICamera"]];
-    //icon.center = CGPointMake(_indicatorBackground.frame.size.width-18, _indicatorBackground.frame.size.height/2);
+    UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 18, 18)];
+    [icon setImage:[UIImage imageNamed:@"KICamera"]];
+    icon.center = CGPointMake(_indicatorBackground.frame.size.width-18, _indicatorBackground.frame.size.height/2);
     //[_indicatorBackground addSubview:icon];
+    */
     
     _countLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 48, 24)];
     [_countLabel setTextAlignment:NSTextAlignmentCenter];
