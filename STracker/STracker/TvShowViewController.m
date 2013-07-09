@@ -119,20 +119,21 @@
 #pragma mark - DLStarRatingControl delegate
 -(void)newRating:(DLStarRatingControl *)control :(float)rating
 {
-    _userRating = rating;
-    [_rating setRating:_userRating];
-    
 	AppDelegate *app = [[UIApplication sharedApplication] delegate];
     if (app.user == nil)
     {
+        // Clean rating because the user is not yet logged in.
+        [_rating setRating:0];
+        
         FacebookView *fb = [[FacebookView alloc] initWithController:self];
         [self presentSemiView:fb];
         return;
     }
     
-    [[STrackerServerHttpClient sharedClient] postTvShowRating:self.tvshow rating:_userRating success:^(AFJSONRequestOperation *operation, id result) {
+    [[STrackerServerHttpClient sharedClient] postTvShowRating:self.tvshow rating:rating success:^(AFJSONRequestOperation *operation, id result) {
         
-        // Nothing to do...
+        // Reload information.
+        [self getRating];
         
     } failure:nil];
 }

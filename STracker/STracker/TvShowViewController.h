@@ -30,8 +30,6 @@
     __weak IBOutlet DLStarRatingControl *_rating;
     __weak IBOutlet UILabel *_average;
     __weak IBOutlet UILabel *_numberOfUsers;
-    
-    float _userRating;
 }
 
 @property(nonatomic, strong) TvShow *tvshow;
