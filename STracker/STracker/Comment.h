@@ -7,11 +7,13 @@
 //
 
 #import "Entity.h"
+#import "User.h"
 
 @interface Comment : Entity
 
 @property(nonatomic, copy) NSString *identifier;
-@property(nonatomic, copy) NSString *userId;
 @property(nonatomic, copy) NSString *body;
+@property(nonatomic, strong) UserSinospis *user;
+@property(nonatomic, copy) NSString *uri;
 
 @end

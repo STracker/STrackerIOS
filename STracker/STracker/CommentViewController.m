@@ -12,13 +12,9 @@
 
 @synthesize comment;
 
-- (void)getUserName
+- (void)deleteCommentHook
 {
-    [[STrackerServerHttpClient sharedClient] getUser:^(AFJSONRequestOperation *operation, id result) {
-        
-        // TODO
-        
-    } failure:nil];
+    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
 }
 
 - (void)viewDidLoad
@@ -27,12 +23,42 @@
 	
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
     _body.text = comment.body;
+    _userName.text = comment.user.name;
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
+    if (![comment.user.identifier isEqualToString:app.user.identifier])
+        return;
+    
+    // If the comment is from the current user, add the delete option.
+    UIBarButtonItem *bt = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteComment)];
+    [self.navigationItem setRightBarButtonItem:bt animated:YES];
 }
 
 - (void)viewDidUnload
 {
     _userName = nil;
     _body = nil;
+    _userProfile = nil;
     [super viewDidUnload];
 }
+
+#pragma mark - Alert view delegates.
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != 0)
+        [self deleteCommentHook];
+    
+    [alertView setDelegate:nil];
+    alertView = nil;
+}
+
+#pragma mark - Selectors.
+- (void)deleteComment
+{
+    _alertDelete = [[UIAlertView alloc] initWithTitle:@"Attention!" message:@"you really want to delete this comment?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    
+    [_alertDelete show];
+}
+
 @end

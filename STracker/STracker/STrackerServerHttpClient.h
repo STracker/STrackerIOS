@@ -14,6 +14,7 @@
 #import "Episode.h"
 #import "User.h"
 #import "HawkClient_iOS.h"
+#import "Comment.h"
 
 #define TIME_FORMAT @"yyyy-MM-dd HH:mm:ss"
 
@@ -33,7 +34,7 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 - (void)setHawkCredentials:(HawkCredentials *)credentials;
 
 // Users operations.
-- (void)getUser:(Success)success failure:(Failure)failure;
+- (void)getUser:(NSString *)userId success:(Success)success failure:(Failure)failure;
 - (void)postUser:(User *)user success:(Success)success failure:(Failure)failure;
 
 // Genres operations.
@@ -59,5 +60,10 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 
 // Comments operations.
 - (void)getTvshowComments:(TvShow *)tvshow success:(Success)success failure:(Failure) failure;
+- (void)postTvShowComment:(TvShow *)tvshow comment:(NSString *)comment success:(Success)success failure:(Failure) failure;
+- (void)deleteTvShowComment:(TvShow *)tvshow comment:(Comment *)comment success:(Success)success failure:(Failure) failure;
+- (void)getEpisodeComments:(Episode *)episode success:(Success)success failure:(Failure) failure;
+- (void)postEpisodeComment:(Episode *)episode success:(Success)success failure:(Failure) failure;
+- (void)deleteEpisodeComment:(Episode *)episode success:(Success)success failure:(Failure) failure;
 
 @end

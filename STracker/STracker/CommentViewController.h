@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "STrackerServerHttpClient.h"
 #import "Comment.h"
+#import "User.h"
+#import "AppDelegate.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 
@@ -16,8 +18,14 @@
 {
     __weak IBOutlet UILabel *_userName;
     __weak IBOutlet UITextView *_body;
+    __weak IBOutlet UIButton *_userProfile;
+    
+    UIAlertView *_alertDelete;
 }
 
 @property(nonatomic, strong) Comment *comment;
+
+// Hook method.
+- (void)deleteCommentHook;
 
 @end

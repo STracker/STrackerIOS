@@ -20,6 +20,8 @@
     __weak IBOutlet UIImageView *_poster;
     __weak IBOutlet UILabel *_date;
     __weak IBOutlet UITextView *_description;
+    __weak IBOutlet UILabel *_average;
+    __weak IBOutlet UILabel *_numberOfUsers;
 }
 
 @property(nonatomic, retain) Episode *episode;

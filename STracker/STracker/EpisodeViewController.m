@@ -15,8 +15,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self configureView];
-	
+    [self configureView];	
 }
 
 - (void)viewDidUnload
@@ -24,6 +23,8 @@
     _poster = nil;
     _date = nil;
     _description = nil;
+    _average = nil;
+    _numberOfUsers = nil;
     [super viewDidUnload];
 }
 

@@ -15,8 +15,6 @@
 	</array>
 	<key>HawkKey</key>
 	<string>werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn</string>
-	<key>STrackerTvShowCommentsURL</key>
-	<string>tvshows/id/comments</string>
 	<key>STrackerRatingsURL</key>
 	<string>tvshows/id/ratings</string>
 	<key>FacebookAppID</key>
@@ -24,7 +22,7 @@
 	<key>STrackerServerBaseURL</key>
 	<string>http://strackerserverdev.apphb.com/api</string>
 	<key>STrackerUserInfoURI</key>
-	<string>user</string>
+	<string>users</string>
 	<key>STrackerServerBaseTvShowsURI</key>
 	<string>tvshows</string>
 	<key>STrackerServerBaseGenresURI</key>

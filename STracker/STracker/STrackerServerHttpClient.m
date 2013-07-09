@@ -92,6 +92,37 @@
     }];
 }
 
+- (void)getOperationWithHawkProtocol:(NSString *)path query:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure
+{
+    // Define Authorization header.
+    NSString *header = [self getAuthorizationHeader:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.baseURL, path]] method:@"GET"];
+    
+    [self setDefaultHeader:@"Authorization" value:header];
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        // Clean Authorization header.
+        [self setDefaultHeader:@"Authorization" value:nil];
+        if (success != nil)
+            success((AFJSONRequestOperation *)operation, responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        // Clean Authorization header.
+        [self setDefaultHeader:@"Authorization" value:nil];
+        
+        [self getAlertForError:error];
+        
+        if (failure != nil)
+            failure((AFJSONRequestOperation *)operation, error);
+    }];
+}
+
 - (void)postOperation:(NSString *)path parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure
 {
     // Define Authorization header.
@@ -122,10 +153,41 @@
     }];
 }
 
-#pragma mark - Users operations.
-- (void)getUser:(Success)success failure:(Failure)failure
+- (void)deleteOperation:(NSString *)path parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure
 {
-    [self getOperation:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserInfoURI"] query:nil success:success failure:failure];
+    // Define Authorization header.
+    NSString *header = [self getAuthorizationHeader:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.baseURL, path]] method:@"DELETE"];
+    
+    [self setDefaultHeader:@"Authorization" value:header];
+    
+    [self deletePath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        // Clean Authorization header.
+        [self setDefaultHeader:@"Authorization" value:nil];
+        if (success != nil)
+            success((AFJSONRequestOperation *)operation, responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        // Clean Authorization header.
+        [self setDefaultHeader:@"Authorization" value:header];
+        [self getAlertForError:error];
+        
+        if (failure != nil)
+            failure((AFJSONRequestOperation *)operation, error);
+    }];
+}
+
+#pragma mark - Users operations.
+- (void)getUser:(NSString *)userId success:(Success)success failure:(Failure)failure
+{
+    NSString *path = [NSString stringWithFormat:@"%@/%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserInfoURI"], userId];
+    
+    [self getOperationWithHawkProtocol:path query:nil success:success failure:failure];
 }
 
 - (void)postUser:(User *)user success:(Success)success failure:(Failure)failure
@@ -215,6 +277,36 @@
     path = [path stringByReplacingOccurrencesOfString:@"id" withString:tvshow.imdbId];
     
     [self getOperation:path query:nil success:success failure:failure];
+}
+
+- (void)postTvShowComment:(TvShow *)tvshow comment:(NSString *)comment success:(Success)success failure:(Failure) failure
+{
+    NSString *path = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowCommentsURL"];
+    path = [path stringByReplacingOccurrencesOfString:@"id" withString:tvshow.imdbId];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObject:comment] forKeys:[NSArray arrayWithObject:@""]];
+
+    [self postOperation:path parameters:parameters success:success failure:failure];
+}
+
+- (void)deleteTvShowComment:(TvShow *)tvshow comment:(Comment *)comment success:(Success)success failure:(Failure) failure
+{
+    [self deleteOperation:comment.uri parameters:nil success:success failure:failure];
+}
+
+- (void)getEpisodeComments:(Episode *)episode success:(Success)success failure:(Failure) failure
+{
+    // TODO
+}
+
+- (void)postEpisodeComment:(Episode *)episode success:(Success)success failure:(Failure) failure
+{
+    // TODO
+}
+
+- (void)deleteEpisodeComment:(Episode *)episode success:(Success)success failure:(Failure) failure
+{
+    // TODO
 }
 
 @end

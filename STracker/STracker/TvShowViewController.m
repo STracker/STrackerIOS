@@ -72,7 +72,7 @@
 # pragma mark - IBActions.
 - (IBAction)options:(UIBarButtonItem *)sender
 { 
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Seasons", @"Cast", @"Comments", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Seasons", @"Cast", @"Comments", @"Subscribe", @"Suggest", nil];
     
     [actionSheet showFromBarButtonItem:sender animated:YES];
 }
@@ -122,7 +122,7 @@
             [data addObject:comment];
         }
         
-        CommentsViewController *view = [[CommentsViewController alloc] initWithData:data];
+        TvShowCommentsViewController *view = [[TvShowCommentsViewController alloc] initWithData:data andTvShow:tvshow];
         [self.navigationController pushViewController:view animated:YES];
         
     } failure:nil];

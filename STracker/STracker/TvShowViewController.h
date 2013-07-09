@@ -14,7 +14,7 @@
 #import "DLStarRatingControl.h"
 #import "SeasonsViewController.h"
 #import "PersonsViewController.h"
-#import "CommentsViewController.h"
+#import "TvShowCommentsViewController.h"
 #import "TvShow.h"
 #import "Genre.h"
 #import "Comment.h"
