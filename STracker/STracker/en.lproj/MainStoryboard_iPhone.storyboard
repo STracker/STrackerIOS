@@ -20,7 +20,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kY9-Qf-mlJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-414" y="-287"/>
+            <point key="canvasLocation" x="-1390" y="-295"/>
         </scene>
         <!--Tv Show View Controller-->
         <scene sceneID="yt1-cF-5bD">
@@ -163,7 +163,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Yw-pO-Ywf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="811" y="-287"/>
+            <point key="canvasLocation" x="-165" y="-295"/>
         </scene>
         <!--Episode View Controller-->
         <scene sceneID="Raz-lg-aao">
@@ -183,7 +183,7 @@
                                 <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="YaS-bk-H8N">
-                                <rect key="frame" x="24" y="293" width="280" height="108"/>
+                                <rect key="frame" x="20" y="293" width="280" height="108"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="14"/>
@@ -233,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u1T-nd-pBo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1176" y="-287"/>
+            <point key="canvasLocation" x="200" y="-295"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="DGH-cf-nFe">
@@ -272,7 +272,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfd-JJ-uix" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="17" y="-287"/>
+            <point key="canvasLocation" x="-959" y="-295"/>
         </scene>
         <!--Options View Controller - Options-->
         <scene sceneID="gdg-4f-aWH">
@@ -399,7 +399,42 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RNi-HK-rSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="443" y="-287"/>
+            <point key="canvasLocation" x="-533" y="-295"/>
+        </scene>
+        <!--Comment View Controller-->
+        <scene sceneID="1gT-Ib-D8T">
+            <objects>
+                <viewController storyboardIdentifier="Comment" id="k1n-IL-uaY" customClass="CommentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8Ja-So-daH">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="UXe-Xm-GI1">
+                                <rect key="frame" x="15" y="110" width="280" height="286"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ybU-1F-HaQ">
+                                <rect key="frame" x="20" y="28" width="280" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="22"/>
+                                <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="_body" destination="UXe-Xm-GI1" id="N0m-6g-g7b"/>
+                        <outlet property="_userName" destination="ybU-1F-HaQ" id="QpM-vV-nPT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EIW-az-FaB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="587" y="-295"/>
         </scene>
     </scenes>
     <resources>
@@ -411,6 +446,13 @@
         <image name="Shows_icon.png" width="32" height="32"/>
     </resources>
     <classes>
+        <class className="CommentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CommentViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="_body" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="_userName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
         <class className="DLStarRatingControl" superclassName="UIControl">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DLStarRatingControl.h"/>
             <relationships>

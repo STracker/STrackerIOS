@@ -14,8 +14,10 @@
 #import "DLStarRatingControl.h"
 #import "SeasonsViewController.h"
 #import "PersonsViewController.h"
+#import "CommentsViewController.h"
 #import "TvShow.h"
 #import "Genre.h"
+#import "Comment.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 

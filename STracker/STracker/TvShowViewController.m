@@ -113,7 +113,19 @@
 // Auxiliary method for get and create comments.
 - (void)comments
 {
-    // TODO
+    [[STrackerServerHttpClient sharedClient] getTvshowComments:tvshow success:^(AFJSONRequestOperation *operation, id result) {
+        
+        NSMutableArray *data = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in result)
+        {
+            Comment *comment = [[Comment alloc] initWithDictionary:item];
+            [data addObject:comment];
+        }
+        
+        CommentsViewController *view = [[CommentsViewController alloc] initWithData:data];
+        [self.navigationController pushViewController:view animated:YES];
+        
+    } failure:nil];
 }
 
 #pragma mark - DLStarRatingControl delegate

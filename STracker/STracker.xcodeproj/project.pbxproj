@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C1AB39E178C4A2500ED7142 /* CommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AB39D178C4A2500ED7142 /* CommentsViewController.m */; };
+		8C1AB3A1178C4BF400ED7142 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AB3A0178C4BF400ED7142 /* Comment.m */; };
+		8C1AB3A4178C50BC00ED7142 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AB3A3178C50BC00ED7142 /* CommentViewController.m */; };
 		8C67EDDD1764D779003278F8 /* Genre.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDDC1764D779003278F8 /* Genre.m */; };
 		8C67EDE31764FC5A003278F8 /* SeasonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDE21764FC59003278F8 /* SeasonsViewController.m */; };
 		8C67EDE71764FD38003278F8 /* Season.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDE61764FD38003278F8 /* Season.m */; };
@@ -64,6 +67,12 @@
 /* Begin PBXFileReference section */
 		00925DCD2FE44C7AB3E9BD97 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		86A72A6102254A888262B579 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C1AB39C178C4A2500ED7142 /* CommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsViewController.h; sourceTree = "<group>"; };
+		8C1AB39D178C4A2500ED7142 /* CommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsViewController.m; sourceTree = "<group>"; };
+		8C1AB39F178C4BF400ED7142 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		8C1AB3A0178C4BF400ED7142 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		8C1AB3A2178C50BB00ED7142 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		8C1AB3A3178C50BC00ED7142 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		8C67EDDB1764D779003278F8 /* Genre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Genre.h; sourceTree = "<group>"; };
 		8C67EDDC1764D779003278F8 /* Genre.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Genre.m; sourceTree = "<group>"; };
 		8C67EDE11764FC59003278F8 /* SeasonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeasonsViewController.h; sourceTree = "<group>"; };
@@ -166,6 +175,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C1AB39B178C49EC00ED7142 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				8C1AB39C178C4A2500ED7142 /* CommentsViewController.h */,
+				8C1AB39D178C4A2500ED7142 /* CommentsViewController.m */,
+				8C1AB3A2178C50BB00ED7142 /* CommentViewController.h */,
+				8C1AB3A3178C50BC00ED7142 /* CommentViewController.m */,
+			);
+			name = Comments;
+			sourceTree = "<group>";
+		};
 		8C4D51C4175296DE00739A25 /* HttpClients */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +214,7 @@
 				8C67EDE41764FC5F003278F8 /* SeasonsControllers */,
 				8C67EDEE176515E7003278F8 /* EpisodesController */,
 				8C67EDF8176525CB003278F8 /* PersonsController */,
+				8C1AB39B178C49EC00ED7142 /* Comments */,
 			);
 			name = ControllersAndViews;
 			sourceTree = "<group>";
@@ -264,6 +285,8 @@
 				8C67EDF617651E55003278F8 /* Actor.m */,
 				D802E65B17888C6E00ABD08F /* User.h */,
 				D802E65C17888C6E00ABD08F /* User.m */,
+				8C1AB39F178C4BF400ED7142 /* Comment.h */,
+				8C1AB3A0178C4BF400ED7142 /* Comment.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -538,6 +561,9 @@
 				D802E65D17888C6E00ABD08F /* User.m in Sources */,
 				D802E66417889C7E00ABD08F /* FacebookView.m in Sources */,
 				D811B5551789D88D00D4CB3F /* SlideshowViewController.m in Sources */,
+				8C1AB39E178C4A2500ED7142 /* CommentsViewController.m in Sources */,
+				8C1AB3A1178C4BF400ED7142 /* Comment.m in Sources */,
+				8C1AB3A4178C50BC00ED7142 /* CommentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

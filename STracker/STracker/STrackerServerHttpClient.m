@@ -79,12 +79,16 @@
     [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        success((AFJSONRequestOperation *)operation, responseObject);
+        if (success != nil)
+            success((AFJSONRequestOperation *)operation, responseObject);
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         [self getAlertForError:error];
-        failure((AFJSONRequestOperation *)operation, error);
+        
+        if (failure != nil)
+            failure((AFJSONRequestOperation *)operation, error);
     }];
 }
 
@@ -102,7 +106,9 @@
         
         // Clean Authorization header.
         [self setDefaultHeader:@"Authorization" value:nil];
-        success((AFJSONRequestOperation *)operation, responseObject);
+        if (success != nil) 
+            success((AFJSONRequestOperation *)operation, responseObject);
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -110,11 +116,18 @@
         // Clean Authorization header.
         [self setDefaultHeader:@"Authorization" value:header];
         [self getAlertForError:error];
-        failure((AFJSONRequestOperation *)operation, error);
+        
+        if (failure != nil) 
+            failure((AFJSONRequestOperation *)operation, error);
     }];
 }
 
 #pragma mark - Users operations.
+- (void)getUser:(Success)success failure:(Failure)failure
+{
+    [self getOperation:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserInfoURI"] query:nil success:success failure:failure];
+}
+
 - (void)postUser:(User *)user success:(Success)success failure:(Failure)failure
 {
     NSArray *objs = [NSArray arrayWithObjects:user.identifier, user.name, user.email, user.photoURL, nil];
@@ -193,6 +206,15 @@
 - (void)postEpisodeRating:(Episode *)episode rating:(float)rating success:(Success)success failure:(Failure) failure
 {
     // TODO
+}
+
+#pragma mark - Comments operations.
+- (void)getTvshowComments:(TvShow *)tvshow success:(Success)success failure:(Failure) failure
+{
+    NSString *path = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowCommentsURL"];
+    path = [path stringByReplacingOccurrencesOfString:@"id" withString:tvshow.imdbId];
+    
+    [self getOperation:path query:nil success:success failure:failure];
 }
 
 @end

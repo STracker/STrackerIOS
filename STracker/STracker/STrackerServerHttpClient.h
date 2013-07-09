@@ -33,6 +33,7 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 - (void)setHawkCredentials:(HawkCredentials *)credentials;
 
 // Users operations.
+- (void)getUser:(Success)success failure:(Failure)failure;
 - (void)postUser:(User *)user success:(Success)success failure:(Failure)failure;
 
 // Genres operations.
@@ -55,5 +56,8 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 - (void)postTvShowRating:(TvShow *)tvshow rating:(float)rating success:(Success)success failure:(Failure) failure;
 - (void)getEpisodeRating:(Episode *)episode success:(Success)success failure:(Failure) failure;
 - (void)postEpisodeRating:(Episode *)episode rating:(float)rating success:(Success)success failure:(Failure) failure;
+
+// Comments operations.
+- (void)getTvshowComments:(TvShow *)tvshow success:(Success)success failure:(Failure) failure;
 
 @end
