@@ -40,6 +40,7 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 - (void)postUser:(User *)user success:(Success)success failure:(Failure)failure;
 - (void)getUserFriends:(Success)success failure:(Failure)failure;
 - (void)postInvite:(User *)user success:(Success)success failure:(Failure)failure;
+- (void)deleteFriend:(NSString *)userId success:(Success)success failure:(Failure)failure;
 
 // Genres operations.
 - (void)getGenres:(Success)success failure:(Failure)failure;

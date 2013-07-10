@@ -9,8 +9,6 @@
 #import "BaseTableViewController.h"
 #import "Actor.h"
 #import "DownloadFiles.h"
-#import "User.h"
-#import "ProfileViewController.h"
 #import "AppDelegate.h"
 
 @interface PersonsViewController : BaseTableViewController

@@ -80,7 +80,7 @@
             [data addObject:sinopsis];
         }
         
-        PersonsViewController *view = [[PersonsViewController alloc] initWithData:data];
+        UsersViewController *view = [[UsersViewController alloc] initWithData:data];
         [self.navigationController pushViewController:view animated:YES];
         
     } failure:nil];

@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "FacebookView.h"
 #import "SubscriptionsViewController.h"
-#import "PersonsViewController.h"
+#import "UsersViewController.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 

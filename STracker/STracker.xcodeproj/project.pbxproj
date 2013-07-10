@@ -55,6 +55,7 @@
 		D88B0472178D63A5001587B5 /* Subscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D88B0471178D63A5001587B5 /* Subscription.m */; };
 		D88B0475178D664B001587B5 /* SubscriptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D88B0474178D664B001587B5 /* SubscriptionsViewController.m */; };
 		D88B047C178D7647001587B5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D88B047B178D7647001587B5 /* ProfileViewController.m */; };
+		D88B047F178D91B7001587B5 /* UsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D88B047E178D91B7001587B5 /* UsersViewController.m */; };
 		D891AE2D174FE191001625C6 /* BackgroundPattern.png in Resources */ = {isa = PBXBuildFile; fileRef = D891AE2C174FE191001625C6 /* BackgroundPattern.png */; };
 		D891AE30174FE7E6001625C6 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D891AE2F174FE7E6001625C6 /* HomeViewController.m */; };
 		D891AE36174FEB0C001625C6 /* Search.png in Resources */ = {isa = PBXBuildFile; fileRef = D891AE35174FEB0C001625C6 /* Search.png */; };
@@ -145,6 +146,8 @@
 		D88B0474178D664B001587B5 /* SubscriptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionsViewController.m; sourceTree = "<group>"; };
 		D88B047A178D7647001587B5 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		D88B047B178D7647001587B5 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		D88B047D178D91B6001587B5 /* UsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersViewController.h; sourceTree = "<group>"; };
+		D88B047E178D91B7001587B5 /* UsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersViewController.m; sourceTree = "<group>"; };
 		D891AE2C174FE191001625C6 /* BackgroundPattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundPattern.png; sourceTree = "<group>"; };
 		D891AE2E174FE7E6001625C6 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		D891AE2F174FE7E6001625C6 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
@@ -269,6 +272,8 @@
 			children = (
 				8C67EDF9176525E9003278F8 /* PersonsViewController.h */,
 				8C67EDFA176525E9003278F8 /* PersonsViewController.m */,
+				D88B047D178D91B6001587B5 /* UsersViewController.h */,
+				D88B047E178D91B7001587B5 /* UsersViewController.m */,
 				D88B047A178D7647001587B5 /* ProfileViewController.h */,
 				D88B047B178D7647001587B5 /* ProfileViewController.m */,
 			);
@@ -588,6 +593,7 @@
 				D88B0472178D63A5001587B5 /* Subscription.m in Sources */,
 				D88B0475178D664B001587B5 /* SubscriptionsViewController.m in Sources */,
 				D88B047C178D7647001587B5 /* ProfileViewController.m in Sources */,
+				D88B047F178D91B7001587B5 /* UsersViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

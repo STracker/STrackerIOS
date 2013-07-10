@@ -60,10 +60,6 @@
             break;
         case 1:
             [self friends];
-            break;
-        case 2:
-            
-            break;
     }
     
     [actionSheet setDelegate:nil];
@@ -78,7 +74,7 @@
 
 - (void)friends
 {
-    PersonsViewController *view = [[PersonsViewController alloc] initWithData:self.user.friends];
+    UsersViewController *view = [[UsersViewController alloc] initWithData:self.user.friends];
     [self.navigationController pushViewController:view animated:YES];
 }
 

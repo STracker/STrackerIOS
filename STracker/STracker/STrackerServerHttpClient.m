@@ -217,6 +217,13 @@
     [self postOperation:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsURI"] parameters:parameters success:success failure:failure];
 }
 
+- (void)deleteFriend:(NSString *)userId success:(Success)success failure:(Failure)failure
+{
+    NSString *path = [NSString stringWithFormat:@"%@/%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsURI"], userId];
+    
+    [self deleteOperation:path parameters:nil success:success failure:failure];
+}
+
 #pragma mark - Genres operations.
 - (void)getGenres:(Success)success failure:(Failure)failure
 {
