@@ -10,7 +10,33 @@
 
 @implementation User
 
-@synthesize identifier, email;
+@synthesize identifier, email, friends, subscriptions;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary
+{
+    self = [super initWithDictionary:dictionary];
+    if (self)
+    {
+        identifier = [Entity verifyValue:[dictionary objectForKey:@"Key"] defaultValue:@"N/A"];
+        email = [Entity verifyValue:[dictionary objectForKey:@"Email"] defaultValue:@"N/A"];
+        
+        friends = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in [dictionary objectForKey:@"Friends"])
+        {
+            UserSinospis *friend = [[UserSinospis alloc] initWithDictionary:item];
+            [friends addObject:friend];
+        }
+        
+        subscriptions = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in [dictionary objectForKey:@"SubscriptionList"])
+        {
+            Subscription *subscription = [[Subscription alloc] initWithDictionary:item];
+            [subscriptions addObject:subscription];
+        }
+    }
+    
+    return self;
+}
 
 @end
 

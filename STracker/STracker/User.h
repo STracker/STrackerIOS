@@ -7,11 +7,14 @@
 //
 
 #import "Person.h"
+#import "Subscription.h"
 
 @interface User : Person
 
 @property(nonatomic, copy) NSString *identifier;
 @property(nonatomic, copy) NSString *email;
+@property(nonatomic, strong) NSMutableArray *friends;
+@property(nonatomic, strong) NSMutableArray *subscriptions;
 
 @end
 

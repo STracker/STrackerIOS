@@ -63,4 +63,22 @@
     [_alertDelete show];
 }
 
+- (IBAction)openUserProfile
+{
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    if ([app.user.identifier isEqualToString:comment.user.identifier])
+        return;
+    
+    [[STrackerServerHttpClient sharedClient] getUser:comment.user.identifier success:^(AFJSONRequestOperation *operation, id result) {
+        
+        User *user = [[User alloc] initWithDictionary:result];
+        
+        ProfileViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"Profile"];
+        view.user = user;
+        
+        [self.navigationController pushViewController:view animated:YES];
+        
+    } failure:nil];
+}
+
 @end

@@ -31,7 +31,8 @@
         case 1:
             [self subscriptions];
             break;
-        default:
+        case 2:
+            [self friends];
             break;
     }
 }
@@ -50,11 +51,36 @@
         
         NSMutableArray *data = [[NSMutableArray alloc] init];
         for (NSDictionary *item in result) {
-            TvShowSynopse *synopse = [[TvShowSynopse alloc] initWithDictionary:[item objectForKey:@"TvShow"]];
-            [data addObject:synopse];
+            Subscription *subscription = [[Subscription alloc] initWithDictionary:item];
+            [data addObject:subscription];
         }
         
-        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:data andTitle:@"Following"];
+        SubscriptionsViewController *view = [[SubscriptionsViewController alloc] initWithData:data];
+        [self.navigationController pushViewController:view animated:YES];
+        
+    } failure:nil];
+}
+
+- (void)friends
+{
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    if (app.user == nil)
+    {
+        FacebookView *fb = [[FacebookView alloc] initWithController:self];
+        [self presentSemiView:fb];
+        return;
+    }
+    
+    [[STrackerServerHttpClient sharedClient] getUserFriends:^(AFJSONRequestOperation *operation, id result) {
+        
+        NSMutableArray *data = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in result)
+        {
+            UserSinospis *sinopsis = [[UserSinospis alloc] initWithDictionary:item];
+            [data addObject:sinopsis];
+        }
+        
+        PersonsViewController *view = [[PersonsViewController alloc] initWithData:data];
         [self.navigationController pushViewController:view animated:YES];
         
     } failure:nil];

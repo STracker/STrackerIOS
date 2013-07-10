@@ -17,6 +17,8 @@
 	<string>werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn</string>
 	<key>STrackerTopTvShowsNumber</key>
 	<integer>5</integer>
+	<key>STrackerUserFriendsURI</key>
+	<string>userfriends</string>
 	<key>STrackerUserSubscriptionsURL</key>
 	<string>usersubscriptions</string>
 	<key>STrackerEpisodeCommentsURL</key>

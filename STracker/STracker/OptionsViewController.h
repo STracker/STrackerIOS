@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 #import "FacebookView.h"
-#import "TvShowsViewController.h"
+#import "SubscriptionsViewController.h"
+#import "PersonsViewController.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 

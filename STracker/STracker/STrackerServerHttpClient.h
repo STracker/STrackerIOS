@@ -15,6 +15,7 @@
 #import "User.h"
 #import "HawkClient_iOS.h"
 #import "Comment.h"
+#import "Subscription.h"
 
 #define TIME_FORMAT @"yyyy-MM-dd HH:mm:ss"
 
@@ -37,6 +38,8 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 // Users operations.
 - (void)getUser:(NSString *)userId success:(Success)success failure:(Failure)failure;
 - (void)postUser:(User *)user success:(Success)success failure:(Failure)failure;
+- (void)getUserFriends:(Success)success failure:(Failure)failure;
+- (void)postInvite:(User *)user success:(Success)success failure:(Failure)failure;
 
 // Genres operations.
 - (void)getGenres:(Success)success failure:(Failure)failure;
@@ -69,6 +72,6 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 // Subscriptions operations.
 - (void)getSubscriptions:(Success)success failure:(Failure) failure;
 - (void)postSubscription:(TvShow *)tvshow success:(Success)success failure:(Failure) failure;
-//- (void)deleteSubscription:(TvShow *)tvshow success:(Success)success failure:(Failure) failure;
+- (void)deleteSubscription:(Subscription *)subscription success:(Success)success failure:(Failure) failure;
 
 @end

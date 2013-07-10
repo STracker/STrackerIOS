@@ -18,7 +18,7 @@
     NSString *_tableTitle;
 }
 
-// Init method that receives the data and the name of the genre.
+// Init method that receives the data and the name of the title.
 - (id)initWithData:(NSMutableArray *)data andTitle:(NSString *)title;
 
 @end

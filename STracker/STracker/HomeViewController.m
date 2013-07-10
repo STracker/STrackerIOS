@@ -50,7 +50,7 @@
 
 - (IBAction)searchOptions:(UIBarButtonItem *)sender
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Search" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Shows", @"Genres", @"Friends", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Search" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Shows", @"Genres", @"People", nil];
     
     [actionSheet showFromBarButtonItem:sender animated:YES];
 }

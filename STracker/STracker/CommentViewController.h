@@ -11,6 +11,7 @@
 #import "Comment.h"
 #import "User.h"
 #import "AppDelegate.h"
+#import "ProfileViewController.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 
@@ -24,5 +25,7 @@
 }
 
 @property(nonatomic, strong) Comment *comment;
+
+- (IBAction)openUserProfile;
 
 @end

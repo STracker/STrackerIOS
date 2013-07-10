@@ -36,7 +36,6 @@
 		D802E65D17888C6E00ABD08F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D802E65C17888C6E00ABD08F /* User.m */; };
 		D802E66417889C7E00ABD08F /* FacebookView.m in Sources */ = {isa = PBXBuildFile; fileRef = D802E66317889C7E00ABD08F /* FacebookView.m */; };
 		D811B5521789BE1600D4CB3F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D811B5511789BE1600D4CB3F /* QuartzCore.framework */; };
-		D811B5551789D88D00D4CB3F /* SlideshowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D811B5541789D88C00D4CB3F /* SlideshowViewController.m */; };
 		D869D456178C8DA2003C1CDF /* TvShowCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869D455178C8DA2003C1CDF /* TvShowCommentsViewController.m */; };
 		D8782EC0174E6E160025CF79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EBF174E6E160025CF79 /* UIKit.framework */; };
 		D8782EC2174E6E160025CF79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EC1174E6E160025CF79 /* Foundation.framework */; };
@@ -53,6 +52,9 @@
 		D887E38C1753C8F000E3BABB /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = D887E38B1753C8F000E3BABB /* Entity.m */; };
 		D887E38F1753CC6C00E3BABB /* TvShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D887E38E1753CC6C00E3BABB /* TvShowViewController.m */; };
 		D887E3921753FA2200E3BABB /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D887E3911753FA2200E3BABB /* BaseTableViewController.m */; };
+		D88B0472178D63A5001587B5 /* Subscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D88B0471178D63A5001587B5 /* Subscription.m */; };
+		D88B0475178D664B001587B5 /* SubscriptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D88B0474178D664B001587B5 /* SubscriptionsViewController.m */; };
+		D88B047C178D7647001587B5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D88B047B178D7647001587B5 /* ProfileViewController.m */; };
 		D891AE2D174FE191001625C6 /* BackgroundPattern.png in Resources */ = {isa = PBXBuildFile; fileRef = D891AE2C174FE191001625C6 /* BackgroundPattern.png */; };
 		D891AE30174FE7E6001625C6 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D891AE2F174FE7E6001625C6 /* HomeViewController.m */; };
 		D891AE36174FEB0C001625C6 /* Search.png in Resources */ = {isa = PBXBuildFile; fileRef = D891AE35174FEB0C001625C6 /* Search.png */; };
@@ -112,8 +114,6 @@
 		D802E66217889C7E00ABD08F /* FacebookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookView.h; sourceTree = "<group>"; };
 		D802E66317889C7E00ABD08F /* FacebookView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookView.m; sourceTree = "<group>"; };
 		D811B5511789BE1600D4CB3F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		D811B5531789D88C00D4CB3F /* SlideshowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowViewController.h; sourceTree = "<group>"; };
-		D811B5541789D88C00D4CB3F /* SlideshowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowViewController.m; sourceTree = "<group>"; };
 		D869D454178C8DA2003C1CDF /* TvShowCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TvShowCommentsViewController.h; sourceTree = "<group>"; };
 		D869D455178C8DA2003C1CDF /* TvShowCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShowCommentsViewController.m; sourceTree = "<group>"; };
 		D8782EBC174E6E160025CF79 /* STracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +139,12 @@
 		D887E38E1753CC6C00E3BABB /* TvShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShowViewController.m; sourceTree = "<group>"; };
 		D887E3901753FA2200E3BABB /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
 		D887E3911753FA2200E3BABB /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
+		D88B0470178D63A5001587B5 /* Subscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Subscription.h; sourceTree = "<group>"; };
+		D88B0471178D63A5001587B5 /* Subscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Subscription.m; sourceTree = "<group>"; };
+		D88B0473178D664B001587B5 /* SubscriptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionsViewController.h; sourceTree = "<group>"; };
+		D88B0474178D664B001587B5 /* SubscriptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionsViewController.m; sourceTree = "<group>"; };
+		D88B047A178D7647001587B5 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		D88B047B178D7647001587B5 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		D891AE2C174FE191001625C6 /* BackgroundPattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundPattern.png; sourceTree = "<group>"; };
 		D891AE2E174FE7E6001625C6 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		D891AE2F174FE7E6001625C6 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
@@ -181,7 +187,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8C1AB39B178C49EC00ED7142 /* Comments */ = {
+		8C1AB39B178C49EC00ED7142 /* CommentsController */ = {
 			isa = PBXGroup;
 			children = (
 				8C1AB39C178C4A2500ED7142 /* CommentsViewController.h */,
@@ -193,7 +199,7 @@
 				8C1AB3A2178C50BB00ED7142 /* CommentViewController.h */,
 				8C1AB3A3178C50BC00ED7142 /* CommentViewController.m */,
 			);
-			name = Comments;
+			name = CommentsController;
 			sourceTree = "<group>";
 		};
 		8C4D51C4175296DE00739A25 /* HttpClients */ = {
@@ -215,27 +221,18 @@
 				D8782ECE174E6E160025CF79 /* AppDelegate.h */,
 				D8782ECF174E6E160025CF79 /* AppDelegate.m */,
 				D811B5561789E94E00D4CB3F /* FacebookLogin */,
-				D811B5571789F43500D4CB3F /* BaseTable */,
-				8C6040ED178A2296001BAA6E /* Slideshow */,
+				D811B5571789F43500D4CB3F /* BaseTableController */,
 				D887E39917540A0500E3BABB /* HomeController */,
 				D887E39B17540AAC00E3BABB /* OptionsController */,
+				D88B0476178D6654001587B5 /* SubscriptionsController */,
 				8C67EDDA1764D5AC003278F8 /* GenresController */,
 				D887E39A17540A0E00E3BABB /* TvShowsControllers */,
 				8C67EDE41764FC5F003278F8 /* SeasonsControllers */,
 				8C67EDEE176515E7003278F8 /* EpisodesController */,
 				8C67EDF8176525CB003278F8 /* PersonsController */,
-				8C1AB39B178C49EC00ED7142 /* Comments */,
+				8C1AB39B178C49EC00ED7142 /* CommentsController */,
 			);
 			name = ControllersAndViews;
-			sourceTree = "<group>";
-		};
-		8C6040ED178A2296001BAA6E /* Slideshow */ = {
-			isa = PBXGroup;
-			children = (
-				D811B5531789D88C00D4CB3F /* SlideshowViewController.h */,
-				D811B5541789D88C00D4CB3F /* SlideshowViewController.m */,
-			);
-			name = Slideshow;
 			sourceTree = "<group>";
 		};
 		8C67EDDA1764D5AC003278F8 /* GenresController */ = {
@@ -272,6 +269,8 @@
 			children = (
 				8C67EDF9176525E9003278F8 /* PersonsViewController.h */,
 				8C67EDFA176525E9003278F8 /* PersonsViewController.m */,
+				D88B047A178D7647001587B5 /* ProfileViewController.h */,
+				D88B047B178D7647001587B5 /* ProfileViewController.m */,
 			);
 			name = PersonsController;
 			sourceTree = "<group>";
@@ -297,6 +296,8 @@
 				D802E65C17888C6E00ABD08F /* User.m */,
 				8C1AB39F178C4BF400ED7142 /* Comment.h */,
 				8C1AB3A0178C4BF400ED7142 /* Comment.m */,
+				D88B0470178D63A5001587B5 /* Subscription.h */,
+				D88B0471178D63A5001587B5 /* Subscription.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -310,13 +311,13 @@
 			name = FacebookLogin;
 			sourceTree = "<group>";
 		};
-		D811B5571789F43500D4CB3F /* BaseTable */ = {
+		D811B5571789F43500D4CB3F /* BaseTableController */ = {
 			isa = PBXGroup;
 			children = (
 				D887E3901753FA2200E3BABB /* BaseTableViewController.h */,
 				D887E3911753FA2200E3BABB /* BaseTableViewController.m */,
 			);
-			name = BaseTable;
+			name = BaseTableController;
 			sourceTree = "<group>";
 		};
 		D8782EB3174E6E160025CF79 = {
@@ -411,6 +412,15 @@
 				D891AE42174FFA49001625C6 /* OptionsViewController.m */,
 			);
 			name = OptionsController;
+			sourceTree = "<group>";
+		};
+		D88B0476178D6654001587B5 /* SubscriptionsController */ = {
+			isa = PBXGroup;
+			children = (
+				D88B0473178D664B001587B5 /* SubscriptionsViewController.h */,
+				D88B0474178D664B001587B5 /* SubscriptionsViewController.m */,
+			);
+			name = SubscriptionsController;
 			sourceTree = "<group>";
 		};
 		D891AE2B174FE172001625C6 /* Images */ = {
@@ -570,12 +580,14 @@
 				8CD10DC2176E81BD00F81F7C /* DownloadFiles.m in Sources */,
 				D802E65D17888C6E00ABD08F /* User.m in Sources */,
 				D802E66417889C7E00ABD08F /* FacebookView.m in Sources */,
-				D811B5551789D88D00D4CB3F /* SlideshowViewController.m in Sources */,
 				8C1AB39E178C4A2500ED7142 /* CommentsViewController.m in Sources */,
 				8C1AB3A1178C4BF400ED7142 /* Comment.m in Sources */,
 				8C1AB3A4178C50BC00ED7142 /* CommentViewController.m in Sources */,
 				D869D456178C8DA2003C1CDF /* TvShowCommentsViewController.m in Sources */,
 				8C5934FB178CE18300872E30 /* EpisodeCommentsViewController.m in Sources */,
+				D88B0472178D63A5001587B5 /* Subscription.m in Sources */,
+				D88B0475178D664B001587B5 /* SubscriptionsViewController.m in Sources */,
+				D88B047C178D7647001587B5 /* ProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

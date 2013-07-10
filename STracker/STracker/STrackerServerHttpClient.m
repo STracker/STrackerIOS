@@ -175,6 +175,8 @@
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
+        NSLog(@"%@", error.description);
+        
         // Clean Authorization header.
         [self setDefaultHeader:@"Authorization" value:header];
         [self getAlertForError:error];
@@ -199,6 +201,20 @@
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:objs forKeys:keys];
     
     [self postOperation:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserInfoURI"] parameters:parameters success:success failure:failure];
+}
+
+- (void)getUserFriends:(Success)success failure:(Failure)failure
+{
+    [self getOperationWithHawkProtocol:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsURI"] query:nil success:success failure:failure];
+}
+
+- (void)postInvite:(User *)user success:(Success)success failure:(Failure)failure
+{
+    NSArray *objs = [NSArray arrayWithObject:user.identifier];
+    NSArray *keys = [NSArray arrayWithObject:@""];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:objs forKeys:keys];
+    
+    [self postOperation:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsURI"] parameters:parameters success:success failure:failure];
 }
 
 #pragma mark - Genres operations.
@@ -344,6 +360,13 @@
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObject:tvshow.imdbId] forKeys:[NSArray arrayWithObject:@""]];
     
     [self postOperation:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURL"] parameters:parameters success:success failure:failure];
+}
+
+- (void)deleteSubscription:(Subscription *)subscription success:(Success)success failure:(Failure) failure
+{
+    NSString *path = [NSString stringWithFormat:@"%@/%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURL"], subscription.tvshow.imdbId];
+    
+    [self deleteOperation:path parameters:nil success:success failure:failure];
 }
 
 @end
