@@ -10,11 +10,11 @@
 
 @implementation TvShowsViewController
 
-- (id)initWithData:(NSMutableArray *)data andGenre:(NSString *)genre
+- (id)initWithData:(NSMutableArray *)data andTitle:(NSString *)title
 {
     self = [super initWithData:data];
     if (self)
-        title = genre;
+        _tableTitle = title;
     
     return self;
 }
@@ -29,7 +29,7 @@
 - (void)viewDidLoadHook
 {
     _numberOfSections = 1;
-    self.navigationItem.title = title;
+    self.navigationItem.title = _tableTitle;
 }
 
 #pragma mark - Table view delegate

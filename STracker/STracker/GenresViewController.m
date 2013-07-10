@@ -37,7 +37,7 @@
         }
         
         GenreSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
-        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:data andGenre:synopsis.name];
+        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:data andTitle:synopsis.name];
         [self.navigationController pushViewController:view animated:YES];
         
     } failure: nil];

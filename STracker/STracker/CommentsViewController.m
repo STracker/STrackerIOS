@@ -15,19 +15,6 @@
     [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
 }
 
-- (void)openCommentHook:(Comment *)comment
-{
-    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    // Reload data.
-    
-}
-
 #pragma mark - Hook methods.
 - (void)viewDidLoadHook
 {
@@ -58,7 +45,10 @@
         return;
     }
     
-    [self openCommentHook:[_data objectAtIndex:indexPath.row]];
+    CommentViewController *view = [app.storyboard instantiateViewControllerWithIdentifier:@"Comment"];
+    view.comment = [_data objectAtIndex:indexPath.row];
+    
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 #pragma mark - Selectors.
@@ -90,7 +80,7 @@
 
 - (void)popupTextView:(YIPopupTextView*)textView didDismissWithText:(NSString*)text cancelled:(BOOL)cancelled
 {
-    if ([text isEqualToString:@""])
+    if ([text isEqualToString:@""] || cancelled)
         return;
     
     [_composeComment setEnabled:YES];

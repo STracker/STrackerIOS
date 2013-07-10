@@ -142,6 +142,8 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
+        NSLog(@"%@", error.description);
+        
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         // Clean Authorization header.
@@ -251,6 +253,16 @@
     [self getOperation:path query:nil success:success failure:failure];
 }
 
+- (void)getEpisodeRating:(Episode *)episode success:(Success)success failure:(Failure) failure
+{
+    NSString *path = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeRatingURL"];
+    path = [path stringByReplacingOccurrencesOfString:@"tvshowId" withString:episode.tvshowId];
+    path = [path stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%@",episode.seasonNumber]];
+    path = [path stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%@",episode.number]];
+    
+    [self getOperation:path query:nil success:success failure:failure];
+}
+
 - (void)postTvShowRating:(TvShow *)tvshow rating:(float)rating success:(Success)success failure:(Failure) failure
 {
     NSString *path = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerRatingsURL"];
@@ -261,13 +273,18 @@
     
     [self postOperation:path parameters:parameters success:success failure:failure];
 }
-- (void)getEpisodeRating:(Episode *)episode success:(Success)success failure:(Failure) failure
-{
-    // TODO
-}
+
 - (void)postEpisodeRating:(Episode *)episode rating:(float)rating success:(Success)success failure:(Failure) failure
 {
-    // TODO
+    NSString *path = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeRatingURL"];
+    path = [path stringByReplacingOccurrencesOfString:@"tvshowId" withString:episode.tvshowId];
+    path = [path stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%@",episode.seasonNumber]];
+    path = [path stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%@",episode.number]];
+    
+    NSString * ratingStr = [NSString stringWithFormat:@"%d", (int)rating];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObject:ratingStr] forKeys:[NSArray arrayWithObject:@""]];
+    
+    [self postOperation:path parameters:parameters success:success failure:failure];
 }
 
 #pragma mark - Comments operations.
@@ -276,6 +293,16 @@
     NSString *path = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowCommentsURL"];
     path = [path stringByReplacingOccurrencesOfString:@"id" withString:tvshow.imdbId];
     
+    [self getOperation:path query:nil success:success failure:failure];
+}
+
+- (void)getEpisodeComments:(Episode *)episode success:(Success)success failure:(Failure) failure
+{
+    NSString *path = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeCommentsURL"];
+    path = [path stringByReplacingOccurrencesOfString:@"tvshowId" withString:episode.tvshowId];
+    path = [path stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%@",episode.seasonNumber]];
+    path = [path stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%@",episode.number]];
+
     [self getOperation:path query:nil success:success failure:failure];
 }
 
@@ -289,24 +316,34 @@
     [self postOperation:path parameters:parameters success:success failure:failure];
 }
 
-- (void)deleteTvShowComment:(TvShow *)tvshow comment:(Comment *)comment success:(Success)success failure:(Failure) failure
+- (void)postEpisodeComment:(Episode *)episode comment:(NSString *)comment success:(Success)success failure:(Failure) failure
+{
+    NSString *path = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeCommentsURL"];
+    path = [path stringByReplacingOccurrencesOfString:@"tvshowId" withString:episode.tvshowId];
+    path = [path stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%@",episode.seasonNumber]];
+    path = [path stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%@",episode.number]];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObject:comment] forKeys:[NSArray arrayWithObject:@""]];
+    
+    [self postOperation:path parameters:parameters success:success failure:failure];
+}
+
+- (void)deleteComment:(Comment *)comment success:(Success)success failure:(Failure) failure
 {
     [self deleteOperation:comment.uri parameters:nil success:success failure:failure];
 }
 
-- (void)getEpisodeComments:(Episode *)episode success:(Success)success failure:(Failure) failure
+#pragma mark - Subscriptions operations.
+- (void)getSubscriptions:(Success)success failure:(Failure) failure
 {
-    // TODO
+    [self getOperationWithHawkProtocol:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURL"] query:nil success:success failure:failure];
 }
 
-- (void)postEpisodeComment:(Episode *)episode success:(Success)success failure:(Failure) failure
+- (void)postSubscription:(TvShow *)tvshow success:(Success)success failure:(Failure) failure
 {
-    // TODO
-}
-
-- (void)deleteEpisodeComment:(Episode *)episode success:(Success)success failure:(Failure) failure
-{
-    // TODO
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObject:tvshow.imdbId] forKeys:[NSArray arrayWithObject:@""]];
+    
+    [self postOperation:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURL"] parameters:parameters success:success failure:failure];
 }
 
 @end

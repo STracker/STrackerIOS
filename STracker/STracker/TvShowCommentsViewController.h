@@ -8,7 +8,7 @@
 
 #import "CommentsViewController.h"
 #import "STrackerServerHttpClient.h"
-#import "CommentTvShowViewController.h"
+#import "CommentViewController.h"
 
 @interface TvShowCommentsViewController : CommentsViewController
 {
@@ -16,6 +16,6 @@
 }
 
 // Constructor.
-- (id)initWithData:(NSMutableArray *)data andTvShow:(TvShow *)tvshow;
+- (id)initWithTvShow:(TvShow *)tvshow;
 
 @end

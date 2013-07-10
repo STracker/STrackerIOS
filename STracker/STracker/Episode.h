@@ -21,6 +21,8 @@
 
 @interface Episode : Entity
 
+@property(nonatomic, copy) NSString *tvshowId;
+@property(nonatomic, copy) NSString *seasonNumber;
 @property(nonatomic, copy) NSString *number;
 @property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSString *description;

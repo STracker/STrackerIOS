@@ -15,10 +15,10 @@
 
 @interface TvShowsViewController : BaseTableViewController
 {
-    NSString *title;
+    NSString *_tableTitle;
 }
 
 // Init method that receives the data and the name of the genre.
-- (id)initWithData:(NSMutableArray *)data andGenre:(NSString *)genre;
+- (id)initWithData:(NSMutableArray *)data andTitle:(NSString *)title;
 
 @end

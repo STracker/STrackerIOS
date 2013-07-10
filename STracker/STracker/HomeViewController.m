@@ -15,10 +15,13 @@
 {
     [[STrackerServerHttpClient sharedClient] getTopRated:^(AFJSONRequestOperation *operation, id result) {
        
+        _top = nil;
+        _top = [[NSMutableArray alloc] initWithCapacity:(int)[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTopTvShowsNumber"]];
+        
         for (NSDictionary *item in result)
         {
             TvShowSynopse *synopsis = [[TvShowSynopse alloc] initWithDictionary:item];
-            [_top5 addObject:synopsis];
+            [_top addObject:synopsis];
         }
         
         [imagePager reloadData];
@@ -29,9 +32,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.navigationItem.title = @"STracker Top Series";
-    _top5 = [[NSMutableArray alloc] initWithCapacity:5];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     [self getTopRated];
 }
@@ -39,14 +44,6 @@
 # pragma mark - IBActions.
 - (IBAction)userOptions:(id)sender
 {
-    // Verification if the user exists, if not ask for login on Facebook.
-    if (_app.user == nil)
-    {
-        FacebookView *fb = [[FacebookView alloc] initWithController:self];
-        [self presentSemiView:fb];
-        return;
-    }
-    
     OptionsViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"UserOptions"];
     [self.navigationController pushViewController:view animated:YES];
 }
@@ -62,7 +59,7 @@
 - (NSArray *) arrayWithImageUrlStrings
 {
     NSMutableArray *urls = [[NSMutableArray alloc] initWithCapacity:5];
-    for (TvShowSynopse *synopse in _top5)
+    for (TvShowSynopse *synopse in _top)
         [urls addObject:synopse.poster];
     
     if (urls.count == 0)
@@ -80,7 +77,7 @@
 #pragma mark - KIImagePager Delegate
 - (void) imagePager:(KIImagePager *)imagePager didSelectImageAtIndex:(NSUInteger)index
 {
-    TvShowSynopse *synopse = [_top5 objectAtIndex:index];
+    TvShowSynopse *synopse = [_top objectAtIndex:index];
     
     [[STrackerServerHttpClient sharedClient] getTvshow:synopse success:^(AFJSONRequestOperation *operation, id result) {
         

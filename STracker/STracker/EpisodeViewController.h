@@ -12,16 +12,21 @@
 #import "PersonsViewController.h"
 #import "Episode.h"
 #import "Person.h"
+#import "DLStarRatingControl.h"
+#import "FacebookView.h"
+#import "STrackerServerHttpClient.h"
+#import "EpisodeCommentsViewController.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 
-@interface EpisodeViewController : UIViewController <UIActionSheetDelegate>
+@interface EpisodeViewController : UIViewController <UIActionSheetDelegate, DLStarRatingDelegate>
 {
     __weak IBOutlet UIImageView *_poster;
     __weak IBOutlet UILabel *_date;
     __weak IBOutlet UITextView *_description;
     __weak IBOutlet UILabel *_average;
     __weak IBOutlet UILabel *_numberOfUsers;
+    __weak IBOutlet DLStarRatingControl *_rating;
 }
 
 @property(nonatomic, retain) Episode *episode;

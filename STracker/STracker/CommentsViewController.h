@@ -12,16 +12,14 @@
 #import "Comment.h"
 #import "YIPopupTextView.h"
 #import "FacebookView.h"
-#import "CommentTvShowViewController.h"
+#import "CommentViewController.h"
 
 @interface CommentsViewController : BaseTableViewController <YIPopupTextViewDelegate>
 {
     UIBarButtonItem *_composeComment;
 }
 
-// Hook method.
+// Hook methods.
 - (void)popupTextViewHook:(YIPopupTextView*)textView didDismissWithText:(NSString*)text cancelled:(BOOL)cancelled;
-
-- (void)openCommentHook:(Comment *)comment;
 
 @end

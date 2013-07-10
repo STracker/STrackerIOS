@@ -1,19 +1,23 @@
 //
-//  TvShowCommentsViewController.m
+//  EpisodeCommentsViewController.m
 //  STracker
 //
-//  Created by Ricardo Sousa on 09/07/13.
+//  Created by Ricardo Sousa on 7/10/13.
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "TvShowCommentsViewController.h"
+#import "EpisodeCommentsViewController.h"
 
-@implementation TvShowCommentsViewController
+@interface EpisodeCommentsViewController ()
 
-- (id)initWithTvShow:(TvShow *)tvshow
+@end
+
+@implementation EpisodeCommentsViewController
+
+- (id)initWithEpisode:(Episode *)episode
 {
     if (self = [super initWithData:[[NSMutableArray alloc] init]])
-        _tvshow = tvshow;
+        _episode = episode;
     
     return self;
 }
@@ -22,7 +26,7 @@
 {
     [super viewWillAppear:animated];
     
-    [[STrackerServerHttpClient sharedClient] getTvshowComments:_tvshow success:^(AFJSONRequestOperation *operation, id result) {
+    [[STrackerServerHttpClient sharedClient] getEpisodeComments:_episode success:^(AFJSONRequestOperation *operation, id result) {
         
         _data = nil;
         _data = [[NSMutableArray alloc] init];
@@ -33,16 +37,17 @@
         }
         
         [self.tableView reloadData];
-        
+                
     } failure:nil];
 }
 
 #pragma mark - Hook methods.
 - (void)popupTextViewHook:(YIPopupTextView*)textView didDismissWithText:(NSString*)text cancelled:(BOOL)cancelled
 {
-    [[STrackerServerHttpClient sharedClient] postTvShowComment:_tvshow comment:text success:^(AFJSONRequestOperation *operation, id result) {
-    
-        //Nothing to do...
+    [[STrackerServerHttpClient sharedClient] postEpisodeComment:_episode comment:text success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Nothing to do...
+        
     } failure:nil];
 }
 

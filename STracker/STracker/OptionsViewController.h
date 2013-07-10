@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 #import "FacebookView.h"
+#import "TvShowsViewController.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 

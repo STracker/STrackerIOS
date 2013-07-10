@@ -10,6 +10,7 @@
 		8C1AB39E178C4A2500ED7142 /* CommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AB39D178C4A2500ED7142 /* CommentsViewController.m */; };
 		8C1AB3A1178C4BF400ED7142 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AB3A0178C4BF400ED7142 /* Comment.m */; };
 		8C1AB3A4178C50BC00ED7142 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AB3A3178C50BC00ED7142 /* CommentViewController.m */; };
+		8C5934FB178CE18300872E30 /* EpisodeCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5934FA178CE18300872E30 /* EpisodeCommentsViewController.m */; };
 		8C67EDDD1764D779003278F8 /* Genre.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDDC1764D779003278F8 /* Genre.m */; };
 		8C67EDE31764FC5A003278F8 /* SeasonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDE21764FC59003278F8 /* SeasonsViewController.m */; };
 		8C67EDE71764FD38003278F8 /* Season.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDE61764FD38003278F8 /* Season.m */; };
@@ -37,8 +38,6 @@
 		D811B5521789BE1600D4CB3F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D811B5511789BE1600D4CB3F /* QuartzCore.framework */; };
 		D811B5551789D88D00D4CB3F /* SlideshowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D811B5541789D88C00D4CB3F /* SlideshowViewController.m */; };
 		D869D456178C8DA2003C1CDF /* TvShowCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869D455178C8DA2003C1CDF /* TvShowCommentsViewController.m */; };
-		D869D459178C994F003C1CDF /* CommentTvShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869D458178C994E003C1CDF /* CommentTvShowViewController.m */; };
-		D869D45C178CB4FA003C1CDF /* CommentEpisodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869D45B178CB4FA003C1CDF /* CommentEpisodeViewController.m */; };
 		D8782EC0174E6E160025CF79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EBF174E6E160025CF79 /* UIKit.framework */; };
 		D8782EC2174E6E160025CF79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EC1174E6E160025CF79 /* Foundation.framework */; };
 		D8782EC4174E6E160025CF79 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EC3174E6E160025CF79 /* CoreGraphics.framework */; };
@@ -76,6 +75,8 @@
 		8C1AB3A0178C4BF400ED7142 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		8C1AB3A2178C50BB00ED7142 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		8C1AB3A3178C50BC00ED7142 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		8C5934F9178CE18300872E30 /* EpisodeCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpisodeCommentsViewController.h; sourceTree = "<group>"; };
+		8C5934FA178CE18300872E30 /* EpisodeCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EpisodeCommentsViewController.m; sourceTree = "<group>"; };
 		8C67EDDB1764D779003278F8 /* Genre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Genre.h; sourceTree = "<group>"; };
 		8C67EDDC1764D779003278F8 /* Genre.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Genre.m; sourceTree = "<group>"; };
 		8C67EDE11764FC59003278F8 /* SeasonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeasonsViewController.h; sourceTree = "<group>"; };
@@ -115,10 +116,6 @@
 		D811B5541789D88C00D4CB3F /* SlideshowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowViewController.m; sourceTree = "<group>"; };
 		D869D454178C8DA2003C1CDF /* TvShowCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TvShowCommentsViewController.h; sourceTree = "<group>"; };
 		D869D455178C8DA2003C1CDF /* TvShowCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShowCommentsViewController.m; sourceTree = "<group>"; };
-		D869D457178C994E003C1CDF /* CommentTvShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTvShowViewController.h; sourceTree = "<group>"; };
-		D869D458178C994E003C1CDF /* CommentTvShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTvShowViewController.m; sourceTree = "<group>"; };
-		D869D45A178CB4F9003C1CDF /* CommentEpisodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentEpisodeViewController.h; sourceTree = "<group>"; };
-		D869D45B178CB4FA003C1CDF /* CommentEpisodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentEpisodeViewController.m; sourceTree = "<group>"; };
 		D8782EBC174E6E160025CF79 /* STracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8782EBF174E6E160025CF79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D8782EC1174E6E160025CF79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -191,12 +188,10 @@
 				8C1AB39D178C4A2500ED7142 /* CommentsViewController.m */,
 				D869D454178C8DA2003C1CDF /* TvShowCommentsViewController.h */,
 				D869D455178C8DA2003C1CDF /* TvShowCommentsViewController.m */,
+				8C5934F9178CE18300872E30 /* EpisodeCommentsViewController.h */,
+				8C5934FA178CE18300872E30 /* EpisodeCommentsViewController.m */,
 				8C1AB3A2178C50BB00ED7142 /* CommentViewController.h */,
 				8C1AB3A3178C50BC00ED7142 /* CommentViewController.m */,
-				D869D457178C994E003C1CDF /* CommentTvShowViewController.h */,
-				D869D458178C994E003C1CDF /* CommentTvShowViewController.m */,
-				D869D45A178CB4F9003C1CDF /* CommentEpisodeViewController.h */,
-				D869D45B178CB4FA003C1CDF /* CommentEpisodeViewController.m */,
 			);
 			name = Comments;
 			sourceTree = "<group>";
@@ -580,8 +575,7 @@
 				8C1AB3A1178C4BF400ED7142 /* Comment.m in Sources */,
 				8C1AB3A4178C50BC00ED7142 /* CommentViewController.m in Sources */,
 				D869D456178C8DA2003C1CDF /* TvShowCommentsViewController.m in Sources */,
-				D869D459178C994F003C1CDF /* CommentTvShowViewController.m in Sources */,
-				D869D45C178CB4FA003C1CDF /* CommentEpisodeViewController.m in Sources */,
+				8C5934FB178CE18300872E30 /* EpisodeCommentsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

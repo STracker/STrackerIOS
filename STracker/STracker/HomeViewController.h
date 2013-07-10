@@ -22,7 +22,7 @@
 @interface HomeViewController : UIViewController <KIImagePagerDelegate, KIImagePagerDataSource, UIActionSheetDelegate, UIAlertViewDelegate>
 {
     __weak IBOutlet KIImagePager *imagePager;
-    NSMutableArray *_top5;
+    NSMutableArray *_top;
     AppDelegate *_app;
 }
 

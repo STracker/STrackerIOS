@@ -91,6 +91,8 @@
         case 2:
             [self comments];
             break;
+        case 3:
+            [self subscribe];
     }
     
     [actionSheet setDelegate:nil];
@@ -113,22 +115,27 @@
 // Auxiliary method for get and create comments.
 - (void)comments
 {
-    [[STrackerServerHttpClient sharedClient] getTvshowComments:tvshow success:^(AFJSONRequestOperation *operation, id result) {
-        
-        NSMutableArray *data = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in result)
-        {
-            Comment *comment = [[Comment alloc] initWithDictionary:item];
-            [data addObject:comment];
-        }
-        
-        TvShowCommentsViewController *view = [[TvShowCommentsViewController alloc] initWithData:data andTvShow:tvshow];
-        [self.navigationController pushViewController:view animated:YES];
-        
-    } failure:nil];
+    TvShowCommentsViewController *view = [[TvShowCommentsViewController alloc] initWithTvShow:tvshow];
+    [self.navigationController pushViewController:view animated:YES];
 }
 
-#pragma mark - DLStarRatingControl delegate
+// Auxiliary method for subscribe this tvshow.
+- (void)subscribe
+{
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    if (app.user == nil)
+    {
+        FacebookView *fb = [[FacebookView alloc] initWithController:self];
+        [self presentSemiView:fb];
+        return;
+    }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention" message:[NSString stringWithFormat:@"you really want to subscribe %@?", tvshow.name] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+
+    [alert show];
+}
+
+#pragma mark - DLStarRatingControl delegate.
 -(void)newRating:(DLStarRatingControl *)control :(float)rating
 {
 	AppDelegate *app = [[UIApplication sharedApplication] delegate];
@@ -148,6 +155,22 @@
         [self getRating];
         
     } failure:nil];
+}
+
+#pragma mark - UIAlert View delegates.
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != 0)
+    {
+        [[STrackerServerHttpClient sharedClient] postSubscription:tvshow success:^(AFJSONRequestOperation *operation, id result) {
+            
+            // Nothing to do...
+            
+        } failure:nil];
+    }
+    
+    [alertView setDelegate:nil];
+    alertView = nil;
 }
 
 @end

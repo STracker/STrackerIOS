@@ -25,7 +25,4 @@
 
 @property(nonatomic, strong) Comment *comment;
 
-// Hook method.
-- (void)deleteCommentHook;
-
 @end

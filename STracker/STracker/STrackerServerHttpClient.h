@@ -31,6 +31,7 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 // Class method that returns a shared singleton instance.
 + (id)sharedClient;
 
+// Method for set hawk credentials, for using on requests with Hawk protocol.
 - (void)setHawkCredentials:(HawkCredentials *)credentials;
 
 // Users operations.
@@ -54,16 +55,20 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 
 // Ratings operations.
 - (void)getTvShowRating:(TvShow *)tvshow success:(Success)success failure:(Failure) failure;
-- (void)postTvShowRating:(TvShow *)tvshow rating:(float)rating success:(Success)success failure:(Failure) failure;
 - (void)getEpisodeRating:(Episode *)episode success:(Success)success failure:(Failure) failure;
+- (void)postTvShowRating:(TvShow *)tvshow rating:(float)rating success:(Success)success failure:(Failure) failure;
 - (void)postEpisodeRating:(Episode *)episode rating:(float)rating success:(Success)success failure:(Failure) failure;
 
 // Comments operations.
 - (void)getTvshowComments:(TvShow *)tvshow success:(Success)success failure:(Failure) failure;
-- (void)postTvShowComment:(TvShow *)tvshow comment:(NSString *)comment success:(Success)success failure:(Failure) failure;
-- (void)deleteTvShowComment:(TvShow *)tvshow comment:(Comment *)comment success:(Success)success failure:(Failure) failure;
 - (void)getEpisodeComments:(Episode *)episode success:(Success)success failure:(Failure) failure;
-- (void)postEpisodeComment:(Episode *)episode success:(Success)success failure:(Failure) failure;
-- (void)deleteEpisodeComment:(Episode *)episode success:(Success)success failure:(Failure) failure;
+- (void)postTvShowComment:(TvShow *)tvshow comment:(NSString *)comment success:(Success)success failure:(Failure) failure;
+- (void)postEpisodeComment:(Episode *)episode comment:(NSString *)comment success:(Success)success failure:(Failure) failure;
+- (void)deleteComment:(Comment *)comment success:(Success)success failure:(Failure) failure;
+
+// Subscriptions operations.
+- (void)getSubscriptions:(Success)success failure:(Failure) failure;
+- (void)postSubscription:(TvShow *)tvshow success:(Success)success failure:(Failure) failure;
+//- (void)deleteSubscription:(TvShow *)tvshow success:(Success)success failure:(Failure) failure;
 
 @end

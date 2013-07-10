@@ -29,11 +29,35 @@
             NSLog(@"Calendar");
             break;
         case 1:
-            
+            [self subscriptions];
             break;
         default:
             break;
     }
+}
+
+- (void)subscriptions
+{
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    if (app.user == nil)
+    {
+        FacebookView *fb = [[FacebookView alloc] initWithController:self];
+        [self presentSemiView:fb];
+        return;
+    }
+    
+    [[STrackerServerHttpClient sharedClient] getSubscriptions:^(AFJSONRequestOperation *operation, id result) {
+        
+        NSMutableArray *data = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in result) {
+            TvShowSynopse *synopse = [[TvShowSynopse alloc] initWithDictionary:[item objectForKey:@"TvShow"]];
+            [data addObject:synopse];
+        }
+        
+        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:data andTitle:@"Following"];
+        [self.navigationController pushViewController:view animated:YES];
+        
+    } failure:nil];
 }
 
 @end

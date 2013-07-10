@@ -10,13 +10,15 @@
 
 @implementation Episode
 
-@synthesize number, name, description, date, poster, directors, guestActors;
+@synthesize tvshowId, seasonNumber, number, name, description, date, poster, directors, guestActors;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
     if (self = [super init])
     {
-        number = [Entity verifyValue:[dictionary objectForKey:@"SeasonNumber"] defaultValue:@"N/A"];
+        tvshowId = [Entity verifyValue:[dictionary objectForKey:@"TvShowId"] defaultValue:@"N/A"];
+        seasonNumber = [Entity verifyValue:[dictionary objectForKey:@"SeasonNumber"] defaultValue:@"N/A"];
+        number = [Entity verifyValue:[dictionary objectForKey:@"EpisodeNumber"] defaultValue:@"N/A"];
         name = [Entity verifyValue:[dictionary objectForKey:@"Name"] defaultValue:@"N/A"];
         description = [Entity verifyValue:[dictionary objectForKey:@"Description"] defaultValue:@"N/A"];
         date = [Entity verifyValue:[dictionary objectForKey:@"Date"] defaultValue:@"N/A"];

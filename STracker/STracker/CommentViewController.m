@@ -12,11 +12,6 @@
 
 @synthesize comment;
 
-- (void)deleteCommentHook
-{
-    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -43,11 +38,18 @@
     [super viewDidUnload];
 }
 
-#pragma mark - Alert view delegates.
+#pragma mark - UIAlertView delegates.
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != 0)
-        [self deleteCommentHook];
+    {
+        [[STrackerServerHttpClient sharedClient] deleteComment:comment success:^(AFJSONRequestOperation *operation, id result) {
+            
+            // Go back.
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        } failure:nil];
+    }
     
     [alertView setDelegate:nil];
     alertView = nil;

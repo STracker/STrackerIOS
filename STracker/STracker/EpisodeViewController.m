@@ -12,10 +12,22 @@
 
 @synthesize episode;
 
+- (void)getRating
+{
+    [[STrackerServerHttpClient sharedClient] getEpisodeRating:episode success:^(AFJSONRequestOperation *operation, id result) {
+        
+        NSDictionary *data = (NSDictionary *)result;
+        _average.text = [NSString stringWithFormat:@"%@/5", [data objectForKey:@"Rating"]];
+        _numberOfUsers.text = [NSString stringWithFormat:@"%@ Users", [data objectForKey:@"Total"]];
+        
+    } failure:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self configureView];	
+    [self configureView];
+    [self getRating];
 }
 
 - (void)viewDidUnload
@@ -25,6 +37,7 @@
     _description = nil;
     _average = nil;
     _numberOfUsers = nil;
+    _rating = nil;
     [super viewDidUnload];
 }
 
@@ -86,7 +99,30 @@
 // Auxiliary method for show and create comments.
 - (void)comments
 {
-    //TODO
+    EpisodeCommentsViewController *view = [[EpisodeCommentsViewController alloc] initWithEpisode:episode];
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+#pragma mark - DLStarRatingControl delegate
+-(void)newRating:(DLStarRatingControl *)control :(float)rating
+{
+	AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    if (app.user == nil)
+    {
+        // Clean rating because the user is not yet logged in.
+        [_rating setRating:0];
+        
+        FacebookView *fb = [[FacebookView alloc] initWithController:self];
+        [self presentSemiView:fb];
+        return;
+    }
+    
+    [[STrackerServerHttpClient sharedClient] postEpisodeRating:episode rating:rating success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Reload information.
+        [self getRating];
+        
+    } failure:nil];
 }
 
 @end
