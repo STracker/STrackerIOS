@@ -24,6 +24,8 @@
     __weak IBOutlet KIImagePager *imagePager;
     NSMutableArray *_top;
     AppDelegate *_app;
+    UIAlertView *_alertTv;
+    UIAlertView *_alertUser;
 }
 
 - (IBAction)searchOptions:(UIBarButtonItem *)sender;

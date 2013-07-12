@@ -111,6 +111,8 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
+        NSLog(@"%@", error.description);
+        
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         // Clean Authorization header.
@@ -222,6 +224,17 @@
     NSString *path = [NSString stringWithFormat:@"%@/%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsURI"], userId];
     
     [self deleteOperation:path parameters:nil success:success failure:failure];
+}
+
+- (void)getPeopleByName:(NSString *)name success:(Success)success failure:(Failure)failure
+{
+    NSArray *objs = [NSArray arrayWithObject:name];
+    NSArray *keys = [NSArray arrayWithObject:@"name"];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:objs forKeys:keys];
+    
+    NSString *path = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserInfoURI"];
+    
+    [self getOperationWithHawkProtocol:path query:parameters success:success failure:failure];
 }
 
 #pragma mark - Genres operations.

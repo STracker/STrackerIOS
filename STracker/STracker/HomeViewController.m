@@ -110,10 +110,10 @@
 // Auxiliary method for search series by name.
 - (void) searchSeries
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Insert the name" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Search", nil];
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    _alertTv = [[UIAlertView alloc] initWithTitle:@"Insert the name" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Search", nil];
+    _alertTv.alertViewStyle = UIAlertViewStylePlainTextInput;
     
-    [alert show];
+    [_alertTv show];
 }
 
 // Auxiliary method for search series by genres, list all the genres
@@ -136,7 +136,10 @@
 // Auxiliary method for search users by name.
 - (void)searchUsers
 {
-    // TODO
+    _alertUser = [[UIAlertView alloc] initWithTitle:@"Insert the name" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Search", nil];
+    _alertUser.alertViewStyle = UIAlertViewStylePlainTextInput;
+    
+    [_alertUser show];
 }
 
 // Auxiliary method for fill tv shows with name or partial of the name
@@ -158,11 +161,35 @@
     } failure:nil];
 }
 
+- (void)fillUsersByName:(NSString *)userName
+{
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    if (app.user == nil)
+    {
+        FacebookView *fb = [[FacebookView alloc] initWithController:self];
+        [self presentSemiView:fb];
+        return;
+    }
+    
+    [[STrackerServerHttpClient sharedClient] getPeopleByName:userName success:^(AFJSONRequestOperation *operation, id result) {
+        
+        
+        
+    } failure:nil];
+}
+
 #pragma mark - Alert View delegates.
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != 0)
-        [self fillTvshowsByName:[[alertView textFieldAtIndex:0] text]];
+    {
+        if (alertView == _alertTv)
+            [self fillTvshowsByName:[[alertView textFieldAtIndex:0] text]];
+        
+        if (alertView == _alertUser)
+            [self fillUsersByName:[[alertView textFieldAtIndex:0] text]];
+    }
+        
     
     [alertView setDelegate:nil];
     alertView = nil;
