@@ -10,28 +10,35 @@
 
 @implementation OptionsViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     _app = [[UIApplication sharedApplication] delegate];
     
-    self.navigationItem.title = _app.user.name;
+    _profileName.text = _app.user.name;
+    
+    [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:_app.user.photoURL] finish:^(UIImage *image) {
+        _profilePhoto.image = image;
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section)
     {
-        case 0:
+        case 1:
             NSLog(@"Calendar");
             break;
-        case 1:
+        case 2:
             [self subscriptions];
             break;
-        case 2:
+        case 3:
             [self friends];
             break;
     }
@@ -39,14 +46,6 @@
 
 - (void)subscriptions
 {
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    if (app.user == nil)
-    {
-        FacebookView *fb = [[FacebookView alloc] initWithController:self];
-        [self presentSemiView:fb];
-        return;
-    }
-    
     [[STrackerServerHttpClient sharedClient] getSubscriptions:^(AFJSONRequestOperation *operation, id result) {
         
         NSMutableArray *data = [[NSMutableArray alloc] init];
@@ -63,13 +62,6 @@
 
 - (void)friends
 {
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    if (app.user == nil)
-    {
-        FacebookView *fb = [[FacebookView alloc] initWithController:self];
-        [self presentSemiView:fb];
-        return;
-    }
     
     [[STrackerServerHttpClient sharedClient] getUserFriends:^(AFJSONRequestOperation *operation, id result) {
         
@@ -86,4 +78,10 @@
     } failure:nil];
 }
 
+- (void)viewDidUnload {
+    _profileCell = nil;
+    _profilePhoto = nil;
+    _profileName = nil;
+    [super viewDidUnload];
+}
 @end

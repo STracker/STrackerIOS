@@ -11,12 +11,16 @@
 #import "FacebookView.h"
 #import "SubscriptionsViewController.h"
 #import "UsersViewController.h"
+#import "DownloadFiles.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 
 @interface OptionsViewController : UITableViewController
 {
     AppDelegate *_app;
+    __weak IBOutlet UITableViewCell *_profileCell;
+    __weak IBOutlet UIImageView *_profilePhoto;
+    __weak IBOutlet UILabel *_profileName;
 }
 
 @end

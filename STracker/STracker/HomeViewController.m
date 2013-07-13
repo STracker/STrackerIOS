@@ -44,6 +44,14 @@
 # pragma mark - IBActions.
 - (IBAction)userOptions:(id)sender
 {
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    if (app.user == nil)
+    {
+        FacebookView *fb = [[FacebookView alloc] initWithController:self];
+        [self presentSemiView:fb];
+        return;
+    }
+    
     OptionsViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"UserOptions"];
     [self.navigationController pushViewController:view animated:YES];
 }
