@@ -1,0 +1,5 @@
+#include "Pods-YIPopupTextView.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/YIPopupTextView" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/Base64" "${PODS_ROOT}/Headers/DLStarRating" "${PODS_ROOT}/Headers/FXReachability" "${PODS_ROOT}/Headers/HawkClient" "${PODS_ROOT}/Headers/KIImagePager" "${PODS_ROOT}/Headers/KNSemiModalViewController" "${PODS_ROOT}/Headers/YIPopupTextView"
+OTHER_LDFLAGS = -ObjC
+PODS_ROOT = ${SRCROOT}

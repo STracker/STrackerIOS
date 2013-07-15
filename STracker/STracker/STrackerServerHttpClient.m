@@ -60,17 +60,30 @@
     return [NSString stringWithFormat:@"%ld", timestamp];
 }
 
-// Auxiliary method for set the authorization header with Hawk protocol.
-- (NSString *)getAuthorizationHeader:(NSURL *)url method:(NSString *)method
+- (NSString *)generateNonce
 {
-    NSString *timestamp = [self getTimestamp];
-    
     // Generate random nonce.
     CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
     NSString *nonce = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
     CFRelease(uuid);
+    return nonce;
+}
+
+// Auxiliary method for set the authorization header with Hawk protocol.
+- (NSString *)getAuthorizationHeader:(NSURL *)url method:(NSString *)method
+{
+    NSString *timestamp = [self getTimestamp];
+    NSString *nonce = [self generateNonce];
     
     return [_hawkClient generateAuthorizationHeader:url method:method timestamp:timestamp nonce:nonce credentials:_credentials payload:nil ext:nil];
+}
+
+- (NSString *)getAuthorizationHeaderWithPayload:(NSURL *)url method:(NSString *)method payload:(NSString *)payload
+{
+    NSString *timestamp = [self getTimestamp];
+    NSString *nonce = [self generateNonce];
+    
+    return [_hawkClient generateAuthorizationHeaderWithPayloadValidation:url method:method timestamp:timestamp nonce:nonce credentials:_credentials payload:payload ext:nil];
 }
 
 - (void)getOperation:(NSString *)path query:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure
@@ -128,7 +141,26 @@
 - (void)postOperation:(NSString *)path parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure
 {
     // Define Authorization header.
-    NSString *header = [self getAuthorizationHeader:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.baseURL, path]] method:@"POST"];
+    //NSString *header = [self getAuthorizationHeader:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.baseURL, path]] method:@"POST"];
+    
+    NSMutableString *payload = [NSMutableString string];
+    for (NSString* key in [parameters allKeys])
+    {
+        if ([payload length] > 0)
+            [payload appendString:@"&"];
+        
+        [payload appendFormat:@"%@=%@", key, [parameters objectForKey:key]];
+    }
+    
+    NSString *encodedPayload = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                  NULL,
+                                                                                  (CFStringRef)payload,
+                                                                                  NULL,
+                                                                                  (CFStringRef)@"!*'();:@+$,/?%#[]",
+                                                                                  kCFStringEncodingUTF8 ));
+    
+    
+    NSString *header = [self getAuthorizationHeaderWithPayload:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.baseURL, path]] method:@"POST" payload:encodedPayload];
     
     [self setDefaultHeader:@"Authorization" value:header];
     
