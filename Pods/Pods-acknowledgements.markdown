@@ -123,7 +123,7 @@ freely, subject to the following restrictions:
 
 ## HawkClient
 
- Copyright (c)
+ Copyright (c) 2013 ricardosousa1989
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal

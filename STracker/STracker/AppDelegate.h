@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import <Instabug/Instabug.h>
 #import "User.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

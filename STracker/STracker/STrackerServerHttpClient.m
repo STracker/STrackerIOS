@@ -81,7 +81,7 @@
 - (NSString *)getAuthorizationHeaderWithPayload:(NSURL *)url method:(NSString *)method payload:(NSString *)payload
 {
     NSString *timestamp = [self getTimestamp];
-    NSString *nonce = [self generateNonce];
+    NSString *nonce = @"XXX";//[self generateNonce];
     
     return [_hawkClient generateAuthorizationHeaderWithPayloadValidation:url method:method timestamp:timestamp nonce:nonce credentials:_credentials payload:payload ext:nil];
 }
@@ -112,6 +112,8 @@
     
     [self setDefaultHeader:@"Authorization" value:header];
     
+    NSLog(@"%@", header);
+    
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -140,27 +142,23 @@
 
 - (void)postOperation:(NSString *)path parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure
 {
-    // Define Authorization header.
-    //NSString *header = [self getAuthorizationHeader:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.baseURL, path]] method:@"POST"];
-    
+    // Create the payload string with url encoding.
     NSMutableString *payload = [NSMutableString string];
-    for (NSString* key in [parameters allKeys])
+    for (int i = [parameters allKeys].count - 1; i >= 0; i--)
     {
         if ([payload length] > 0)
             [payload appendString:@"&"];
         
-        [payload appendFormat:@"%@=%@", key, [parameters objectForKey:key]];
+        NSString *param = [parameters objectForKey:[[parameters allKeys] objectAtIndex:i]];
+        NSString *encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)param, NULL, (CFStringRef)@"!*'();:@&=$,/?%#[]", kCFStringEncodingUTF8 ));
+        
+        [payload appendFormat:@"%@=%@", [[parameters allKeys] objectAtIndex:i], encodedString];
     }
     
-    NSString *encodedPayload = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
-                                                                                  NULL,
-                                                                                  (CFStringRef)payload,
-                                                                                  NULL,
-                                                                                  (CFStringRef)@"!*'();:@+$,/?%#[]",
-                                                                                  kCFStringEncodingUTF8 ));
+    NSString *header = [self getAuthorizationHeaderWithPayload:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.baseURL, path]] method:@"POST" payload:payload];
     
     
-    NSString *header = [self getAuthorizationHeaderWithPayload:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.baseURL, path]] method:@"POST" payload:encodedPayload];
+    NSLog(@"%@", header);
     
     [self setDefaultHeader:@"Authorization" value:header];
     
@@ -176,7 +174,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        NSLog(@"%@", error.description);
+        NSLog(@"%@\n", error.description);
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
@@ -230,10 +228,10 @@
 
 - (void)postUser:(User *)user success:(Success)success failure:(Failure)failure
 {
-    NSArray *objs = [NSArray arrayWithObjects:user.identifier, user.name, user.email, user.photoURL, nil];
-    NSArray *keys = [NSArray arrayWithObjects:@"Id", @"Name", @"Email", @"Photo", nil];
+    NSArray *objs = [NSArray arrayWithObjects:user.name, user.email, user.photoURL, nil];
+    NSArray *keys = [NSArray arrayWithObjects:@"Name", @"Email", @"Photo", nil];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:objs forKeys:keys];
-    
+
     [self postOperation:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserInfoURI"] parameters:parameters success:success failure:failure];
 }
 

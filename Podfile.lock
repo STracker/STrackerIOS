@@ -3,7 +3,7 @@ PODS:
   - Base64 (1.0.1)
   - DLStarRating (1.1)
   - FXReachability (1.1)
-  - HawkClient (1.1.0):
+  - HawkClient (1.2.0):
     - Base64 (~> 1.0.1)
   - KIImagePager (0.0.2)
   - KNSemiModalViewController (0.3)
@@ -13,7 +13,7 @@ DEPENDENCIES:
   - AFNetworking (~> 1.2)
   - DLStarRating (~> 1.1)
   - FXReachability (~> 1.1)
-  - HawkClient (~> 1.1.0)
+  - HawkClient (~> 1.2.0)
   - KIImagePager (~> 0.0.2)
   - KNSemiModalViewController (~> 0.3)
   - YIPopupTextView (~> 1.0.0)
@@ -23,7 +23,7 @@ SPEC CHECKSUMS:
   Base64: eaac9f2088ba659c5db1db960576eb0f2969ebaf
   DLStarRating: 11ffb061ea68acd28cb9580e2bd0e718c6088e6f
   FXReachability: afd163afb55d92199a1359526474882af17f4436
-  HawkClient: 88bc66a6e6c702a02a1fd24b25ef4bcef0020ba5
+  HawkClient: a5a7e95655aa001549db95d0f8eb63ba4bacd54b
   KIImagePager: 29fedf1aaa77fa341bd694b41749956efc8ff65a
   KNSemiModalViewController: 976b739f57aa595359a2cfdf6aadde991ada8f99
   YIPopupTextView: 2219b1579ac7477332af3dfa34c0dacb4113017d

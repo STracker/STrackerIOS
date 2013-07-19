@@ -37,6 +37,15 @@
 		D802E66417889C7E00ABD08F /* FacebookView.m in Sources */ = {isa = PBXBuildFile; fileRef = D802E66317889C7E00ABD08F /* FacebookView.m */; };
 		D811B5521789BE1600D4CB3F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D811B5511789BE1600D4CB3F /* QuartzCore.framework */; };
 		D869D456178C8DA2003C1CDF /* TvShowCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869D455178C8DA2003C1CDF /* TvShowCommentsViewController.m */; };
+		D872032D1795CE96006FCAC6 /* Instabug.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D872032B1795CE96006FCAC6 /* Instabug.bundle */; };
+		D872032E1795CE96006FCAC6 /* Instabug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D872032C1795CE96006FCAC6 /* Instabug.framework */; };
+		D87203301795CEB9006FCAC6 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D872032F1795CEB9006FCAC6 /* CoreFoundation.framework */; };
+		D87203321795CEC6006FCAC6 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87203311795CEC6006FCAC6 /* OpenGLES.framework */; };
+		D87203341795CECE006FCAC6 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87203331795CECE006FCAC6 /* GLKit.framework */; };
+		D87203361795CEE0006FCAC6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87203351795CEE0006FCAC6 /* SystemConfiguration.framework */; };
+		D87203381795CEEA006FCAC6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87203371795CEEA006FCAC6 /* AVFoundation.framework */; };
+		D872033A1795CEF2006FCAC6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87203391795CEF2006FCAC6 /* AudioToolbox.framework */; };
+		D872033C1795CEFA006FCAC6 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D872033B1795CEFA006FCAC6 /* CoreTelephony.framework */; };
 		D8782EC0174E6E160025CF79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EBF174E6E160025CF79 /* UIKit.framework */; };
 		D8782EC2174E6E160025CF79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EC1174E6E160025CF79 /* Foundation.framework */; };
 		D8782EC4174E6E160025CF79 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EC3174E6E160025CF79 /* CoreGraphics.framework */; };
@@ -48,6 +57,7 @@
 		D8782ED6174E6E160025CF79 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8782ED5174E6E160025CF79 /* Default-568h@2x.png */; };
 		D8782ED9174E6E160025CF79 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8782ED7174E6E160025CF79 /* MainStoryboard_iPhone.storyboard */; };
 		D8782EDC174E6E160025CF79 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8782EDA174E6E160025CF79 /* MainStoryboard_iPad.storyboard */; };
+		D87BF9301799C562009BA58B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87BF92F1799C562009BA58B /* CoreData.framework */; };
 		D887E3861753B22000E3BABB /* STrackerServerHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D887E3851753B22000E3BABB /* STrackerServerHttpClient.m */; };
 		D887E38C1753C8F000E3BABB /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = D887E38B1753C8F000E3BABB /* Entity.m */; };
 		D887E38F1753CC6C00E3BABB /* TvShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D887E38E1753CC6C00E3BABB /* TvShowViewController.m */; };
@@ -117,6 +127,15 @@
 		D811B5511789BE1600D4CB3F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D869D454178C8DA2003C1CDF /* TvShowCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TvShowCommentsViewController.h; sourceTree = "<group>"; };
 		D869D455178C8DA2003C1CDF /* TvShowCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShowCommentsViewController.m; sourceTree = "<group>"; };
+		D872032B1795CE96006FCAC6 /* Instabug.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Instabug.bundle; sourceTree = "<group>"; };
+		D872032C1795CE96006FCAC6 /* Instabug.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Instabug.framework; sourceTree = "<group>"; };
+		D872032F1795CEB9006FCAC6 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		D87203311795CEC6006FCAC6 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		D87203331795CECE006FCAC6 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		D87203351795CEE0006FCAC6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D87203371795CEEA006FCAC6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D87203391795CEF2006FCAC6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D872033B1795CEFA006FCAC6 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		D8782EBC174E6E160025CF79 /* STracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8782EBF174E6E160025CF79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D8782EC1174E6E160025CF79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -132,6 +151,7 @@
 		D8782ED5174E6E160025CF79 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D8782ED8174E6E160025CF79 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		D8782EDB174E6E160025CF79 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		D87BF92F1799C562009BA58B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D887E3841753B22000E3BABB /* STrackerServerHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STrackerServerHttpClient.h; sourceTree = "<group>"; };
 		D887E3851753B22000E3BABB /* STrackerServerHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STrackerServerHttpClient.m; sourceTree = "<group>"; };
 		D887E38A1753C8F000E3BABB /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
@@ -172,6 +192,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D87BF9301799C562009BA58B /* CoreData.framework in Frameworks */,
+				D872033C1795CEFA006FCAC6 /* CoreTelephony.framework in Frameworks */,
+				D872033A1795CEF2006FCAC6 /* AudioToolbox.framework in Frameworks */,
+				D87203381795CEEA006FCAC6 /* AVFoundation.framework in Frameworks */,
+				D87203361795CEE0006FCAC6 /* SystemConfiguration.framework in Frameworks */,
+				D87203341795CECE006FCAC6 /* GLKit.framework in Frameworks */,
+				D87203321795CEC6006FCAC6 /* OpenGLES.framework in Frameworks */,
+				D87203301795CEB9006FCAC6 /* CoreFoundation.framework in Frameworks */,
 				D811B5521789BE1600D4CB3F /* QuartzCore.framework in Frameworks */,
 				D802E6511788811000ABD08F /* Security.framework in Frameworks */,
 				D802E6521788811B00ABD08F /* Social.framework in Frameworks */,
@@ -184,6 +212,7 @@
 				D802E6561788815700ABD08F /* CoreLocation.framework in Frameworks */,
 				D802E65A178887C000ABD08F /* libsqlite3.dylib in Frameworks */,
 				958B692C8AB84E8FB6B7F544 /* libPods.a in Frameworks */,
+				D872032E1795CE96006FCAC6 /* Instabug.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +376,16 @@
 		D8782EBE174E6E160025CF79 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D87BF92F1799C562009BA58B /* CoreData.framework */,
+				D872033B1795CEFA006FCAC6 /* CoreTelephony.framework */,
+				D87203391795CEF2006FCAC6 /* AudioToolbox.framework */,
+				D87203371795CEEA006FCAC6 /* AVFoundation.framework */,
+				D87203351795CEE0006FCAC6 /* SystemConfiguration.framework */,
+				D87203331795CECE006FCAC6 /* GLKit.framework */,
+				D87203311795CEC6006FCAC6 /* OpenGLES.framework */,
+				D872032F1795CEB9006FCAC6 /* CoreFoundation.framework */,
+				D872032B1795CE96006FCAC6 /* Instabug.bundle */,
+				D872032C1795CE96006FCAC6 /* Instabug.framework */,
 				D811B5511789BE1600D4CB3F /* QuartzCore.framework */,
 				D8FC677F17886B2300A06D40 /* Security.framework */,
 				D8FC677D17886B1800A06D40 /* Social.framework */,
@@ -521,6 +560,7 @@
 				D8AECA251755108F00C4139C /* star_icon.png in Resources */,
 				8CD10DCE176E8DA300F81F7C /* Calendar_icon.png in Resources */,
 				D802E658178882AD00ABD08F /* FacebookSDKResources.bundle in Resources */,
+				D872032D1795CE96006FCAC6 /* Instabug.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

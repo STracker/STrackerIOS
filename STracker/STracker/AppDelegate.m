@@ -42,7 +42,9 @@
     else
         storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     
-    // [FBLoginView class];
+    // TEST in a real device!
+    [Instabug KickOffWithToken:@"d33e20cbbdf7dc8b0d5fce4ba8db3d79" CaptureSource:InstabugCaptureSourceUIKit FeedbackEvent:InstabugFeedbackEventShake IsTrackingLocation:NO];
+    
     return YES;
 }
 
