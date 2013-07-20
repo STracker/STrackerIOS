@@ -13,6 +13,6 @@
  */
 @interface Actor : Person
 
-@property(nonatomic, copy) NSString *CharacterName;
+@property(nonatomic, copy) NSString *characterName;
 
 @end

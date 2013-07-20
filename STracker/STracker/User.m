@@ -11,26 +11,47 @@
 
 @implementation User
 
-@synthesize Key, Email, Friends, SubscriptionList;
+@synthesize identifier, email, friends, subscriptions;
 
-/*
- According to Jastor documentation, is necessary to define this methods
- for returning the class object, when the objects are array type.
- */
-- (Class)Friends_class
+- (id)initWithDictionary:(NSDictionary *)parameters
 {
-    return [UserSinopse class];
-}
-
-- (Class)SubscriptionList_class
-{
-    return [Subscription class];
+    if (self = [super initWithDictionary:parameters])
+    {
+        identifier = [parameters objectForKey:@"Key"];
+        email = [parameters objectForKey:@"Email"];
+        
+        NSMutableArray *friendsAux = [[NSMutableArray alloc] init];
+        for (NSDictionary * item in [parameters objectForKey:@"Friends"])
+        {
+            User *friend = [[User alloc] initWithDictionary:item];
+            [friendsAux addObject:friend];
+        }
+        friends = friendsAux;
+        
+        NSMutableArray *subscriptionsAux = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in [parameters objectForKey:@"SubscriptionList"])
+        {
+            Subscription *subscription = [[Subscription alloc] initWithDictionary:item];
+            [subscriptionsAux addObject:subscription];
+        }
+        subscriptions = subscriptionsAux;
+    }
+    
+    return self;
 }
 
 @end
 
 @implementation UserSinopse
 
-@synthesize Id, Name;
+@synthesize identifier;
+
+- (id)initWithDictionary:(NSDictionary *)parameters
+{
+    if (self = [super initWithDictionary:parameters])
+        identifier = [parameters objectForKey:@"Key"];
+
+    return self;
+}
 
 @end

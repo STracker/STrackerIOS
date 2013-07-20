@@ -13,7 +13,16 @@
  */
 @interface Person : Entity
 
-@property(nonatomic, copy) NSString *Name;
-@property(nonatomic, copy) NSString *Photo;
+@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy) NSString *photoUrl;
+
+@end
+
+/*!
+ @discussion This object defines the person synopse entity object.
+ */
+@interface PersonSynopse : Entity
+
+@property(nonatomic, copy) NSString *name;
 
 @end

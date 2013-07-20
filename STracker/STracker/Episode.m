@@ -11,26 +11,58 @@
 
 @implementation Episode
 
-@synthesize TvShowId, SeasonNumber, EpisodeNumber, Name, Description, Date, Poster, Directors, GuestActors;
+@synthesize tvshowId, seasonNumber, episodeNumber, name, description, date, poster, directors, guestActors;
 
-/*
- According to Jastor documentation, is necessary to define this methods
- for returning the class object, when the objects are array type.
- */
-- (Class)Directors_class
+- (id)initWithDictionary:(NSDictionary *)parameters
 {
-    return [Person class];
-}
-
-- (Class)GuestActors_class
-{
-    return [Actor class];
+    if (self = [super init])
+    {
+        tvshowId = [parameters objectForKey:@"TvShowId"];
+        seasonNumber = [parameters objectForKey:@"SeasonNumber"];
+        episodeNumber = [parameters objectForKey:@"EpisodeNumber"];
+        name = [parameters objectForKey:@"Name"];
+        description = [parameters objectForKey:@"Description"];
+        date = [parameters objectForKey:@"Date"];
+        poster = [parameters objectForKey:@"Poster"];
+        
+        NSMutableArray *directorsAux = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in [parameters objectForKey:@"Directors"])
+        {
+            Person *director = [[Person alloc] initWithDictionary:item];
+            [directorsAux addObject:director];
+        }
+        directors = directorsAux;
+        
+        NSMutableArray *guestActorsAux = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in [parameters objectForKey:@"GuestActors"])
+        {
+            Actor *actor = [[Actor alloc] initWithDictionary:item];
+            [guestActorsAux addObject:actor];
+        }
+        guestActors = guestActorsAux;
+    }
+    
+    return self;
 }
 
 @end
 
 @implementation EpisodeSynopse
 
-@synthesize EpisodeNumber, Name, Date;
+@synthesize tvshowId, seasonNumber, episodeNumber, name, date;
+
+- (id)initWithDictionary:(NSDictionary *)parameters
+{
+    if (self = [super init])
+    {
+        tvshowId = [parameters objectForKey:@"TvShowId"];
+        seasonNumber = [parameters objectForKey:@"SeasonNumber"];
+        episodeNumber = [parameters objectForKey:@"EpisodeNumber"];
+        name = [parameters objectForKey:@"Name"];
+        date = [parameters objectForKey:@"Date"];
+    }
+    
+    return self;
+}
 
 @end

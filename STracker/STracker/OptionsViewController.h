@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
-#import "FacebookView.h"
-#import "SubscriptionsViewController.h"
-#import "UsersViewController.h"
-#import "DownloadFiles.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 

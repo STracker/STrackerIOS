@@ -1,6 +1,6 @@
 platform :ios, '5.0'
 pod 'AFNetworking', '~> 1.2'
-pod 'HawkClient', '~> 1.2.0'
+pod 'HawkClient', '~> 1.3.0'
 pod 'FXReachability', '~> 1.1'
 pod 'KNSemiModalViewController', '~> 0.3'
 pod 'DLStarRating', '~> 1.1'

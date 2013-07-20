@@ -11,15 +11,25 @@
 
 @implementation Season
 
-@synthesize SeasonNumber, EpisodeSynopses;
+@synthesize tvshowId, seasonNumber, episodes;
 
-/*
- According to Jastor documentation, is necessary to define this method
- for returing the class object because the type of the object is array.
- */
-- (Class)EpisodeSynopses_class
+- (id)initWithDictionary:(NSDictionary *)parameters
 {
-    return [EpisodeSynopse class];
+    if (self = [super init])
+    {
+        tvshowId = [parameters objectForKey:@"TvShowId"];
+        seasonNumber = [parameters objectForKey:@"SeasonNumber"];
+        
+        NSMutableArray *episodesAux = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in [parameters objectForKey:@"EpisodesSynopses"])
+        {
+            EpisodeSynopse *episode = [[EpisodeSynopse alloc] initWithDictionary:item];
+            [episodesAux addObject:episode];
+        }
+        episodes = episodesAux;
+    }
+    
+    return self;
 }
 
 @end
@@ -27,6 +37,18 @@
 #pragma mark - Synopsis object.
 @implementation SeasonSynopse
 
-@synthesize SeasonNumber;
+@synthesize tvshowId, seasonNumber;
+
+- (id)initWithDictionary:(NSDictionary *)parameters
+{
+    if (self = [super init])
+    {
+        tvshowId = [parameters objectForKey:@"TvShowId"];
+        seasonNumber = [parameters objectForKey:@"SeasonNumber"];
+    }
+
+    return self;
+}
+
 
 @end

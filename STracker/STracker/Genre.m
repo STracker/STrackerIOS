@@ -7,15 +7,42 @@
 //
 
 #import "Genre.h"
+#import "TvShow.h"
 
 @implementation Genre
 
-@synthesize Id;
+@synthesize name, tvshows;
+
+- (id)initWithDictionary:(NSDictionary *)parameters
+{
+    if (self = [super init])
+    {
+        name = [parameters objectForKey:@"Id"];
+        
+        NSMutableArray *tvshowsAux = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in [parameters objectForKey:@"TvShowsSinopses"])
+        {
+            TvShowSynopse *tvshow = [[TvShowSynopse alloc] initWithDictionary:item];
+            [tvshowsAux addObject:tvshow];
+        }
+        tvshows = tvshowsAux;
+    }
+    
+    return self;
+}
 
 @end
 
 @implementation GenreSynopse
 
-@synthesize Id;
+@synthesize name;
+
+- (id)initWithDictionary:(NSDictionary *)parameters
+{
+    if (self = [super init])
+        name = [parameters objectForKey:@"Id"];
+    
+    return self;
+}
 
 @end

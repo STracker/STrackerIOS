@@ -42,11 +42,11 @@
     return sharedClient;
 }
 
-- (void)getRequest:(NSString *)url query:(NSDictionary *)query success:(Success)success failure:(Failure)failure
+- (void)getRequest:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    [self getPath:url parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self getPath:uri parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if (success != nil)
@@ -60,20 +60,21 @@
     }];
 }
 
-- (void)getRequestWithHawkProtocol:(NSString *)url query:(NSDictionary *)query success:(Success)success failure:(Failure)failure
+- (void)getRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure
 {
     HawkCredentials *credentials = [_app getHawkCredentials];
     if (credentials == nil)
         return;
     
     // Generate and set the Authorization header with Hawk protocol.
+    NSString *url = [NSString stringWithFormat:@"%@%@", self.baseURL, uri];
     NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"GET" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:credentials ext:nil payload:nil payloadValidation:NO];
     
     [self setDefaultHeader:@"Authorization" value:header];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    [self getPath:url parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self getPath:uri parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
@@ -95,10 +96,10 @@
     }];
 }
 
-- (void)postRequest:(NSString *)url parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure
+- (void)postRequest:(NSString *)uri parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    [self postPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self postPath:uri parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
@@ -113,19 +114,20 @@
     }];
 }
 
-- (void)postRequestWithHawkProtocol:(NSString *)url parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure
+- (void)postRequestWithHawkProtocol:(NSString *)uri parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure
 {
     HawkCredentials *credentials = [_app getHawkCredentials];
     if (credentials == nil)
         return;
     
     // Generate and set the Authorization header with Hawk protocol.
+    NSString *url = [NSString stringWithFormat:@"%@%@", self.baseURL, uri];
     NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"POST" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:credentials ext:nil payload:[self trasnformPayloadToUrlEncoded:parameters] payloadValidation:YES];
     
     [self setDefaultHeader:@"Authorization" value:header];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    [self postPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self postPath:uri parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
@@ -146,10 +148,10 @@
     }];
 }
 
-- (void)deleteRequest:(NSString *)url query:(NSDictionary *)query success:(Success)success failure:(Failure)failure
+- (void)deleteRequest:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    [self deletePath:url parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self deletePath:uri parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         if (success != nil)
@@ -163,19 +165,20 @@
     }];
 }
 
-- (void)deleteRequestWithHawkProtocol:(NSString *)url query:(NSDictionary *)query success:(Success)success failure:(Failure)failure
+- (void)deleteRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure
 {
     HawkCredentials *credentials = [_app getHawkCredentials];
     if (credentials == nil)
         return;
     
     // Generate and set the Authorization header with Hawk protocol.
+    NSString *url = [NSString stringWithFormat:@"%@%@", self.baseURL, uri];
     NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"DELETE" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:credentials ext:nil payload:nil payloadValidation:NO];
     
     [self setDefaultHeader:@"Authorization" value:header];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    [self deletePath:url parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self deletePath:uri parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         // Clean Authorization header.
@@ -209,6 +212,8 @@
         
         [payload appendFormat:@"%@=%@", [[parameters allKeys] objectAtIndex:i], encodedString];
     }
+    
+    NSLog(@"%@", payload);
     
     return payload;
 }

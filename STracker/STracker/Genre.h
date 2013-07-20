@@ -14,7 +14,8 @@
  */
 @interface Genre : Entity
 
-@property(nonatomic, copy) NSString *Id;
+@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy) NSArray *tvshows;
 
 @end
 
@@ -23,6 +24,6 @@
  */
 @interface GenreSynopse : Entity
 
-@property(nonatomic, copy) NSString *Id;
+@property(nonatomic, copy) NSString *name;
 
 @end

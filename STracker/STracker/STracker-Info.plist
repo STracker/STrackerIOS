@@ -17,6 +17,8 @@
 	<string>werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn</string>
 	<key>STrackerTopTvShowsNumber</key>
 	<integer>5</integer>
+	<key>STrackerTvShowsURI</key>
+	<string>tvshows</string>
 	<key>STrackerUserFriendsURI</key>
 	<string>userfriends</string>
 	<key>STrackerUserSubscriptionsURL</key>
@@ -35,8 +37,6 @@
 	<string>http://strackerserverdev.apphb.com/api</string>
 	<key>STrackerUserURI</key>
 	<string>users</string>
-	<key>STrackerServerBaseTvShowsURI</key>
-	<string>tvshows</string>
 	<key>STrackerServerBaseGenresURI</key>
 	<string>genres</string>
 	<key>STrackerServerBaseTopRatedURI</key>

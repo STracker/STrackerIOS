@@ -10,6 +10,19 @@
 
 @implementation Comment
 
-@synthesize Id, Body, User, Uri;
+@synthesize identifier, body, user, uri;
+
+- (id)initWithDictionary:(NSDictionary *)parameters
+{
+    if (self = [super init])
+    {
+        identifier = [parameters objectForKey:@"Id"];
+        body = [parameters objectForKey:@"Body"];
+        user = [[UserSinopse alloc] initWithDictionary:[parameters objectForKey:@"User"]];
+        uri = [parameters objectForKey:@"Uri"];
+    }  
+    
+    return self;
+}
 
 @end

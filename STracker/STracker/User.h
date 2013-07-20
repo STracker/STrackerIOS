@@ -13,19 +13,18 @@
  */
 @interface User : Person
 
-@property(nonatomic, copy) NSString *Key;
-@property(nonatomic, copy) NSString *Email;
-@property(nonatomic, strong) NSArray *Friends;
-@property(nonatomic, strong) NSArray *SubscriptionList;
+@property(nonatomic, copy) NSString *identifier;
+@property(nonatomic, copy) NSString *email;
+@property(nonatomic, strong) NSArray *friends;
+@property(nonatomic, strong) NSArray *subscriptions;
 
 @end
 
 /*!
  @discussion This object defines the actor synopse entity object.
  */
-@interface UserSinopse : Entity
+@interface UserSinopse : PersonSynopse
 
-@property(nonatomic, copy) NSString *Id;
-@property(nonatomic, copy) NSString *Name;
+@property(nonatomic, copy) NSString *identifier;
 
 @end

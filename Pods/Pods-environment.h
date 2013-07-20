@@ -33,7 +33,7 @@
 // HawkClient
 #define COCOAPODS_POD_AVAILABLE_HawkClient
 #define COCOAPODS_VERSION_MAJOR_HawkClient 1
-#define COCOAPODS_VERSION_MINOR_HawkClient 2
+#define COCOAPODS_VERSION_MINOR_HawkClient 3
 #define COCOAPODS_VERSION_PATCH_HawkClient 0
 
 // KIImagePager

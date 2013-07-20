@@ -14,18 +14,18 @@
  */
 @interface TvShow : Entity
 
-@property(nonatomic, copy) NSString *TvShowId;
-@property(nonatomic, copy) NSString *Name;
-@property(nonatomic, copy) NSString *Description;
-@property(nonatomic, copy) NSString *Runtime;
-@property(nonatomic, copy) NSString *AirDay;
-@property(nonatomic, copy) NSString *FirstAired;
-@property(nonatomic, copy) NSString *Poster;
-@property(nonatomic, retain) NSArray *Genres;
-@property(nonatomic, retain) NSArray *SeasonSynopses;
-@property(nonatomic, retain) NSArray *Actors;
-@property(nonatomic) double Rating;
-@property(nonatomic) int RatingTotalUsers;
+@property(nonatomic, copy) NSString *tvshowId;
+@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy) NSString *description;
+@property(nonatomic, copy) NSString *runtime;
+@property(nonatomic, copy) NSString *airDay;
+@property(nonatomic, copy) NSString *firstAired;
+@property(nonatomic, copy) NSString *poster;
+@property(nonatomic, retain) NSArray *genres;
+@property(nonatomic, retain) NSArray *seasons;
+@property(nonatomic, retain) NSArray *actors;
+@property(nonatomic) double rating;
+@property(nonatomic) int ratingTotalUsers;
 
 @end
 
@@ -34,9 +34,8 @@
  */
 @interface TvShowSynopse : EntitySynopse
 
-@property(nonatomic, copy) NSString *TvShowId;
-@property(nonatomic, copy) NSString *Name;
-@property(nonatomic, copy) NSString *Poster;
+@property(nonatomic, copy) NSString *tvshowId;
+@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy) NSString *poster;
 
 @end
-

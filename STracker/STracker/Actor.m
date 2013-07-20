@@ -10,6 +10,14 @@
 
 @implementation Actor
 
-@synthesize CharacterName;
+@synthesize characterName;
+
+-(id)initWithDictionary:(NSDictionary *)parameters
+{
+    if (self = [super initWithDictionary:parameters])
+        characterName = [parameters objectForKey:@"CharacterName"];
+    
+    return self;
+}
 
 @end

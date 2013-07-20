@@ -13,31 +13,63 @@
 
 @implementation TvShow
 
-@synthesize TvShowId, Name, Description, Runtime, FirstAired, AirDay, Genres, SeasonSynopses, Actors, Rating, RatingTotalUsers;
+@synthesize tvshowId, name, description, runtime, firstAired, airDay, genres, seasons, actors, rating, ratingTotalUsers, poster;
 
-/*
- According to Jastor documentation, is necessary to define this methods 
- for returning the class object, when the objects are array type.
- */
-- (Class)Genres_class
+- (id)initWithDictionary:(NSDictionary *)parameters
 {
-    return [GenreSynopse class];
-}
-
-- (Class)SeasonSynopses_class
-{
-    return [SeasonSynopse class];
-}
-
-- (Class)Actors_class
-{
-    return [Actor class];
+    if (self = [super init])
+    {
+        tvshowId = [parameters objectForKey:@"TvShowId"];
+        name = [parameters objectForKey:@"Name"];
+        description = [parameters objectForKey:@"Description"];
+        runtime = [parameters objectForKey:@"Runtime"];
+        airDay = [parameters objectForKey:@"AirDay"];
+        firstAired = [parameters objectForKey:@"FirstAired"];
+        poster = [parameters objectForKey:@"Poster"];
+        
+        NSMutableArray *genresAux = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in [parameters objectForKey:@"Genres"])
+        {
+            GenreSynopse *genre = [[GenreSynopse alloc] initWithDictionary:item];
+            [genresAux addObject:genre];
+        }
+        genres = genresAux;
+        
+        NSMutableArray *seasonsAux = [[NSMutableArray alloc] init];
+        for(NSDictionary *item in [parameters objectForKey:@"SeasonsSynopses"])
+        {
+            SeasonSynopse *season = [[SeasonSynopse alloc] initWithDictionary:item];
+            [seasonsAux addObject:season];
+        }
+        seasons = seasonsAux;
+        
+        NSMutableArray *actorsAux = [[NSMutableArray alloc] init];
+        for(NSDictionary *item in [parameters objectForKey:@"Actors"])
+        {
+            Actor *season = [[Actor alloc] initWithDictionary:item];
+            [actorsAux addObject:season];
+        }
+        actors = actorsAux;
+    }
+    
+    return self;
 }
 
 @end
 
 @implementation TvShowSynopse
 
-@synthesize TvShowId, Name, Poster;
+@synthesize tvshowId, name, poster;
 
+- (id)initWithDictionary:(NSDictionary *)parameters
+{
+    if (self = [super init])
+    {
+        tvshowId = [parameters objectForKey:@"TvShowId"];
+        name = [parameters objectForKey:@"Name"];
+        poster = [parameters objectForKey:@"Poster"];
+    }
+    
+    return self;
+}
 @end

@@ -50,16 +50,16 @@
     [FBSession.activeSession closeAndClearTokenInformation];
     
     User *me = [[User alloc] init];
-    me.Key = user.id;
-    me.Name = user.name;
-    me.Photo = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large", me.Key];
+    me.identifier = user.id;
+    me.name = user.name;
+    me.photoUrl = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large", me.identifier];
     
     // TODO
     me.Email = @"test@test.com";
     
     // Set Hawk credentials for authenticated requests to server.
     HawkCredentials *credentials = [[HawkCredentials alloc] init];
-    credentials.identifier = me.Key;
+    credentials.identifier = me.identifier;
     credentials.key = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"HawkKey"];
     [_app setHawkCredentials:credentials];
     
@@ -67,8 +67,8 @@
     
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserURI"];
     
-    NSArray *keys = [[NSArray alloc] initWithObjects:@"Email", @"Name", @"Photo", nil];
-    NSArray *values = [[NSArray alloc] initWithObjects:me.Email, me.Name, me.Photo, nil];
+    NSArray *keys = [[NSArray alloc] initWithObjects:@"Name", @"Email", @"Photo", nil];
+    NSArray *values = [[NSArray alloc] initWithObjects:me.name, me.email, me.photoUrl, nil];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:values forKeys:keys];
     
     [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {

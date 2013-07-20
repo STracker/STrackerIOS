@@ -28,6 +28,14 @@
     }];*/
 }
 
+- (void)viewDidUnload
+{
+    _profileCell = nil;
+    _profilePhoto = nil;
+    _profileName = nil;
+    [super viewDidUnload];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section)
@@ -81,10 +89,4 @@
      */
 }
 
-- (void)viewDidUnload {
-    _profileCell = nil;
-    _profilePhoto = nil;
-    _profileName = nil;
-    [super viewDidUnload];
-}
 @end

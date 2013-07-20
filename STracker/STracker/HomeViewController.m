@@ -8,11 +8,17 @@
 
 #import "HomeViewController.h"
 #import "STrackerServerHttpClient.h"
-#import "AppDelegate.h"
 #import "TvShow.h"
 #import "OptionsViewController.h"
 
 @implementation HomeViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    _app = [[UIApplication sharedApplication] delegate];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -24,14 +30,14 @@
 - (void)viewDidUnload
 {
     _imagePager = nil;
+    
     [super viewDidUnload];
 }
 
 # pragma mark - IBActions.
 - (IBAction)userOptions:(id)sender
-{    
-    OptionsViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"UserOptions"];
-    [self.navigationController pushViewController:view animated:YES];
+{
+    // TODO -> here push the view of Profile view controller type!
 }
 
 - (IBAction)searchOptions:(UIBarButtonItem *)sender
@@ -46,7 +52,7 @@
 {
     NSMutableArray *urls = [[NSMutableArray alloc] initWithCapacity:5];
     for (TvShowSynopse *tvshow in _top)
-        [urls addObject:tvshow.Poster];
+        [urls addObject:tvshow.poster];
     
     if (urls.count == 0)
         [urls addObject:@"N/A"];
@@ -192,13 +198,15 @@
 }
 
 #pragma mark - HomeViewController private auxiliary methods.
+
 /*!
  @discussion This method performs a request to STracker server for 
  get the television shows with more rating.
  */
 - (void)getTopRated
 {
-    [[STrackerServerHttpClient sharedClient] getRequest:nil query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowsURI"];
+    [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         _top = nil;
         _top = [[NSMutableArray alloc] initWithCapacity:(int)[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTopTvShowsNumber"]];
@@ -212,9 +220,8 @@
         [_imagePager reloadData];
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [app getAlertViewForErrors:error.localizedDescription];
+
+        [_app getAlertViewForErrors:error.localizedDescription];
     }];
 }
 

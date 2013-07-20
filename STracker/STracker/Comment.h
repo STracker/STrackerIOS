@@ -14,9 +14,9 @@
  */
 @interface Comment : Entity
 
-@property(nonatomic, copy) NSString *Id;
-@property(nonatomic, copy) NSString *Body;
-@property(nonatomic, strong) UserSinopse *User;
-@property(nonatomic, copy) NSString *Uri;
+@property(nonatomic, copy) NSString *identifier;
+@property(nonatomic, copy) NSString *body;
+@property(nonatomic, strong) UserSinopse *user;
+@property(nonatomic, copy) NSString *uri;
 
 @end

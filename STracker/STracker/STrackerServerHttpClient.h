@@ -36,57 +36,57 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 
 /*!
  @discussion Method for making an HTTP GET request to STracker server.
- @param url     The url.
+ @param uri     The uri.
  @param query   The query, is optional.
  @param success The callback for success request.
  @param failure The callback for failure request.
  */
-- (void)getRequest:(NSString *)url query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
+- (void)getRequest:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
 
 /*!
  @discussion Method for making an HTTP GET request to STracker server with the Hawk protocol protection.
- @param url     The url.
+ @param uri     The uri.
  @param query   The query, is optional.
  @param success The callback for success request.
  @param failure The callback for failure request.
  */
-- (void)getRequestWithHawkProtocol:(NSString *)url query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
+- (void)getRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
 
 /*!
  @discussion Method for making an HTTP POST request to STracker server.
- @param url         The url.
+ @param uri         The uri.
  @param parameters  The parameters, body of the request.
  @param success     The callback for success request.
  @param failure     The callback for failure request.
  */
-- (void)postRequest:(NSString *)url parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure;
+- (void)postRequest:(NSString *)uri parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure;
 
 /*!
  @discussion Method for making an HTTP POST request to STracker server with the Hawk protocol protection. This method use 
  the payload validation option of Hawk protocol.
- @param url         The url.
+ @param uri         The uri.
  @param parameters  The parameters, body of the request.
  @param success     The callback for success request.
  @param failure     The callback for failure request.
  */
-- (void)postRequestWithHawkProtocol:(NSString *)url parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure;
+- (void)postRequestWithHawkProtocol:(NSString *)uri parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure;
 
 /*!
  @discussion Method for making an HTTP DELETE request to STracker server.
- @param url     The url.
+ @param uri     The uri.
  @param query   The query, is optional.
  @param success The callback for success request.
  @param failure The callback for failure request.
  */
-- (void)deleteRequest:(NSString *)url query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
+- (void)deleteRequest:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
 
 /*!
  @discussion Method for making an HTTP DELETE request to STracker server with the Hawk protocol protection.
- @param url     The url.
+ @param uri     The uri.
  @param query   The query, is optional.
  @param success The callback for success request.
  @param failure The callback for failure request.
  */
-- (void)deleteRequestWithHawkProtocol:(NSString *)url query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
+- (void)deleteRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
 
 @end
