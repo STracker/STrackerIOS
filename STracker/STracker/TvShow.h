@@ -8,33 +8,35 @@
 
 #import <Foundation/Foundation.h>
 #import "Entity.h"
-#import "Genre.h"
-#import "Season.h"
 
-@interface TvShowSynopse : Entity
-
-@property(nonatomic, copy) NSString *imdbId;
-@property(nonatomic, copy) NSString *name;
-@property(nonatomic, copy) NSString *poster;
-@property(nonatomic, copy) NSString *uri;
-
-@end
-
+/*!
+ @discussion This object defines the television show entity object.
+ */
 @interface TvShow : Entity
 
-@property(nonatomic, copy) NSString *imdbId;
-@property(nonatomic, copy) NSString *name;
-@property(nonatomic, copy) NSString *description;
-@property(nonatomic, copy) NSString *runtime;
-@property(nonatomic, copy) NSString *airDay;
-@property(nonatomic, copy) NSString *firstAired;
-@property(nonatomic, copy) NSString *poster;
-@property(nonatomic, retain) NSMutableArray *genres;
-@property(nonatomic, retain) NSMutableArray *seasons;
-@property(nonatomic, retain) NSMutableArray *actors;
-@property(nonatomic) double rating;
-@property(nonatomic) int totalUsers;
-
-- (TvShowSynopse *)getSynopse;
+@property(nonatomic, copy) NSString *TvShowId;
+@property(nonatomic, copy) NSString *Name;
+@property(nonatomic, copy) NSString *Description;
+@property(nonatomic, copy) NSString *Runtime;
+@property(nonatomic, copy) NSString *AirDay;
+@property(nonatomic, copy) NSString *FirstAired;
+@property(nonatomic, copy) NSString *Poster;
+@property(nonatomic, retain) NSArray *Genres;
+@property(nonatomic, retain) NSArray *SeasonSynopses;
+@property(nonatomic, retain) NSArray *Actors;
+@property(nonatomic) double Rating;
+@property(nonatomic) int RatingTotalUsers;
 
 @end
+
+/*!
+ @discussion This object defines the television show synopse entity object.
+ */
+@interface TvShowSynopse : EntitySynopse
+
+@property(nonatomic, copy) NSString *TvShowId;
+@property(nonatomic, copy) NSString *Name;
+@property(nonatomic, copy) NSString *Poster;
+
+@end
+

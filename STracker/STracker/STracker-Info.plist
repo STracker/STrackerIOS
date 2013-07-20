@@ -33,7 +33,7 @@
 	<string>516839011711939</string>
 	<key>STrackerServerBaseURL</key>
 	<string>http://strackerserverdev.apphb.com/api</string>
-	<key>STrackerUserInfoURI</key>
+	<key>STrackerUserURI</key>
 	<string>users</string>
 	<key>STrackerServerBaseTvShowsURI</key>
 	<string>tvshows</string>

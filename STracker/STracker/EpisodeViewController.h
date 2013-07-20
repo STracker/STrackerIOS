@@ -1,3 +1,4 @@
+/*
 //
 //  EpisodeViewController.h
 //  STracker
@@ -34,3 +35,4 @@
 - (IBAction)options:(id)sender;
 
 @end
+ */

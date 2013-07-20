@@ -294,7 +294,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="imagePager" destination="ZKU-A9-tje" id="6gk-db-boE"/>
+                        <outlet property="_imagePager" destination="ZKU-A9-tje" id="yQO-4E-qWO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfd-JJ-uix" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -614,12 +614,6 @@
     <classes>
         <class className="CommentViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CommentViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="openUserProfile"/>
-                <relationship kind="outlet" name="_body" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="_userName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="_userProfile" candidateClass="UIButton"/>
-            </relationships>
         </class>
         <class className="DLStarRatingControl" superclassName="UIControl">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DLStarRatingControl.h"/>
@@ -631,12 +625,6 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EpisodeViewController.h"/>
             <relationships>
                 <relationship kind="action" name="options:"/>
-                <relationship kind="outlet" name="_average" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="_date" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="_description" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="_numberOfUsers" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="_poster" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="_rating" candidateClass="DLStarRatingControl"/>
             </relationships>
         </class>
         <class className="HomeViewController" superclassName="UIViewController">
@@ -644,7 +632,7 @@
             <relationships>
                 <relationship kind="action" name="searchOptions:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="action" name="userOptions:"/>
-                <relationship kind="outlet" name="imagePager" candidateClass="KIImagePager"/>
+                <relationship kind="outlet" name="_imagePager" candidateClass="KIImagePager"/>
             </relationships>
         </class>
         <class className="KIImagePager" superclassName="UIView">
@@ -665,25 +653,13 @@
         <class className="ProfileViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
             <relationships>
-                <relationship kind="action" name="invite"/>
                 <relationship kind="action" name="options:"/>
-                <relationship kind="outlet" name="_numberOfSubscriptions" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="_photo" candidateClass="UIImageView"/>
             </relationships>
         </class>
         <class className="TvShowViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TvShowViewController.h"/>
             <relationships>
                 <relationship kind="action" name="options:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="_airDay" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="_average" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="_description" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="_firstAired" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="_genres" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="_numberOfUsers" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="_poster" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="_rating" candidateClass="DLStarRatingControl"/>
-                <relationship kind="outlet" name="_runtime" candidateClass="UILabel"/>
             </relationships>
         </class>
     </classes>

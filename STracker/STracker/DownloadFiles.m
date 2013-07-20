@@ -10,6 +10,20 @@
 
 @implementation DownloadFiles
 
+/*!
+ @discussion Override the init method, for set some properties.
+ */
+- (id)init
+{
+    if (self = [super init])
+        // Create the queue for images.
+        downloadImagesQueue = dispatch_queue_create("images", nil);
+    
+    return self;
+}
+
+#pragma mark - DownloadFiles public methods.
+
 + (id)sharedObject
 {
     static DownloadFiles *sharedObject = nil;
@@ -22,20 +36,13 @@
     return sharedObject;
 }
 
-- (id)init
-{
-    if (self = [super init]) 
-      downloadImagesQueue = dispatch_queue_create("images", nil);
-    
-    return self;
-}
-
 - (void)downloadImageFromUrl:(NSURL *) url finish:(Finish) finish
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     dispatch_async(downloadImagesQueue, ^{
         UIImage *img = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
         
+        // Run the next code into main thread.
         dispatch_async(dispatch_get_main_queue(), ^{
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             finish(img);

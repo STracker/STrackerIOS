@@ -1,3 +1,4 @@
+/*
 //
 //  CommentViewController.h
 //  STracker
@@ -29,3 +30,4 @@
 - (IBAction)openUserProfile;
 
 @end
+*/

@@ -7,54 +7,30 @@
 //
 
 #import "User.h"
+#import "Subscription.h"
 
 @implementation User
 
-@synthesize identifier, email, friends, subscriptions;
+@synthesize Key, Email, Friends, SubscriptionList;
 
-- (id)initWithDictionary:(NSDictionary *)dictionary
+/*
+ According to Jastor documentation, is necessary to define this methods
+ for returning the class object, when the objects are array type.
+ */
+- (Class)Friends_class
 {
-    self = [super initWithDictionary:dictionary];
-    if (self)
-    {
-        identifier = [Entity verifyValue:[dictionary objectForKey:@"Key"] defaultValue:@"N/A"];
-        email = [Entity verifyValue:[dictionary objectForKey:@"Email"] defaultValue:@"N/A"];
-        
-        friends = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in [dictionary objectForKey:@"Friends"])
-        {
-            UserSinospis *friend = [[UserSinospis alloc] initWithDictionary:item];
-            [friends addObject:friend];
-        }
-        
-        subscriptions = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in [dictionary objectForKey:@"SubscriptionList"])
-        {
-            Subscription *subscription = [[Subscription alloc] initWithDictionary:item];
-            [subscriptions addObject:subscription];
-        }
-    }
-    
-    return self;
+    return [UserSinopse class];
+}
+
+- (Class)SubscriptionList_class
+{
+    return [Subscription class];
 }
 
 @end
 
-@implementation UserSinospis
+@implementation UserSinopse
 
-@synthesize identifier, name, uri;
-
-- (id)initWithDictionary:(NSDictionary *)dictionary
-{
-    self = [super init];
-    if (self)
-    {
-        identifier = [Entity verifyValue:[dictionary objectForKey:@"Id"] defaultValue:@"N/A"];
-        name = [Entity verifyValue:[dictionary objectForKey:@"Name"] defaultValue:@"N/A"];
-        uri = [Entity verifyValue:[dictionary objectForKey:@"Uri"] defaultValue:@"N/A"];
-    }
-    
-    return self;
-}
+@synthesize Id, Name;
 
 @end

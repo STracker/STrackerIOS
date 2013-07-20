@@ -7,21 +7,25 @@
 //
 
 #import "Person.h"
-#import "Subscription.h"
 
+/*!
+ @discussion This object defines the user entity object.
+ */
 @interface User : Person
 
-@property(nonatomic, copy) NSString *identifier;
-@property(nonatomic, copy) NSString *email;
-@property(nonatomic, strong) NSMutableArray *friends;
-@property(nonatomic, strong) NSMutableArray *subscriptions;
+@property(nonatomic, copy) NSString *Key;
+@property(nonatomic, copy) NSString *Email;
+@property(nonatomic, strong) NSArray *Friends;
+@property(nonatomic, strong) NSArray *SubscriptionList;
 
 @end
 
-@interface UserSinospis : Entity
+/*!
+ @discussion This object defines the actor synopse entity object.
+ */
+@interface UserSinopse : Entity
 
-@property(nonatomic, copy) NSString *identifier;
-@property(nonatomic, copy) NSString *name;
-@property(nonatomic, copy) NSString *uri;
+@property(nonatomic, copy) NSString *Id;
+@property(nonatomic, copy) NSString *Name;
 
 @end

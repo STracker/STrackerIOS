@@ -9,16 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "Entity.h"
 
-@interface GenreSynopsis : Entity
+/*!
+ @discussion This object defines the genre entity object.
+ */
+@interface Genre : Entity
 
-@property(nonatomic, copy) NSString *name;
-@property(nonatomic, copy) NSString *uri;
+@property(nonatomic, copy) NSString *Id;
 
 @end
 
-@interface Genre : Entity
+/*!
+ @discussion This object defines the genre synopse entity object.
+ */
+@interface GenreSynopse : Entity
 
-@property(nonatomic, copy) NSString *name;
-@property(nonatomic, retain) NSArray *tvshows;
+@property(nonatomic, copy) NSString *Id;
 
 @end

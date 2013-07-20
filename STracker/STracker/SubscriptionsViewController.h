@@ -1,3 +1,4 @@
+/*
 //
 //  SubscriptionsViewController.h
 //  STracker
@@ -13,3 +14,4 @@
 @interface SubscriptionsViewController : BaseTableViewController
 
 @end
+*/

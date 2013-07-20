@@ -10,34 +10,12 @@
 
 @implementation Genre
 
-@synthesize name, tvshows;
-
-- (id)initWithDictionary:(NSDictionary *)dictionary
-{
-    if (self = [super init])
-    {
-        name = [Entity verifyValue:[dictionary objectForKey:@"Id"] defaultValue:@"N/A"];
-    }
-    
-    return self;
-}
+@synthesize Id;
 
 @end
 
-#pragma mark - Synopsis object.
-@implementation GenreSynopsis
+@implementation GenreSynopse
 
-@synthesize name, uri;
-
-- (id)initWithDictionary:(NSDictionary *)dictionary
-{
-    if (self = [super init])
-    {
-        name = [Entity verifyValue:[dictionary objectForKey:@"Id"] defaultValue:@"N/A"];
-        uri = [Entity verifyValue:[dictionary objectForKey:@"Uri"] defaultValue:@"N/A"];
-    }
-    
-    return self;
-}
+@synthesize Id;
 
 @end

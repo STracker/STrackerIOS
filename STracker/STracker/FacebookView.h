@@ -9,19 +9,22 @@
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "AppDelegate.h"
-#import "UIViewController+KNSemiModal.h"
-#import "STrackerServerHttpClient.h"
 
+/*!
+ @discussion This view allows the user to Login into Facebook.
+ */
 @interface FacebookView : UIView<FBLoginViewDelegate>
 {
     AppDelegate *_app;
     UIViewController *_controller;
-    UIActivityIndicatorView *_indicator;
     FBLoginView *_fb;
 }
 
-// Init method that receives the controller for dismiss
-// this view after the login.
+/*!
+ @discussion Init method that receives the controller for dismiss this view after the login.
+ @param controller The controller.
+ @return One instance of FacebookView.
+ */
 - (id)initWithController:(UIViewController *)controller;
 
 @end

@@ -8,10 +8,35 @@
 
 #import <Foundation/Foundation.h>
 
+/*!
+ @discussion This object defines the base entity object for all models.
+ */
 @interface Entity : NSObject
 
-- (id)initWithDictionary:(NSDictionary *)dictionary;
+/*!
+ @discussion Init method that constructs the object with values passed 
+ in parameters.
+ @param parameters The dictionary of parameters.
+ @return An instance of Entity.
+ */
+- (id)initWithDictionary:(NSDictionary *)parameters;
 
-+ (id)verifyValue: (id)value defaultValue:(id)defaultValue;
+@end
+
+/*!
+ @discussion This object defines the base synopse object for all synopses models.
+ */
+@interface EntitySynopse : NSObject
+
+// Every synopse contains one uri for your model.
+@property(nonatomic, copy) NSString *uri;
+
+/*!
+ @discussion Init method that constructs the object with values passed
+ in parameters.
+ @param parameters The dictionary of parameters.
+ @return An instance of EntitySynopse.
+ */
+- (id)initWithDictionary:(NSDictionary *)parameters;
 
 @end

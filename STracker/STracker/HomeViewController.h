@@ -7,29 +7,33 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
-#import "FacebookView.h"
 #import "UIViewController+KNSemiModal.h"
 #import "KIImagePager.h"
-#import "STrackerServerHttpClient.h"
-#import "OptionsViewController.h"
-#import "BaseTableViewController.h"
-#import "GenresViewController.h"
-#import "TvShowsViewController.h"
-#import "Genre.h"
-#import "TvShow.h"
+#import "AppDelegate.h"
 
+/*!
+ @discussion This view controller is the first controller appears in applicaton.
+ */
 @interface HomeViewController : UIViewController <KIImagePagerDelegate, KIImagePagerDataSource, UIActionSheetDelegate, UIAlertViewDelegate>
 {
-    __weak IBOutlet KIImagePager *imagePager;
+    __weak IBOutlet KIImagePager *_imagePager;
+    
     NSMutableArray *_top;
     AppDelegate *_app;
     UIAlertView *_alertTv;
     UIAlertView *_alertUser;
 }
 
+/*!
+ @discussion The action method that is invoked when user click 
+ in search icon.
+ */
 - (IBAction)searchOptions:(UIBarButtonItem *)sender;
 
+/*!
+ @discussion The action method that is invoked when user click 
+ in user options icon.
+ */
 - (IBAction)userOptions:(id)sender;
 
 @end

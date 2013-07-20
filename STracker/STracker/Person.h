@@ -8,10 +8,12 @@
 
 #import "Entity.h"
 
+/*!
+ @discussion This object defines the person entity object.
+ */
 @interface Person : Entity
 
-@property(nonatomic, copy) NSString *name;
-@property(nonatomic, copy) NSString *photoURL;
-@property(nonatomic, copy) UIImage *image;
+@property(nonatomic, copy) NSString *Name;
+@property(nonatomic, copy) NSString *Photo;
 
 @end

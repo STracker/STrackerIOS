@@ -1,3 +1,4 @@
+/*
 //
 //  ShowViewController.h
 //  STracker
@@ -39,3 +40,4 @@
 - (IBAction)options:(UIBarButtonItem *)sender;
 
 @end
+*/

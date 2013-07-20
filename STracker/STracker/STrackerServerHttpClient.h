@@ -9,71 +9,84 @@
 #import <Foundation/Foundation.h>
 #import "AFHTTPClient.h"
 #import "AFJSONRequestOperation.h"
-#import "Genre.h"
-#import "TvShow.h"
-#import "Episode.h"
-#import "User.h"
-#import "HawkClient_iOS.h"
-#import "Comment.h"
-#import "Subscription.h"
+#import "AppDelegate.h"
+#import "HawkClient.h"
 
 #define TIME_FORMAT @"yyyy-MM-dd HH:mm:ss"
 
-// Define the callbacks.
+// Definition of callbacks (Success and Failure).
 typedef void (^Success)(AFJSONRequestOperation *operation, id result);
 typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 
+/*!
+ @discussion This object defines the HTTP operations performed to STracker server.
+ Is inherited from AFHTTPClient to use the advantages of the AFNetworking framework.
+ @see http://afnetworking.com/
+ */
 @interface STrackerServerHttpClient : AFHTTPClient
 {
-    HawkClient_iOS *_hawkClient;
-    HawkCredentials *_credentials;
+    AppDelegate *_app;
 }
 
-// Class method that returns a shared singleton instance.
+/*!
+ @discussion Class method that returns a shared singleton instance.
+ @return an singleton instance.
+ */
 + (id)sharedClient;
 
-// Method for set hawk credentials, for using on requests with Hawk protocol.
-- (void)setHawkCredentials:(HawkCredentials *)credentials;
+/*!
+ @discussion Method for making an HTTP GET request to STracker server.
+ @param url     The url.
+ @param query   The query, is optional.
+ @param success The callback for success request.
+ @param failure The callback for failure request.
+ */
+- (void)getRequest:(NSString *)url query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
 
-// Users operations.
-- (void)getUser:(NSString *)userId success:(Success)success failure:(Failure)failure;
-- (void)postUser:(User *)user success:(Success)success failure:(Failure)failure;
-- (void)getUserFriends:(Success)success failure:(Failure)failure;
-- (void)postInvite:(User *)user success:(Success)success failure:(Failure)failure;
-- (void)deleteFriend:(NSString *)userId success:(Success)success failure:(Failure)failure;
-- (void)getPeopleByName:(NSString *)name success:(Success)success failure:(Failure)failure;
+/*!
+ @discussion Method for making an HTTP GET request to STracker server with the Hawk protocol protection.
+ @param url     The url.
+ @param query   The query, is optional.
+ @param success The callback for success request.
+ @param failure The callback for failure request.
+ */
+- (void)getRequestWithHawkProtocol:(NSString *)url query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
 
-// Genres operations.
-- (void)getGenres:(Success)success failure:(Failure)failure;
-- (void)getTvShowsByGenre:(GenreSynopsis *)genre success:(Success)success failure:(Failure) failure;
+/*!
+ @discussion Method for making an HTTP POST request to STracker server.
+ @param url         The url.
+ @param parameters  The parameters, body of the request.
+ @param success     The callback for success request.
+ @param failure     The callback for failure request.
+ */
+- (void)postRequest:(NSString *)url parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure;
 
-// Tv shows operations.
-- (void)getTvshow:(TvShowSynopse *)tvshow success:(Success)success failure:(Failure) failure;
-- (void)getTvshowsByName:(NSString *)name success:(Success)success failure:(Failure) failure;
-- (void)getTopRated:(Success)success failure:(Failure) failure;
+/*!
+ @discussion Method for making an HTTP POST request to STracker server with the Hawk protocol protection. This method use 
+ the payload validation option of Hawk protocol.
+ @param url         The url.
+ @param parameters  The parameters, body of the request.
+ @param success     The callback for success request.
+ @param failure     The callback for failure request.
+ */
+- (void)postRequestWithHawkProtocol:(NSString *)url parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure;
 
-// Seasons operations.
-- (void)getSeason:(SeasonSynopsis *)season success:(Success)success failure:(Failure) failure;
+/*!
+ @discussion Method for making an HTTP DELETE request to STracker server.
+ @param url     The url.
+ @param query   The query, is optional.
+ @param success The callback for success request.
+ @param failure The callback for failure request.
+ */
+- (void)deleteRequest:(NSString *)url query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
 
-// Episodes operations.
-- (void)getEpisode:(EpisodeSynopsis *)episode success:(Success)success failure:(Failure) failure;
-
-// Ratings operations.
-- (void)getTvShowRating:(TvShow *)tvshow success:(Success)success failure:(Failure) failure;
-- (void)getEpisodeRating:(Episode *)episode success:(Success)success failure:(Failure) failure;
-- (void)postTvShowRating:(TvShow *)tvshow rating:(float)rating success:(Success)success failure:(Failure) failure;
-- (void)postEpisodeRating:(Episode *)episode rating:(float)rating success:(Success)success failure:(Failure) failure;
-
-// Comments operations.
-- (void)getTvshowComments:(TvShow *)tvshow success:(Success)success failure:(Failure) failure;
-- (void)getEpisodeComments:(Episode *)episode success:(Success)success failure:(Failure) failure;
-- (void)postTvShowComment:(TvShow *)tvshow comment:(NSString *)comment success:(Success)success failure:(Failure) failure;
-- (void)postEpisodeComment:(Episode *)episode comment:(NSString *)comment success:(Success)success failure:(Failure) failure;
-- (void)deleteComment:(Comment *)comment success:(Success)success failure:(Failure) failure;
-
-// Subscriptions operations.
-- (void)getSubscriptions:(Success)success failure:(Failure) failure;
-- (void)postSubscription:(TvShow *)tvshow success:(Success)success failure:(Failure) failure;
-- (void)deleteSubscription:(Subscription *)subscription success:(Success)success failure:(Failure) failure;
+/*!
+ @discussion Method for making an HTTP DELETE request to STracker server with the Hawk protocol protection.
+ @param url     The url.
+ @param query   The query, is optional.
+ @param success The callback for success request.
+ @param failure The callback for failure request.
+ */
+- (void)deleteRequestWithHawkProtocol:(NSString *)url query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
 
 @end

@@ -7,10 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "FacebookView.h"
+#import "UIViewController+KNSemiModal.h"
 
 @implementation AppDelegate
 
-@synthesize window, storyboard, user;
+@synthesize window, storyboard;
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -42,7 +44,7 @@
     else
         storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     
-    // TEST in a real device!
+    // TODO -> TEST in a real device!
     [Instabug KickOffWithToken:@"d33e20cbbdf7dc8b0d5fce4ba8db3d79" CaptureSource:InstabugCaptureSourceUIKit FeedbackEvent:InstabugFeedbackEventShake IsTrackingLocation:NO];
     
     return YES;
@@ -78,6 +80,47 @@
                                   [alert show];
                               }
                           }];
+}
+
+#pragma mark - AppDelegate public methods.
+
+- (User *)getUser
+{
+    if (_user != nil)
+        return _user;
+    
+    FacebookView *fb = [[FacebookView alloc] initWithController:self.window.rootViewController];
+    [self.window.rootViewController presentSemiView:fb];
+    
+    return nil;
+}
+
+- (void)setUser:(User *)user
+{
+    _user = user;
+}
+
+- (HawkCredentials *)getHawkCredentials
+{
+    if (_hawkCredentials != nil)
+        return _hawkCredentials;
+    
+    FacebookView *fb = [[FacebookView alloc] initWithController:self.window.rootViewController];
+    [self.window.rootViewController presentSemiView:fb];
+    
+    return nil;
+}
+
+- (void)setHawkCredentials:(HawkCredentials *)credentials
+{
+    _hawkCredentials = credentials;
+}
+
+- (UIAlertView *)getAlertViewForErrors:(NSString *)msgError
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msgError delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
+    
+    return alert;
 }
 
 @end

@@ -1,3 +1,4 @@
+/*
 //
 //  TvShowCommentsViewController.h
 //  STracker
@@ -19,3 +20,4 @@
 - (id)initWithTvShow:(TvShow *)tvshow;
 
 @end
+*/

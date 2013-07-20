@@ -1,3 +1,4 @@
+/*
 //
 //  EpisodeCommentsViewController.h
 //  STracker
@@ -19,3 +20,4 @@
 - (id)initWithEpisode:(Episode *)episode;
 
 @end
+*/

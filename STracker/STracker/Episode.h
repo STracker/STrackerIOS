@@ -7,28 +7,31 @@
 //
 
 #import "Entity.h"
-#import "Person.h"
-#import "Actor.h"
 
-@interface EpisodeSynopsis : Entity
+/*!
+ @discussion This object defines the episode entity object.
+ */
+@interface Episode : Entity
 
-@property(nonatomic, copy) NSString *number;
-@property(nonatomic, copy) NSString *name;
-@property(nonatomic, copy) NSString *date;
-@property(nonatomic, copy) NSString *uri;
+@property(nonatomic, copy) NSString *TvShowId;
+@property(nonatomic, copy) NSString *SeasonNumber;
+@property(nonatomic, copy) NSString *EpisodeNumber;
+@property(nonatomic, copy) NSString *Name;
+@property(nonatomic, copy) NSString *Description;
+@property(nonatomic, copy) NSString *Date;
+@property(nonatomic, copy) NSString *Poster;
+@property(nonatomic, retain) NSArray *Directors;
+@property(nonatomic, retain) NSArray *GuestActors;
 
 @end
 
-@interface Episode : Entity
+/*!
+ @discussion This object defines the episode synopse entity object.
+ */
+@interface EpisodeSynopse : Entity
 
-@property(nonatomic, copy) NSString *tvshowId;
-@property(nonatomic, copy) NSString *seasonNumber;
-@property(nonatomic, copy) NSString *number;
-@property(nonatomic, copy) NSString *name;
-@property(nonatomic, copy) NSString *description;
-@property(nonatomic, copy) NSString *date;
-@property(nonatomic, copy) NSString *poster;
-@property(nonatomic, retain) NSMutableArray *directors;
-@property(nonatomic, retain) NSMutableArray *guestActors;
+@property(nonatomic, copy) NSString *EpisodeNumber;
+@property(nonatomic, copy) NSString *Name;
+@property(nonatomic, copy) NSString *Date;
 
 @end

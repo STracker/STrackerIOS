@@ -7,27 +7,19 @@
 //
 
 #import "Subscription.h"
+#import "Episode.h"
 
 @implementation Subscription
 
-@synthesize tvshow, episodesWatched;
+@synthesize TvShow, EpisodesWatched;
 
-- (id)initWithDictionary:(NSDictionary *)dictionary
+/*
+ According to Jastor documentation, is necessary to define this method
+ for returing the class object because the type of the object is array.
+ */
+- (Class)EpisodesWatched_class
 {
-    if (self = [super init])
-    {
-        tvshow = [[TvShowSynopse alloc] initWithDictionary:[dictionary objectForKey:@"TvShow"]];
-        
-        episodesWatched = [[NSMutableArray alloc] init];
-        
-        for (NSDictionary *item in [dictionary objectForKey:@"EpisodesWatched"])
-        {
-            EpisodeSynopsis *synopsis = [[EpisodeSynopsis alloc] initWithDictionary:item];
-            [episodesWatched addObject:synopsis];
-        }
-    }
-    
-    return self;
+    return [EpisodeSynopse class];
 }
 
 @end

@@ -1,3 +1,4 @@
+/*
 //
 //  ShowViewController.m
 //  STracker
@@ -113,6 +114,7 @@
 }
 
 // Auxiliary method for get and create comments.
+
 - (void)comments
 {
     TvShowCommentsViewController *view = [[TvShowCommentsViewController alloc] initWithTvShow:tvshow];
@@ -174,3 +176,4 @@
 }
 
 @end
+ */

@@ -1,3 +1,4 @@
+/*
 //
 //  ProfileViewController.h
 //  STracker
@@ -26,3 +27,4 @@
 - (IBAction)invite;
 
 @end
+*/

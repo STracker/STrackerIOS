@@ -7,32 +7,12 @@
 //
 
 #import "HomeViewController.h"
+#import "STrackerServerHttpClient.h"
+#import "AppDelegate.h"
+#import "TvShow.h"
+#import "OptionsViewController.h"
 
 @implementation HomeViewController
-
-// Auxiliary method for get the top 5 tvshows.
-- (void)getTopRated
-{
-    [[STrackerServerHttpClient sharedClient] getTopRated:^(AFJSONRequestOperation *operation, id result) {
-       
-        _top = nil;
-        _top = [[NSMutableArray alloc] initWithCapacity:(int)[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTopTvShowsNumber"]];
-        
-        for (NSDictionary *item in result)
-        {
-            TvShowSynopse *synopsis = [[TvShowSynopse alloc] initWithDictionary:item];
-            [_top addObject:synopsis];
-        }
-        
-        [imagePager reloadData];
-        
-    } failure:nil];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -41,17 +21,15 @@
     [self getTopRated];
 }
 
+- (void)viewDidUnload
+{
+    _imagePager = nil;
+    [super viewDidUnload];
+}
+
 # pragma mark - IBActions.
 - (IBAction)userOptions:(id)sender
-{
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    if (app.user == nil)
-    {
-        FacebookView *fb = [[FacebookView alloc] initWithController:self];
-        [self presentSemiView:fb];
-        return;
-    }
-    
+{    
     OptionsViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"UserOptions"];
     [self.navigationController pushViewController:view animated:YES];
 }
@@ -67,12 +45,11 @@
 - (NSArray *) arrayWithImageUrlStrings
 {
     NSMutableArray *urls = [[NSMutableArray alloc] initWithCapacity:5];
-    for (TvShowSynopse *synopse in _top)
-        [urls addObject:synopse.poster];
+    for (TvShowSynopse *tvshow in _top)
+        [urls addObject:tvshow.Poster];
     
     if (urls.count == 0)
         [urls addObject:@"N/A"];
-        
     
     return urls;
 }
@@ -85,15 +62,21 @@
 #pragma mark - KIImagePager Delegate
 - (void) imagePager:(KIImagePager *)imagePager didSelectImageAtIndex:(NSUInteger)index
 {
+    /*
     TvShowSynopse *synopse = [_top objectAtIndex:index];
     
-    [[STrackerServerHttpClient sharedClient] getTvshow:synopse success:^(AFJSONRequestOperation *operation, id result) {
+    [[STrackerServerHttpClient sharedClient] getRequest:nil query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         TvShowViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"TvShow"];
         view.tvshow = [[TvShow alloc] initWithDictionary:result];
         [self.navigationController pushViewController:view animated:YES];
         
-    } failure:nil];
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [app getAlertViewForErrors:error.localizedDescription];
+    }];
+     */
 }
 
 #pragma mark - Action sheet delegate.
@@ -128,6 +111,7 @@
 // available in STracker.
 - (void)searchGenres
 {
+    /*
     [[STrackerServerHttpClient sharedClient] getGenres:^(AFJSONRequestOperation *operation, id result) {
         NSMutableArray *data = [[NSMutableArray alloc] init];
         for (NSDictionary *item in result)
@@ -139,6 +123,7 @@
         [self.navigationController pushViewController:view animated:YES];
         
     } failure:nil];
+     */
 }
 
 // Auxiliary method for search users by name.
@@ -154,6 +139,7 @@
 // equal to the name inserted by user.
 - (void)fillTvshowsByName:(NSString *)tvName
 {
+    /*
     [[STrackerServerHttpClient sharedClient] getTvshowsByName:tvName success:^(AFJSONRequestOperation *operation, id result) {
         NSMutableArray *data = [[NSMutableArray alloc] init];
         for (NSDictionary *item in result)
@@ -167,10 +153,12 @@
         [self.navigationController pushViewController:view animated:YES];
         
     } failure:nil];
+     */
 }
 
 - (void)fillUsersByName:(NSString *)userName
 {
+    /*
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     if (app.user == nil)
     {
@@ -184,6 +172,7 @@
         
         
     } failure:nil];
+     */
 }
 
 #pragma mark - Alert View delegates.
@@ -197,15 +186,36 @@
         if (alertView == _alertUser)
             [self fillUsersByName:[[alertView textFieldAtIndex:0] text]];
     }
-        
     
     [alertView setDelegate:nil];
     alertView = nil;
 }
 
-- (void)viewDidUnload
+#pragma mark - HomeViewController private auxiliary methods.
+/*!
+ @discussion This method performs a request to STracker server for 
+ get the television shows with more rating.
+ */
+- (void)getTopRated
 {
-    imagePager = nil;
-    [super viewDidUnload];
+    [[STrackerServerHttpClient sharedClient] getRequest:nil query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        _top = nil;
+        _top = [[NSMutableArray alloc] initWithCapacity:(int)[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTopTvShowsNumber"]];
+        
+        for (NSDictionary *item in result)
+        {
+            TvShowSynopse *synopsis = [[TvShowSynopse alloc] initWithDictionary:item];
+            [_top addObject:synopsis];
+        }
+        
+        [_imagePager reloadData];
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [app getAlertViewForErrors:error.localizedDescription];
+    }];
 }
+
 @end

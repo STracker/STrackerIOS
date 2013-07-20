@@ -20,12 +20,12 @@
     
     _app = [[UIApplication sharedApplication] delegate];
     
-    _profileName.text = _app.user.name;
+    //_profileName.text = _app.user.name;
     
-    [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:_app.user.photoURL] finish:^(UIImage *image) {
+    /*[[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:_app.user.photoURL] finish:^(UIImage *image) {
         _profilePhoto.image = image;
         [self.tableView reloadData];
-    }];
+    }];*/
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -46,6 +46,7 @@
 
 - (void)subscriptions
 {
+    /*
     [[STrackerServerHttpClient sharedClient] getSubscriptions:^(AFJSONRequestOperation *operation, id result) {
         
         NSMutableArray *data = [[NSMutableArray alloc] init];
@@ -58,11 +59,12 @@
         [self.navigationController pushViewController:view animated:YES];
         
     } failure:nil];
+     */
 }
 
 - (void)friends
 {
-    
+    /*
     [[STrackerServerHttpClient sharedClient] getUserFriends:^(AFJSONRequestOperation *operation, id result) {
         
         NSMutableArray *data = [[NSMutableArray alloc] init];
@@ -76,6 +78,7 @@
         [self.navigationController pushViewController:view animated:YES];
         
     } failure:nil];
+     */
 }
 
 - (void)viewDidUnload {

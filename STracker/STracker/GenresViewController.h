@@ -1,3 +1,4 @@
+/*
 //
 //  SearchByGenreViewController.h
 //  STracker
@@ -16,3 +17,4 @@
 @interface GenresViewController : BaseTableViewController
 
 @end
+ */

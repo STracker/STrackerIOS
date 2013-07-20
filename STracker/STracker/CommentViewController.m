@@ -1,3 +1,4 @@
+/*
 //
 //  CommentViewController.m
 //  STracker
@@ -82,3 +83,4 @@
 }
 
 @end
+ */

@@ -1,3 +1,4 @@
+/*
 //
 //  TvShowCommentsViewController.m
 //  STracker
@@ -47,3 +48,4 @@
 }
 
 @end
+*/

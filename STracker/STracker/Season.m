@@ -7,44 +7,26 @@
 //
 
 #import "Season.h"
+#import "Episode.h"
 
 @implementation Season
 
-@synthesize number, episodesSynopsis;
+@synthesize SeasonNumber, EpisodeSynopses;
 
-- (id)initWithDictionary:(NSDictionary *)dictionary
+/*
+ According to Jastor documentation, is necessary to define this method
+ for returing the class object because the type of the object is array.
+ */
+- (Class)EpisodeSynopses_class
 {
-    if (self = [super init])
-    {
-        number = [Entity verifyValue:[dictionary objectForKey:@"SeasonNumber"] defaultValue:@"N/A"];
-        
-        episodesSynopsis = [[NSMutableArray alloc] init];
-        for (id item in [dictionary objectForKey:@"EpisodeSynopses"])
-        {
-            EpisodeSynopsis *episode = [[EpisodeSynopsis alloc] initWithDictionary:item];
-            [episodesSynopsis addObject:episode];
-        }
-    }
-    
-    return self;
+    return [EpisodeSynopse class];
 }
 
 @end
 
 #pragma mark - Synopsis object.
-@implementation SeasonSynopsis
+@implementation SeasonSynopse
 
-@synthesize number, uri;
-
-- (id)initWithDictionary:(NSDictionary *)dictionary
-{
-    if (self = [super init])
-    {
-        number = [Entity verifyValue:[dictionary objectForKey:@"SeasonNumber"] defaultValue:@"N/A"];
-        uri = [Entity verifyValue:[dictionary objectForKey:@"Uri"] defaultValue:@"N/A"];
-    }
-    
-    return self;
-}
+@synthesize SeasonNumber;
 
 @end

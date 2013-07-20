@@ -8,8 +8,11 @@
 
 #import "Person.h"
 
+/*!
+ @discussion This object defines the actor entity object.
+ */
 @interface Actor : Person
 
-@property(nonatomic, copy) NSString *characterName;
+@property(nonatomic, copy) NSString *CharacterName;
 
 @end

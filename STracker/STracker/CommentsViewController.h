@@ -1,3 +1,4 @@
+/*
 //
 //  CommentsViewController.h
 //  STracker
@@ -23,3 +24,4 @@
 - (void)popupTextViewHook:(YIPopupTextView*)textView didDismissWithText:(NSString*)text cancelled:(BOOL)cancelled;
 
 @end
+*/

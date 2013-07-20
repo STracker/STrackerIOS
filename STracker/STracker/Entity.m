@@ -10,15 +10,22 @@
 
 @implementation Entity
 
-- (id)initWithDictionary:(NSDictionary *)dictionary
+- (id)initWithDictionary:(NSDictionary *)parameters
 {
     [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
     return nil;
 }
 
-+ (id)verifyValue: (id)value defaultValue:(id)defaultValue
+@end
+
+@implementation EntitySynopse
+
+@synthesize uri;
+
+- (id)initWithDictionary:(NSDictionary *)parameters
 {
-    return [[NSString stringWithFormat:@"%@", value] isEqual:@"<null>"] ? defaultValue : value;
+    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
+    return nil;
 }
 
 @end

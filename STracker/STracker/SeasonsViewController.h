@@ -1,3 +1,4 @@
+/*
 //
 //  SeasonsViewController.h
 //  STracker
@@ -14,3 +15,4 @@
 @interface SeasonsViewController : BaseTableViewController
 
 @end
+*/

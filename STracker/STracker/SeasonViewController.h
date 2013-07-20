@@ -1,3 +1,4 @@
+/*
 //
 //  SeasonViewController.h
 //  STracker
@@ -19,3 +20,4 @@
 - (id)initWithData:(NSMutableArray *)data andSeasonNumber:(NSString *)seasonNumber;
 
 @end
+ */

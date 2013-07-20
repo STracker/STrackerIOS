@@ -7,18 +7,22 @@
 //
 
 #import "Entity.h"
-#import "Episode.h"
 
-@interface SeasonSynopsis : Entity
+/*!
+ @discussion This object defines the season entity object.
+ */
+@interface Season : Entity
 
-@property(nonatomic, copy) NSString *number;
-@property(nonatomic, copy) NSString *uri;
+@property(nonatomic, copy) NSString *SeasonNumber;
+@property(nonatomic, retain) NSArray *EpisodeSynopses;
 
 @end
 
-@interface Season : Entity
+/*!
+ @discussion This object defines the season synopse entity object.
+ */
+@interface SeasonSynopse : EntitySynopse
 
-@property(nonatomic, copy) NSString *number;
-@property(nonatomic, retain) NSMutableArray *episodesSynopsis;
+@property(nonatomic, copy) NSString *SeasonNumber;
 
 @end

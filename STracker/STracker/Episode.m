@@ -7,59 +7,30 @@
 //
 
 #import "Episode.h"
+#import "Actor.h"
 
 @implementation Episode
 
-@synthesize tvshowId, seasonNumber, number, name, description, date, poster, directors, guestActors;
+@synthesize TvShowId, SeasonNumber, EpisodeNumber, Name, Description, Date, Poster, Directors, GuestActors;
 
-- (id)initWithDictionary:(NSDictionary *)dictionary
+/*
+ According to Jastor documentation, is necessary to define this methods
+ for returning the class object, when the objects are array type.
+ */
+- (Class)Directors_class
 {
-    if (self = [super init])
-    {
-        tvshowId = [Entity verifyValue:[dictionary objectForKey:@"TvShowId"] defaultValue:@"N/A"];
-        seasonNumber = [Entity verifyValue:[dictionary objectForKey:@"SeasonNumber"] defaultValue:@"N/A"];
-        number = [Entity verifyValue:[dictionary objectForKey:@"EpisodeNumber"] defaultValue:@"N/A"];
-        name = [Entity verifyValue:[dictionary objectForKey:@"Name"] defaultValue:@"N/A"];
-        description = [Entity verifyValue:[dictionary objectForKey:@"Description"] defaultValue:@"N/A"];
-        date = [Entity verifyValue:[dictionary objectForKey:@"Date"] defaultValue:@"N/A"];
-        poster = [Entity verifyValue:[dictionary objectForKey:@"Poster"] defaultValue:@"N/A"];
-        
-        directors = [[NSMutableArray alloc] init];
-        for (id item in [dictionary objectForKey:@"Directors"])
-        {
-            Person *person = [[Person alloc] initWithDictionary:item];
-            [directors addObject:person];
-        }
-        
-        guestActors = [[NSMutableArray alloc] init];
-        for (id item in [dictionary objectForKey:@"GuestActors"])
-        {
-            Actor *actor = [[Actor alloc] initWithDictionary:item];
-            [guestActors addObject:actor];
-        }
-    }
-    
-    return self;
+    return [Person class];
+}
+
+- (Class)GuestActors_class
+{
+    return [Actor class];
 }
 
 @end
 
-#pragma mark - Synopsis object.
-@implementation EpisodeSynopsis
+@implementation EpisodeSynopse
 
-@synthesize number, name, date, uri;
-
-- (id)initWithDictionary:(NSDictionary *)dictionary
-{
-    if (self = [super init])
-    {
-        number = [Entity verifyValue:[dictionary objectForKey:@"EpisodeNumber"] defaultValue:@"N/A"];
-        name = [Entity verifyValue:[dictionary objectForKey:@"Name"] defaultValue:@"N/A"];
-        date = [Entity verifyValue:[dictionary objectForKey:@"Date"] defaultValue:@"N/A"];
-        uri = [Entity verifyValue:[dictionary objectForKey:@"Uri"] defaultValue:@"N/A"];
-    }
-    
-    return self;
-}
+@synthesize EpisodeNumber, Name, Date;
 
 @end

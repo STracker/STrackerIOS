@@ -8,11 +8,13 @@
 
 #import "Entity.h"
 #import "TvShow.h"
-#import "Episode.h"
 
+/*!
+ @discussion This object defines the subscription entity object.
+ */
 @interface Subscription : Entity
 
-@property(nonatomic, strong) TvShowSynopse *tvshow;
-@property(nonatomic, strong) NSMutableArray *episodesWatched;
+@property(nonatomic, strong) TvShowSynopse *TvShow;
+@property(nonatomic, strong) NSArray *EpisodesWatched;
 
 @end
