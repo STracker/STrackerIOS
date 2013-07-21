@@ -49,7 +49,7 @@
 
 @implementation EpisodeSynopse
 
-@synthesize tvshowId, seasonNumber, episodeNumber, name, date;
+@synthesize tvshowId, seasonNumber, episodeNumber, date;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
@@ -58,8 +58,9 @@
         tvshowId = [parameters objectForKey:@"TvShowId"];
         seasonNumber = [parameters objectForKey:@"SeasonNumber"];
         episodeNumber = [parameters objectForKey:@"EpisodeNumber"];
-        name = [parameters objectForKey:@"Name"];
+        self.name = [parameters objectForKey:@"Name"];
         date = [parameters objectForKey:@"Date"];
+        self.uri = [parameters objectForKey:@"Uri"];
     }
     
     return self;

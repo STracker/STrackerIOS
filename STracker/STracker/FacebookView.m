@@ -14,7 +14,7 @@
 @implementation FacebookView
 
 #pragma mark - FacebookView public methods.
-- (id)initWithController:(UIViewController *)controller
+- (id)initWithCallback:(Finish) finish
 {
     // 43 is the heigth of the FBLoginView button.
     self = [super initWithFrame:CGRectMake(0, 0, 0, 43)];
@@ -24,10 +24,10 @@
         
         _fb = [[FBLoginView alloc] init];
         [_fb setDelegate:self];
-        [_fb setCenter:CGPointMake(controller.view.center.x, _fb.center.y)];
+        //[_fb setCenter:self.center];
         [self addSubview:_fb];
         
-        _controller = controller;
+        _finish = finish;
     }
     
     return self;
@@ -61,7 +61,7 @@
     HawkCredentials *credentials = [[HawkCredentials alloc] init];
     credentials.identifier = me.identifier;
     credentials.key = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"HawkKey"];
-    [_app setHawkCredentials:credentials];
+    _app.hawkCredentials = credentials;
     
     // Register the user into STracker server.
     
@@ -73,15 +73,12 @@
     
     [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
         
-        // If success set the user object in AppDelegate.
-        [_app setUser:me];
+        // If success, execute callback.
+        _finish(me);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         [[_app getAlertViewForErrors:error.localizedDescription] show];
     }];
-    
-    // Dismiss this view.
-    [_controller dismissSemiModalView];
 }
 
 @end

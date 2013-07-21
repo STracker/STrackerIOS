@@ -27,12 +27,13 @@
 
 @implementation PersonSynopse
 
-@synthesize name;
-
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
     if (self = [super init])
-        name = [parameters objectForKey:@"Name"];
+    {
+        self.name = [parameters objectForKey:@"Name"];
+        self.uri = [parameters objectForKey:@"Uri"];
+    }
     
     return self;
 }

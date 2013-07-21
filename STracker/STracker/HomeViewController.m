@@ -9,7 +9,8 @@
 #import "HomeViewController.h"
 #import "STrackerServerHttpClient.h"
 #import "TvShow.h"
-#import "OptionsViewController.h"
+#import "CurrentUserProfileViewController.h"
+#import "GenresViewController.h"
 
 @implementation HomeViewController
 
@@ -37,7 +38,8 @@
 # pragma mark - IBActions.
 - (IBAction)userOptions:(id)sender
 {
-    // TODO -> here push the view of Profile view controller type!
+    CurrentUserProfileViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"MyProfile"];
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 - (IBAction)searchOptions:(UIBarButtonItem *)sender
@@ -117,19 +119,8 @@
 // available in STracker.
 - (void)searchGenres
 {
-    /*
-    [[STrackerServerHttpClient sharedClient] getGenres:^(AFJSONRequestOperation *operation, id result) {
-        NSMutableArray *data = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in result)
-        {
-            GenreSynopsis *synopsis = [[GenreSynopsis alloc] initWithDictionary:item];
-            [data addObject:synopsis];
-        }
-        GenresViewController *view = [[GenresViewController alloc] initWithData:data];
-        [self.navigationController pushViewController:view animated:YES];
-        
-    } failure:nil];
-     */
+    GenresViewController *view = [[GenresViewController alloc] init];
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 // Auxiliary method for search users by name.
@@ -205,7 +196,7 @@
  */
 - (void)getTopRated
 {
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowsURI"];
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTopRatedTvShowsURI"];
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         _top = nil;
@@ -221,7 +212,7 @@
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
 
-        [_app getAlertViewForErrors:error.localizedDescription];
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 

@@ -28,6 +28,8 @@
  */
 @interface EntitySynopse : NSObject
 
+@property(nonatomic, copy) NSString *name;
+
 // Every synopse contains one uri for your model.
 @property(nonatomic, copy) NSString *uri;
 

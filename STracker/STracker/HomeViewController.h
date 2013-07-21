@@ -18,8 +18,8 @@
 {
     __weak IBOutlet KIImagePager *_imagePager;
     
-    NSMutableArray *_top;
     AppDelegate *_app;
+    NSMutableArray *_top;
     UIAlertView *_alertTv;
     UIAlertView *_alertUser;
 }

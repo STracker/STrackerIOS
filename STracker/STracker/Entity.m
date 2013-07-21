@@ -20,7 +20,7 @@
 
 @implementation EntitySynopse
 
-@synthesize uri;
+@synthesize name, uri;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {

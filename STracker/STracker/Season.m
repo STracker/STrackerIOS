@@ -45,6 +45,8 @@
     {
         tvshowId = [parameters objectForKey:@"TvShowId"];
         seasonNumber = [parameters objectForKey:@"SeasonNumber"];
+        self.name = [NSString stringWithFormat:@"Season %@", seasonNumber];
+        self.uri = [parameters objectForKey:@"Uri"];
     }
 
     return self;

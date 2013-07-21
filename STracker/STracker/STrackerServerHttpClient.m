@@ -61,14 +61,10 @@
 }
 
 - (void)getRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure
-{
-    HawkCredentials *credentials = [_app getHawkCredentials];
-    if (credentials == nil)
-        return;
-    
+{   
     // Generate and set the Authorization header with Hawk protocol.
     NSString *url = [NSString stringWithFormat:@"%@%@", self.baseURL, uri];
-    NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"GET" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:credentials ext:nil payload:nil payloadValidation:NO];
+    NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"GET" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:_app.hawkCredentials ext:nil payload:nil payloadValidation:NO];
     
     [self setDefaultHeader:@"Authorization" value:header];
     
@@ -115,14 +111,10 @@
 }
 
 - (void)postRequestWithHawkProtocol:(NSString *)uri parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure
-{
-    HawkCredentials *credentials = [_app getHawkCredentials];
-    if (credentials == nil)
-        return;
-    
+{    
     // Generate and set the Authorization header with Hawk protocol.
     NSString *url = [NSString stringWithFormat:@"%@%@", self.baseURL, uri];
-    NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"POST" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:credentials ext:nil payload:[self trasnformPayloadToUrlEncoded:parameters] payloadValidation:YES];
+    NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"POST" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:_app.hawkCredentials ext:nil payload:[self trasnformPayloadToUrlEncoded:parameters] payloadValidation:YES];
     
     [self setDefaultHeader:@"Authorization" value:header];
     
@@ -167,13 +159,9 @@
 
 - (void)deleteRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure
 {
-    HawkCredentials *credentials = [_app getHawkCredentials];
-    if (credentials == nil)
-        return;
-    
     // Generate and set the Authorization header with Hawk protocol.
     NSString *url = [NSString stringWithFormat:@"%@%@", self.baseURL, uri];
-    NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"DELETE" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:credentials ext:nil payload:nil payloadValidation:NO];
+    NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"DELETE" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:_app.hawkCredentials ext:nil payload:nil payloadValidation:NO];
     
     [self setDefaultHeader:@"Authorization" value:header];
     
@@ -212,8 +200,6 @@
         
         [payload appendFormat:@"%@=%@", [[parameters allKeys] objectAtIndex:i], encodedString];
     }
-    
-    NSLog(@"%@", payload);
     
     return payload;
 }

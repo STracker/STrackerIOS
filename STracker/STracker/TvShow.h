@@ -35,7 +35,6 @@
 @interface TvShowSynopse : EntitySynopse
 
 @property(nonatomic, copy) NSString *tvshowId;
-@property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSString *poster;
 
 @end

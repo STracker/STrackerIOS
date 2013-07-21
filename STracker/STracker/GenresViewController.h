@@ -1,4 +1,3 @@
-/*
 //
 //  SearchByGenreViewController.h
 //  STracker
@@ -8,13 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "STrackerServerHttpClient.h"
-#import "BaseTableViewController.h"
-#import "TvShowsViewController.h"
-#import "Genre.h"
-#import "TvShow.h"
+#import "SynopsesViewController.h"
+#import "AppDelegate.h"
 
-@interface GenresViewController : BaseTableViewController
+@interface GenresViewController : SynopsesViewController
 
 @end
- */

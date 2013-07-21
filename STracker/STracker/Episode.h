@@ -28,12 +28,11 @@
 /*!
  @discussion This object defines the episode synopse entity object.
  */
-@interface EpisodeSynopse : Entity
+@interface EpisodeSynopse : EntitySynopse
 
 @property(nonatomic, copy) NSString *tvshowId;
 @property(nonatomic, copy) NSString *seasonNumber;
 @property(nonatomic, copy) NSString *episodeNumber;
-@property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSString *date;
 
 @end

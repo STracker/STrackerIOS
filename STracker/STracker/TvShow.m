@@ -59,15 +59,16 @@
 
 @implementation TvShowSynopse
 
-@synthesize tvshowId, name, poster;
+@synthesize tvshowId, poster;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
     if (self = [super init])
     {
         tvshowId = [parameters objectForKey:@"TvShowId"];
-        name = [parameters objectForKey:@"Name"];
+        self.name = [parameters objectForKey:@"Name"];
         poster = [parameters objectForKey:@"Poster"];
+        self.uri = [parameters objectForKey:@"Uri"];
     }
     
     return self;

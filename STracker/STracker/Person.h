@@ -21,8 +21,6 @@
 /*!
  @discussion This object defines the person synopse entity object.
  */
-@interface PersonSynopse : Entity
-
-@property(nonatomic, copy) NSString *name;
+@interface PersonSynopse : EntitySynopse
 
 @end

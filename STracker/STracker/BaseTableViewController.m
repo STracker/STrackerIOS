@@ -43,10 +43,21 @@
     return self;
 }
 
+- (id)initWithData:(NSMutableArray *)data andSynopse:(EntitySynopse *)synopse
+{
+    self = [self initWithData:data];
+    if (self)
+        _synopse = synopse;
+    
+    return self;
+}
+
 # pragma mark - UIView Controller delegate.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _app = [[UIApplication sharedApplication] delegate];
     
     [self viewDidLoadHook];
     [self configureViewStyle];
@@ -55,7 +66,7 @@
 #pragma mark - Table view data source.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return _numberOfSections;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

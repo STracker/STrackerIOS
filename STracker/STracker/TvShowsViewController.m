@@ -1,4 +1,3 @@
-/*
 //
 //  ShowsViewController.m
 //  STracker
@@ -8,19 +7,13 @@
 //
 
 #import "TvShowsViewController.h"
+#import "STrackerServerHttpClient.h"
+#import "TvShow.h"
 
 @implementation TvShowsViewController
 
-- (id)initWithData:(NSMutableArray *)data andTitle:(NSString *)title
-{
-    self = [super initWithData:data];
-    if (self)
-        _tableTitle = title;
-    
-    return self;
-}
-
 #pragma mark - BaseTableViewController override methods.
+
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
 {
     TvShowSynopse *synopse = [_data objectAtIndex:indexPath.row];
@@ -29,23 +22,28 @@
 
 - (void)viewDidLoadHook
 {
-    _numberOfSections = 1;
-    self.navigationItem.title = _tableTitle;
+    [[STrackerServerHttpClient sharedClient] getRequest:_synopse.uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        _data = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in result)
+        {
+            TvShowSynopse *tvshow = [[TvShowSynopse alloc] initWithDictionary:item];
+            [_data addObject:tvshow];
+        }
+        
+        // Reload data of table view.
+        [self.tableView reloadData];
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
 }
 
 #pragma mark - Table view delegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TvShowSynopse *synopse = [_data objectAtIndex:indexPath.row];
-    [[STrackerServerHttpClient sharedClient] getTvshow:synopse success:^(AFJSONRequestOperation *operation, id result) {
-        
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        TvShowViewController *view = [app.storyboard instantiateViewControllerWithIdentifier:@"TvShow"];
-        view.tvshow = [[TvShow alloc] initWithDictionary:result];
-        [self.navigationController pushViewController:view animated:YES];
-        
-    } failure:nil];
+    // TODO.
 }
 
 @end
-*/

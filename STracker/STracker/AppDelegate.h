@@ -12,45 +12,28 @@
 #import "User.h"
 #import "HawkCredentials.h"
 
+// Definition of callback for code after login.
+typedef void (^Finish)(User *user);
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
     // The current user information.
     User *_user;
-    
-    // The Hawk credentials, necessary to make protected requests to STracker server.
-    HawkCredentials *_hawkCredentials;
 }
 
 @property(nonatomic, strong) UIWindow *window;
 @property(nonatomic, strong) UIStoryboard *storyboard;
+// The Hawk credentials, necessary to make protected requests to STracker server.
+@property(nonatomic, strong) HawkCredentials *hawkCredentials;
 
 /*!
  @discussion This method returns the user information.
- If the user information are null, return null and prompt to the
- user one view for Login with Facebook account.
+ If the user information are null prompt the user one view for 
+ Login with Facebook account.
+ @param finish The callback for execute code after the Login.
  @return The user information object.
  */
-- (User *)getUser;
-
-/*!
- @discussion This method set the user information object.
- @param user The user.
- */
-- (void)setUser:(User *)user;
-
-/*!
- @discussion This method returns the credentials if they are not null.
- If the credentials are null, return null and prompt to the user one view for
- Login with Facebook account.
- @return The user Hawk credentials.
- */
-- (HawkCredentials *)getHawkCredentials;
-
-/*!
- @discussion This method set the Hawk credentials field.
- @param credentials The user Hawk credentials.
- */
-- (void)setHawkCredentials:(HawkCredentials *)credentials;
+- (void)loginInFacebook:(Finish) finish;
 
 /*!
  @discussion This method returns one alert view with one message error.

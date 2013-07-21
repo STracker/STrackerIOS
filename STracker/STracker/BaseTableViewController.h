@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
+#import "Entity.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 #define CELLIDENTIFIER @"BaseTableCell"
@@ -14,11 +16,15 @@
 @interface BaseTableViewController : UITableViewController
 {
     NSMutableArray *_data;
-    int _numberOfSections;
+    EntitySynopse *_synopse;
+    
+    AppDelegate *_app;
 }
 
 // Init method.
 - (id)initWithData:(NSMutableArray *)data;
+
+- (id)initWithData:(NSMutableArray *)data andSynopse:(EntitySynopse *)synopse;
 
 // Hook methods.
 - (void)viewDidLoadHook;

@@ -12,7 +12,7 @@
 
 @implementation AppDelegate
 
-@synthesize window, storyboard;
+@synthesize window, storyboard, hawkCredentials;
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -84,36 +84,21 @@
 
 #pragma mark - AppDelegate public methods.
 
-- (User *)getUser
+- (void)loginInFacebook:(Finish)finish
 {
     if (_user != nil)
-        return _user;
+    {
+        finish(_user);
+        return;
+    }
     
-    FacebookView *fb = [[FacebookView alloc] initWithController:self.window.rootViewController];
+    FacebookView *fb = [[FacebookView alloc] initWithCallback:^(User *user) {
+       [self.window.rootViewController dismissSemiModalView];
+        _user = user;
+        finish(user);
+    }];
+    
     [self.window.rootViewController presentSemiView:fb];
-    
-    return nil;
-}
-
-- (void)setUser:(User *)user
-{
-    _user = user;
-}
-
-- (HawkCredentials *)getHawkCredentials
-{
-    if (_hawkCredentials != nil)
-        return _hawkCredentials;
-    
-    FacebookView *fb = [[FacebookView alloc] initWithController:self.window.rootViewController];
-    [self.window.rootViewController presentSemiView:fb];
-    
-    return nil;
-}
-
-- (void)setHawkCredentials:(HawkCredentials *)credentials
-{
-    _hawkCredentials = credentials;
 }
 
 - (UIAlertView *)getAlertViewForErrors:(NSString *)msgError

@@ -36,7 +36,7 @@
     return sharedObject;
 }
 
-- (void)downloadImageFromUrl:(NSURL *) url finish:(Finish) finish
+- (void)downloadImageFromUrl:(NSURL *) url finish:(FinishDownloadImage) finish
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     dispatch_async(downloadImagesQueue, ^{

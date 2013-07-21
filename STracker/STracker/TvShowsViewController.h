@@ -1,4 +1,3 @@
-/*
 //
 //  ShowsViewController.h
 //  STracker
@@ -8,19 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
-#import "STrackerServerHttpClient.h"
-#import "BaseTableViewController.h"
-#import "TvShowViewController.h"
-#import "TvShow.h"
+#import "SynopsesViewController.h"
 
-@interface TvShowsViewController : BaseTableViewController
-{
-    NSString *_tableTitle;
-}
-
-// Init method that receives the data and the name of the title.
-- (id)initWithData:(NSMutableArray *)data andTitle:(NSString *)title;
+@interface TvShowsViewController : SynopsesViewController
 
 @end
-*/

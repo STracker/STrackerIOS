@@ -16,15 +16,15 @@
 @interface FacebookView : UIView<FBLoginViewDelegate>
 {
     AppDelegate *_app;
-    UIViewController *_controller;
+    Finish _finish;
     FBLoginView *_fb;
 }
 
 /*!
- @discussion Init method that receives the controller for dismiss this view after the login.
- @param controller The controller.
+ @discussion Init method that receives the callback for execute code after the login.
+ @param finish The finish callback.
  @return One instance of FacebookView.
  */
-- (id)initWithController:(UIViewController *)controller;
+- (id)initWithCallback:(Finish) finish;
 
 @end

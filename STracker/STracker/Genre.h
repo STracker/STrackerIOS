@@ -22,8 +22,6 @@
 /*!
  @discussion This object defines the genre synopse entity object.
  */
-@interface GenreSynopse : Entity
-
-@property(nonatomic, copy) NSString *name;
+@interface GenreSynopse : EntitySynopse
 
 @end

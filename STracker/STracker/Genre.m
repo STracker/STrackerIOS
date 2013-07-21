@@ -35,12 +35,13 @@
 
 @implementation GenreSynopse
 
-@synthesize name;
-
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
     if (self = [super init])
-        name = [parameters objectForKey:@"Id"];
+    {
+        self.name = [parameters objectForKey:@"Id"];
+        self.uri = [parameters objectForKey:@"Uri"];
+    }
     
     return self;
 }
