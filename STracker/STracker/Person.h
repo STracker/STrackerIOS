@@ -16,6 +16,9 @@
 @property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSString *photoUrl;
 
+// Necessary for save the photo in table views.
+@property(nonatomic, strong) UIImage *photo;
+
 @end
 
 /*!

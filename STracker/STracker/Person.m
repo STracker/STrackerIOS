@@ -10,7 +10,7 @@
 
 @implementation Person
 
-@synthesize name, photoUrl;
+@synthesize name, photoUrl, photo;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {

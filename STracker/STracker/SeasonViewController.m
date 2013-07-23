@@ -1,4 +1,3 @@
-/*
 //
 //  SeasonViewController.m
 //  STracker
@@ -8,44 +7,31 @@
 //
 
 #import "SeasonViewController.h"
+#import "Episode.h"
+#import "EpisodeViewController.h"
+#import "STrackerServerHttpClient.h"
 
 @implementation SeasonViewController
 
-- (id)initWithData:(NSMutableArray *)data andSeasonNumber:(NSString *)seasonNumber
-{
-    self = [super initWithData:data];
-    if (self)
-        title = seasonNumber;
-    
-    return self;
-}
+#pragma mark - Table view delegate.
 
-#pragma mark - BaseTableViewController override methods.
-- (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
-{
-    EpisodeSynopsis *episode = [_data objectAtIndex:indexPath.row];
-    cell.textLabel.text = episode.name;
-}
-
-- (void)viewDidLoadHook
-{
-    _numberOfSections = 1;
-    self.navigationItem.title = title;
-}
-
-#pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    EpisodeSynopsis *sinopsis = [_data objectAtIndex:indexPath.row];
-    [[STrackerServerHttpClient sharedClient] getEpisode:sinopsis success:^(AFJSONRequestOperation *operation, id result) {
-      
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        EpisodeViewController *view = [app.storyboard instantiateViewControllerWithIdentifier:@"Episode"];
-        view.episode = [[Episode alloc] initWithDictionary:result];
+    // Opens an particular episode.
+    EpisodeSynopse *synopse = [_data objectAtIndex:indexPath.row];
+    
+    [[STrackerServerHttpClient sharedClient] getRequest:synopse.uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        Episode *episode = [[Episode alloc] initWithDictionary:result];
+        
+        EpisodeViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"EpisodeView"] initWithEpisode: episode];
+        
         [self.navigationController pushViewController:view animated:YES];
         
-    } failure:nil];
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [_app getAlertViewForErrors:error.localizedDescription];
+    }];
 }
 
 @end
-*/

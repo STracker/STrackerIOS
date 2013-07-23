@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "SynopsesViewController.h"
 
+/*!
+ @discussion This object defines a table of television shows 
+ synopses.
+ */
 @interface TvShowsViewController : SynopsesViewController
 
 @end

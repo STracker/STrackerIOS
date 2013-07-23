@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "BaseTableViewController.h"
 
+/*!
+ @discussion Base controller of synopses tables.
+ */
 @interface SynopsesViewController : BaseTableViewController
 
 @end

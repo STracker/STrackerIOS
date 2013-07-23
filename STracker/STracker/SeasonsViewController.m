@@ -1,4 +1,3 @@
-/*
 //
 //  SeasonsViewController.m
 //  STracker
@@ -8,42 +7,35 @@
 //
 
 #import "SeasonsViewController.h"
+#import "STrackerServerHttpClient.h"
+#import "Season.h"
+#import "Episode.h"
+#import "SeasonViewController.h"
 
 @implementation SeasonsViewController
 
-#pragma mark - BaseTableViewController override methods.
-- (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
-{
-    SeasonSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"Season %@", synopsis.number];
-}
+#pragma mark - Table view delegate.
 
-- (void)viewDidLoadHook
-{
-    _numberOfSections = 1;
-    self.navigationItem.title = @"Seasons";
-}
-
-#pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SeasonSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
-    [[STrackerServerHttpClient sharedClient] getSeason:synopsis success:^(AFJSONRequestOperation *operation, id result) {
+    SeasonSynopse *synopse = [_data objectAtIndex:indexPath.row];
+    [[STrackerServerHttpClient sharedClient] getRequest:synopse.uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
-        NSMutableArray *episodes = [[NSMutableArray alloc] init];
-        NSDictionary *res = (NSDictionary *)result;
-        for (NSDictionary *item in [res objectForKey:@"EpisodeSynopses"])
+        NSMutableArray *data = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in [result objectForKey:@"EpisodeSynopses"])
         {
-            EpisodeSynopsis *episode = [[EpisodeSynopsis alloc] initWithDictionary:item];
-            [episodes addObject:episode];
+            EpisodeSynopse *episode = [[EpisodeSynopse alloc] initWithDictionary:item];
+            [data addObject:episode];
         }
-
-        NSString *seasonNumber = [res objectForKey:@"SeasonNumber"];        
-        SeasonViewController *view = [[SeasonViewController alloc] initWithData:episodes andSeasonNumber:[NSString stringWithFormat:@"Season %@", seasonNumber]];
+        
+        SeasonViewController *view = [[SeasonViewController alloc] initWithData:data andTitle:[NSString stringWithFormat:@"Season %@", [result objectForKey:@"SeasonNumber"]]];
+        
         [self.navigationController pushViewController:view animated:YES];
-    
-    } failure:nil];
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [_app getAlertViewForErrors:error.localizedDescription];
+    }];
 }
 
 @end
-*/

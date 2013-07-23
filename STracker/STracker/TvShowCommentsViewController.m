@@ -1,4 +1,3 @@
-/*
 //
 //  TvShowCommentsViewController.m
 //  STracker
@@ -8,44 +7,35 @@
 //
 
 #import "TvShowCommentsViewController.h"
+#import "STrackerServerHttpClient.h"
+#import "Comment.h"
 
 @implementation TvShowCommentsViewController
 
-- (id)initWithTvShow:(TvShow *)tvshow
+- (id)initWithData:(NSArray *)data andTvShow:(TvShow *)tvshow
 {
-    if (self = [super initWithData:[[NSMutableArray alloc] init]])
+    if (self = [super initWithData:data])
         _tvshow = tvshow;
     
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [[STrackerServerHttpClient sharedClient] getTvshowComments:_tvshow success:^(AFJSONRequestOperation *operation, id result) {
-        
-        _data = nil;
-        _data = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in result)
-        {
-            Comment *comment = [[Comment alloc] initWithDictionary:item];
-            [_data addObject:comment];
-        }
-        
-        [self.tableView reloadData];
-        
-    } failure:nil];
-}
+#pragma mark - CommentsViewController abstract methods.
 
-#pragma mark - Hook methods.
-- (void)popupTextViewHook:(YIPopupTextView*)textView didDismissWithText:(NSString*)text cancelled:(BOOL)cancelled
+- (void)popupTextViewHook:(NSString*)text
 {
-    [[STrackerServerHttpClient sharedClient] postTvShowComment:_tvshow comment:text success:^(AFJSONRequestOperation *operation, id result) {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowCommentsURI"];
+    uri = [uri stringByReplacingOccurrencesOfString:@"id" withString:_tvshow.tvshowId];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:text, @"", nil];
     
-        //Nothing to do...
-    } failure:nil];
+    [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Nothing to do...
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
 }
 
 @end
-*/

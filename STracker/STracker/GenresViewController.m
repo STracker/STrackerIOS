@@ -10,40 +10,33 @@
 #import "STrackerServerHttpClient.h"
 #import "Genre.h"
 #import "TvShowsViewController.h"
+#import "TvShow.h"
 
 @implementation GenresViewController
 
-#pragma mark - BaseTableViewController abstract methods.
-- (void)viewDidLoadHook
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.navigationItem.title = @"Genres";
+    // Open a table with tvshows synopses (all tvshows from this particular genre).
+    GenreSynopse *genre = [_data objectAtIndex:indexPath.row];
     
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerGenresURI"];    
-    [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    [[STrackerServerHttpClient sharedClient] getRequest:genre.uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
-        _data = [[NSMutableArray alloc] init];
+        NSMutableArray *data = [[NSMutableArray alloc] init];
         for (NSDictionary *item in result)
         {
-            GenreSynopse *genre = [[GenreSynopse alloc] initWithDictionary:item];
-            [_data addObject:genre];
+            TvShowSynopse *tvshow = [[TvShowSynopse alloc] initWithDictionary:item];
+            [data addObject:tvshow];
         }
         
-        // Reload data of table view.
-        [self.tableView reloadData];
+        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:data andTitle:genre.name];
+        [self.navigationController pushViewController:view animated:YES];
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         
         [[_app getAlertViewForErrors:error.localizedDescription] show];
     }];
-}
-
-#pragma mark - Table view delegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    GenreSynopse *genre = [_data objectAtIndex:indexPath.row];
-    
-    TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:nil andSynopse:genre];
-    [self.navigationController pushViewController:view animated:YES];
 }
 
 @end

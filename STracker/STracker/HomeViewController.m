@@ -9,8 +9,11 @@
 #import "HomeViewController.h"
 #import "STrackerServerHttpClient.h"
 #import "TvShow.h"
-#import "CurrentUserProfileViewController.h"
+#import "TvShowsViewController.h"
+#import "MyProfileViewController.h"
 #import "GenresViewController.h"
+#import "Genre.h"
+#import "TvShowViewController.h"
 
 @implementation HomeViewController
 
@@ -18,7 +21,8 @@
 {
     [super viewDidLoad];
     
-    _app = [[UIApplication sharedApplication] delegate];
+    // Well, without background pattern in this view, gets more cool...
+    self.view.backgroundColor = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -36,10 +40,15 @@
 }
 
 # pragma mark - IBActions.
+
 - (IBAction)userOptions:(id)sender
 {
-    CurrentUserProfileViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"MyProfile"];
-    [self.navigationController pushViewController:view animated:YES];
+    // For this action is necessary the user was logged into Facebook account.
+    [_app loginInFacebook:^(User *user) {
+        
+        MyProfileViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"MyProfile"] initWithUserInfo:user];
+        [self.navigationController pushViewController:view animated:YES];
+    }];
 }
 
 - (IBAction)searchOptions:(UIBarButtonItem *)sender
@@ -49,7 +58,8 @@
     [actionSheet showFromBarButtonItem:sender animated:YES];
 }
 
-#pragma mark - KIImagePager DataSource
+#pragma mark - KIImagePager DataSource.
+
 - (NSArray *) arrayWithImageUrlStrings
 {
     NSMutableArray *urls = [[NSMutableArray alloc] initWithCapacity:5];
@@ -67,27 +77,27 @@
     return UIViewContentModeScaleAspectFit;
 }
 
-#pragma mark - KIImagePager Delegate
+#pragma mark - KIImagePager Delegate.
+
 - (void) imagePager:(KIImagePager *)imagePager didSelectImageAtIndex:(NSUInteger)index
 {
-    /*
     TvShowSynopse *synopse = [_top objectAtIndex:index];
     
-    [[STrackerServerHttpClient sharedClient] getRequest:nil query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    [[STrackerServerHttpClient sharedClient] getRequest:synopse.uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
-        TvShowViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"TvShow"];
-        view.tvshow = [[TvShow alloc] initWithDictionary:result];
+        TvShow *tvshow = [[TvShow alloc] initWithDictionary:result];
+        TvShowViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"TvShow"] initWithTvShow:tvshow];
+        
         [self.navigationController pushViewController:view animated:YES];
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [app getAlertViewForErrors:error.localizedDescription];
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
     }];
-     */
 }
 
 #pragma mark - Action sheet delegate.
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch (buttonIndex)
@@ -106,82 +116,16 @@
     [actionSheet setDelegate:nil];
 }
 
-// Auxiliary method for search series by name.
-- (void) searchSeries
-{
-    _alertTv = [[UIAlertView alloc] initWithTitle:@"Insert the name" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Search", nil];
-    _alertTv.alertViewStyle = UIAlertViewStylePlainTextInput;
-    
-    [_alertTv show];
-}
-
-// Auxiliary method for search series by genres, list all the genres
-// available in STracker.
-- (void)searchGenres
-{
-    GenresViewController *view = [[GenresViewController alloc] init];
-    [self.navigationController pushViewController:view animated:YES];
-}
-
-// Auxiliary method for search users by name.
-- (void)searchUsers
-{
-    _alertUser = [[UIAlertView alloc] initWithTitle:@"Insert the name" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Search", nil];
-    _alertUser.alertViewStyle = UIAlertViewStylePlainTextInput;
-    
-    [_alertUser show];
-}
-
-// Auxiliary method for fill tv shows with name or partial of the name
-// equal to the name inserted by user.
-- (void)fillTvshowsByName:(NSString *)tvName
-{
-    /*
-    [[STrackerServerHttpClient sharedClient] getTvshowsByName:tvName success:^(AFJSONRequestOperation *operation, id result) {
-        NSMutableArray *data = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in result)
-        {
-            TvShowSynopse *synopsis = [[TvShowSynopse alloc] initWithDictionary:item];
-            [data addObject:synopsis];
-        }
-        
-        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:data];
-        view.title = [NSString stringWithFormat:@"Search results"];
-        [self.navigationController pushViewController:view animated:YES];
-        
-    } failure:nil];
-     */
-}
-
-- (void)fillUsersByName:(NSString *)userName
-{
-    /*
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    if (app.user == nil)
-    {
-        FacebookView *fb = [[FacebookView alloc] initWithController:self];
-        [self presentSemiView:fb];
-        return;
-    }
-    
-    [[STrackerServerHttpClient sharedClient] getPeopleByName:userName success:^(AFJSONRequestOperation *operation, id result) {
-        
-        
-        
-    } failure:nil];
-     */
-}
-
 #pragma mark - Alert View delegates.
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != 0)
     {
         if (alertView == _alertTv)
-            [self fillTvshowsByName:[[alertView textFieldAtIndex:0] text]];
+            [self searchSeriesAux:[[alertView textFieldAtIndex:0] text]];
         
         if (alertView == _alertUser)
-            [self fillUsersByName:[[alertView textFieldAtIndex:0] text]];
+            [self searchUsersAux:[[alertView textFieldAtIndex:0] text]];
     }
     
     [alertView setDelegate:nil];
@@ -214,6 +158,93 @@
 
         [[_app getAlertViewForErrors:error.localizedDescription] show];
     }];
+}
+
+/*!
+ @discussion This method performs a request to STracker server for 
+ get the all genres availabe.
+ */
+- (void)searchGenres
+{
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerGenresURI"];
+    [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        NSMutableArray *data = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in result)
+        {
+            GenreSynopse *genre = [[GenreSynopse alloc] initWithDictionary:item];
+            [data addObject:genre];
+        }
+        
+        GenresViewController *view = [[GenresViewController alloc] initWithData:data andTitle:@"Genres"];
+        [self.navigationController pushViewController:view animated:YES];
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
+/*!
+ @discussion This method pop ups one alert for user insert the name 
+ of the serie or series he want to search.
+ */
+- (void)searchSeries
+{
+    _alertTv = [[UIAlertView alloc] initWithTitle:@"Insert the name of the tv show" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Search", nil];
+    _alertTv.alertViewStyle = UIAlertViewStylePlainTextInput;
+    
+    [_alertTv show];
+}
+
+/*!
+ @discussion This method pop ups one alert for user insert the name
+ of the user he want to search.
+ */
+- (void)searchUsers
+{
+    _alertUser = [[UIAlertView alloc] initWithTitle:@"Insert the name of the user" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Search", nil];
+    _alertUser.alertViewStyle = UIAlertViewStylePlainTextInput;
+    
+    [_alertUser show];
+}
+
+/*!
+ @discussion This method performs a request to STracker server for get 
+ the tv shows with same word on name.
+ @param name The word for search.
+ */
+- (void)searchSeriesAux:(NSString *)name
+{
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowsURI"];
+    NSDictionary *query = [[NSDictionary alloc] initWithObjectsAndKeys:name, @"name", nil];
+    
+    [[STrackerServerHttpClient sharedClient] getRequest:uri query:query success:^(AFJSONRequestOperation *operation, id result) {
+        
+        NSMutableArray *data = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in result)
+        {
+            TvShowSynopse *tvshow = [[TvShowSynopse alloc] initWithDictionary:item];
+            [data addObject:tvshow];
+        }
+        
+        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:data];
+        [self.navigationController pushViewController:view animated:YES];
+     
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
+/*!
+ @discussion This method performs a request to STracker server for get
+ the users with same name.
+ @param name The word for search.
+ */
+- (void)searchUsersAux:(NSString *)name
+{
+    // TODO.
 }
 
 @end

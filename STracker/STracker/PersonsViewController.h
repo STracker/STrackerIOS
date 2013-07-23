@@ -1,4 +1,3 @@
-/*
 //
 //  PersonsViewController.h
 //  STracker
@@ -8,11 +7,10 @@
 //
 
 #import "BaseTableViewController.h"
-#import "Actor.h"
-#import "DownloadFiles.h"
-#import "AppDelegate.h"
 
+/*!
+ @discussion Table view for show basic people information.
+ */
 @interface PersonsViewController : BaseTableViewController
 
 @end
-*/

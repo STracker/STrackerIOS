@@ -1,4 +1,3 @@
-/*
 //
 //  ShowViewController.m
 //  STracker
@@ -8,28 +7,39 @@
 //
 
 #import "TvShowViewController.h"
+#import "DownloadFiles.h"
+#import "Genre.h"
+#import "SeasonsViewController.h"
+#import "ActorsViewController.h"
+#import "STrackerServerHttpClient.h"
+#import "Comment.h"
+#import "TvShowCommentsViewController.h"
 
 @implementation TvShowViewController
 
-@synthesize tvshow;
-
-- (void)getRating
+- (id)initWithTvShow:(TvShow *)tvshow
 {
-    [[STrackerServerHttpClient sharedClient] getTvShowRating:tvshow success:^(AFJSONRequestOperation *operation, id result) {
-        
-        NSDictionary *data = (NSDictionary *)result;
-        _average.text = [NSString stringWithFormat:@"%@/5", [data objectForKey:@"Rating"]];
-        _numberOfUsers.text = [NSString stringWithFormat:@"%@ Users", [data objectForKey:@"Total"]];
-        
-    } failure:nil];
+    /* 
+     The [super init] is not called because this instance is 
+     created from storyboard.
+     */
+    _tvshow = tvshow;
+    return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self configureView];
     
-    [self getRating];
+    // Get rating information.
+    _ratings = [[Ratings alloc] initWithAverage:_average andNumberOfUsers:_numberOfUsers];
+    
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowRatingsURI"];
+    uri = [uri stringByReplacingOccurrencesOfString:@"id" withString:_tvshow.tvshowId];
+    
+    [_ratings getRating:uri];
 }
 
 - (void)viewDidUnload
@@ -43,34 +53,12 @@
     _rating = nil;
     _average = nil;
     _numberOfUsers = nil;
+    
     [super viewDidUnload];
 }
 
-// Auxiliary method for configure the components inside the main view.
-- (void)configureView
-{
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
-    self.navigationItem.title = tvshow.name;
-    
-    _description.text = tvshow.description;
-    _runtime.text = [NSString stringWithFormat:@"%@ min", tvshow.runtime];
-    _airDay.text = tvshow.airDay;
-    _firstAired.text = tvshow.firstAired;
-    
-    NSMutableString *str = [[NSMutableString alloc] init];
-    for (GenreSynopsis *genre in tvshow.genres)
-    {
-        [str appendString:[NSString stringWithFormat:@"- %@\n", genre.name]];
-    }
-    
-    _genres.text = str;
-    
-    [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:tvshow.poster] finish:^(UIImage *image) {
-        _poster.image = image;
-    }];
-}
+#pragma mark - IBActions.
 
-# pragma mark - IBActions.
 - (IBAction)options:(UIBarButtonItem *)sender
 { 
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Seasons", @"Cast", @"Comments", @"Subscribe", @"Suggest", nil];
@@ -78,7 +66,8 @@
     [actionSheet showFromBarButtonItem:sender animated:YES];
 }
 
-#pragma mark - Action sheet delegate
+#pragma mark - Action sheet delegate.
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch (buttonIndex)
@@ -93,34 +82,116 @@
             [self comments];
             break;
         case 3:
-            [self subscribe];
+            //[self subscribe];
+            break;
     }
     
     [actionSheet setDelegate:nil];
 }
 
-// Auxiliary method for get seasons.
+#pragma mark - UIAlert View delegates.
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != 0)
+    {
+        /*
+        [[STrackerServerHttpClient sharedClient] postSubscription:tvshow success:^(AFJSONRequestOperation *operation, id result) {
+            
+            // Nothing to do...
+            
+        } failure:nil];
+         */
+    }
+    
+    [alertView setDelegate:nil];
+    alertView = nil;
+}
+
+#pragma mark - DLStarRatingControl delegate.
+
+-(void)newRating:(DLStarRatingControl *)control :(float)rating
+{
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowRatingsURI"];
+    uri = [uri stringByReplacingOccurrencesOfString:@"id" withString:_tvshow.tvshowId];
+    
+    [_ratings postRating:uri withRating:rating];
+}
+
+#pragma mark - TvShowViewController auxiliary private methods.
+
+/*!
+ @discussion Auxiliary method for set the television show information in 
+ outlets.
+ */
+- (void)configureView
+{
+    self.navigationItem.title = _tvshow.name;
+    
+    _description.text = _tvshow.description;
+    _runtime.text = [NSString stringWithFormat:@"%@ min", _tvshow.runtime];
+    _airDay.text = _tvshow.airDay;
+    _firstAired.text = _tvshow.firstAired;
+    
+    NSMutableString *str = [[NSMutableString alloc] init];
+    for (GenreSynopse *genre in _tvshow.genres)
+        [str appendString:[NSString stringWithFormat:@"- %@\n", genre.name]];
+    
+    _genres.text = str;
+    
+    [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:_tvshow.poster] finish:^(UIImage *image) {
+        
+        _poster.image = image;
+    }];
+}
+
+/*!
+ @discussion Auxiliary method for showing the seasons.
+ */
 - (void)seasons
 {
-    SeasonsViewController *view = [[SeasonsViewController alloc] initWithData:tvshow.seasons];
+    SeasonsViewController *view = [[SeasonsViewController alloc] initWithData:_tvshow.seasons];
     [self.navigationController pushViewController:view animated:YES];
 }
 
-// Auxiliary method for get the cast.
+/*!
+ @discussion Auxiliary method for showing the cast.
+ */
 - (void)cast
 {
-    PersonsViewController *view = [[PersonsViewController alloc] initWithData:tvshow.actors];
+    ActorsViewController *view = [[ActorsViewController alloc] initWithData:_tvshow.actors andTitle:@"Cast"];
     [self.navigationController pushViewController:view animated:YES];
 }
 
-// Auxiliary method for get and create comments.
 
+/*!
+ @discussion Auxiliary method for showing the users comments.
+ */
 - (void)comments
 {
-    TvShowCommentsViewController *view = [[TvShowCommentsViewController alloc] initWithTvShow:tvshow];
-    [self.navigationController pushViewController:view animated:YES];
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowCommentsURI"];
+    uri = [uri stringByReplacingOccurrencesOfString:@"id" withString:_tvshow.tvshowId];
+    
+    [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        NSMutableArray *data = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in result)
+        {
+            Comment *comment = [[Comment alloc] initWithDictionary:item];
+            [data addObject:comment];
+        }
+        
+        TvShowCommentsViewController *view = [[TvShowCommentsViewController alloc] initWithData:data andTvShow:_tvshow];
+        
+        [self.navigationController pushViewController:view animated:YES];
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
 }
 
+/*
 // Auxiliary method for subscribe this tvshow.
 - (void)subscribe
 {
@@ -133,47 +204,8 @@
     }
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention" message:[NSString stringWithFormat:@"you really want to subscribe %@?", tvshow.name] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-
+    
     [alert show];
 }
-
-#pragma mark - DLStarRatingControl delegate.
--(void)newRating:(DLStarRatingControl *)control :(float)rating
-{
-	AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    if (app.user == nil)
-    {
-        // Clean rating because the user is not yet logged in.
-        [_rating setRating:0];
-        
-        FacebookView *fb = [[FacebookView alloc] initWithController:self];
-        [self presentSemiView:fb];
-        return;
-    }
-    
-    [[STrackerServerHttpClient sharedClient] postTvShowRating:self.tvshow rating:rating success:^(AFJSONRequestOperation *operation, id result) {
-        
-        // Reload information.
-        [self getRating];
-        
-    } failure:nil];
-}
-
-#pragma mark - UIAlert View delegates.
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex != 0)
-    {
-        [[STrackerServerHttpClient sharedClient] postSubscription:tvshow success:^(AFJSONRequestOperation *operation, id result) {
-            
-            // Nothing to do...
-            
-        } failure:nil];
-    }
-    
-    [alertView setDelegate:nil];
-    alertView = nil;
-}
-
+*/
 @end
- */

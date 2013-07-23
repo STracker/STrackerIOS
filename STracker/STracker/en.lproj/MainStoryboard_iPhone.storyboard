@@ -163,12 +163,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Yw-pO-Ywf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-189" y="363"/>
+            <point key="canvasLocation" x="-207" y="-295"/>
         </scene>
         <!--Episode View Controller-->
         <scene sceneID="Raz-lg-aao">
             <objects>
-                <viewController storyboardIdentifier="Episode" id="MRe-eE-sXa" customClass="EpisodeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EpisodeView" id="MRe-eE-sXa" customClass="EpisodeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pyb-h2-Jiu">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -260,12 +260,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u1T-nd-pBo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="176" y="363"/>
+            <point key="canvasLocation" x="158" y="-295"/>
         </scene>
         <!--Home View Controller - Top shows-->
         <scene sceneID="DGH-cf-nFe">
             <objects>
-                <viewController id="cQy-gV-Iy8" customClass="HomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeView" id="cQy-gV-Iy8" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bs3-w7-j3d">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -301,10 +301,10 @@
             </objects>
             <point key="canvasLocation" x="-959" y="-295"/>
         </scene>
-        <!--Current User Profile View Controller - My profile-->
+        <!--My Profile View Controller - My profile-->
         <scene sceneID="gdg-4f-aWH">
             <objects>
-                <tableViewController storyboardIdentifier="MyProfile" id="UcH-MT-EUX" customClass="CurrentUserProfileViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MyProfile" id="UcH-MT-EUX" customClass="MyProfileViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="RM0-uc-Wyi">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -459,7 +459,7 @@
         <!--Comment View Controller-->
         <scene sceneID="Keh-Gh-X3N">
             <objects>
-                <viewController storyboardIdentifier="Comment" id="L8X-hC-3G7" customClass="CommentViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CommentView" id="L8X-hC-3G7" customClass="CommentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ogn-5t-j6Z">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -604,11 +604,16 @@
         <image name="Shows_icon.png" width="32" height="32"/>
     </resources>
     <classes>
-        <class className="CurrentUserProfileViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CurrentUserProfileViewController.h"/>
+        <class className="BaseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BaseViewController.h"/>
+        </class>
+        <class className="CommentViewController" superclassName="BaseViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CommentViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="_name" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="_photo" candidateClass="UIImageView"/>
+                <relationship kind="action" name="openUserProfile"/>
+                <relationship kind="outlet" name="_body" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="_userName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_userProfile" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="DLStarRatingControl" superclassName="UIControl">
@@ -617,7 +622,19 @@
                 <relationship kind="outlet" name="delegate"/>
             </relationships>
         </class>
-        <class className="HomeViewController" superclassName="UIViewController">
+        <class className="EpisodeViewController" superclassName="BaseViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EpisodeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="options:"/>
+                <relationship kind="outlet" name="_average" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_description" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="_numberOfUsers" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_poster" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="_rating" candidateClass="DLStarRatingControl"/>
+            </relationships>
+        </class>
+        <class className="HomeViewController" superclassName="BaseViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
             <relationships>
                 <relationship kind="action" name="searchOptions:" candidateClass="UIBarButtonItem"/>
@@ -630,6 +647,37 @@
             <relationships>
                 <relationship kind="outlet" name="dataSource"/>
                 <relationship kind="outlet" name="delegate"/>
+            </relationships>
+        </class>
+        <class className="MyProfileViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyProfileViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="_name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_photo" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="ProfileViewController" superclassName="BaseViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="invite"/>
+                <relationship kind="action" name="options:"/>
+                <relationship kind="outlet" name="_numberOfSubscriptions" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_photo" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="TvShowViewController" superclassName="BaseViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TvShowViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="options:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="_airDay" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_average" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_description" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="_firstAired" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_genres" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="_numberOfUsers" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_poster" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="_rating" candidateClass="DLStarRatingControl"/>
+                <relationship kind="outlet" name="_runtime" candidateClass="UILabel"/>
             </relationships>
         </class>
     </classes>

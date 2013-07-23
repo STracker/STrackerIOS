@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "SynopsesViewController.h"
-#import "AppDelegate.h"
 
+/*!
+ @discussion Controller for show all genres synopses.
+ */
 @interface GenresViewController : SynopsesViewController
 
 @end

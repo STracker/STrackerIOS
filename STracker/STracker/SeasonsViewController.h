@@ -1,4 +1,3 @@
-/*
 //
 //  SeasonsViewController.h
 //  STracker
@@ -7,12 +6,13 @@
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "STrackerServerHttpClient.h"
-#import "BaseTableViewController.h"
-#import "SeasonViewController.h"
-#import "Season.h"
+#import <UIKit/UIKit.h>
+#import "SynopsesViewController.h"
 
-@interface SeasonsViewController : BaseTableViewController
+/*!
+ @discussion This table view shows all seasons from one 
+ television show.
+ */
+@interface SeasonsViewController : SynopsesViewController
 
 @end
-*/

@@ -1,4 +1,3 @@
-/*
 //
 //  EpisodeViewController.m
 //  STracker
@@ -8,27 +7,39 @@
 //
 
 #import "EpisodeViewController.h"
+#import "DownloadFiles.h"
+#import "ActorsViewController.h"
+#import "STrackerServerHttpClient.h"
+#import "Comment.h"
+#import "EpisodeCommentsViewController.h"
 
 @implementation EpisodeViewController
 
-@synthesize episode;
-
-- (void)getRating
+- (id)initWithEpisode:(Episode *)episode
 {
-    [[STrackerServerHttpClient sharedClient] getEpisodeRating:episode success:^(AFJSONRequestOperation *operation, id result) {
-        
-        NSDictionary *data = (NSDictionary *)result;
-        _average.text = [NSString stringWithFormat:@"%@/5", [data objectForKey:@"Rating"]];
-        _numberOfUsers.text = [NSString stringWithFormat:@"%@ Users", [data objectForKey:@"Total"]];
-        
-    } failure:nil];
+    /*
+     The [super init] is not called because this instance is
+     created from storyboard.
+     */
+    _episode = episode;
+    return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self configureView];
-    [self getRating];
+    
+    // Get rating information.
+    _ratings = [[Ratings alloc] initWithAverage:_average andNumberOfUsers:_numberOfUsers];
+    
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeRatingsURI"];
+    uri = [uri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.tvshowId];
+    uri = [uri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%@", _episode.seasonNumber]];
+    uri = [uri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%@", _episode.episodeNumber]];
+    
+    [_ratings getRating:uri];
 }
 
 - (void)viewDidUnload
@@ -39,21 +50,8 @@
     _average = nil;
     _numberOfUsers = nil;
     _rating = nil;
+    
     [super viewDidUnload];
-}
-
-// Auxiliary method for configure components of main view.
-- (void)configureView
-{
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
-    self.navigationItem.title = episode.name;
-    
-    _date.text = episode.date;
-    _description.text = episode.description;
-    
-    [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:episode.poster] finish:^(UIImage *image) {
-        _poster.image = image;
-    }];
 }
 
 #pragma mark - IBActions.
@@ -64,7 +62,8 @@
     [actionSheet showFromBarButtonItem:sender animated:YES];
 }
 
-#pragma mark - Action sheet delegate
+#pragma mark - Action sheet delegate.
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch (buttonIndex)
@@ -83,48 +82,84 @@
     [actionSheet setDelegate:nil];
 }
 
-// Auxiliary method for show gest actors.
-- (void)guestActors
-{
-    PersonsViewController *view = [[PersonsViewController alloc] initWithData:episode.guestActors];
-    [self.navigationController pushViewController:view animated:YES];
-}
+#pragma mark - DLStarRatingControl delegate.
 
-// Auxiliary method for show directors.
-- (void)directors
-{
-    PersonsViewController *view = [[PersonsViewController alloc] initWithData:episode.directors];
-    [self.navigationController pushViewController:view animated:YES];
-}
-
-// Auxiliary method for show and create comments.
-- (void)comments
-{
-    EpisodeCommentsViewController *view = [[EpisodeCommentsViewController alloc] initWithEpisode:episode];
-    [self.navigationController pushViewController:view animated:YES];
-}
-
-#pragma mark - DLStarRatingControl delegate
 -(void)newRating:(DLStarRatingControl *)control :(float)rating
 {
-	AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    if (app.user == nil)
-    {
-        // Clean rating because the user is not yet logged in.
-        [_rating setRating:0];
-        
-        FacebookView *fb = [[FacebookView alloc] initWithController:self];
-        [self presentSemiView:fb];
-        return;
-    }
+	NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeRatingsURI"];
+    uri = [uri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.tvshowId];
+    uri = [uri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%@", _episode.seasonNumber]];
+    uri = [uri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%@", _episode.episodeNumber]];
     
-    [[STrackerServerHttpClient sharedClient] postEpisodeRating:episode rating:rating success:^(AFJSONRequestOperation *operation, id result) {
+    [_ratings postRating:uri withRating:rating];
+}
+
+#pragma mark - EpisodeViewController auxiliary private methods.
+
+/*!
+ @discussion Auxiliary method for set the episode information in
+ outlets.
+ */
+- (void)configureView
+{
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
+    self.navigationItem.title = _episode.name;
+    
+    _date.text = _episode.date;
+    _description.text = _episode.description;
+    
+    [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:_episode.poster] finish:^(UIImage *image) {
+        _poster.image = image;
+    }];
+}
+
+/*!
+ @discussion Auxiliary method for showing the guest actors.
+ */
+- (void)guestActors
+{
+    ActorsViewController *view = [[ActorsViewController alloc] initWithData:_episode.guestActors andTitle:@"Guest actors"];
+    
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+/*!
+ @discussion Auxiliary method for showing the directors.
+ */
+- (void)directors
+{
+    PersonsViewController *view = [[PersonsViewController alloc] initWithData:_episode.directors andTitle:@"Directors"];
+    
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+/*!
+ @discussion Auxiliary method for showing the users comments.
+ */
+- (void)comments
+{
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeCommentsURI"];
+    uri = [uri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.tvshowId];
+    uri = [uri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%@", _episode.seasonNumber]];
+    uri = [uri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%@", _episode.episodeNumber]];
+
+    [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
-        // Reload information.
-        [self getRating];
+        NSMutableArray *data = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in result)
+        {
+            Comment *comment = [[Comment alloc] initWithDictionary:item];
+            [data addObject:comment];
+        }
         
-    } failure:nil];
+        EpisodeCommentsViewController *view = [[EpisodeCommentsViewController alloc] initWithData:data andEpisode:_episode];
+        
+        [self.navigationController pushViewController:view animated:YES];
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
 }
 
 @end
- */

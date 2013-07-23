@@ -12,8 +12,10 @@
 @implementation SynopsesViewController
 
 #pragma mark - BaseTableViewController abstract methods.
+
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
 {
+    // This is equals in all synopses table.
     EntitySynopse *synopse = [_data objectAtIndex:indexPath.row];
     cell.textLabel.text = synopse.name;
 }

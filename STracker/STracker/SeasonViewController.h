@@ -1,4 +1,3 @@
-/*
 //
 //  SeasonViewController.h
 //  STracker
@@ -7,17 +6,12 @@
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "STrackerServerHttpClient.h"
-#import "BaseTableViewController.h"
-#import "EpisodeViewController.h"
-#import "Episode.h"
+#import "SynopsesViewController.h"
 
-@interface SeasonViewController : BaseTableViewController
-{
-    NSString *title;
-}
-
-- (id)initWithData:(NSMutableArray *)data andSeasonNumber:(NSString *)seasonNumber;
+/*!
+ @discussion This table shows an list with episodes from 
+ this season.
+ */
+@interface SeasonViewController : SynopsesViewController
 
 @end
- */

@@ -10,31 +10,7 @@
 
 @implementation BaseTableViewController
 
-- (void)viewDidLoadHook
-{
-    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
-}
-
-- (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
-{
-    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
-}
-
-- (void)configureViewStyle
-{
-    self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-}
-
-- (void)configureCellView:(UITableViewCell *)cell
-{
-    [cell.textLabel setFont:[UIFont fontWithName:@"Tamil Sangam MN" size:22.0]];
-    [cell.textLabel setTextColor:[UIColor whiteColor]];
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-}
-
-- (id)initWithData:(NSMutableArray *)data
+- (id)initWithData:(NSArray *)data
 {
     self = [super init];
     if (self)
@@ -43,27 +19,31 @@
     return self;
 }
 
-- (id)initWithData:(NSMutableArray *)data andSynopse:(EntitySynopse *)synopse
+- (id)initWithData:(NSArray *)data andTitle:(NSString *)title
 {
-    self = [self initWithData:data];
-    if (self)
-        _synopse = synopse;
+    if (self = [self initWithData:data])
+        _tableTitle = title;
     
     return self;
 }
 
-# pragma mark - UIView Controller delegate.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    self.navigationItem.title = _tableTitle;
     _app = [[UIApplication sharedApplication] delegate];
     
-    [self viewDidLoadHook];
     [self configureViewStyle];
 }
 
+- (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
+{
+    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
+}
+
 #pragma mark - Table view data source.
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -84,6 +64,28 @@
     [self configureCellHook:cell inIndexPath:indexPath];
     
     return cell;
+}
+
+#pragma mark - BaseTableViewController private auxiliary methods.
+
+/*!
+ @discussion This method sets the configuration of the table view.
+ */
+- (void)configureViewStyle
+{
+    self.tableView.backgroundView = nil;
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+}
+
+/*!
+ @discussion This method sets the configuration of the table view cell.
+ */
+- (void)configureCellView:(UITableViewCell *)cell
+{
+    [cell.textLabel setFont:[UIFont fontWithName:@"Tamil Sangam MN" size:22.0]];
+    [cell.textLabel setTextColor:[UIColor whiteColor]];
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 }
 
 @end

@@ -6,10 +6,20 @@
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "CurrentUserProfileViewController.h"
+#import "MyProfileViewController.h"
 #import "DownloadFiles.h"
 
-@implementation CurrentUserProfileViewController
+@implementation MyProfileViewController
+
+/* 
+ This method don't call the [super init], because this controller
+ is instanced from storyboard.
+ */
+- (id)initWithUserInfo:(User *)user
+{
+   _user = user;
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -87,24 +97,16 @@
 }
 
 /*!
- @discussion This method get the user information in AppDelegate, if the information
- already exists, fill the outlets, if not, user will see a prompt with Facebook Login. 
- (This logic it's implemented in AppDelegate).
+ @discussion This method sets the outlets of user basic information.
  */
 - (void)fillUserInformation
 {
-    _app = [[UIApplication sharedApplication] delegate];
-    [_app loginInFacebook:^(User *user) {
-        
-        _user = user;
-        
-        // Set properties of basic user information.
-        _name.text = _user.name;
-        
-        [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:_user.photoUrl] finish:^(UIImage *image) {
+    // Set properties of basic user information.
+    _name.text = _user.name;
+    
+    [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:_user.photoUrl] finish:^(UIImage *image) {
             
             _photo.image = image;
-        }];
     }];
 }
 

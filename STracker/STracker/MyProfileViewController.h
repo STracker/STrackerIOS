@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
+#import "User.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 
@@ -16,13 +16,14 @@
  Shows the basic information, plus the calendar, the favorite shows, friends
  and messages.
  */
-@interface CurrentUserProfileViewController : UITableViewController
+@interface MyProfileViewController : UITableViewController
 {
-    AppDelegate *_app;
     User *_user;
     
     __weak IBOutlet UIImageView *_photo;
     __weak IBOutlet UILabel *_name;
 }
+
+- (id)initWithUserInfo:(User *)user;
 
 @end

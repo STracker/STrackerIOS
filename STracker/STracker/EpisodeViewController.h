@@ -1,4 +1,3 @@
-/*
 //
 //  EpisodeViewController.h
 //  STracker
@@ -8,19 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
-#import "DownloadFiles.h"
-#import "PersonsViewController.h"
-#import "Episode.h"
-#import "Person.h"
+#import "BaseViewController.h"
 #import "DLStarRatingControl.h"
-#import "FacebookView.h"
-#import "STrackerServerHttpClient.h"
-#import "EpisodeCommentsViewController.h"
+#import "Episode.h"
+#import "Ratings.h"
 
-#define BACKGROUND @"BackgroundPattern.png"
-
-@interface EpisodeViewController : UIViewController <UIActionSheetDelegate, DLStarRatingDelegate>
+/*!
+ @discussion This view controller shows the information about 
+ one episode.
+ */
+@interface EpisodeViewController : BaseViewController <UIActionSheetDelegate, DLStarRatingDelegate>
 {
     __weak IBOutlet UIImageView *_poster;
     __weak IBOutlet UILabel *_date;
@@ -28,11 +24,23 @@
     __weak IBOutlet UILabel *_average;
     __weak IBOutlet UILabel *_numberOfUsers;
     __weak IBOutlet DLStarRatingControl *_rating;
+    
+    Episode *_episode;
+    Ratings *_ratings;
 }
 
-@property(nonatomic, retain) Episode *episode;
+/*!
+ @discussion Init method for get an instance of EpisodeViewController.
+ Receives the episode that contains all information.
+ @param episode The episode.
+ @return An EpisodeViewController instance.
+ */
+- (id)initWithEpisode:(Episode *)episode;
 
+/*!
+ @discussion The action method that is invoked when user click
+ in user options icon.
+ */
 - (IBAction)options:(id)sender;
 
 @end
- */

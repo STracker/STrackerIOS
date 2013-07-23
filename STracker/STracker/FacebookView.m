@@ -20,11 +20,10 @@
     self = [super initWithFrame:CGRectMake(0, 0, 0, 43)];
     if (self)
     {
-        _app = [[UIApplication sharedApplication] delegate];
+        _app = [[UIApplication sharedApplication] delegate]; 
         
         _fb = [[FBLoginView alloc] init];
         [_fb setDelegate:self];
-        //[_fb setCenter:self.center];
         [self addSubview:_fb];
         
         _finish = finish;

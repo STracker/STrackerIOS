@@ -1,4 +1,3 @@
-/*
 //
 //  EpisodeCommentsViewController.m
 //  STracker
@@ -8,49 +7,36 @@
 //
 
 #import "EpisodeCommentsViewController.h"
-
-@interface EpisodeCommentsViewController ()
-
-@end
+#import "STrackerServerHttpClient.h"
 
 @implementation EpisodeCommentsViewController
 
-- (id)initWithEpisode:(Episode *)episode
+- (id)initWithData:(NSArray *)data andEpisode:(Episode *)episode
 {
-    if (self = [super initWithData:[[NSMutableArray alloc] init]])
+    if (self = [super initWithData: data])
         _episode = episode;
     
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [[STrackerServerHttpClient sharedClient] getEpisodeComments:_episode success:^(AFJSONRequestOperation *operation, id result) {
-        
-        _data = nil;
-        _data = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in result)
-        {
-            Comment *comment = [[Comment alloc] initWithDictionary:item];
-            [_data addObject:comment];
-        }
-        
-        [self.tableView reloadData];
-                
-    } failure:nil];
-}
-
 #pragma mark - Hook methods.
-- (void)popupTextViewHook:(YIPopupTextView*)textView didDismissWithText:(NSString*)text cancelled:(BOOL)cancelled
+- (void)popupTextViewHook:(NSString*)text
 {
-    [[STrackerServerHttpClient sharedClient] postEpisodeComment:_episode comment:text success:^(AFJSONRequestOperation *operation, id result) {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeCommentsURI"];
+    uri = [uri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.tvshowId];
+    uri = [uri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%@", _episode.seasonNumber]];
+    uri = [uri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%@", _episode.episodeNumber]];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:text, @"", nil];
+    
+    [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
         
         // Nothing to do...
         
-    } failure:nil];
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
 }
 
 @end
- */

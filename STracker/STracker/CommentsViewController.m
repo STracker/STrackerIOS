@@ -1,4 +1,3 @@
-/*
 //
 //  CommentsViewController.m
 //  STracker
@@ -8,24 +7,26 @@
 //
 
 #import "CommentsViewController.h"
+#import "Comment.h"
+#import "CommentViewController.h"
 
 @implementation CommentsViewController
 
-- (void)popupTextViewHook:(YIPopupTextView*)textView didDismissWithText:(NSString*)text cancelled:(BOOL)cancelled
+- (void)viewDidLoad
 {
-    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
-}
-
-#pragma mark - Hook methods.
-- (void)viewDidLoadHook
-{
-    self.navigationItem.title = @"Comments";
-    _numberOfSections = 1;
+    [super viewDidLoad];
     
     // Set right button to compose comments.
     _composeComment = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(addComment)];
     [self.navigationItem setRightBarButtonItem:_composeComment animated:YES];
 }
+
+- (void)popupTextViewHook:(NSString *)text
+{
+    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
+}
+
+#pragma mark - BaseTableViewController abstract methods.
 
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
 {
@@ -36,44 +37,36 @@
     cell.detailTextLabel.text = comment.user.name;
 }
 
+#pragma mark - Table view delegate.
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    if (app.user == nil)
-    {
-        FacebookView *fb = [[FacebookView alloc] initWithController:self];
-        [self presentSemiView:fb];
-        return;
-    }
+    Comment *comment = [_data objectAtIndex:indexPath.row];
     
-    CommentViewController *view = [app.storyboard instantiateViewControllerWithIdentifier:@"Comment"];
-    view.comment = [_data objectAtIndex:indexPath.row];
-    
-    [self.navigationController pushViewController:view animated:YES];
+    // Needed to be Logged in Facebook to view the comment.
+    [_app loginInFacebook:^(User *user) {
+        CommentViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"CommentView"] initWithComment:comment];
+        [self.navigationController pushViewController:view animated:YES];
+    }];
 }
 
 #pragma mark - Selectors.
 - (void)addComment
 {
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    if (app.user == nil)
-    {   
-        FacebookView *fb = [[FacebookView alloc] initWithController:self];
-        [self presentSemiView:fb];
-        return;
-    }
-    
-    [_composeComment setEnabled:NO];
-    
-    YIPopupTextView *popupTextView = [[YIPopupTextView alloc] initWithPlaceHolder:@"comment here" maxCount:0 buttonStyle:YIPopupTextViewButtonStyleRightCancelAndDone tintsDoneButton:YES];
-    
-    popupTextView.delegate = self;
-    
-    popupTextView.caretShiftGestureEnabled = YES;
-    [popupTextView showInView:self.view];
+    // Needed to be Logged in Facebook to create an comment.
+    [_app loginInFacebook:^(User *user) {
+        
+        [_composeComment setEnabled:NO];
+        YIPopupTextView *popupTextView = [[YIPopupTextView alloc] initWithPlaceHolder:@"comment here" maxCount:0 buttonStyle:YIPopupTextViewButtonStyleRightCancelAndDone tintsDoneButton:YES];
+        
+        popupTextView.delegate = self;
+        popupTextView.caretShiftGestureEnabled = YES;
+        [popupTextView showInView:self.view];
+    }];
 }
 
 #pragma mark - YIPopupTextView delegates.
+
 - (void)popupTextView:(YIPopupTextView *)textView willDismissWithText:(NSString *)text cancelled:(BOOL)cancelled
 {
     [_composeComment setEnabled:YES];
@@ -86,13 +79,15 @@
     
     [_composeComment setEnabled:YES];
     
-    [self popupTextViewHook:textView didDismissWithText:text cancelled:cancelled];
+    // Call hook method
+    [self popupTextViewHook:text];
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];    
-    UIAlertView *alertConfirm = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Hi %@", app.user.name] message:@"your comment will be processed..." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-
-    [alertConfirm show];
+    [_app loginInFacebook:^(User *user) {
+        
+        UIAlertView *alertConfirm = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Hi %@", user.name] message:@"your comment will be processed..." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        
+        [alertConfirm show];
+    }];
 }
 
 @end
-*/

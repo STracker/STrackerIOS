@@ -1,4 +1,3 @@
-/*
 //
 //  CommentViewController.h
 //  STracker
@@ -8,26 +7,36 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "STrackerServerHttpClient.h"
+#import "BaseViewController.h"
 #import "Comment.h"
-#import "User.h"
-#import "AppDelegate.h"
-#import "ProfileViewController.h"
 
-#define BACKGROUND @"BackgroundPattern.png"
-
-@interface CommentViewController : UIViewController
+/*!
+ @discussion This view show the comment. And if the comment 
+ is from the current user, is possible to remove.
+ */
+@interface CommentViewController : BaseViewController
 {
     __weak IBOutlet UILabel *_userName;
     __weak IBOutlet UITextView *_body;
     __weak IBOutlet UIButton *_userProfile;
     
     UIAlertView *_alertDelete;
+    Comment *_comment;
 }
 
-@property(nonatomic, strong) Comment *comment;
+/*!
+ @discussion Init method for return an instance of 
+ CommentViewController.
+ Receives one instance of Comment that contains all information about
+ the comment.
+ @param comment The comment with information.
+ @return An instance of CommentViewController.
+ */
+- (id)initWithComment:(Comment *)comment;
 
+/*!
+ @discussion Action for open the comment user's profile.
+ */
 - (IBAction)openUserProfile;
 
 @end
-*/

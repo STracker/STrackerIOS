@@ -8,20 +8,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 #import "User.h"
-#import "DownloadFiles.h"
-#import "SubscriptionsViewController.h"
-#import "UsersViewController.h"
 
-#define BACKGROUND @"BackgroundPattern.png"
-
-@interface ProfileViewController : UIViewController <UIActionSheetDelegate>
+@interface ProfileViewController : BaseViewController <UIActionSheetDelegate>
 {
     __weak IBOutlet UIImageView *_photo;
     __weak IBOutlet UILabel *_numberOfSubscriptions;
+    
+    User *_user;
 }
 
-@property(nonatomic, strong) User *user;
+- (id)initWithUser:(User *)user;
 
 - (IBAction)options:(id)sender;
 - (IBAction)invite;

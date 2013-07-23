@@ -49,7 +49,7 @@
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
     if (self = [super initWithDictionary:parameters])
-        identifier = [parameters objectForKey:@"Key"];
+        identifier = [parameters objectForKey:@"Id"];
 
     return self;
 }

@@ -9,16 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "UIViewController+KNSemiModal.h"
 #import "KIImagePager.h"
-#import "AppDelegate.h"
+#import "BaseViewController.h"
 
 /*!
  @discussion This view controller is the first controller appears in applicaton.
  */
-@interface HomeViewController : UIViewController <KIImagePagerDelegate, KIImagePagerDataSource, UIActionSheetDelegate, UIAlertViewDelegate>
+@interface HomeViewController : BaseViewController <KIImagePagerDelegate, KIImagePagerDataSource, UIActionSheetDelegate, UIAlertViewDelegate>
 {
     __weak IBOutlet KIImagePager *_imagePager;
-    
-    AppDelegate *_app;
+
     NSMutableArray *_top;
     UIAlertView *_alertTv;
     UIAlertView *_alertUser;

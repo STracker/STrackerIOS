@@ -8,26 +8,42 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
-#import "Entity.h"
 
 #define BACKGROUND @"BackgroundPattern.png"
 #define CELLIDENTIFIER @"BaseTableCell"
 
+/*!
+ @discussion This controller is a base controller for table views.
+ Contains all things that are equal beteween the table views.
+ */
 @interface BaseTableViewController : UITableViewController
 {
-    NSMutableArray *_data;
-    EntitySynopse *_synopse;
-    
+    NSArray *_data;
+    NSString *_tableTitle;
     AppDelegate *_app;
 }
 
-// Init method.
-- (id)initWithData:(NSMutableArray *)data;
+/*!
+ @discussion This init method, creates an instance receiving the data 
+ that are used to populate the table view.
+ @param data The data.
+ @return An instance of BaseTableViewController.
+ */
+- (id)initWithData:(NSArray *)data;
 
-- (id)initWithData:(NSMutableArray *)data andSynopse:(EntitySynopse *)synopse;
+/*!
+ @discussion This init method, creates an instance receiving the data
+ that are used to populate the table view and the title for the table view.
+ @param data    The data.
+ @param title   The title of table view.
+ @return An instance of BaseTableViewController.
+ */
+- (id)initWithData:(NSArray *)data andTitle:(NSString *)title;
 
-// Hook methods.
-- (void)viewDidLoadHook;
+/*!
+ @discussion This method is a hook method (template method pattern), that is 
+ implemented in the sub table views.
+ */
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath;
 
 @end

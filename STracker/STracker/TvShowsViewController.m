@@ -9,41 +9,28 @@
 #import "TvShowsViewController.h"
 #import "STrackerServerHttpClient.h"
 #import "TvShow.h"
+#import "TvShowViewController.h"
 
 @implementation TvShowsViewController
-
-#pragma mark - BaseTableViewController override methods.
-
-- (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
-{
-    TvShowSynopse *synopse = [_data objectAtIndex:indexPath.row];
-    cell.textLabel.text = synopse.name;
-}
-
-- (void)viewDidLoadHook
-{
-    [[STrackerServerHttpClient sharedClient] getRequest:_synopse.uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
-        
-        _data = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in result)
-        {
-            TvShowSynopse *tvshow = [[TvShowSynopse alloc] initWithDictionary:item];
-            [_data addObject:tvshow];
-        }
-        
-        // Reload data of table view.
-        [self.tableView reloadData];
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
-    }];
-}
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO.
+    // Open a particular tvshow controller...
+    TvShowSynopse *synopse = [_data objectAtIndex:indexPath.row];
+    
+    [[STrackerServerHttpClient sharedClient] getRequest:synopse.uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        TvShow *tvshow = [[TvShow alloc] initWithDictionary:result];
+        TvShowViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"TvShow"] initWithTvShow:tvshow];
+        
+        [self.navigationController pushViewController:view animated:YES];
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
 }
 
 @end

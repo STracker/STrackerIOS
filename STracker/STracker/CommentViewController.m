@@ -1,4 +1,3 @@
-/*
 //
 //  CommentViewController.m
 //  STracker
@@ -8,27 +7,39 @@
 //
 
 #import "CommentViewController.h"
+#import "STrackerServerHttpClient.h"
+#import "User.h"
+#import "ProfileViewController.h"
 
 @implementation CommentViewController
 
-@synthesize comment;
+- (id)initWithComment:(Comment *)comment
+{
+    /*
+     The [super init] is not called because this instance is
+     created from storyboard.
+     */
+    _comment = comment;
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
-    _body.text = comment.body;
-    _userName.text = comment.user.name;
+    _body.text = _comment.body;
+    _userName.text = _comment.user.name;
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    
-    if (![comment.user.identifier isEqualToString:app.user.identifier])
-        return;
-    
-    // If the comment is from the current user, add the delete option.
-    UIBarButtonItem *bt = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteComment)];
-    [self.navigationItem setRightBarButtonItem:bt animated:YES];
+    [_app loginInFacebook:^(User *user) {
+
+        if ([user.identifier isEqualToString:_comment.user.identifier])
+        {
+            // If the comment is from the current user, add the delete option.
+            UIBarButtonItem *bt = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteCommentSelector)];
+            
+            [self.navigationItem setRightBarButtonItem:bt animated:YES];
+        }
+    }];
 }
 
 - (void)viewDidUnload
@@ -36,51 +47,63 @@
     _userName = nil;
     _body = nil;
     _userProfile = nil;
+    
     [super viewDidUnload];
 }
 
 #pragma mark - UIAlertView delegates.
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != 0)
-    {
-        [[STrackerServerHttpClient sharedClient] deleteComment:comment success:^(AFJSONRequestOperation *operation, id result) {
-            
-            // Go back.
-            [self.navigationController popViewControllerAnimated:YES];
-            
-        } failure:nil];
-    }
+        [self deleteComment];
     
     [alertView setDelegate:nil];
     alertView = nil;
 }
 
 #pragma mark - Selectors.
-- (void)deleteComment
+
+- (void)deleteCommentSelector
 {
     _alertDelete = [[UIAlertView alloc] initWithTitle:@"Attention!" message:@"you really want to delete this comment?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
     
     [_alertDelete show];
 }
 
+#pragma mark - IBActions.
+
 - (IBAction)openUserProfile
-{
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    if ([app.user.identifier isEqualToString:comment.user.identifier])
-        return;
-    
-    [[STrackerServerHttpClient sharedClient] getUser:comment.user.identifier success:^(AFJSONRequestOperation *operation, id result) {
+{    /*
+    [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:_comment.user.uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
-        User *user = [[User alloc] initWithDictionary:result];
-        
-        ProfileViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"Profile"];
-        view.user = user;
+        ProfileViewController *view = [[ProfileViewController alloc] initWithUser:[[User alloc] initWithDictionary:result]];
         
         [self.navigationController pushViewController:view animated:YES];
         
-    } failure:nil];
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
+    */
+}
+
+#pragma mark - CommentViewController auxiliary private methods.
+
+/*!
+ @discussion Auxiliary method for delete the comment.
+ */
+- (void)deleteComment
+{
+    [[STrackerServerHttpClient sharedClient] deleteRequestWithHawkProtocol:_comment.uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Go back.
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
 }
 
 @end
- */

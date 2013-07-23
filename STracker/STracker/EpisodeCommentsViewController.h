@@ -1,4 +1,3 @@
-/*
 //
 //  EpisodeCommentsViewController.h
 //  STracker
@@ -8,7 +7,6 @@
 //
 
 #import "CommentsViewController.h"
-#import "STrackerServerHttpClient.h"
 #import "Episode.h"
 
 @interface EpisodeCommentsViewController : CommentsViewController
@@ -17,7 +15,6 @@
 }
 
 // Constructor.
-- (id)initWithEpisode:(Episode *)episode;
+- (id)initWithData:(NSArray *)data andEpisode:(Episode *)episode;
 
 @end
-*/
