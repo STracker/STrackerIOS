@@ -1,0 +1,33 @@
+//
+//  TvShowsController.h
+//  STracker
+//
+//  Created by Ricardo Sousa on 23/07/13.
+//  Copyright (c) 2013 STracker. All rights reserved.
+//
+
+#import "InfoController.h"
+#import "TvShow.h"
+
+/*!
+ @discussion Info controller for manage television show 
+ information.
+ */
+@interface TvShowsController : InfoController
+
+/*!
+ @discussion Get one television show.
+ @param uri         The uri for make the request.
+ @param finish      The finish callback.
+ */
+- (void)getTvShow:(NSString *)uri finish:(Finish) finish;
+
+/*!
+ @discussion Get television shows with same name.
+ @param name    The tvshow name.
+ @param uri     The uri for make the request.
+ @param finish  The finish callback.
+ */
+- (void)getTvShowsByName:(NSString *)name uri:(NSString *)uri finish:(Finish) finish;
+
+@end

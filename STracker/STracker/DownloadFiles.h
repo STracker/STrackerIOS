@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AppDelegate.h"
 
 // Definition of callback for finish downloading image.
 typedef void (^FinishDownloadImage)(UIImage *image);
@@ -27,6 +28,6 @@ typedef void (^FinishDownloadImage)(UIImage *image);
  @param url     The url of the image.
  @param finish  The callback that is called when the image is completely downloaded.
  */
-- (void)downloadImageFromUrl:(NSURL *) url finish:(FinishDownloadImage) finish;
+- (void)downloadImageFromUrl:(NSURL *) url finish:(Finish) finish;
 
 @end

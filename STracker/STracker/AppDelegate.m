@@ -92,10 +92,10 @@
         return;
     }
     
-    FacebookView *fb = [[FacebookView alloc] initWithCallback:^(User *user) {
+    FacebookView *fb = [[FacebookView alloc] initWithCallback:^(id obj) {
        [self.window.rootViewController dismissSemiModalView];
-        _user = user;
-        finish(user);
+        _user = obj;
+        finish(obj);
     }];
     
     [self.window.rootViewController presentSemiView:fb];

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 #import "Comment.h"
+#import "CommentController.h"
 
 /*!
  @discussion This view show the comment. And if the comment 
@@ -22,6 +23,8 @@
     
     UIAlertView *_alertDelete;
     Comment *_comment;
+    
+    CommentController *_commentController;
 }
 
 /*!

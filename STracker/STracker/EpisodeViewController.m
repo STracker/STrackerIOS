@@ -9,8 +9,6 @@
 #import "EpisodeViewController.h"
 #import "DownloadFiles.h"
 #import "ActorsViewController.h"
-#import "STrackerServerHttpClient.h"
-#import "Comment.h"
 #import "EpisodeCommentsViewController.h"
 
 @implementation EpisodeViewController
@@ -138,28 +136,9 @@
  */
 - (void)comments
 {
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeCommentsURI"];
-    uri = [uri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.tvshowId];
-    uri = [uri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%@", _episode.seasonNumber]];
-    uri = [uri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%@", _episode.episodeNumber]];
-
-    [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
-        
-        NSMutableArray *data = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in result)
-        {
-            Comment *comment = [[Comment alloc] initWithDictionary:item];
-            [data addObject:comment];
-        }
-        
-        EpisodeCommentsViewController *view = [[EpisodeCommentsViewController alloc] initWithData:data andEpisode:_episode];
-        
-        [self.navigationController pushViewController:view animated:YES];
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+    EpisodeCommentsViewController *view = [[EpisodeCommentsViewController alloc] initWithEpisode:_episode];
+    
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 @end

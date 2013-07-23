@@ -7,35 +7,21 @@
 //
 
 #import "TvShowCommentsViewController.h"
-#import "STrackerServerHttpClient.h"
-#import "Comment.h"
 
 @implementation TvShowCommentsViewController
 
-- (id)initWithData:(NSArray *)data andTvShow:(TvShow *)tvshow
+- (id)initWithTvShow:(TvShow *)tvshow
 {
-    if (self = [super initWithData:data])
+    if (self = [super initWithData:[[NSArray alloc] init]])
+    {
         _tvshow = tvshow;
+        
+        // Set uri for this television show comments.
+        _commentsUri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowCommentsURI"];
+        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"id" withString:_tvshow.tvshowId];
+    }    
     
     return self;
-}
-
-#pragma mark - CommentsViewController abstract methods.
-
-- (void)popupTextViewHook:(NSString*)text
-{
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowCommentsURI"];
-    uri = [uri stringByReplacingOccurrencesOfString:@"id" withString:_tvshow.tvshowId];
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:text, @"", nil];
-    
-    [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
-        
-        // Nothing to do...
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
-    }];
 }
 
 @end

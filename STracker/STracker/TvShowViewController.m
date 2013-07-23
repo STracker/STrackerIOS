@@ -11,8 +11,6 @@
 #import "Genre.h"
 #import "SeasonsViewController.h"
 #import "ActorsViewController.h"
-#import "STrackerServerHttpClient.h"
-#import "Comment.h"
 #import "TvShowCommentsViewController.h"
 
 @implementation TvShowViewController
@@ -169,26 +167,9 @@
  */
 - (void)comments
 {
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowCommentsURI"];
-    uri = [uri stringByReplacingOccurrencesOfString:@"id" withString:_tvshow.tvshowId];
+    TvShowCommentsViewController *view = [[TvShowCommentsViewController alloc] initWithTvShow:_tvshow];
     
-    [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
-        
-        NSMutableArray *data = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in result)
-        {
-            Comment *comment = [[Comment alloc] initWithDictionary:item];
-            [data addObject:comment];
-        }
-        
-        TvShowCommentsViewController *view = [[TvShowCommentsViewController alloc] initWithData:data andTvShow:_tvshow];
-        
-        [self.navigationController pushViewController:view animated:YES];
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 /*

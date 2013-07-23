@@ -30,6 +30,8 @@
     _body.text = _comment.body;
     _userName.text = _comment.user.name;
     
+    _commentController = [[CommentController alloc] init];
+    
     [_app loginInFacebook:^(User *user) {
 
         if ([user.identifier isEqualToString:_comment.user.identifier])
@@ -95,14 +97,10 @@
  */
 - (void)deleteComment
 {
-    [[STrackerServerHttpClient sharedClient] deleteRequestWithHawkProtocol:_comment.uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    [_commentController deleteComment:_comment.uri finish:^{
         
         // Go back.
         [self.navigationController popViewControllerAnimated:YES];
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 

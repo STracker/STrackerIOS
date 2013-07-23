@@ -7,36 +7,24 @@
 //
 
 #import "EpisodeCommentsViewController.h"
-#import "STrackerServerHttpClient.h"
 
 @implementation EpisodeCommentsViewController
 
-- (id)initWithData:(NSArray *)data andEpisode:(Episode *)episode
+- (id)initWithEpisode:(Episode *)episode
 {
-    if (self = [super initWithData: data])
+    if (self = [super init])
+    {
         _episode = episode;
+        
+        // Set uri for this episodes comments.
+        _commentsUri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeCommentsURI"];
+        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.tvshowId];
+        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%@", _episode.seasonNumber]];
+        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%@", _episode.episodeNumber]];
+    }
+    
     
     return self;
-}
-
-#pragma mark - Hook methods.
-- (void)popupTextViewHook:(NSString*)text
-{
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeCommentsURI"];
-    uri = [uri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.tvshowId];
-    uri = [uri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%@", _episode.seasonNumber]];
-    uri = [uri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%@", _episode.episodeNumber]];
-    
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:text, @"", nil];
-    
-    [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
-        
-        // Nothing to do...
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
-    }];
 }
 
 @end

@@ -12,8 +12,8 @@
 #import "User.h"
 #import "HawkCredentials.h"
 
-// Definition of callback for code after login.
-typedef void (^Finish)(User *user);
+// Definition of finish callback.
+typedef void (^Finish)(id obj);
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {

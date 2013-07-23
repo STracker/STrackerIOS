@@ -19,6 +19,14 @@
     // Set right button to compose comments.
     _composeComment = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(addComment)];
     [self.navigationItem setRightBarButtonItem:_composeComment animated:YES];
+    
+    _commentController = [[CommentController alloc] init];
+    
+    [_commentController getComments:_commentsUri finish:^(NSArray *comments) {
+        // Set and reload table's data.
+        _data = comments;
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)popupTextViewHook:(NSString *)text
@@ -45,12 +53,14 @@
     
     // Needed to be Logged in Facebook to view the comment.
     [_app loginInFacebook:^(User *user) {
+        
         CommentViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"CommentView"] initWithComment:comment];
         [self.navigationController pushViewController:view animated:YES];
     }];
 }
 
 #pragma mark - Selectors.
+
 - (void)addComment
 {
     // Needed to be Logged in Facebook to create an comment.
@@ -79,15 +89,8 @@
     
     [_composeComment setEnabled:YES];
     
-    // Call hook method
-    [self popupTextViewHook:text];
-    
-    [_app loginInFacebook:^(User *user) {
-        
-        UIAlertView *alertConfirm = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Hi %@", user.name] message:@"your comment will be processed..." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        
-        [alertConfirm show];
-    }];
+    // Post comment to STracker server.
+    [_commentController postComment:_commentsUri comment:text];
 }
 
 @end

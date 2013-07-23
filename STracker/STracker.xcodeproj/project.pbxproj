@@ -79,6 +79,11 @@
 		D891AE5F174FFF88001625C6 /* Messages_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D891AE5B174FFF88001625C6 /* Messages_icon.png */; };
 		D8AECA251755108F00C4139C /* star_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D8AECA241755108F00C4139C /* star_icon.png */; };
 		D8FC678617886C5B00A06D40 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FC678517886C5B00A06D40 /* FacebookSDK.framework */; };
+		D8FCACB1179EE91B00CC91E4 /* CommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FCACB0179EE91B00CC91E4 /* CommentController.m */; };
+		D8FCACB5179F164B00CC91E4 /* InfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FCACB4179F164B00CC91E4 /* InfoController.m */; };
+		D8FCACB8179F1DB500CC91E4 /* TvShowsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FCACB7179F1DB500CC91E4 /* TvShowsController.m */; };
+		D8FCACBB179F30AF00CC91E4 /* SeasonsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FCACBA179F30AF00CC91E4 /* SeasonsController.m */; };
+		D8FCACBE179F335500CC91E4 /* EpisodesController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FCACBD179F335500CC91E4 /* EpisodesController.m */; };
 		D8FFA0AB179C3D210058E825 /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FFA0AA179C3D210058E825 /* MyProfileViewController.m */; };
 		D8FFA0AF179C62B00058E825 /* SynopsesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FFA0AE179C62B00058E825 /* SynopsesViewController.m */; };
 /* End PBXBuildFile section */
@@ -193,6 +198,16 @@
 		D8FC677F17886B2300A06D40 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D8FC678317886B6000A06D40 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		D8FC678517886C5B00A06D40 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		D8FCACAF179EE91B00CC91E4 /* CommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentController.h; sourceTree = "<group>"; };
+		D8FCACB0179EE91B00CC91E4 /* CommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentController.m; sourceTree = "<group>"; };
+		D8FCACB3179F164B00CC91E4 /* InfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoController.h; sourceTree = "<group>"; };
+		D8FCACB4179F164B00CC91E4 /* InfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoController.m; sourceTree = "<group>"; };
+		D8FCACB6179F1DB500CC91E4 /* TvShowsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TvShowsController.h; sourceTree = "<group>"; };
+		D8FCACB7179F1DB500CC91E4 /* TvShowsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShowsController.m; sourceTree = "<group>"; };
+		D8FCACB9179F30AF00CC91E4 /* SeasonsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeasonsController.h; sourceTree = "<group>"; };
+		D8FCACBA179F30AF00CC91E4 /* SeasonsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeasonsController.m; sourceTree = "<group>"; };
+		D8FCACBC179F335500CC91E4 /* EpisodesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpisodesController.h; sourceTree = "<group>"; };
+		D8FCACBD179F335500CC91E4 /* EpisodesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EpisodesController.m; sourceTree = "<group>"; };
 		D8FFA0A9179C3D210058E825 /* MyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProfileViewController.h; sourceTree = "<group>"; };
 		D8FFA0AA179C3D210058E825 /* MyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileViewController.m; sourceTree = "<group>"; };
 		D8FFA0AD179C62B00058E825 /* SynopsesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynopsesViewController.h; sourceTree = "<group>"; };
@@ -427,6 +442,7 @@
 			children = (
 				8C6D9BCD17502F1A000C2E99 /* Models */,
 				8C4D51C4175296DE00739A25 /* HttpClients */,
+				D8FCACB2179F031F00CC91E4 /* InfoControllers */,
 				8C4D51C817529C3700739A25 /* ControllersAndViews */,
 				D8782EC6174E6E160025CF79 /* Supporting Files */,
 			);
@@ -508,6 +524,23 @@
 			children = (
 			);
 			name = "Unit Tests";
+			sourceTree = "<group>";
+		};
+		D8FCACB2179F031F00CC91E4 /* InfoControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D8FCACB3179F164B00CC91E4 /* InfoController.h */,
+				D8FCACB4179F164B00CC91E4 /* InfoController.m */,
+				D8FCACB6179F1DB500CC91E4 /* TvShowsController.h */,
+				D8FCACB7179F1DB500CC91E4 /* TvShowsController.m */,
+				D8FCACB9179F30AF00CC91E4 /* SeasonsController.h */,
+				D8FCACBA179F30AF00CC91E4 /* SeasonsController.m */,
+				D8FCACBC179F335500CC91E4 /* EpisodesController.h */,
+				D8FCACBD179F335500CC91E4 /* EpisodesController.m */,
+				D8FCACAF179EE91B00CC91E4 /* CommentController.h */,
+				D8FCACB0179EE91B00CC91E4 /* CommentController.m */,
+			);
+			name = InfoControllers;
 			sourceTree = "<group>";
 		};
 		D8FFA0AC179C62760058E825 /* SynopsesTableController */ = {
@@ -666,6 +699,11 @@
 				8CC6C0FD179D6ED70085B036 /* BaseViewController.m in Sources */,
 				8CC6C100179D8B280085B036 /* Ratings.m in Sources */,
 				8CC6C104179DABBE0085B036 /* ActorsViewController.m in Sources */,
+				D8FCACB1179EE91B00CC91E4 /* CommentController.m in Sources */,
+				D8FCACB5179F164B00CC91E4 /* InfoController.m in Sources */,
+				D8FCACB8179F1DB500CC91E4 /* TvShowsController.m in Sources */,
+				D8FCACBB179F30AF00CC91E4 /* SeasonsController.m in Sources */,
+				D8FCACBE179F335500CC91E4 /* EpisodesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

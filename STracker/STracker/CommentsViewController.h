@@ -8,12 +8,25 @@
 
 #import "BaseTableViewController.h"
 #import "YIPopupTextView.h"
+#import "CommentController.h"
 
+/*!
+ @discussion Comments base table. Contains are things 
+ that are equal beteween televsion shows comments and 
+ episodes comments.
+ */
 @interface CommentsViewController : BaseTableViewController <YIPopupTextViewDelegate>
 {
     UIBarButtonItem *_composeComment;
+    CommentController *_commentController;
+    NSString *_commentsUri;
 }
 
+/*!
+ @discussion Hook method for post the comment in STracker 
+ server. It's implemented in episodes comments table and 
+ television comments table.
+ */
 - (void)popupTextViewHook:(NSString *)text;
 
 @end

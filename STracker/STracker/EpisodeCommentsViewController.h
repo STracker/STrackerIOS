@@ -9,12 +9,19 @@
 #import "CommentsViewController.h"
 #import "Episode.h"
 
+/*!
+ @discussion Table view for episodes comments.
+ */
 @interface EpisodeCommentsViewController : CommentsViewController
 {
     Episode *_episode;
 }
 
-// Constructor.
-- (id)initWithData:(NSArray *)data andEpisode:(Episode *)episode;
+/*!
+ @discussion Init method for create the table view controller.
+ @param episode The episode object with information.
+ @return An instance of EpisodeCommentsViewController.
+ */
+- (id)initWithEpisode:(Episode *)episode;
 
 @end

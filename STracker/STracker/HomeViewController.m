@@ -14,6 +14,7 @@
 #import "GenresViewController.h"
 #import "Genre.h"
 #import "TvShowViewController.h"
+#import "TvShowsController.h"
 
 @implementation HomeViewController
 
@@ -83,16 +84,11 @@
 {
     TvShowSynopse *synopse = [_top objectAtIndex:index];
     
-    [[STrackerServerHttpClient sharedClient] getRequest:synopse.uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    [[TvShowsController sharedObject] getTvShow:synopse.uri finish:^(id obj) {
         
-        TvShow *tvshow = [[TvShow alloc] initWithDictionary:result];
-        TvShowViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"TvShow"] initWithTvShow:tvshow];
+        TvShowViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"TvShow"] initWithTvShow:obj];
         
         [self.navigationController pushViewController:view animated:YES];
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
