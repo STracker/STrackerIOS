@@ -9,7 +9,7 @@
 #import "SeasonViewController.h"
 #import "Episode.h"
 #import "EpisodeViewController.h"
-#import "STrackerServerHttpClient.h"
+#import "EpisodesController.h"
 
 @implementation SeasonViewController
 
@@ -19,18 +19,11 @@
 {
     // Opens an particular episode.
     EpisodeSynopse *synopse = [_data objectAtIndex:indexPath.row];
-    
-    [[STrackerServerHttpClient sharedClient] getRequest:synopse.uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    [[EpisodesController sharedObject] getEpisode:synopse.uri finish:^(id obj) {
         
-        Episode *episode = [[Episode alloc] initWithDictionary:result];
-        
-        EpisodeViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"EpisodeView"] initWithEpisode: episode];
+        EpisodeViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"EpisodeView"] initWithEpisode: obj];
         
         [self.navigationController pushViewController:view animated:YES];
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [_app getAlertViewForErrors:error.localizedDescription];
     }];
 }
 

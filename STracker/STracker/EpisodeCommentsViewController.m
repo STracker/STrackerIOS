@@ -19,8 +19,8 @@
         // Set uri for this episodes comments.
         _commentsUri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeCommentsURI"];
         _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.tvshowId];
-        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%@", _episode.seasonNumber]];
-        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%@", _episode.episodeNumber]];
+        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%d", _episode.seasonNumber]];
+        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%d", _episode.episodeNumber]];
     }
     
     

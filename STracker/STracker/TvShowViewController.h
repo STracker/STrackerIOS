@@ -7,15 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
-#import "DLStarRatingControl.h"
 #import "TvShow.h"
-#import "Ratings.h"
+#import "RatingsViewController.h"
 
 /*!
  @discussion This controller shows all information about an television show.
  */
-@interface TvShowViewController : BaseViewController <UIActionSheetDelegate, DLStarRatingDelegate>
+@interface TvShowViewController : RatingsViewController <UIActionSheetDelegate>
 {
     __weak IBOutlet UITextView *_description;
     __weak IBOutlet UILabel *_airDay;
@@ -23,12 +21,8 @@
     __weak IBOutlet UILabel *_runtime;
     __weak IBOutlet UIImageView *_poster;
     __weak IBOutlet UITextView *_genres;
-    __weak IBOutlet DLStarRatingControl *_rating;
-    __weak IBOutlet UILabel *_average;
-    __weak IBOutlet UILabel *_numberOfUsers;
-    
+
     TvShow *_tvshow;
-    Ratings *_ratings;
 }
 
 /*!

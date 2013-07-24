@@ -25,7 +25,7 @@
         <!--Tv Show View Controller-->
         <scene sceneID="yt1-cF-5bD">
             <objects>
-                <viewController storyboardIdentifier="TvShow" id="s0C-U4-c9e" customClass="TvShowViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TvShowView" id="s0C-U4-c9e" customClass="TvShowViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cU5-ZC-NlR">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -653,15 +653,6 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MyProfileViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="_name" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="_photo" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="ProfileViewController" superclassName="BaseViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="invite"/>
-                <relationship kind="action" name="options:"/>
-                <relationship kind="outlet" name="_numberOfSubscriptions" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="_photo" candidateClass="UIImageView"/>
             </relationships>
         </class>

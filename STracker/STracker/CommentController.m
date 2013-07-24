@@ -23,7 +23,7 @@
     return self;
 }
 
-- (void)getComments:(NSString *)uri finish:(FinishGet) finish
+- (void)getComments:(NSString *)uri finish:(Finish) finish
 {
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -43,7 +43,7 @@
     }];
 }
 
-- (void)postComment:(NSString *)uri comment:(NSString *)comment
+- (void)postComment:(NSString *)uri comment:(NSString *)comment finish:(Finish) finish
 {
     [_app loginInFacebook:^(User *user) {
         
@@ -51,9 +51,11 @@
         
         [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
             
-            UIAlertView *alertConfirm = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Hi %@", user.name] message:@"your comment will be processed..." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
             
-            [alertConfirm show];
+            // Nothing todo here...
+            
+            // Invoke callback.
+            finish(nil);
             
         } failure:^(AFJSONRequestOperation *operation, NSError *error) {
             
@@ -62,17 +64,31 @@
     }];
 }
 
-- (void)deleteComment:(NSString *)uri finish:(FinishDelete)finish
+- (void)deleteComment:(NSString *)uri finish:(Finish)finish
 {
     [[STrackerServerHttpClient sharedClient] deleteRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         // Invoke callback.
-        finish();
+        finish(nil);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         
         [[_app getAlertViewForErrors:error.localizedDescription] show];
     }];
+}
+
+#pragma mark - InfoController abstract methods.
+
++ (id)sharedObject
+{
+    static CommentController *sharedObject = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedObject = [[CommentController alloc] init];
+    });
+    
+    return sharedObject;
 }
 
 @end

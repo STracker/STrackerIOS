@@ -7,6 +7,7 @@
 //
 
 #import "SynopsesViewController.h"
+#import "Season.h"
 
 /*!
  @discussion This table shows an list with episodes from 

@@ -7,26 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
-#import "DLStarRatingControl.h"
+#import "RatingsViewController.h"
 #import "Episode.h"
-#import "Ratings.h"
 
 /*!
  @discussion This view controller shows the information about 
  one episode.
  */
-@interface EpisodeViewController : BaseViewController <UIActionSheetDelegate, DLStarRatingDelegate>
+@interface EpisodeViewController : RatingsViewController <UIActionSheetDelegate>
 {
     __weak IBOutlet UIImageView *_poster;
     __weak IBOutlet UILabel *_date;
     __weak IBOutlet UITextView *_description;
-    __weak IBOutlet UILabel *_average;
-    __weak IBOutlet UILabel *_numberOfUsers;
-    __weak IBOutlet DLStarRatingControl *_rating;
     
     Episode *_episode;
-    Ratings *_ratings;
 }
 
 /*!

@@ -18,10 +18,10 @@
     if (self = [super init])
     {
         tvshowId = [parameters objectForKey:@"TvShowId"];
-        seasonNumber = [parameters objectForKey:@"SeasonNumber"];
+        seasonNumber = [[parameters objectForKey:@"SeasonNumber"] intValue];
         
         NSMutableArray *episodesAux = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in [parameters objectForKey:@"EpisodesSynopses"])
+        for (NSDictionary *item in [parameters objectForKey:@"EpisodeSynopses"])
         {
             EpisodeSynopse *episode = [[EpisodeSynopse alloc] initWithDictionary:item];
             [episodesAux addObject:episode];
@@ -44,8 +44,8 @@
     if (self = [super init])
     {
         tvshowId = [parameters objectForKey:@"TvShowId"];
-        seasonNumber = [parameters objectForKey:@"SeasonNumber"];
-        self.name = [NSString stringWithFormat:@"Season %@", seasonNumber];
+        seasonNumber = [[parameters objectForKey:@"SeasonNumber"] intValue];
+        self.name = [NSString stringWithFormat:@"Season %d", seasonNumber];
         self.uri = [parameters objectForKey:@"Uri"];
     }
 

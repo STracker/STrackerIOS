@@ -20,6 +20,12 @@
      created from storyboard.
      */
     _episode = episode;
+    _ratingsUri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeRatingsURI"];
+    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.tvshowId];
+    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%d", _episode.seasonNumber]];
+    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%d", _episode.episodeNumber]];
+
+    
     return self;
 }
 
@@ -28,16 +34,6 @@
     [super viewDidLoad];
     
     [self configureView];
-    
-    // Get rating information.
-    _ratings = [[Ratings alloc] initWithAverage:_average andNumberOfUsers:_numberOfUsers];
-    
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeRatingsURI"];
-    uri = [uri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.tvshowId];
-    uri = [uri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%@", _episode.seasonNumber]];
-    uri = [uri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%@", _episode.episodeNumber]];
-    
-    [_ratings getRating:uri];
 }
 
 - (void)viewDidUnload
@@ -78,18 +74,6 @@
     }
     
     [actionSheet setDelegate:nil];
-}
-
-#pragma mark - DLStarRatingControl delegate.
-
--(void)newRating:(DLStarRatingControl *)control :(float)rating
-{
-	NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeRatingsURI"];
-    uri = [uri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.tvshowId];
-    uri = [uri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%@", _episode.seasonNumber]];
-    uri = [uri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%@", _episode.episodeNumber]];
-    
-    [_ratings postRating:uri withRating:rating];
 }
 
 #pragma mark - EpisodeViewController auxiliary private methods.

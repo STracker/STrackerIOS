@@ -32,20 +32,27 @@
     
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:query success:^(AFJSONRequestOperation *operation, id result) {
         
-        NSMutableArray *data = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in result)
-        {
-            TvShowSynopse *synopse = [[TvShowSynopse alloc] initWithDictionary:item];
-            [data addObject:synopse];
-        }
-        
         // Invoke callback.
-        finish(data);
+        finish([self parseTvShowsToArray:result]);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         
         [[_app getAlertViewForErrors:error.localizedDescription] show];
     }];
+}
+
+- (void)getTvShowsTopRated:(NSString *)uri finish:(Finish) finish
+{
+    [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+              
+        // Invoke callback.
+        finish([self parseTvShowsToArray:result]);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
+
 }
 
 #pragma mark - InfoController abstract methods.
@@ -60,6 +67,20 @@
     });
     
     return sharedObject;
+}
+
+#pragma mark - TvShowsController private auxiliary methods.
+
+- (NSArray *)parseTvShowsToArray:(id) result
+{
+    NSMutableArray *data = [[NSMutableArray alloc] init];
+    for (NSDictionary *item in result)
+    {
+        TvShowSynopse *synopse = [[TvShowSynopse alloc] initWithDictionary:item];
+        [data addObject:synopse];
+    }
+    
+    return data;
 }
 
 @end

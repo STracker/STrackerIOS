@@ -14,8 +14,8 @@
 @interface Episode : Entity
 
 @property(nonatomic, copy) NSString *tvshowId;
-@property(nonatomic, copy) NSString *seasonNumber;
-@property(nonatomic, copy) NSString *episodeNumber;
+@property(nonatomic) int seasonNumber;
+@property(nonatomic) int episodeNumber;
 @property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSString *description;
 @property(nonatomic, copy) NSString *date;
@@ -31,8 +31,8 @@
 @interface EpisodeSynopse : EntitySynopse
 
 @property(nonatomic, copy) NSString *tvshowId;
-@property(nonatomic, copy) NSString *seasonNumber;
-@property(nonatomic, copy) NSString *episodeNumber;
+@property(nonatomic) int seasonNumber;
+@property(nonatomic) int episodeNumber;
 @property(nonatomic, copy) NSString *date;
 
 @end

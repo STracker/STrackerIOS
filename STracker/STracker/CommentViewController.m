@@ -10,6 +10,7 @@
 #import "STrackerServerHttpClient.h"
 #import "User.h"
 #import "ProfileViewController.h"
+#import "CommentController.h"
 
 @implementation CommentViewController
 
@@ -29,9 +30,7 @@
 	
     _body.text = _comment.body;
     _userName.text = _comment.user.name;
-    
-    _commentController = [[CommentController alloc] init];
-    
+
     [_app loginInFacebook:^(User *user) {
 
         if ([user.identifier isEqualToString:_comment.user.identifier])
@@ -97,7 +96,7 @@
  */
 - (void)deleteComment
 {
-    [_commentController deleteComment:_comment.uri finish:^{
+    [[CommentController sharedObject] deleteComment:_comment.uri finish:^(id obj) {
         
         // Go back.
         [self.navigationController popViewControllerAnimated:YES];

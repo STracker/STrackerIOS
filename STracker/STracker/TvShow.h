@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Entity.h"
+#import "Rating.h"
 
 /*!
  @discussion This object defines the television show entity object.
@@ -24,8 +25,7 @@
 @property(nonatomic, retain) NSArray *genres;
 @property(nonatomic, retain) NSArray *seasons;
 @property(nonatomic, retain) NSArray *actors;
-@property(nonatomic) double rating;
-@property(nonatomic) int ratingTotalUsers;
+@property(nonatomic, strong) Rating *rating;
 
 @end
 

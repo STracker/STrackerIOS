@@ -30,4 +30,11 @@
  */
 - (void)getTvShowsByName:(NSString *)name uri:(NSString *)uri finish:(Finish) finish;
 
+/*!
+ @discussion Get Top rated television shows.
+ @param uri     The uri for make the request.
+ @param finish  The finish callback.
+ */
+- (void)getTvShowsTopRated:(NSString *)uri finish:(Finish) finish;
+
 @end

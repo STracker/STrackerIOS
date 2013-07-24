@@ -23,8 +23,11 @@
 		8C6D9BCC17502954000C2E99 /* GenresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BCB17502954000C2E99 /* GenresViewController.m */; };
 		8C6D9BD017502F30000C2E99 /* TvShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BCF17502F30000C2E99 /* TvShow.m */; };
 		8C6D9BD3175030B2000C2E99 /* TvShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6D9BD2175030B2000C2E99 /* TvShowsViewController.m */; };
+		8C8E14AB17A01C4800A4B48C /* Rating.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C8E14AA17A01C4800A4B48C /* Rating.m */; };
+		8C8E14AE17A0272F00A4B48C /* GenresController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C8E14AD17A0272F00A4B48C /* GenresController.m */; };
+		8C8E14B217A0346900A4B48C /* RatingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C8E14B117A0346900A4B48C /* RatingsViewController.m */; };
 		8CC6C0FD179D6ED70085B036 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6C0FC179D6ED70085B036 /* BaseViewController.m */; };
-		8CC6C100179D8B280085B036 /* Ratings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6C0FF179D8B280085B036 /* Ratings.m */; };
+		8CC6C100179D8B280085B036 /* RatingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6C0FF179D8B280085B036 /* RatingsController.m */; };
 		8CC6C104179DABBE0085B036 /* ActorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6C103179DABBE0085B036 /* ActorsViewController.m */; };
 		8CD10DC2176E81BD00F81F7C /* DownloadFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD10DC1176E81BD00F81F7C /* DownloadFiles.m */; };
 		8CD10DCE176E8DA300F81F7C /* Calendar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CD10DCD176E8DA300F81F7C /* Calendar_icon.png */; };
@@ -123,10 +126,16 @@
 		8C6D9BCF17502F30000C2E99 /* TvShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShow.m; sourceTree = "<group>"; };
 		8C6D9BD1175030B2000C2E99 /* TvShowsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TvShowsViewController.h; sourceTree = "<group>"; };
 		8C6D9BD2175030B2000C2E99 /* TvShowsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShowsViewController.m; sourceTree = "<group>"; };
+		8C8E14A917A01C4800A4B48C /* Rating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rating.h; sourceTree = "<group>"; };
+		8C8E14AA17A01C4800A4B48C /* Rating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rating.m; sourceTree = "<group>"; };
+		8C8E14AC17A0272F00A4B48C /* GenresController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenresController.h; sourceTree = "<group>"; };
+		8C8E14AD17A0272F00A4B48C /* GenresController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenresController.m; sourceTree = "<group>"; };
+		8C8E14B017A0346900A4B48C /* RatingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingsViewController.h; sourceTree = "<group>"; };
+		8C8E14B117A0346900A4B48C /* RatingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingsViewController.m; sourceTree = "<group>"; };
 		8CC6C0FB179D6ED70085B036 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		8CC6C0FC179D6ED70085B036 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		8CC6C0FE179D8B280085B036 /* Ratings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ratings.h; sourceTree = "<group>"; };
-		8CC6C0FF179D8B280085B036 /* Ratings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ratings.m; sourceTree = "<group>"; };
+		8CC6C0FE179D8B280085B036 /* RatingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingsController.h; sourceTree = "<group>"; };
+		8CC6C0FF179D8B280085B036 /* RatingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingsController.m; sourceTree = "<group>"; };
 		8CC6C102179DABBE0085B036 /* ActorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActorsViewController.h; sourceTree = "<group>"; };
 		8CC6C103179DABBE0085B036 /* ActorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActorsViewController.m; sourceTree = "<group>"; };
 		8CD10DC0176E81BD00F81F7C /* DownloadFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadFiles.h; sourceTree = "<group>"; };
@@ -287,13 +296,13 @@
 				D887E39917540A0500E3BABB /* HomeController */,
 				D887E39B17540AAC00E3BABB /* MyProfileController */,
 				D88B0476178D6654001587B5 /* SubscriptionsController */,
+				8C8E14AF17A0344F00A4B48C /* RatingsController */,
 				D8FFA0AC179C62760058E825 /* SynopsesTableController */,
 				8C67EDDA1764D5AC003278F8 /* GenresController */,
 				D887E39A17540A0E00E3BABB /* TvShowsControllers */,
 				8C67EDE41764FC5F003278F8 /* SeasonsControllers */,
 				8C67EDEE176515E7003278F8 /* EpisodesController */,
 				8C67EDF8176525CB003278F8 /* PersonsController */,
-				8CC6C101179D99E80085B036 /* Ratings */,
 				8C1AB39B178C49EC00ED7142 /* CommentsController */,
 			);
 			name = ControllersAndViews;
@@ -364,19 +373,21 @@
 				D802E65C17888C6E00ABD08F /* User.m */,
 				8C1AB39F178C4BF400ED7142 /* Comment.h */,
 				8C1AB3A0178C4BF400ED7142 /* Comment.m */,
+				8C8E14A917A01C4800A4B48C /* Rating.h */,
+				8C8E14AA17A01C4800A4B48C /* Rating.m */,
 				D88B0470178D63A5001587B5 /* Subscription.h */,
 				D88B0471178D63A5001587B5 /* Subscription.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
 		};
-		8CC6C101179D99E80085B036 /* Ratings */ = {
+		8C8E14AF17A0344F00A4B48C /* RatingsController */ = {
 			isa = PBXGroup;
 			children = (
-				8CC6C0FE179D8B280085B036 /* Ratings.h */,
-				8CC6C0FF179D8B280085B036 /* Ratings.m */,
+				8C8E14B017A0346900A4B48C /* RatingsViewController.h */,
+				8C8E14B117A0346900A4B48C /* RatingsViewController.m */,
 			);
-			name = Ratings;
+			name = RatingsController;
 			sourceTree = "<group>";
 		};
 		D811B5561789E94E00D4CB3F /* FacebookLogin */ = {
@@ -531,12 +542,16 @@
 			children = (
 				D8FCACB3179F164B00CC91E4 /* InfoController.h */,
 				D8FCACB4179F164B00CC91E4 /* InfoController.m */,
+				8C8E14AC17A0272F00A4B48C /* GenresController.h */,
+				8C8E14AD17A0272F00A4B48C /* GenresController.m */,
 				D8FCACB6179F1DB500CC91E4 /* TvShowsController.h */,
 				D8FCACB7179F1DB500CC91E4 /* TvShowsController.m */,
 				D8FCACB9179F30AF00CC91E4 /* SeasonsController.h */,
 				D8FCACBA179F30AF00CC91E4 /* SeasonsController.m */,
 				D8FCACBC179F335500CC91E4 /* EpisodesController.h */,
 				D8FCACBD179F335500CC91E4 /* EpisodesController.m */,
+				8CC6C0FE179D8B280085B036 /* RatingsController.h */,
+				8CC6C0FF179D8B280085B036 /* RatingsController.m */,
 				D8FCACAF179EE91B00CC91E4 /* CommentController.h */,
 				D8FCACB0179EE91B00CC91E4 /* CommentController.m */,
 			);
@@ -697,13 +712,16 @@
 				D8FFA0AB179C3D210058E825 /* MyProfileViewController.m in Sources */,
 				D8FFA0AF179C62B00058E825 /* SynopsesViewController.m in Sources */,
 				8CC6C0FD179D6ED70085B036 /* BaseViewController.m in Sources */,
-				8CC6C100179D8B280085B036 /* Ratings.m in Sources */,
+				8CC6C100179D8B280085B036 /* RatingsController.m in Sources */,
 				8CC6C104179DABBE0085B036 /* ActorsViewController.m in Sources */,
 				D8FCACB1179EE91B00CC91E4 /* CommentController.m in Sources */,
 				D8FCACB5179F164B00CC91E4 /* InfoController.m in Sources */,
 				D8FCACB8179F1DB500CC91E4 /* TvShowsController.m in Sources */,
 				D8FCACBB179F30AF00CC91E4 /* SeasonsController.m in Sources */,
 				D8FCACBE179F335500CC91E4 /* EpisodesController.m in Sources */,
+				8C8E14AB17A01C4800A4B48C /* Rating.m in Sources */,
+				8C8E14AE17A0272F00A4B48C /* GenresController.m in Sources */,
+				8C8E14B217A0346900A4B48C /* RatingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

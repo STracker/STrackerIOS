@@ -18,8 +18,8 @@
     if (self = [super init])
     {
         tvshowId = [parameters objectForKey:@"TvShowId"];
-        seasonNumber = [parameters objectForKey:@"SeasonNumber"];
-        episodeNumber = [parameters objectForKey:@"EpisodeNumber"];
+        seasonNumber = [[parameters objectForKey:@"SeasonNumber"] intValue];
+        episodeNumber = [[parameters objectForKey:@"EpisodeNumber"] intValue];
         name = [parameters objectForKey:@"Name"];
         description = [parameters objectForKey:@"Description"];
         date = [parameters objectForKey:@"Date"];
@@ -56,8 +56,8 @@
     if (self = [super init])
     {
         tvshowId = [parameters objectForKey:@"TvShowId"];
-        seasonNumber = [parameters objectForKey:@"SeasonNumber"];
-        episodeNumber = [parameters objectForKey:@"EpisodeNumber"];
+        seasonNumber = [[parameters objectForKey:@"SeasonNumber"] intValue];
+        episodeNumber = [[parameters objectForKey:@"EpisodeNumber"] intValue];
         self.name = [parameters objectForKey:@"Name"];
         date = [parameters objectForKey:@"Date"];
         self.uri = [parameters objectForKey:@"Uri"];

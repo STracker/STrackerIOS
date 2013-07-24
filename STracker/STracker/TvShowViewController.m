@@ -22,22 +22,17 @@
      created from storyboard.
      */
     _tvshow = tvshow;
+    _ratingsUri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowRatingsURI"];
+    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"id" withString:_tvshow.tvshowId];
+
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+ 
     [self configureView];
-    
-    // Get rating information.
-    _ratings = [[Ratings alloc] initWithAverage:_average andNumberOfUsers:_numberOfUsers];
-    
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowRatingsURI"];
-    uri = [uri stringByReplacingOccurrencesOfString:@"id" withString:_tvshow.tvshowId];
-    
-    [_ratings getRating:uri];
 }
 
 - (void)viewDidUnload
@@ -106,16 +101,6 @@
     alertView = nil;
 }
 
-#pragma mark - DLStarRatingControl delegate.
-
--(void)newRating:(DLStarRatingControl *)control :(float)rating
-{
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowRatingsURI"];
-    uri = [uri stringByReplacingOccurrencesOfString:@"id" withString:_tvshow.tvshowId];
-    
-    [_ratings postRating:uri withRating:rating];
-}
-
 #pragma mark - TvShowViewController auxiliary private methods.
 
 /*!
@@ -168,7 +153,6 @@
 - (void)comments
 {
     TvShowCommentsViewController *view = [[TvShowCommentsViewController alloc] initWithTvShow:_tvshow];
-    
     [self.navigationController pushViewController:view animated:YES];
 }
 

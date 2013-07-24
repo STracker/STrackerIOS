@@ -7,42 +7,34 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AppDelegate.h"
-
-// Definition of callback for code after comments get operation.
-typedef void (^FinishGet)(NSArray *comments);
-
-// Definition of callback for code after comments delete operation.
-typedef void (^FinishDelete)();
+#import "InfoController.h"
 
 /*!
- @discussion The propose of this object is for get and 
- post comments into STracker server via HTTP.
+ @discussion Info controller for manage comments 
+ information.
  */
-@interface CommentController : NSObject
-{
-    AppDelegate *_app;
-}
+@interface CommentController : InfoController
 
 /*!
  @discussion Get comments from the request Uri.
  @param uri     Request Uri.
  @param finish  The callback when download is finish.
  */
-- (void)getComments:(NSString *)uri finish:(FinishGet) finish;
+- (void)getComments:(NSString *)uri finish:(Finish) finish;
 
 /*!
  @discussion Post one comment into STracker server.
  @param uri     The Uri for post.
  @param comment The comment.
+ @param finish  The callback when post is finish.
  */
-- (void)postComment:(NSString *)uri comment:(NSString *)comment;
+- (void)postComment:(NSString *)uri comment:(NSString *)comment finish:(Finish) finish;
 
 /*!
  @discussion Delete one comment into STracker server.
  @param uri     The Uri for delete.
  @param finish  The callback when delete is complete.
  */
-- (void)deleteComment:(NSString *)uri finish:(FinishDelete) finish;
+- (void)deleteComment:(NSString *)uri finish:(Finish) finish;
 
 @end

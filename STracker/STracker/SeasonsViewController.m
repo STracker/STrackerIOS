@@ -7,9 +7,8 @@
 //
 
 #import "SeasonsViewController.h"
-#import "STrackerServerHttpClient.h"
+#import "SeasonsController.h"
 #import "Season.h"
-#import "Episode.h"
 #import "SeasonViewController.h"
 
 @implementation SeasonsViewController
@@ -19,22 +18,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SeasonSynopse *synopse = [_data objectAtIndex:indexPath.row];
-    [[STrackerServerHttpClient sharedClient] getRequest:synopse.uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    [[SeasonsController sharedObject] getSeason:synopse.uri finish:^(id obj) {
         
-        NSMutableArray *data = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in [result objectForKey:@"EpisodeSynopses"])
-        {
-            EpisodeSynopse *episode = [[EpisodeSynopse alloc] initWithDictionary:item];
-            [data addObject:episode];
-        }
-        
-        SeasonViewController *view = [[SeasonViewController alloc] initWithData:data andTitle:[NSString stringWithFormat:@"Season %@", [result objectForKey:@"SeasonNumber"]]];
-        
+        Season *season = obj;
+        SeasonViewController *view = [[SeasonViewController alloc] initWithData:season.episodes andTitle:synopse.name];
         [self.navigationController pushViewController:view animated:YES];
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [_app getAlertViewForErrors:error.localizedDescription];
     }];
 }
 

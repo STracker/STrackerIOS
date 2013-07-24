@@ -22,7 +22,7 @@
     {
         _app = [[UIApplication sharedApplication] delegate]; 
         
-        _fb = [[FBLoginView alloc] init];
+        _fb = [[FBLoginView alloc] initWithReadPermissions:[NSArray arrayWithObject:@"email"]];
         [_fb setDelegate:self];
         [self addSubview:_fb];
         

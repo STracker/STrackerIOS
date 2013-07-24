@@ -8,7 +8,6 @@
 
 #import "BaseTableViewController.h"
 #import "YIPopupTextView.h"
-#import "CommentController.h"
 
 /*!
  @discussion Comments base table. Contains are things 
@@ -18,7 +17,6 @@
 @interface CommentsViewController : BaseTableViewController <YIPopupTextViewDelegate>
 {
     UIBarButtonItem *_composeComment;
-    CommentController *_commentController;
     NSString *_commentsUri;
 }
 

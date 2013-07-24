@@ -7,7 +7,6 @@
 //
 
 #import "HomeViewController.h"
-#import "STrackerServerHttpClient.h"
 #import "TvShow.h"
 #import "TvShowsViewController.h"
 #import "MyProfileViewController.h"
@@ -15,6 +14,7 @@
 #import "Genre.h"
 #import "TvShowViewController.h"
 #import "TvShowsController.h"
+#import "GenresController.h"
 
 @implementation HomeViewController
 
@@ -22,7 +22,7 @@
 {
     [super viewDidLoad];
     
-    // Well, without background pattern in this view, gets more cool...
+    // Well, without background pattern, this view stays more cool...
     self.view.backgroundColor = nil;
 }
 
@@ -83,10 +83,9 @@
 - (void) imagePager:(KIImagePager *)imagePager didSelectImageAtIndex:(NSUInteger)index
 {
     TvShowSynopse *synopse = [_top objectAtIndex:index];
-    
     [[TvShowsController sharedObject] getTvShow:synopse.uri finish:^(id obj) {
         
-        TvShowViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"TvShow"] initWithTvShow:obj];
+        TvShowViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"TvShowView"] initWithTvShow:obj];
         
         [self.navigationController pushViewController:view animated:YES];
     }];
@@ -137,23 +136,12 @@
 - (void)getTopRated
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTopRatedTvShowsURI"];
-    [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
-        
-        _top = nil;
-        _top = [[NSMutableArray alloc] initWithCapacity:(int)[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTopTvShowsNumber"]];
-        
-        for (NSDictionary *item in result)
-        {
-            TvShowSynopse *synopsis = [[TvShowSynopse alloc] initWithDictionary:item];
-            [_top addObject:synopsis];
-        }
-        
-        [_imagePager reloadData];
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+   [[TvShowsController sharedObject] getTvShowsTopRated:uri finish:^(id obj) {
+       
+       // Set and reload data from imagePager.
+       _top = obj;
+       [_imagePager reloadData];
+   }];
 }
 
 /*!
@@ -163,22 +151,12 @@
 - (void)searchGenres
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerGenresURI"];
-    [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    [[GenresController sharedObject] getGenres:uri finish:^(id obj) {
         
-        NSMutableArray *data = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in result)
-        {
-            GenreSynopse *genre = [[GenreSynopse alloc] initWithDictionary:item];
-            [data addObject:genre];
-        }
-        
-        GenresViewController *view = [[GenresViewController alloc] initWithData:data andTitle:@"Genres"];
+        GenresViewController *view = [[GenresViewController alloc] initWithData:obj andTitle:@"Genres"];
         [self.navigationController pushViewController:view animated:YES];
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
     }];
+     
 }
 
 /*!
@@ -213,23 +191,10 @@
 - (void)searchSeriesAux:(NSString *)name
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowsURI"];
-    NSDictionary *query = [[NSDictionary alloc] initWithObjectsAndKeys:name, @"name", nil];
-    
-    [[STrackerServerHttpClient sharedClient] getRequest:uri query:query success:^(AFJSONRequestOperation *operation, id result) {
+    [[TvShowsController sharedObject] getTvShowsByName:name uri:uri finish:^(id obj) {
         
-        NSMutableArray *data = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in result)
-        {
-            TvShowSynopse *tvshow = [[TvShowSynopse alloc] initWithDictionary:item];
-            [data addObject:tvshow];
-        }
-        
-        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:data];
+        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:obj];
         [self.navigationController pushViewController:view animated:YES];
-     
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 

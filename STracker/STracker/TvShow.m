@@ -13,7 +13,7 @@
 
 @implementation TvShow
 
-@synthesize tvshowId, name, description, runtime, firstAired, airDay, genres, seasons, actors, rating, ratingTotalUsers, poster;
+@synthesize tvshowId, name, description, runtime, firstAired, airDay, genres, seasons, actors, rating, poster;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {

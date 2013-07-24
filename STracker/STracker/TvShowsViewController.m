@@ -7,7 +7,7 @@
 //
 
 #import "TvShowsViewController.h"
-#import "STrackerServerHttpClient.h"
+#import "TvShowsController.h"
 #import "TvShow.h"
 #import "TvShowViewController.h"
 
@@ -19,17 +19,11 @@
 {
     // Open a particular tvshow controller...
     TvShowSynopse *synopse = [_data objectAtIndex:indexPath.row];
-    
-    [[STrackerServerHttpClient sharedClient] getRequest:synopse.uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    [[TvShowsController sharedObject] getTvShow:synopse.uri finish:^(id obj) {
         
-        TvShow *tvshow = [[TvShow alloc] initWithDictionary:result];
-        TvShowViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"TvShow"] initWithTvShow:tvshow];
+        TvShowViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"TvShow"] initWithTvShow:obj];
         
         [self.navigationController pushViewController:view animated:YES];
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 

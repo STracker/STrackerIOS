@@ -9,6 +9,7 @@
 #import "CommentsViewController.h"
 #import "Comment.h"
 #import "CommentViewController.h"
+#import "CommentController.h"
 
 @implementation CommentsViewController
 
@@ -20,9 +21,8 @@
     _composeComment = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(addComment)];
     [self.navigationItem setRightBarButtonItem:_composeComment animated:YES];
     
-    _commentController = [[CommentController alloc] init];
-    
-    [_commentController getComments:_commentsUri finish:^(NSArray *comments) {
+    [[CommentController sharedObject] getComments:_commentsUri finish:^(NSArray *comments) {
+       
         // Set and reload table's data.
         _data = comments;
         [self.tableView reloadData];
@@ -90,7 +90,16 @@
     [_composeComment setEnabled:YES];
     
     // Post comment to STracker server.
-    [_commentController postComment:_commentsUri comment:text];
+    [[CommentController sharedObject] postComment:_commentsUri comment:text finish:^(id obj) {
+        
+        // In this moment the user is already logged in, this call is only for get the user object.
+        [_app loginInFacebook:^(id obj) {
+            User *user = obj;
+            UIAlertView *alertConfirm = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Hi %@", user.name] message:@"your comment will be processed..." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            
+            [alertConfirm show];
+        }];
+    }];
 }
 
 @end
