@@ -24,7 +24,8 @@
 
 - (void)shakeEvent
 {
-    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
+    // Not raise exception this time because some controls don't need this feature.
+    // [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
 }
 
 - (BOOL)canBecomeFirstResponder

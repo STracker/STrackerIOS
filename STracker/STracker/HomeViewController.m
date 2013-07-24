@@ -24,11 +24,6 @@
     
     // Well, without background pattern, this view stays more cool...
     self.view.backgroundColor = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
     [self getTopRated];
 }
@@ -112,6 +107,7 @@
 }
 
 #pragma mark - Alert View delegates.
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != 0)
@@ -125,6 +121,17 @@
     
     [alertView setDelegate:nil];
     alertView = nil;
+}
+
+#pragma mark - BaseViewController abstract methods.
+
+/*!
+ @discussion In this case, the data for refreshing is the top television 
+ shows.
+ */
+- (void)shakeEvent
+{
+    [self getTopRated];
 }
 
 #pragma mark - HomeViewController private auxiliary methods.

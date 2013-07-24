@@ -21,12 +21,7 @@
     _composeComment = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(addComment)];
     [self.navigationItem setRightBarButtonItem:_composeComment animated:YES];
     
-    [[CommentController sharedObject] getComments:_commentsUri finish:^(NSArray *comments) {
-       
-        // Set and reload table's data.
-        _data = comments;
-        [_tableView reloadData];
-    }];
+    [self getComments];
 }
 
 - (void)popupTextViewHook:(NSString *)text
@@ -99,6 +94,32 @@
             
             [alertConfirm show];
         }];
+    }];
+}
+
+#pragma mark - BaseViewController abstract methods.
+
+/*!
+ @discussion In this case, the data for refreshing is the comments information.
+ */
+- (void)shakeEvent
+{
+    [self getComments];
+}
+
+#pragma mark - CommentsViewController private auxiliary methods.
+
+/*!
+ @discussion Auxiliary method for request the comments and reload the table with the 
+ new information.
+ */
+- (void)getComments
+{
+    [[CommentController sharedObject] getComments:_commentsUri finish:^(NSArray *comments) {
+        
+        // Set and reload table's data.
+        _data = comments;
+        [_tableView reloadData];
     }];
 }
 
