@@ -20,4 +20,27 @@
     _app = [[UIApplication sharedApplication] delegate];
 }
 
+#pragma mark - Shake gesture. Some magic things happens here, do not touch!
+
+- (void)shakeEvent
+{
+    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
+}
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+/*!
+ @discussion Use montion events.
+ @see http://developer.apple.com/library/ios/#documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/motion_event_basics/motion_event_basics.html
+ */
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    // if the motion is the shake gesture, invoke shakeEvent method.
+    if (motion == UIEventSubtypeMotionShake)
+        [self shakeEvent];
+}
+
 @end

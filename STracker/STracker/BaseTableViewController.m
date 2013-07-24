@@ -31,6 +31,12 @@
 {
     [super viewDidLoad];
     
+    // Set tableview field and add to controller.
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    [self.view addSubview:_tableView];
+    
     self.navigationItem.title = _tableTitle;
     _app = [[UIApplication sharedApplication] delegate];
     
@@ -73,9 +79,10 @@
  */
 - (void)configureViewStyle
 {
-    self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    // Is necessary to do this, for set background tableview.
+    _tableView.backgroundView = nil;
+    _tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
+    [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 /*!

@@ -25,7 +25,7 @@
        
         // Set and reload table's data.
         _data = comments;
-        [self.tableView reloadData];
+        [_tableView reloadData];
     }];
 }
 

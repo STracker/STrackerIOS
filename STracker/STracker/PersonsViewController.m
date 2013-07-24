@@ -27,7 +27,7 @@
             person.photo = image;
             
             if (count == [_data count])
-                [self.tableView reloadData];
+                [_tableView reloadData];
         }];
     }
 }

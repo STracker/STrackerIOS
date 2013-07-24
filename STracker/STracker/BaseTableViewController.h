@@ -7,20 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
+#import "BaseViewController.h"
 
-#define BACKGROUND @"BackgroundPattern.png"
 #define CELLIDENTIFIER @"BaseTableCell"
 
 /*!
  @discussion This controller is a base controller for table views.
  Contains all things that are equal beteween the table views.
  */
-@interface BaseTableViewController : UITableViewController
+@interface BaseTableViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource>
 {
     NSArray *_data;
     NSString *_tableTitle;
-    AppDelegate *_app;
+    
+    UITableView *_tableView;
 }
 
 /*!

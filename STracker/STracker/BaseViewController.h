@@ -22,4 +22,11 @@
     AppDelegate *_app;
 }
 
+/*!
+ @discussion Abstract method, is implemented by sub classes. 
+ Defines the events that happen after an shake gesture, usually 
+ the events is for refresh view's data.
+ */
+- (void)shakeEvent;
+
 @end
