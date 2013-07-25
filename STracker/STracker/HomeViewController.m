@@ -172,7 +172,7 @@
  */
 - (void)searchSeries
 {
-    _alertTv = [[UIAlertView alloc] initWithTitle:@"Insert the name of the tv show" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Search", nil];
+    _alertTv = [[UIAlertView alloc] initWithTitle:@"Insert the name" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Search", nil];
     _alertTv.alertViewStyle = UIAlertViewStylePlainTextInput;
     
     [_alertTv show];
