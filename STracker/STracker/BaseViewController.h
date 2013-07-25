@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 
-#define BACKGROUND @"BackgroundPattern.png"
+#define BACKGROUND @"BackgroundPattern2.png"
 
 /*!
  @discussion This controller is the base controller of all 

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "User.h"
 
-#define BACKGROUND @"BackgroundPattern.png"
+#define BACKGROUND @"BackgroundPattern2.png"
 
 /*!
  @discussion This view controller shows the current user profile options.

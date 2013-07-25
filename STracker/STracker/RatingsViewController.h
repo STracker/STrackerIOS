@@ -19,7 +19,6 @@
     
     __weak IBOutlet DLStarRatingControl *_rating;
     __weak IBOutlet UILabel *_average;
-    __weak IBOutlet UILabel *_numberOfUsers;
 }
 
 @end

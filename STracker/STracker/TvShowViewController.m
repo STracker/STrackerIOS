@@ -12,6 +12,7 @@
 #import "SeasonsViewController.h"
 #import "ActorsViewController.h"
 #import "TvShowCommentsViewController.h"
+#import "UIViewController+KNSemiModal.h"
 
 @implementation TvShowViewController
 
@@ -37,16 +38,13 @@
 
 - (void)viewDidUnload
 {
-    _description = nil;
     _airDay = nil;
-    _runtime = nil;
     _poster = nil;
     _firstAired = nil;
     _genres = nil;
-    _rating = nil;
-    _average = nil;
-    _numberOfUsers = nil;
     
+    _swipeGestureSeasons = nil;
+    _swipeGestureDescription = nil;
     [super viewDidUnload];
 }
 
@@ -54,9 +52,27 @@
 
 - (IBAction)options:(UIBarButtonItem *)sender
 { 
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Seasons", @"Cast", @"Comments", @"Subscribe", @"Suggest", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:/*@"Seasons", */@"Cast", @"Comments", @"Subscribe", @"Suggest", nil];
     
     [actionSheet showFromBarButtonItem:sender animated:YES];
+}
+
+- (IBAction)openSeasons:(id)sender
+{
+    [self seasons];
+}
+
+- (IBAction)openDescription:(id)sender
+{
+    UITextView *text = [[UITextView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, 150)];
+    text.backgroundColor = nil;
+    [text setEditable:NO];
+    [text setTextAlignment:NSTextAlignmentCenter];
+    [text setFont:[UIFont fontWithName:@"Futura Medium" size:25.0]];
+    [text setTextColor:[UIColor whiteColor]];
+    text.text = _tvshow.description;
+    
+    [self presentSemiView:text];
 }
 
 #pragma mark - Action sheet delegate.
@@ -65,16 +81,18 @@
 {
     switch (buttonIndex)
     {
+        /*
         case 0:
             [self seasons];
             break;
-        case 1:
+        */
+        case 0:
             [self cast];
             break;
-        case 2:
+        case 1:
             [self comments];
             break;
-        case 3:
+        case 2:
             //[self subscribe];
             break;
     }
@@ -111,14 +129,12 @@
 {
     self.navigationItem.title = _tvshow.name;
     
-    _description.text = _tvshow.description;
-    _runtime.text = [NSString stringWithFormat:@"%@ min", _tvshow.runtime];
-    _airDay.text = _tvshow.airDay;
-    _firstAired.text = _tvshow.firstAired;
+    _airDay.text = [NSString stringWithFormat:@"%@ / %@ minutes per episode", _tvshow.airDay, _tvshow.runtime];
+    _firstAired.text = [NSString stringWithFormat:@"First aired %@", _tvshow.firstAired];
     
     NSMutableString *str = [[NSMutableString alloc] init];
     for (GenreSynopse *genre in _tvshow.genres)
-        [str appendString:[NSString stringWithFormat:@"- %@\n", genre.name]];
+        [str appendString:[NSString stringWithFormat:@"%@\n", genre.name]];
     
     _genres.text = str;
     

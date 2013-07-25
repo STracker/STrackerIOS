@@ -90,8 +90,7 @@
  */
 - (void)configureCellView:(UITableViewCell *)cell
 {
-    [cell.textLabel setFont:[UIFont fontWithName:@"Tamil Sangam MN" size:22.0]];
-    [cell.textLabel setTextColor:[UIColor whiteColor]];
+    [cell.textLabel setFont:[UIFont fontWithName:@"Futura Medium" size:22.0]];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 }
 

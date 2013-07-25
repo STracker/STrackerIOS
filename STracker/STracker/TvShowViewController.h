@@ -15,12 +15,12 @@
  */
 @interface TvShowViewController : RatingsViewController <UIActionSheetDelegate>
 {
-    __weak IBOutlet UITextView *_description;
     __weak IBOutlet UILabel *_airDay;
     __weak IBOutlet UILabel *_firstAired;
-    __weak IBOutlet UILabel *_runtime;
     __weak IBOutlet UIImageView *_poster;
     __weak IBOutlet UITextView *_genres;
+    IBOutlet UISwipeGestureRecognizer *_swipeGestureSeasons;
+    IBOutlet UISwipeGestureRecognizer *_swipeGestureDescription;
 
     TvShow *_tvshow;
 }
@@ -39,5 +39,15 @@
  in user options icon.
  */
 - (IBAction)options:(UIBarButtonItem *)sender;
+
+/*!
+ @discussion Action for open seasons table.
+ */
+- (IBAction)openSeasons:(id)sender;
+
+/*!
+ @discussion Action for open description view.
+ */
+- (IBAction)openDescription:(id)sender;
 
 @end

@@ -10,6 +10,7 @@
 #import "DownloadFiles.h"
 #import "ActorsViewController.h"
 #import "EpisodeCommentsViewController.h"
+#import "UIViewController+KNSemiModal.h"
 
 @implementation EpisodeViewController
 
@@ -40,11 +41,8 @@
 {
     _poster = nil;
     _date = nil;
-    _description = nil;
-    _average = nil;
-    _numberOfUsers = nil;
-    _rating = nil;
     
+    _swipeGestureDescription = nil;
     [super viewDidUnload];
 }
 
@@ -54,6 +52,19 @@
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Guest Actors", @"Directors", @"Comments", nil];
     
     [actionSheet showFromBarButtonItem:sender animated:YES];
+}
+
+- (IBAction)openDescription:(id)sender
+{
+    UITextView *text = [[UITextView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, 150)];
+    text.backgroundColor = nil;
+    [text setEditable:NO];
+    [text setTextAlignment:NSTextAlignmentCenter];
+    [text setFont:[UIFont fontWithName:@"Futura Medium" size:25.0]];
+    [text setTextColor:[UIColor whiteColor]];
+    text.text = _episode.description;
+    
+    [self presentSemiView:text];
 }
 
 #pragma mark - Action sheet delegate.
@@ -88,7 +99,6 @@
     self.navigationItem.title = _episode.name;
     
     _date.text = _episode.date;
-    _description.text = _episode.description;
     
     [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:_episode.poster] finish:^(UIImage *image) {
         _poster.image = image;

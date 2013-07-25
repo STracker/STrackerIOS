@@ -21,6 +21,14 @@
     [self getRating];
 }
 
+- (void)viewDidUnload
+{
+    _rating = nil;
+    _average = nil;
+    
+    [super viewDidUnload];
+}
+
 -(void)newRating:(DLStarRatingControl *)control :(float)rating
 {
     // Needed to be logged in Facebook for post an rating.
@@ -53,8 +61,8 @@
 {
     [[RatingsController sharedObject] getRating:_ratingsUri finish:^(id obj) {
         
-        _average.text = [NSString stringWithFormat:@"%d/5", ((Rating *)obj).rating];
-        _numberOfUsers.text = [NSString stringWithFormat:@"%d user(s)", ((Rating *)obj).numberOfUsers];
+        _average.text = [NSString stringWithFormat:@"%d/5 from %d user(s)", ((Rating *)obj).rating, ((Rating *)obj).numberOfUsers];
+        _rating.rating = ((Rating *)obj).rating;
     }];
 }
 

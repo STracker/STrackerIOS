@@ -29,6 +29,7 @@
 		8CC6C0FD179D6ED70085B036 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6C0FC179D6ED70085B036 /* BaseViewController.m */; };
 		8CC6C100179D8B280085B036 /* RatingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6C0FF179D8B280085B036 /* RatingsController.m */; };
 		8CC6C104179DABBE0085B036 /* ActorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6C103179DABBE0085B036 /* ActorsViewController.m */; };
+		8CC7C4E517A0804800FD2675 /* BackgroundPattern2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CC7C4E417A0804800FD2675 /* BackgroundPattern2.png */; };
 		8CD10DC2176E81BD00F81F7C /* DownloadFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD10DC1176E81BD00F81F7C /* DownloadFiles.m */; };
 		8CD10DCE176E8DA300F81F7C /* Calendar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CD10DCD176E8DA300F81F7C /* Calendar_icon.png */; };
 		958B692C8AB84E8FB6B7F544 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86A72A6102254A888262B579 /* libPods.a */; };
@@ -138,6 +139,7 @@
 		8CC6C0FF179D8B280085B036 /* RatingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingsController.m; sourceTree = "<group>"; };
 		8CC6C102179DABBE0085B036 /* ActorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActorsViewController.h; sourceTree = "<group>"; };
 		8CC6C103179DABBE0085B036 /* ActorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActorsViewController.m; sourceTree = "<group>"; };
+		8CC7C4E417A0804800FD2675 /* BackgroundPattern2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundPattern2.png; sourceTree = "<group>"; };
 		8CD10DC0176E81BD00F81F7C /* DownloadFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadFiles.h; sourceTree = "<group>"; };
 		8CD10DC1176E81BD00F81F7C /* DownloadFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadFiles.m; sourceTree = "<group>"; };
 		8CD10DCD176E8DA300F81F7C /* Calendar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Calendar_icon.png; sourceTree = "<group>"; };
@@ -525,6 +527,7 @@
 				D891AE37174FECE2001625C6 /* Options.png */,
 				D891AE35174FEB0C001625C6 /* Search.png */,
 				D891AE2C174FE191001625C6 /* BackgroundPattern.png */,
+				8CC7C4E417A0804800FD2675 /* BackgroundPattern2.png */,
 			);
 			name = Images;
 			path = ..;
@@ -637,6 +640,7 @@
 				8CD10DCE176E8DA300F81F7C /* Calendar_icon.png in Resources */,
 				D802E658178882AD00ABD08F /* FacebookSDKResources.bundle in Resources */,
 				D872032D1795CE96006FCAC6 /* Instabug.bundle in Resources */,
+				8CC7C4E517A0804800FD2675 /* BackgroundPattern2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

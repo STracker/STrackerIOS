@@ -18,7 +18,7 @@
 {
     __weak IBOutlet UIImageView *_poster;
     __weak IBOutlet UILabel *_date;
-    __weak IBOutlet UITextView *_description;
+    IBOutlet UISwipeGestureRecognizer *_swipeGestureDescription;
     
     Episode *_episode;
 }
@@ -36,5 +36,10 @@
  in user options icon.
  */
 - (IBAction)options:(id)sender;
+
+/*!
+ @discussion Action for open description view.
+ */
+- (IBAction)openDescription:(id)sender;
 
 @end
