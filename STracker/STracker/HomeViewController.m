@@ -15,6 +15,8 @@
 #import "TvShowViewController.h"
 #import "TvShowsController.h"
 #import "GenresController.h"
+#import "UsersController.h"
+#import "UsersViewController.h"
 
 @implementation HomeViewController
 
@@ -212,7 +214,16 @@
  */
 - (void)searchUsersAux:(NSString *)name
 {
-    // TODO.
+    [_app loginInFacebook:^(id obj) {
+        
+        NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
+        [[UsersController sharedObject] searchUser:uri withName:name finish:^(id obj) {
+            
+            UsersViewController *view = [[UsersViewController alloc] initWithData:obj andTitle:@"Search results"];
+            
+            [self.navigationController pushViewController:view animated:YES];
+        }];
+    }];
 }
 
 @end

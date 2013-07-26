@@ -64,6 +64,10 @@
 {   
     // Generate and set the Authorization header with Hawk protocol.
     NSString *url = [NSString stringWithFormat:@"%@%@", self.baseURL, uri];
+    
+    if (query != nil)
+        url = [url stringByAppendingString:[NSString stringWithFormat:@"?%@", [self transformDictionaryToQueryString:query]]];
+    
     NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"GET" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:_app.hawkCredentials ext:nil payload:nil payloadValidation:NO];
     
     [self setDefaultHeader:@"Authorization" value:header];
@@ -187,6 +191,7 @@
 }
 
 #pragma mark - STrackerServerHttpClient private auxiliary methods.
+
 - (NSString *)trasnformPayloadToUrlEncoded:(NSDictionary *)parameters
 {
     NSMutableString *payload = [NSMutableString string];
@@ -202,6 +207,23 @@
     }
     
     return payload;
+}
+
+- (NSString *)transformDictionaryToQueryString:(NSDictionary *)parameters
+{
+    NSMutableString *query = [NSMutableString string];
+    for (int i = [parameters allKeys].count - 1; i >= 0; i--)
+    {
+        if ([query length] > 0)
+            [query appendString:@"&"];
+        
+        NSString *param = [parameters objectForKey:[[parameters allKeys] objectAtIndex:i]];
+        param = [param stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+        
+        [query appendFormat:@"%@=%@", [[parameters allKeys] objectAtIndex:i], param];
+    }
+    
+    return query;
 }
 
 @end

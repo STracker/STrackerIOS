@@ -28,7 +28,7 @@
 
 - (void)getTvShowsByName:(NSString *)name uri:(NSString *)uri finish:(Finish)finish
 {
-    NSDictionary *query = [[NSDictionary alloc] initWithObjectsAndKeys:name, @"", nil];
+    NSDictionary *query = [[NSDictionary alloc] initWithObjectsAndKeys:name, @"name", nil];
     
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:query success:^(AFJSONRequestOperation *operation, id result) {
         

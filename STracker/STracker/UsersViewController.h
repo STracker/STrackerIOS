@@ -1,4 +1,3 @@
-/*
 //
 //  UsersViewController.h
 //  STracker
@@ -7,11 +6,12 @@
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "BaseTableViewController.h"
-#import "ProfileViewController.h"
-#import "AppDelegate.h"
+#import "PersonsViewController.h"
 
-@interface UsersViewController : BaseTableViewController
+/*!
+ @discussion View controller for showing the STracker 
+ users.
+ */
+@interface UsersViewController : PersonsViewController
 
 @end
-*/

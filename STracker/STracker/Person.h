@@ -16,14 +16,16 @@
 @property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSString *photoUrl;
 
-// Necessary for save the photo in table views.
-@property(nonatomic, strong) UIImage *photo;
-
 @end
 
 /*!
  @discussion This object defines the person synopse entity object.
  */
 @interface PersonSynopse : EntitySynopse
+
+@property(nonatomic, copy) NSString *photoUrl;
+
+// Necessary for save the photo in table views.
+@property(nonatomic, strong) UIImage *photo;
 
 @end

@@ -50,7 +50,7 @@
 {
     if (self = [super initWithDictionary:parameters])
         identifier = [parameters objectForKey:@"Id"];
-
+    
     return self;
 }
 

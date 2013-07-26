@@ -16,7 +16,7 @@
     [super viewDidLoad];
     
     int count = 0;
-    for (Person *person in _data)
+    for (PersonSynopse *person in _data)
     {
         count++;
         if (person.photo != nil)
@@ -36,9 +36,11 @@
 {
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     
-    Person *person = [_data objectAtIndex:indexPath.row];
+    PersonSynopse *person = [_data objectAtIndex:indexPath.row];
     cell.textLabel.text = person.name;
     cell.imageView.image = person.photo;
+    
+    // TODO, resize image.
 }
 
 @end

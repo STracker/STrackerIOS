@@ -8,8 +8,7 @@
 
 #import "FacebookView.h"
 #import "UIViewController+KNSemiModal.h"
-#import "STrackerServerHttpClient.h"
-#import "AppDelegate.h"
+#import "UsersController.h"
 
 @implementation FacebookView
 
@@ -63,20 +62,11 @@
     _app.hawkCredentials = credentials;
     
     // Register the user into STracker server.
-    
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserURI"];
-    
-    NSArray *keys = [[NSArray alloc] initWithObjects:@"Name", @"Email", @"Photo", nil];
-    NSArray *values = [[NSArray alloc] initWithObjects:me.name, me.email, me.photoUrl, nil];
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:values forKeys:keys];
-    
-    [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
+    [[UsersController sharedObject] registUser:uri withUser:me finish:^(id obj) {
         
         // If success, execute callback.
         _finish(me);
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 

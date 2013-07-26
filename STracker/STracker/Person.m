@@ -10,7 +10,7 @@
 
 @implementation Person
 
-@synthesize name, photoUrl, photo;
+@synthesize name, photoUrl;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
@@ -27,12 +27,15 @@
 
 @implementation PersonSynopse
 
+@synthesize photoUrl, photo;
+
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
     if (self = [super init])
     {
         self.name = [parameters objectForKey:@"Name"];
         self.uri = [parameters objectForKey:@"Uri"];
+        photoUrl = [parameters objectForKey:@"Photo"];
     }
     
     return self;
