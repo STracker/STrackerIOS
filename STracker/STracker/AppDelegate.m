@@ -44,8 +44,9 @@
     else
         storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     
-    // TODO -> TEST in a real device!
-    [Instabug KickOffWithToken:@"d33e20cbbdf7dc8b0d5fce4ba8db3d79" CaptureSource:InstabugCaptureSourceUIKit FeedbackEvent:InstabugFeedbackEventShake IsTrackingLocation:NO];
+    // Notifications things.
+    [self handleLocalNotifications:application withOptions:launchOptions];
+    [self createNotificationsForMessages];
     
     return YES;
 }
@@ -106,6 +107,36 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msgError delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
     
     return alert;
+}
+
+#pragma mark - AppDelegate auxiliary private methods.
+
+- (void)handleLocalNotifications:(UIApplication *)application withOptions:(NSDictionary *)launchOptions
+{
+    UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    
+    if (notification == nil)
+        return;
+    
+    
+}
+
+- (void)createNotificationsForMessages
+{
+    UILocalNotification* notification = [[UILocalNotification alloc] init];
+    
+    // Its necessary to test if nil, because exists one limit of local notifications per application.
+    if (notification == nil)
+        return;
+    
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    notification.fireDate = [NSDate date];
+    notification.repeatInterval = NSMinuteCalendarUnit;
+    notification.alertBody = @"New message";
+    notification.alertAction = @"Show me the message";
+    notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
 @end
