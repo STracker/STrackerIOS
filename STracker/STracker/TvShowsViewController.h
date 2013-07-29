@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SynopsesViewController.h"
+#import "SynopsisViewController.h"
 
 /*!
  @discussion This object defines a table of television shows 
  synopses.
  */
-@interface TvShowsViewController : SynopsesViewController
+@interface TvShowsViewController : SynopsisViewController
 
 @end

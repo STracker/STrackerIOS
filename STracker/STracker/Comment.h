@@ -16,7 +16,7 @@
 
 @property(nonatomic, copy) NSString *identifier;
 @property(nonatomic, copy) NSString *body;
-@property(nonatomic, strong) UserSinopse *user;
+@property(nonatomic, strong) UserSynopsis *user;
 @property(nonatomic, copy) NSString *uri;
 
 @end

@@ -23,7 +23,7 @@
         NSMutableArray *friendsAux = [[NSMutableArray alloc] init];
         for (NSDictionary * item in [parameters objectForKey:@"Friends"])
         {
-            User *friend = [[User alloc] initWithDictionary:item];
+            UserSynopsis *friend = [[UserSynopsis alloc] initWithDictionary:item];
             [friendsAux addObject:friend];
         }
         friends = friendsAux;
@@ -42,7 +42,7 @@
 
 @end
 
-@implementation UserSinopse
+@implementation UserSynopsis
 
 @synthesize identifier;
 

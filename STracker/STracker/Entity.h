@@ -26,7 +26,7 @@
 /*!
  @discussion This object defines the base synopse object for all synopses models.
  */
-@interface EntitySynopse : NSObject
+@interface EntitySynopsis : NSObject
 
 @property(nonatomic, copy) NSString *name;
 

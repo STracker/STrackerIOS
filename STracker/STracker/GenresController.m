@@ -19,7 +19,7 @@
         NSMutableArray *data = [[NSMutableArray alloc] init];
         for (NSDictionary *item in result)
         {
-            GenreSynopse *synopse = [[GenreSynopse alloc] initWithDictionary:item];
+            GenreSynopsis *synopse = [[GenreSynopsis alloc] initWithDictionary:item];
             [data addObject:synopse];
         }
         

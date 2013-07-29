@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SynopsesViewController.h"
+#import "SynopsisViewController.h"
 
 /*!
  @discussion This table view shows all seasons from one 
  television show.
  */
-@interface SeasonsViewController : SynopsesViewController
+@interface SeasonsViewController : SynopsisViewController
 
 @end

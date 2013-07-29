@@ -47,7 +47,7 @@
 
 @end
 
-@implementation EpisodeSynopse
+@implementation EpisodeSynopsis
 
 @synthesize tvshowId, seasonNumber, episodeNumber, date;
 

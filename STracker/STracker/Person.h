@@ -21,7 +21,7 @@
 /*!
  @discussion This object defines the person synopse entity object.
  */
-@interface PersonSynopse : EntitySynopse
+@interface PersonSynopsis : EntitySynopsis
 
 @property(nonatomic, copy) NSString *photoUrl;
 

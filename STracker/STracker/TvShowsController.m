@@ -76,7 +76,7 @@
     NSMutableArray *data = [[NSMutableArray alloc] init];
     for (NSDictionary *item in result)
     {
-        TvShowSynopse *synopse = [[TvShowSynopse alloc] initWithDictionary:item];
+        TvShowSynopsis *synopse = [[TvShowSynopsis alloc] initWithDictionary:item];
         [data addObject:synopse];
     }
     

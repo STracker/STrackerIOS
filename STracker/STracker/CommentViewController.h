@@ -16,9 +16,9 @@
  */
 @interface CommentViewController : BaseViewController
 {
-    __weak IBOutlet UILabel *_userName;
     __weak IBOutlet UITextView *_body;
     __weak IBOutlet UIButton *_userProfile;
+    __weak IBOutlet UILabel *_userName;
     
     UIAlertView *_alertDelete;
     Comment *_comment;

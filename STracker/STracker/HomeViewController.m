@@ -61,7 +61,7 @@
 - (NSArray *) arrayWithImageUrlStrings
 {
     NSMutableArray *urls = [[NSMutableArray alloc] initWithCapacity:5];
-    for (TvShowSynopse *tvshow in _top)
+    for (TvShowSynopsis *tvshow in _top)
         [urls addObject:tvshow.poster];
     
     if (urls.count == 0)
@@ -79,7 +79,7 @@
 
 - (void) imagePager:(KIImagePager *)imagePager didSelectImageAtIndex:(NSUInteger)index
 {
-    TvShowSynopse *synopse = [_top objectAtIndex:index];
+    TvShowSynopsis *synopse = [_top objectAtIndex:index];
     [[TvShowsController sharedObject] getTvShow:synopse.uri finish:^(id obj) {
         
         TvShowViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"TvShowView"] initWithTvShow:obj];

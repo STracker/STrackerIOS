@@ -23,7 +23,7 @@
         NSMutableArray *episodesAux = [[NSMutableArray alloc] init];
         for (NSDictionary *item in [parameters objectForKey:@"EpisodeSynopses"])
         {
-            EpisodeSynopse *episode = [[EpisodeSynopse alloc] initWithDictionary:item];
+            EpisodeSynopsis *episode = [[EpisodeSynopsis alloc] initWithDictionary:item];
             [episodesAux addObject:episode];
         }
         episodes = episodesAux;
@@ -35,7 +35,7 @@
 @end
 
 #pragma mark - Synopsis object.
-@implementation SeasonSynopse
+@implementation SeasonSynopsis
 
 @synthesize tvshowId, seasonNumber;
 

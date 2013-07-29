@@ -6,17 +6,17 @@
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "SynopsesViewController.h"
+#import "SynopsisViewController.h"
 #import "Entity.h"
 
-@implementation SynopsesViewController
+@implementation SynopsisViewController
 
 #pragma mark - BaseTableViewController abstract methods.
 
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
 {
     // This is equals in all synopses table.
-    EntitySynopse *synopse = [_data objectAtIndex:indexPath.row];
+    EntitySynopsis *synopse = [_data objectAtIndex:indexPath.row];
     cell.textLabel.text = synopse.name;
 }
 

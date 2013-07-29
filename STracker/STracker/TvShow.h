@@ -32,7 +32,7 @@
 /*!
  @discussion This object defines the television show synopse entity object.
  */
-@interface TvShowSynopse : EntitySynopse
+@interface TvShowSynopsis : EntitySynopsis
 
 @property(nonatomic, copy) NSString *tvshowId;
 @property(nonatomic, copy) NSString *poster;

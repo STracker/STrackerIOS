@@ -22,7 +22,7 @@
         NSMutableArray *tvshowsAux = [[NSMutableArray alloc] init];
         for (NSDictionary *item in [parameters objectForKey:@"TvShowsSinopses"])
         {
-            TvShowSynopse *tvshow = [[TvShowSynopse alloc] initWithDictionary:item];
+            TvShowSynopsis *tvshow = [[TvShowSynopsis alloc] initWithDictionary:item];
             [tvshowsAux addObject:tvshow];
         }
         tvshows = tvshowsAux;
@@ -33,7 +33,7 @@
 
 @end
 
-@implementation GenreSynopse
+@implementation GenreSynopsis
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {

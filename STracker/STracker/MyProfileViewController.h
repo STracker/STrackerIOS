@@ -7,23 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "User.h"
-
-#define BACKGROUND @"BackgroundPattern2.png"
+#import "BaseProfileViewController.h"
 
 /*!
  @discussion This view controller shows the current user profile options.
  Shows the basic information, plus the calendar, the favorite shows, friends
  and messages.
  */
-@interface MyProfileViewController : UITableViewController
-{
-    User *_user;
-    
-    __weak IBOutlet UIImageView *_photo;
-    __weak IBOutlet UILabel *_name;
-}
-
-- (id)initWithUserInfo:(User *)user;
+@interface MyProfileViewController : BaseProfileViewController
 
 @end

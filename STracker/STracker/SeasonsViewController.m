@@ -17,7 +17,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SeasonSynopse *synopse = [_data objectAtIndex:indexPath.row];
+    SeasonSynopsis *synopse = [_data objectAtIndex:indexPath.row];
     [[SeasonsController sharedObject] getSeason:synopse.uri finish:^(id obj) {
         
         Season *season = obj;

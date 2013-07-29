@@ -25,7 +25,7 @@
 
 @end
 
-@implementation PersonSynopse
+@implementation PersonSynopsis
 
 @synthesize photoUrl, photo;
 

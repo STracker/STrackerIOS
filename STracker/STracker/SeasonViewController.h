@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "SynopsesViewController.h"
+#import "SynopsisViewController.h"
 #import "Season.h"
 
 /*!
  @discussion This table shows an list with episodes from 
  this season.
  */
-@interface SeasonViewController : SynopsesViewController
+@interface SeasonViewController : SynopsisViewController
 
 @end

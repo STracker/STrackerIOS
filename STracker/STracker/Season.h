@@ -22,7 +22,7 @@
 /*!
  @discussion This object defines the season synopse entity object.
  */
-@interface SeasonSynopse : EntitySynopse
+@interface SeasonSynopsis : EntitySynopsis
 
 @property(nonatomic, copy) NSString *tvshowId;
 @property(nonatomic) int seasonNumber;

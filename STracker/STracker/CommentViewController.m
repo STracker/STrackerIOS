@@ -9,8 +9,9 @@
 #import "CommentViewController.h"
 #import "STrackerServerHttpClient.h"
 #import "User.h"
-#import "ProfileViewController.h"
 #import "CommentController.h"
+#import "UserProfileViewController.h"
+#import "UsersController.h"
 
 @implementation CommentViewController
 
@@ -45,10 +46,10 @@
 
 - (void)viewDidUnload
 {
-    _userName = nil;
     _body = nil;
     _userProfile = nil;
     
+    _userName = nil;
     [super viewDidUnload];
 }
 
@@ -75,18 +76,15 @@
 #pragma mark - IBActions.
 
 - (IBAction)openUserProfile
-{    /*
-    [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:_comment.user.uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+{
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
+    uri = [uri stringByAppendingString:[NSString stringWithFormat:@"/%@", _comment.user.identifier]];
+    
+    [[UsersController sharedObject] getUser:uri finish:^(id obj) {
         
-        ProfileViewController *view = [[ProfileViewController alloc] initWithUser:[[User alloc] initWithDictionary:result]];
-        
+        UserProfileViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"UserProfile"] initWithUserInfo:obj];
         [self.navigationController pushViewController:view animated:YES];
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
     }];
-    */
 }
 
 #pragma mark - CommentViewController auxiliary private methods.

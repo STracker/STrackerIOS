@@ -23,7 +23,7 @@
 /*!
  @discussion This object defines the actor synopse entity object.
  */
-@interface UserSinopse : PersonSynopse
+@interface UserSynopsis : PersonSynopsis
 
 @property(nonatomic, copy) NSString *identifier;
 

@@ -30,7 +30,7 @@
         NSMutableArray *genresAux = [[NSMutableArray alloc] init];
         for (NSDictionary *item in [parameters objectForKey:@"Genres"])
         {
-            GenreSynopse *genre = [[GenreSynopse alloc] initWithDictionary:item];
+            GenreSynopsis *genre = [[GenreSynopsis alloc] initWithDictionary:item];
             [genresAux addObject:genre];
         }
         genres = genresAux;
@@ -38,7 +38,7 @@
         NSMutableArray *seasonsAux = [[NSMutableArray alloc] init];
         for(NSDictionary *item in [parameters objectForKey:@"SeasonSynopses"])
         {
-            SeasonSynopse *season = [[SeasonSynopse alloc] initWithDictionary:item];
+            SeasonSynopsis *season = [[SeasonSynopsis alloc] initWithDictionary:item];
             [seasonsAux addObject:season];
         }
         seasons = seasonsAux;
@@ -57,7 +57,7 @@
 
 @end
 
-@implementation TvShowSynopse
+@implementation TvShowSynopsis
 
 @synthesize tvshowId, poster;
 

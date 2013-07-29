@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SynopsesViewController.h"
+#import "SynopsisViewController.h"
 
 /*!
  @discussion Controller for show all genres synopses.
  */
-@interface GenresViewController : SynopsesViewController
+@interface GenresViewController : SynopsisViewController
 
 @end

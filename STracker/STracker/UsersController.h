@@ -31,4 +31,33 @@
  */
 - (void)searchUser:(NSString *)uri withName:(NSString *)name finish:(Finish) finish;
 
+/*!
+ @discussion Get an particular user.
+ @param uri     The request uri.
+ @param finish  The finish callback.
+ */
+- (void)getUser:(NSString *)uri finish:(Finish) finish;
+
+/*!
+ @discussion Send user friend request.
+ @param uri     The request uri.
+ @param user    The user's information object.
+ @param finish  The finish callback.
+ */
+- (void)inviteUser:(NSString *)uri withUser:(User *)user finish:(Finish) finish;
+
+/*!
+ @discussion Delete user friend request.
+ @param uri     The request uri.
+ @param finish  The finish callback.
+ */
+- (void)deleteFriend:(NSString *)uri finish:(Finish) finish;
+
+/*!
+ @discussion Get current user's friends.
+ @param uri     The request uri.
+ @param finish  The finish callback.
+ */
+- (void)getFriends:(NSString *)uri finish:(Finish) finish;
+
 @end

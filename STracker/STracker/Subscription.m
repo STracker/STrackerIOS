@@ -22,7 +22,7 @@
         NSMutableArray *episodesAux = [[NSMutableArray alloc] init];
         for (NSDictionary *item in [parameters objectForKey:@"EpisodesWatched"])
         {
-            EpisodeSynopse *episode = [[EpisodeSynopse alloc] initWithDictionary:item];
+            EpisodeSynopsis *episode = [[EpisodeSynopsis alloc] initWithDictionary:item];
             [episodesAux addObject:episode];
         }
         episodesWatched = episodesAux;

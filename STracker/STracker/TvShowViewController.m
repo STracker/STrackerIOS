@@ -133,7 +133,7 @@
     _firstAired.text = [NSString stringWithFormat:@"First aired %@", _tvshow.firstAired];
     
     NSMutableString *str = [[NSMutableString alloc] init];
-    for (GenreSynopse *genre in _tvshow.genres)
+    for (GenreSynopsis *genre in _tvshow.genres)
         [str appendString:[NSString stringWithFormat:@"%@\n", genre.name]];
     
     _genres.text = str;

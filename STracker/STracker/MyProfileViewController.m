@@ -7,38 +7,10 @@
 //
 
 #import "MyProfileViewController.h"
-#import "DownloadFiles.h"
+#import "UsersController.h"
+#import "UsersViewController.h"
 
 @implementation MyProfileViewController
-
-/* 
- This method don't call the [super init], because this controller
- is instanced from storyboard.
- */
-- (id)initWithUserInfo:(User *)user
-{
-   _user = user;
-    return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
-    [self fillUserInformation];
-}
-
-- (void)viewDidUnload
-{
-    _photo = nil;
-    _name = nil;
-    
-    [super viewDidUnload];
-}
 
 #pragma mark - Table view delegate
 
@@ -61,13 +33,21 @@
     }
 }
 
-#pragma mark - CurrentUserProfileViewController private auxiliary methods.
+#pragma mark - MyProfileViewController private auxiliary methods.
 
 /*!
  @discussion This method opens a table with the calendar of next episodes from user's 
  favorite shows.
  */
 - (void)calendar
+{
+    //TODO
+}
+
+/*!
+ @discussion This method opens a table with user's messages.
+ */
+- (void)messages
 {
     //TODO
 }
@@ -85,28 +65,12 @@
  */
 - (void)friends
 {
-    //TODO
-}
-
-/*!
- @discussion This method opens a table with user's messages.
- */
-- (void)messages
-{
-    //TODO
-}
-
-/*!
- @discussion This method sets the outlets of user basic information.
- */
-- (void)fillUserInformation
-{
-    // Set properties of basic user information.
-    _name.text = _user.name;
-    
-    [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:_user.photoUrl] finish:^(UIImage *image) {
-            
-            _photo.image = image;
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsURI"];
+    [[UsersController sharedObject] getFriends:uri finish:^(id obj) {
+        
+        UsersViewController *view = [[UsersViewController alloc] initWithData:obj andTitle:@"Friends"];
+        
+        [self.navigationController pushViewController:view animated:YES];
     }];
 }
 

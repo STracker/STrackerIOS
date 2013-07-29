@@ -14,7 +14,7 @@
  */
 @interface Subscription : Entity
 
-@property(nonatomic, strong) TvShowSynopse *tvshow;
+@property(nonatomic, strong) TvShowSynopsis *tvshow;
 @property(nonatomic, strong) NSArray *episodesWatched;
 
 @end

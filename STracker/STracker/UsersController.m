@@ -34,15 +34,64 @@
     
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:query success:^(AFJSONRequestOperation *operation, id result) {
         
-        NSMutableArray *data = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in result)
-        {
-            UserSinopse *synopse = [[UserSinopse alloc] initWithDictionary:item];
-            [data addObject:synopse];
-        }
+        // Invoke callback.
+        finish([self parseUsersToArray:result]);
         
-        //Invoke callback.
-        finish(data);
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
+- (void)getUser:(NSString *)uri finish:(Finish)finish
+{
+    [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        User *user = [[User alloc] initWithDictionary:result];
+        
+        // Invoke callback.
+        finish(user);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
+- (void)inviteUser:(NSString *)uri withUser:(User *)user finish:(Finish)finish
+{
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:user.identifier, @"", nil];
+    
+    [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Invoke callback.
+        finish(nil);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
+- (void)deleteFriend:(NSString *)uri finish:(Finish)finish
+{
+    [[STrackerServerHttpClient sharedClient] deleteRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Invoke callback.
+        finish(nil);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
+- (void)getFriends:(NSString *)uri finish:(Finish)finish
+{
+    [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Invoke callback.
+        finish([self parseUsersToArray:result]);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         
@@ -62,6 +111,20 @@
     });
     
     return sharedObject;
+}
+
+#pragma mark - UsersController private auxiliary methods.
+
+- (NSArray *)parseUsersToArray:(id) result
+{
+    NSMutableArray *data = [[NSMutableArray alloc] init];
+    for (NSDictionary *item in result)
+    {
+        UserSynopsis *synopse = [[UserSynopsis alloc] initWithDictionary:item];
+        [data addObject:synopse];
+    }
+    
+    return data;
 }
 
 @end

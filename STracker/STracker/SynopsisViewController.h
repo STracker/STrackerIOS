@@ -10,8 +10,8 @@
 #import "BaseTableViewController.h"
 
 /*!
- @discussion Base controller of synopses tables.
+ @discussion Base controller of synopsis tables.
  */
-@interface SynopsesViewController : BaseTableViewController
+@interface SynopsisViewController : BaseTableViewController
 
 @end

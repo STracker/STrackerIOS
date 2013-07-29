@@ -18,7 +18,7 @@
     {
         identifier = [parameters objectForKey:@"Id"];
         body = [parameters objectForKey:@"Body"];
-        user = [[UserSinopse alloc] initWithDictionary:[parameters objectForKey:@"User"]];
+        user = [[UserSynopsis alloc] initWithDictionary:[parameters objectForKey:@"User"]];
         uri = [parameters objectForKey:@"Uri"];
     }  
     

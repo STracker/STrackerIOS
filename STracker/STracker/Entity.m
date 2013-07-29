@@ -18,7 +18,7 @@
 
 @end
 
-@implementation EntitySynopse
+@implementation EntitySynopsis
 
 @synthesize name, uri;
 

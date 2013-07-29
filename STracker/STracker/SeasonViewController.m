@@ -18,7 +18,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Opens an particular episode.
-    EpisodeSynopse *synopse = [_data objectAtIndex:indexPath.row];
+    EpisodeSynopsis *synopse = [_data objectAtIndex:indexPath.row];
     [[EpisodesController sharedObject] getEpisode:synopse.uri finish:^(id obj) {
         
         EpisodeViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"EpisodeView"] initWithEpisode: obj];
