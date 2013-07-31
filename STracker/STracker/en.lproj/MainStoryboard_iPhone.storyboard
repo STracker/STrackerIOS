@@ -292,22 +292,22 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="dSJ-rq-brW">
+                            <tableViewSection id="yrf-yS-43D">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyProfileCell" textLabel="h3t-58-rua" imageView="ZwE-sB-gGm" style="IBUITableViewCellStyleDefault" id="Fum-tF-umb">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyProfileCell" textLabel="sL2-yE-9fW" imageView="EFt-Xn-EhX" style="IBUITableViewCellStyleDefault" id="SXc-of-4rT">
                                         <rect key="frame" x="0.0" y="234" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h3t-58-rua">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sL2-yE-9fW">
                                                     <rect key="frame" x="47" y="0.0" width="243" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="22"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Friends_icon.png" id="ZwE-sB-gGm">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Friends_icon.png" id="EFt-Xn-EhX">
                                                     <rect key="frame" x="5" y="5" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -317,25 +317,58 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="oLG-aA-yJb">
+                            <tableViewSection id="RKS-WC-2bE">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyProfileCell" textLabel="nfl-up-DfZ" imageView="0od-Lb-gtO" style="IBUITableViewCellStyleDefault" id="m1J-Y4-ZMJ">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyProfileCell" textLabel="2FX-kI-43O" detailTextLabel="aH8-2d-Vkl" style="IBUITableViewCellStyleSubtitle" id="Rt4-gh-tbZ" customClass="TDBadgedCell">
                                         <rect key="frame" x="0.0" y="278" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Messages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nfl-up-DfZ">
-                                                    <rect key="frame" x="47" y="0.0" width="243" height="43"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Requests" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2FX-kI-43O">
+                                                    <rect key="frame" x="10" y="2" width="82" height="22"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="22"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Messages_icon.png" id="0od-Lb-gtO">
-                                                    <rect key="frame" x="5" y="5" width="32" height="32"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Friend requests" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aH8-2d-Vkl">
+                                                    <rect key="frame" x="10" y="24" width="98" height="18"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="FuA-cU-sxY">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyProfileCell" textLabel="IIC-Ne-Waa" detailTextLabel="05M-lG-4JO" style="IBUITableViewCellStyleSubtitle" id="IVd-Yc-H73" customClass="TDBadgedCell">
+                                        <rect key="frame" x="0.0" y="322" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Suggestions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IIC-Ne-Waa">
+                                                    <rect key="frame" x="10" y="2" width="109" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Friends suggestions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="05M-lG-4JO">
+                                                    <rect key="frame" x="10" y="24" width="126" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -353,6 +386,8 @@
                     <connections>
                         <outlet property="_name" destination="omV-nW-G8c" id="E4f-JN-st3"/>
                         <outlet property="_photo" destination="7gl-Rp-LiA" id="aBh-94-ZnZ"/>
+                        <outlet property="_requests" destination="Rt4-gh-tbZ" id="7yf-Fw-rvP"/>
+                        <outlet property="_suggestions" destination="IVd-Yc-H73" id="5QE-Yc-BbR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RNi-HK-rSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -542,7 +577,6 @@
     <resources>
         <image name="Calendar_icon.png" width="32" height="32"/>
         <image name="Friends_icon.png" width="32" height="32"/>
-        <image name="Messages_icon.png" width="32" height="32"/>
         <image name="Options.png" width="16" height="16"/>
         <image name="Search.png" width="16" height="16"/>
         <image name="Shows_icon.png" width="32" height="32"/>
@@ -600,6 +634,10 @@
         </class>
         <class className="MyProfileViewController" superclassName="BaseProfileViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MyProfileViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="_requests" candidateClass="TDBadgedCell"/>
+                <relationship kind="outlet" name="_suggestions" candidateClass="TDBadgedCell"/>
+            </relationships>
         </class>
         <class className="RatingsViewController" superclassName="BaseViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RatingsViewController.h"/>
@@ -607,6 +645,9 @@
                 <relationship kind="outlet" name="_average" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="_rating" candidateClass="DLStarRatingControl"/>
             </relationships>
+        </class>
+        <class className="TDBadgedCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TDBadgedCell.h"/>
         </class>
         <class className="TvShowViewController" superclassName="RatingsViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TvShowViewController.h"/>

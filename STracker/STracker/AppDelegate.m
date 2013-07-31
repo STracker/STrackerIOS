@@ -44,7 +44,7 @@
         storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
     else
         storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
-    
+
     return YES;
 }
 
@@ -98,7 +98,7 @@
          Create looper for getting information from server.
          Needed to be logged for this.
          */
-        [self createLooper];
+         [self createLooper];
         
         finish(obj);
     }];
@@ -122,7 +122,7 @@
  */
 - (void)createLooper
 {
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(verifyStatus) userInfo:nil repeats:YES];
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(verifyStatus) userInfo:nil repeats:YES];
     
     [timer fire];
 }
@@ -136,11 +136,8 @@
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendRequestsURI"];
     
     [[UsersController sharedObject] getFriendsRequests:uri finish:^(id obj) {
-            
-        for (UserSynopsis *synopsis in obj)
-        {
-            NSLog(@"%@", synopsis.name);
-        }
+        
+        _user.friendRequests = obj;
     }];
     
     // TODO -> Suggestions

@@ -12,6 +12,29 @@
 
 @implementation MyProfileViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    _suggestions.badgeColor = [UIColor colorWithRed:0.35 green:0.142 blue:0.35 alpha:1.000];
+    _suggestions.badge.radius = 5;
+    _suggestions.badge.fontSize = 14;
+    _suggestions.badgeString = @"1";
+    
+    _requests.badgeColor = [UIColor colorWithRed:0.792 green:0.197 blue:0.219 alpha:1.000];
+    _requests.badge.radius = 5;
+    _requests.badge.fontSize = 14;
+    NSLog(@"%d", _user.friendRequests.count);
+    _requests.badgeString = [NSString stringWithFormat:@"%d", _user.friendRequests.count];
+}
+
+- (void)viewDidUnload
+{
+    _suggestions = nil;
+    _requests = nil;
+    [super viewDidUnload];
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -28,7 +51,10 @@
             [self friends];
             break;
         case 4:
-            [self messages];
+            [self friendRequests];
+            break;
+        case 5:
+            [self suggestions];
             break;
     }
 }
@@ -45,11 +71,21 @@
 }
 
 /*!
- @discussion This method opens a table with user's messages.
+ @discussion This method opens a table with user friends's suggestions.
  */
-- (void)messages
+- (void)suggestions
 {
     //TODO
+}
+
+/*!
+ @discussion This method opens a table with friend requests for user.
+ */
+- (void)friendRequests
+{
+    UsersViewController *view = [[UsersViewController alloc] initWithData:_user.friendRequests andTitle:@"Friend requests"];
+    
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 /*!

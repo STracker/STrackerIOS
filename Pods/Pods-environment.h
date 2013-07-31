@@ -48,6 +48,12 @@
 #define COCOAPODS_VERSION_MINOR_KNSemiModalViewController 3
 #define COCOAPODS_VERSION_PATCH_KNSemiModalViewController 0
 
+// TDBadgedCell
+#define COCOAPODS_POD_AVAILABLE_TDBadgedCell
+#define COCOAPODS_VERSION_MAJOR_TDBadgedCell 2
+#define COCOAPODS_VERSION_MINOR_TDBadgedCell 3
+#define COCOAPODS_VERSION_PATCH_TDBadgedCell 1
+
 // YIPopupTextView
 #define COCOAPODS_POD_AVAILABLE_YIPopupTextView
 #define COCOAPODS_VERSION_MAJOR_YIPopupTextView 1

@@ -7,6 +7,7 @@ PODS:
     - Base64 (~> 1.0.1)
   - KIImagePager (0.0.2)
   - KNSemiModalViewController (0.3)
+  - TDBadgedCell (2.3.1)
   - YIPopupTextView (1.0.0)
 
 DEPENDENCIES:
@@ -16,6 +17,7 @@ DEPENDENCIES:
   - HawkClient (~> 1.3.0)
   - KIImagePager (~> 0.0.2)
   - KNSemiModalViewController (~> 0.3)
+  - TDBadgedCell (~> 2.3.1)
   - YIPopupTextView (~> 1.0.0)
 
 SPEC CHECKSUMS:
@@ -26,6 +28,7 @@ SPEC CHECKSUMS:
   HawkClient: 33b7d073d0c4c70a5b754036dce239fcc79916ab
   KIImagePager: 29fedf1aaa77fa341bd694b41749956efc8ff65a
   KNSemiModalViewController: 976b739f57aa595359a2cfdf6aadde991ada8f99
+  TDBadgedCell: 091af82e20d9da3be46eb48cfc53129c324a2faa
   YIPopupTextView: 2219b1579ac7477332af3dfa34c0dacb4113017d
 
 COCOAPODS: 0.20.2
