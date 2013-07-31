@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "FacebookView.h"
 #import "UIViewController+KNSemiModal.h"
+#import "UsersController.h"
 
 @implementation AppDelegate
 
@@ -43,10 +44,6 @@
         storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
     else
         storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
-    
-    // Notifications things.
-    [self handleLocalNotifications:application withOptions:launchOptions];
-    [self createNotificationsForMessages];
     
     return YES;
 }
@@ -96,6 +93,13 @@
     FacebookView *fb = [[FacebookView alloc] initWithCallback:^(id obj) {
        [self.window.rootViewController dismissSemiModalView];
         _user = obj;
+        
+        /* 
+         Create looper for getting information from server.
+         Needed to be logged for this.
+         */
+        [self createLooper];
+        
         finish(obj);
     }];
     
@@ -111,32 +115,35 @@
 
 #pragma mark - AppDelegate auxiliary private methods.
 
-- (void)handleLocalNotifications:(UIApplication *)application withOptions:(NSDictionary *)launchOptions
+/*!
+ @discussion Auxiliary method for getting periodically information from
+ server, like if exists friends requests for user or suggestions from others 
+ users.
+ */
+- (void)createLooper
 {
-    UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(verifyStatus) userInfo:nil repeats:YES];
     
-    if (notification == nil)
-        return;
-    
-    
+    [timer fire];
 }
 
-- (void)createNotificationsForMessages
+/*!
+ @discussion Method that is invoked when is time for getting the information 
+ from server.
+ */
+- (void)verifyStatus
 {
-    UILocalNotification* notification = [[UILocalNotification alloc] init];
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendRequestsURI"];
     
-    // Its necessary to test if nil, because exists one limit of local notifications per application.
-    if (notification == nil)
-        return;
+    [[UsersController sharedObject] getFriendsRequests:uri finish:^(id obj) {
+            
+        for (UserSynopsis *synopsis in obj)
+        {
+            NSLog(@"%@", synopsis.name);
+        }
+    }];
     
-    notification.timeZone = [NSTimeZone defaultTimeZone];
-    notification.fireDate = [NSDate date];
-    notification.repeatInterval = NSMinuteCalendarUnit;
-    notification.alertBody = @"New message";
-    notification.alertAction = @"Show me the message";
-    notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    // TODO -> Suggestions
 }
 
 @end

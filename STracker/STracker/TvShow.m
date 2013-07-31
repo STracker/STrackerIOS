@@ -36,7 +36,7 @@
         genres = genresAux;
         
         NSMutableArray *seasonsAux = [[NSMutableArray alloc] init];
-        for(NSDictionary *item in [parameters objectForKey:@"SeasonSynopses"])
+        for(NSDictionary *item in [parameters objectForKey:@"SeasonSynopsis"])
         {
             SeasonSynopsis *season = [[SeasonSynopsis alloc] initWithDictionary:item];
             [seasonsAux addObject:season];

@@ -21,6 +21,8 @@
 	<string>users</string>
 	<key>STrackerUserFriendsURI</key>
 	<string>userfriends</string>
+	<key>STrackerUserFriendRequestsURI</key>
+	<string>userfriendrequests</string>
 	<key>STrackerUserSubscriptionsURI</key>
 	<string>usersubscriptions</string>
 	<key>STrackerGenresURI</key>

@@ -60,4 +60,12 @@
  */
 - (void)getFriends:(NSString *)uri finish:(Finish) finish;
 
+/*!
+ @discussion Get current user's friends requests.
+ @param uri     The request uri.
+ @param finish  The finish callback.
+ */
+- (void)getFriendsRequests:(NSString *)uri finish:(Finish) finish;
+
+
 @end

@@ -21,7 +21,7 @@
         seasonNumber = [[parameters objectForKey:@"SeasonNumber"] intValue];
         
         NSMutableArray *episodesAux = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in [parameters objectForKey:@"EpisodeSynopses"])
+        for (NSDictionary *item in [parameters objectForKey:@"EpisodeSynopsis"])
         {
             EpisodeSynopsis *episode = [[EpisodeSynopsis alloc] initWithDictionary:item];
             [episodesAux addObject:episode];

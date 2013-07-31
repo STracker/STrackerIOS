@@ -99,6 +99,19 @@
     }];
 }
 
+- (void)getFriendsRequests:(NSString *)uri finish:(Finish)finish
+{
+    [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Invoke callback.
+        finish([self parseUsersToArray:result]);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
 #pragma mark - InfoController abstract methods.
 
 + (id)sharedObject
