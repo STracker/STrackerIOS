@@ -20,7 +20,7 @@
     _app = [[UIApplication sharedApplication] delegate];
 }
 
-#pragma mark - Shake gesture. Some magic things happens here, do not touch!
+#pragma mark - Shake gesture. 
 
 - (void)shakeEvent
 {
