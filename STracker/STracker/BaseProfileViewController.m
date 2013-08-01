@@ -18,6 +18,7 @@
 - (id)initWithUserInfo:(User *)user
 {
     _user = user;
+    _app = [[UIApplication sharedApplication] delegate];
     return self;
 }
 
@@ -40,11 +41,6 @@
     [super viewDidUnload];
 }
 
-#pragma mark - BaseProfileViewController private auxiliary methods.
-
-/*!
- @discussion This method sets the outlets of user basic information.
- */
 - (void)fillUserInformation
 {
     // Set properties of basic user information.
@@ -54,6 +50,30 @@
         
         _photo.image = image;
     }];
+}
+
+#pragma mark - Shake gesture.
+
+- (void)shakeEvent
+{
+    // Not raise exception this time because some controls don't need this feature.
+    // [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
+}
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+/*!
+ @discussion Use montion events.
+ @see http://developer.apple.com/library/ios/#documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/motion_event_basics/motion_event_basics.html
+ */
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    // if the motion is the shake gesture, invoke shakeEvent method.
+    if (motion == UIEventSubtypeMotionShake)
+        [self shakeEvent];
 }
 
 @end

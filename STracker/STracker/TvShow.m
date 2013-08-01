@@ -65,7 +65,7 @@
 {
     if (self = [super init])
     {
-        tvshowId = [parameters objectForKey:@"TvShowId"];
+        tvshowId = [parameters objectForKey:@"Id"];
         self.name = [parameters objectForKey:@"Name"];
         poster = [parameters objectForKey:@"Poster"];
         self.uri = [parameters objectForKey:@"Uri"];

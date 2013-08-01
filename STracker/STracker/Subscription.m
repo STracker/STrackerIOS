@@ -17,7 +17,7 @@
 {
     if (self = [super init])
     {
-        tvshow = [parameters objectForKey:@"TvShowId"];
+        tvshow = [[TvShowSynopsis alloc] initWithDictionary:[parameters objectForKey:@"TvShow"]];
         
         NSMutableArray *episodesAux = [[NSMutableArray alloc] init];
         for (NSDictionary *item in [parameters objectForKey:@"EpisodesWatched"])

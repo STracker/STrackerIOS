@@ -21,7 +21,10 @@
     __weak IBOutlet UITextView *_genres;
     IBOutlet UISwipeGestureRecognizer *_swipeGestureSeasons;
     IBOutlet UISwipeGestureRecognizer *_swipeGestureDescription;
-
+    
+    UIActionSheet *_actionSheet;
+    UIAlertView *_alertSubscribe;
+    UIAlertView *_alertUnsubscribe;
     TvShow *_tvshow;
 }
 

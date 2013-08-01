@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
+#import "AppDelegate.h"
 
 #define BACKGROUND @"BackgroundPattern2.png"
 
@@ -16,6 +17,7 @@
  */
 @interface BaseProfileViewController : UITableViewController
 {
+    AppDelegate *_app;
     User *_user;
     
     __weak IBOutlet UIImageView *_photo;
@@ -28,5 +30,17 @@
  @return An instance of BaseProfileViewController.
  */
 - (id)initWithUserInfo:(User *)user;
+
+/*!
+ @discussion Abstract method, is implemented by sub classes.
+ Defines the events that happen after an shake gesture, usually
+ the events is for refresh view's data.
+ */
+- (void)shakeEvent;
+
+/*!
+ @discussion This method sets the outlets of user basic information.
+ */
+- (void)fillUserInformation;
 
 @end

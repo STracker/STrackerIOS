@@ -8,6 +8,8 @@
 
 #import "UsersController.h"
 #import "STrackerServerHttpClient.h"
+#import "Suggestion.h"
+#import "Subscription.h"
 
 @implementation UsersController
 
@@ -19,10 +21,14 @@
     
     [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
         
+        User *me = [[User alloc] initWithDictionary:result];
+        
         // Invoke callback.
-        finish(nil);
+        finish(me);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error.description);
         
         [[_app getAlertViewForErrors:error.localizedDescription] show];
     }];
@@ -105,6 +111,74 @@
         
         // Invoke callback.
         finish([self parseUsersToArray:result]);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
+- (void)getFriendsSuggestions:(NSString *)uri finish:(Finish)finish
+{
+    [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        NSMutableArray *data = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in result)
+        {
+            Suggestion *suggestion = [[Suggestion alloc] initWithDictionary:item];
+            [data addObject:suggestion];
+        }
+        
+        // Invoke callback.
+        finish(data);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
+- (void)getUserFavoritesTvShows:(NSString *)uri finish:(Finish)finish
+{
+    [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        NSMutableArray *data = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in result)
+        {
+            Subscription *subscription = [[Subscription alloc] initWithDictionary:item];
+            [data addObject:subscription];
+        }
+        
+        // Invoke callback.
+        finish(data);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
+- (void)postFavoriteTvShow:(NSString *)uri tvshowId:(NSString *)tvshowId finish:(Finish)finish
+{
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:tvshowId, @"", nil];
+    
+    [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Invoke callback.
+        finish(nil);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[_app getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
+- (void)deleteFavoriteTvShow:(NSString *)uri finish:(Finish)finish
+{
+    [[STrackerServerHttpClient sharedClient] deleteRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Invoke callback.
+        finish(nil);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         

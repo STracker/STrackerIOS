@@ -27,12 +27,10 @@
         // For simplicity, this sample will ignore the link if the session is already
         // open but a more advanced app could support features like user switching.
         if (call.accessTokenData) {
-            if ([FBSession activeSession].isOpen) {
+            if ([FBSession activeSession].isOpen) 
                 NSLog(@"INFO: Ignoring app link because current session is open.");
-            }
-            else {
+            else 
                 [self handleAppLink:call.accessTokenData];
-            }
         }
     }];
 }
@@ -91,19 +89,25 @@
     }
     
     FacebookView *fb = [[FacebookView alloc] initWithCallback:^(id obj) {
-       [self.window.rootViewController dismissSemiModalView];
+       
+        [self.window.rootViewController dismissSemiModalView];
         _user = obj;
         
         /* 
          Create looper for getting information from server.
          Needed to be logged for this.
          */
-         [self createLooper];
+        [self createLooper];
         
         finish(obj);
     }];
     
     [self.window.rootViewController presentSemiView:fb];
+}
+
+- (void)setUser:(User *)newUser
+{
+    _user = newUser;
 }
 
 - (UIAlertView *)getAlertViewForErrors:(NSString *)msgError
@@ -122,9 +126,13 @@
  */
 - (void)createLooper
 {
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(verifyStatus) userInfo:nil repeats:YES];
-    
-    [timer fire];
+    /*NSTimer *timer = */[NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(verifyStatus) userInfo:nil repeats:YES];
+     
+    /* 
+     Don't fire now, because the request login in facebook returns 
+     the updated user information.
+     */
+    // [timer fire];
 }
 
 /*!
@@ -134,13 +142,16 @@
 - (void)verifyStatus
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendRequestsURI"];
-    
     [[UsersController sharedObject] getFriendsRequests:uri finish:^(id obj) {
         
         _user.friendRequests = obj;
     }];
     
-    // TODO -> Suggestions
+   uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsSuggestionsURI"];
+    [[UsersController sharedObject] getFriendsSuggestions:uri finish:^(id obj) {
+        
+        _user.suggestions = obj;
+    }];
 }
 
 @end

@@ -66,7 +66,7 @@
     [[UsersController sharedObject] registUser:uri withUser:me finish:^(id obj) {
         
         // If success, execute callback.
-        _finish(me);
+        _finish(obj);
     }];
 }
 

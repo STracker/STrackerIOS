@@ -8,7 +8,10 @@
 
 #import "MyProfileViewController.h"
 #import "UsersController.h"
-#import "UsersViewController.h"
+#import "SuggestionsViewController.h"
+#import "UserSubscriptionsViewController.h"
+#import "FriendsRequestsViewController.h"
+#import "FriendsViewController.h"
 
 @implementation MyProfileViewController
 
@@ -16,16 +19,7 @@
 {
     [super viewDidLoad];
     
-    _suggestions.badgeColor = [UIColor colorWithRed:0.35 green:0.142 blue:0.35 alpha:1.000];
-    _suggestions.badge.radius = 5;
-    _suggestions.badge.fontSize = 14;
-    _suggestions.badgeString = @"1";
-    
-    _requests.badgeColor = [UIColor colorWithRed:0.792 green:0.197 blue:0.219 alpha:1.000];
-    _requests.badge.radius = 5;
-    _requests.badge.fontSize = 14;
-    NSLog(@"%d", _user.friendRequests.count);
-    _requests.badgeString = [NSString stringWithFormat:@"%d", _user.friendRequests.count];
+    [self setBadgesInfo];
 }
 
 - (void)viewDidUnload
@@ -33,6 +27,31 @@
     _suggestions = nil;
     _requests = nil;
     [super viewDidUnload];
+}
+
+#pragma mark - BaseViewController abstract methods.
+
+/*!
+ @discussion In this case, the data for refreshing is the 
+ user information. So its needed in the end to set user 
+ information in App.
+ */
+- (void)shakeEvent
+{
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
+    uri = [uri stringByAppendingString:[NSString stringWithFormat:@"/%@", _user.identifier]];
+    
+    [[UsersController sharedObject] getUser:uri finish:^(id obj) {
+        
+        [_app setUser:obj];
+        _user = obj;
+        
+        // Update userInformation.
+        [super fillUserInformation];
+        
+        // Update badges.
+        [self setBadgesInfo];
+    }];
 }
 
 #pragma mark - Table view delegate
@@ -62,6 +81,22 @@
 #pragma mark - MyProfileViewController private auxiliary methods.
 
 /*!
+ @discussion This method sets the cells badges.
+ */
+- (void)setBadgesInfo
+{
+    _suggestions.badgeColor = [UIColor colorWithRed:0.35 green:0.142 blue:0.35 alpha:1.000];
+    _suggestions.badge.radius = 5;
+    _suggestions.badge.fontSize = 14;
+    _suggestions.badgeString = [NSString stringWithFormat:@"%d", _user.suggestions.count];
+    
+    _requests.badgeColor = [UIColor colorWithRed:0.792 green:0.197 blue:0.219 alpha:1.000];
+    _requests.badge.radius = 5;
+    _requests.badge.fontSize = 14;
+    _requests.badgeString = [NSString stringWithFormat:@"%d", _user.friendRequests.count];
+}
+
+/*!
  @discussion This method opens a table with the calendar of next episodes from user's 
  favorite shows.
  */
@@ -75,7 +110,9 @@
  */
 - (void)suggestions
 {
-    //TODO
+    SuggestionsViewController *view = [[SuggestionsViewController alloc] initWithData:_user.suggestions andTitle:@"Suggestions"];
+    
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 /*!
@@ -83,7 +120,7 @@
  */
 - (void)friendRequests
 {
-    UsersViewController *view = [[UsersViewController alloc] initWithData:_user.friendRequests andTitle:@"Friend requests"];
+    FriendsRequestsViewController *view = [[FriendsRequestsViewController alloc] initWithData:_user.friendRequests andTitle:@"Friend requests"];
     
     [self.navigationController pushViewController:view animated:YES];
 }
@@ -93,7 +130,9 @@
  */
 - (void)subscriptions
 {
-    //TODO
+    UserSubscriptionsViewController *view = [[UserSubscriptionsViewController alloc] initWithData:_user.subscriptions andTitle:@"Subscriptions"];
+    
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 /*!
@@ -101,13 +140,9 @@
  */
 - (void)friends
 {
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsURI"];
-    [[UsersController sharedObject] getFriends:uri finish:^(id obj) {
-        
-        UsersViewController *view = [[UsersViewController alloc] initWithData:obj andTitle:@"Friends"];
-        
-        [self.navigationController pushViewController:view animated:YES];
-    }];
+    FriendsViewController *view = [[FriendsViewController alloc] initWithData:_user.friends andTitle:@"Friends"];
+    
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 @end

@@ -582,11 +582,12 @@
         <image name="Shows_icon.png" width="32" height="32"/>
     </resources>
     <classes>
-        <class className="BaseProfileViewController" superclassName="UITableViewController">
+        <class className="BaseProfileViewController" superclassName="BaseViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BaseProfileViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="_name" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="_photo" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="_tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
         <class className="BaseViewController" superclassName="UIViewController">

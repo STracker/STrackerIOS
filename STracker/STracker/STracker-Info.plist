@@ -23,6 +23,8 @@
 	<string>userfriends</string>
 	<key>STrackerUserFriendRequestsURI</key>
 	<string>userfriendrequests</string>
+	<key>STrackerUserFriendsSuggestionsURI</key>
+	<string>usersuggestions</string>
 	<key>STrackerUserSubscriptionsURI</key>
 	<string>usersubscriptions</string>
 	<key>STrackerGenresURI</key>

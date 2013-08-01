@@ -18,8 +18,6 @@
 @property(nonatomic, strong) NSArray *friends;
 @property(nonatomic, strong) NSArray *subscriptions;
 @property(nonatomic, strong) NSArray *suggestions;
-
-// Only for current user.
 @property(nonatomic, strong) NSArray *friendRequests;
 
 @end

@@ -16,7 +16,7 @@ typedef void (^Finish)(id obj);
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
-    // The current user information.
+    // Current user information.
     User *_user;
 }
 
@@ -33,6 +33,15 @@ typedef void (^Finish)(id obj);
  @return The user information object.
  */
 - (void)loginInFacebook:(Finish) finish;
+
+/*!
+ @discussion Well... sometimes is needed to set user with new 
+ information. One example is when user makes a shake gesture in 
+ table view with friends for update information , when this happens, 
+ its needed to update the user in App with the new friends.
+ @param newUser The user object with updated information.
+ */
+- (void)setUser:(User *)newUser;
 
 /*!
  @discussion This method returns one alert view with one message error.

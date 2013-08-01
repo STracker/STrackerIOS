@@ -8,10 +8,11 @@
 
 #import "User.h"
 #import "Subscription.h"
+#import "Suggestion.h"
 
 @implementation User
 
-@synthesize identifier, email, friends, subscriptions;
+@synthesize identifier, email, friends, subscriptions, friendRequests, suggestions;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
@@ -35,6 +36,22 @@
             [subscriptionsAux addObject:subscription];
         }
         subscriptions = subscriptionsAux;
+        
+        NSMutableArray *friendRequestsAux = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in [parameters objectForKey:@"FriendRequests"])
+        {
+            UserSynopsis *request = [[UserSynopsis alloc] initWithDictionary:item];
+            [friendRequestsAux addObject:request];
+        }
+        friendRequests = friendRequestsAux;
+        
+        NSMutableArray *suggestionsAux = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in [parameters objectForKey:@"Suggestions"])
+        {
+            Suggestion *suggestion = [[Suggestion alloc] initWithDictionary:item];
+            [suggestionsAux addObject:suggestion];
+        }
+        suggestions = suggestionsAux;
     }
     
     return self;

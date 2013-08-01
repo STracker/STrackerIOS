@@ -67,5 +67,34 @@
  */
 - (void)getFriendsRequests:(NSString *)uri finish:(Finish) finish;
 
+/*!
+ @discussion Get current user's friends suggestions.
+ @param uri     The request uri.
+ @param finish  The finish callback.
+ */
+- (void)getFriendsSuggestions:(NSString *)uri finish:(Finish) finish;
 
+/*!
+ @discussion Get current user's favorites television shows.
+ @param uri     The request uri.
+ @param finish  The finish callback.
+ */
+- (void)getUserFavoritesTvShows:(NSString *)uri finish:(Finish) finish;
+
+/*!
+ @discussion Make a request for put one tv show into user's 
+ favorites.
+ @param uri         The request uri.
+ @param tvshowId    The id of television show.
+ @param finish      The finish callback.
+ */
+- (void)postFavoriteTvShow:(NSString *)uri tvshowId:(NSString *)tvshowId finish:(Finish) finish;
+
+/*!
+ @discussion Make a request for delete one tv show into user's
+ favorites.
+ @param uri         The request uri.
+ @param finish      The finish callback.
+ */
+- (void)deleteFavoriteTvShow:(NSString *)uri finish:(Finish) finish;
 @end
