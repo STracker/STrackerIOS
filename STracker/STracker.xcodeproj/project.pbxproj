@@ -10,6 +10,11 @@
 		8C1AB39E178C4A2500ED7142 /* CommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AB39D178C4A2500ED7142 /* CommentsViewController.m */; };
 		8C1AB3A1178C4BF400ED7142 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AB3A0178C4BF400ED7142 /* Comment.m */; };
 		8C1AB3A4178C50BC00ED7142 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AB3A3178C50BC00ED7142 /* CommentViewController.m */; };
+		8C36012817B146A800CA10D8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C36012717B146A800CA10D8 /* SenTestingKit.framework */; };
+		8C36012917B146A800CA10D8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EBF174E6E160025CF79 /* UIKit.framework */; };
+		8C36012A17B146A800CA10D8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EC1174E6E160025CF79 /* Foundation.framework */; };
+		8C36013017B146A800CA10D8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8C36012E17B146A800CA10D8 /* InfoPlist.strings */; };
+		8C36013317B146A800CA10D8 /* Unit_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C36013217B146A800CA10D8 /* Unit_Tests.m */; };
 		8C5934FB178CE18300872E30 /* EpisodeCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5934FA178CE18300872E30 /* EpisodeCommentsViewController.m */; };
 		8C67EDDD1764D779003278F8 /* Genre.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDDC1764D779003278F8 /* Genre.m */; };
 		8C67EDE31764FC5A003278F8 /* SeasonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67EDE21764FC59003278F8 /* SeasonsViewController.m */; };
@@ -98,6 +103,16 @@
 		D8FFA0AF179C62B00058E825 /* SynopsisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FFA0AE179C62B00058E825 /* SynopsisViewController.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8C36013C17B149D800CA10D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8782EB4174E6E160025CF79 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D8782EBB174E6E160025CF79;
+			remoteInfo = STracker;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		00925DCD2FE44C7AB3E9BD97 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		86A72A6102254A888262B579 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +122,13 @@
 		8C1AB3A0178C4BF400ED7142 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		8C1AB3A2178C50BB00ED7142 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		8C1AB3A3178C50BC00ED7142 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		8C36012617B146A800CA10D8 /* Unit_Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Unit_Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C36012717B146A800CA10D8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		8C36012D17B146A800CA10D8 /* Unit_Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Unit_Tests-Info.plist"; sourceTree = "<group>"; };
+		8C36012F17B146A800CA10D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8C36013117B146A800CA10D8 /* Unit_Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Unit_Tests.h; sourceTree = "<group>"; };
+		8C36013217B146A800CA10D8 /* Unit_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Unit_Tests.m; sourceTree = "<group>"; };
+		8C36013417B146A800CA10D8 /* Unit_Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Unit_Tests-Prefix.pch"; sourceTree = "<group>"; };
 		8C5934F9178CE18300872E30 /* EpisodeCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpisodeCommentsViewController.h; sourceTree = "<group>"; };
 		8C5934FA178CE18300872E30 /* EpisodeCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EpisodeCommentsViewController.m; sourceTree = "<group>"; };
 		8C67EDDB1764D779003278F8 /* Genre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Genre.h; sourceTree = "<group>"; };
@@ -244,6 +266,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8C36012217B146A800CA10D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C36012817B146A800CA10D8 /* SenTestingKit.framework in Frameworks */,
+				8C36012917B146A800CA10D8 /* UIKit.framework in Frameworks */,
+				8C36012A17B146A800CA10D8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D8782EB9174E6E160025CF79 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -288,6 +320,26 @@
 				8C1AB3A3178C50BC00ED7142 /* CommentViewController.m */,
 			);
 			name = CommentsController;
+			sourceTree = "<group>";
+		};
+		8C36012B17B146A800CA10D8 /* Unit_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8C36013117B146A800CA10D8 /* Unit_Tests.h */,
+				8C36013217B146A800CA10D8 /* Unit_Tests.m */,
+				8C36012C17B146A800CA10D8 /* Supporting Files */,
+			);
+			path = Unit_Tests;
+			sourceTree = "<group>";
+		};
+		8C36012C17B146A800CA10D8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8C36012D17B146A800CA10D8 /* Unit_Tests-Info.plist */,
+				8C36012E17B146A800CA10D8 /* InfoPlist.strings */,
+				8C36013417B146A800CA10D8 /* Unit_Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		8C4D51C4175296DE00739A25 /* HttpClients */ = {
@@ -426,8 +478,8 @@
 		D8782EB3174E6E160025CF79 = {
 			isa = PBXGroup;
 			children = (
-				D8EC0312176F838900BBC5C1 /* Unit Tests */,
 				D8782EC5174E6E160025CF79 /* STracker */,
+				8C36012B17B146A800CA10D8 /* Unit_Tests */,
 				D8782EBE174E6E160025CF79 /* Frameworks */,
 				D8782EBD174E6E160025CF79 /* Products */,
 				00925DCD2FE44C7AB3E9BD97 /* Pods.xcconfig */,
@@ -438,6 +490,7 @@
 			isa = PBXGroup;
 			children = (
 				D8782EBC174E6E160025CF79 /* STracker.app */,
+				8C36012617B146A800CA10D8 /* Unit_Tests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -468,6 +521,7 @@
 				D8782EC3174E6E160025CF79 /* CoreGraphics.framework */,
 				D802E659178887C000ABD08F /* libsqlite3.dylib */,
 				86A72A6102254A888262B579 /* libPods.a */,
+				8C36012717B146A800CA10D8 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -577,13 +631,6 @@
 			name = Friends;
 			sourceTree = "<group>";
 		};
-		D8EC0312176F838900BBC5C1 /* Unit Tests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Unit Tests";
-			sourceTree = "<group>";
-		};
 		D8FCACB2179F031F00CC91E4 /* InfoControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -619,6 +666,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8C36012517B146A800CA10D8 /* Unit_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C36013517B146A800CA10D8 /* Build configuration list for PBXNativeTarget "Unit_Tests" */;
+			buildPhases = (
+				8C36012117B146A800CA10D8 /* Sources */,
+				8C36012217B146A800CA10D8 /* Frameworks */,
+				8C36012317B146A800CA10D8 /* Resources */,
+				8C36012417B146A800CA10D8 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8C36013D17B149D800CA10D8 /* PBXTargetDependency */,
+			);
+			name = Unit_Tests;
+			productName = Unit_Tests;
+			productReference = 8C36012617B146A800CA10D8 /* Unit_Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		D8782EBB174E6E160025CF79 /* STracker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D8782EE2174E6E160025CF79 /* Build configuration list for PBXNativeTarget "STracker" */;
@@ -660,11 +726,20 @@
 			projectRoot = "";
 			targets = (
 				D8782EBB174E6E160025CF79 /* STracker */,
+				8C36012517B146A800CA10D8 /* Unit_Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8C36012317B146A800CA10D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C36013017B146A800CA10D8 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D8782EBA174E6E160025CF79 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -721,9 +796,30 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 		};
+		8C36012417B146A800CA10D8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8C36012117B146A800CA10D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C36013317B146A800CA10D8 /* Unit_Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D8782EB8174E6E160025CF79 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -783,7 +879,23 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8C36013D17B149D800CA10D8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D8782EBB174E6E160025CF79 /* STracker */;
+			targetProxy = 8C36013C17B149D800CA10D8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		8C36012E17B146A800CA10D8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8C36012F17B146A800CA10D8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		D8782EC8174E6E160025CF79 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -811,6 +923,43 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8C36013617B146A800CA10D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/STracker.app/STracker";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Unit_Tests/Unit_Tests-Prefix.pch";
+				INFOPLIST_FILE = "Unit_Tests/Unit_Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		8C36013717B146A800CA10D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/STracker.app/STracker";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Unit_Tests/Unit_Tests-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				INFOPLIST_FILE = "Unit_Tests/Unit_Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		D8782EE0174E6E160025CF79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -879,6 +1028,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "STracker/STracker-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "STracker/STracker-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -895,6 +1045,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "STracker/STracker-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "STracker/STracker-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -904,6 +1055,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8C36013517B146A800CA10D8 /* Build configuration list for PBXNativeTarget "Unit_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C36013617B146A800CA10D8 /* Debug */,
+				8C36013717B146A800CA10D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		D8782EB7174E6E160025CF79 /* Build configuration list for PBXProject "STracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
