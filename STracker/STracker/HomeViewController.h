@@ -16,10 +16,14 @@
  */
 @interface HomeViewController : BaseViewController <KIImagePagerDelegate, KIImagePagerDataSource, UIActionSheetDelegate, UIAlertViewDelegate>
 {
+    @private
     __weak IBOutlet KIImagePager *_imagePager;
-
+    
+    @private
     NSMutableArray *_top;
+    @private
     UIAlertView *_alertTv;
+    @private
     UIAlertView *_alertUser;
 }
 

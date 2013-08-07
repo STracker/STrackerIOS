@@ -17,7 +17,9 @@
  */
 @interface MyProfileViewController : BaseProfileViewController
 {
+    @private
     __weak IBOutlet TDBadgedCell *_suggestions;
+    @private
     __weak IBOutlet TDBadgedCell *_requests;
 }
 

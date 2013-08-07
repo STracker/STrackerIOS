@@ -16,10 +16,14 @@
  */
 @interface EpisodeViewController : RatingsViewController <UIActionSheetDelegate>
 {
+    @private
     __weak IBOutlet UIImageView *_poster;
+    @private
     __weak IBOutlet UILabel *_date;
+    @private
     IBOutlet UISwipeGestureRecognizer *_swipeGestureDescription;
     
+    @private
     Episode *_episode;
 }
 

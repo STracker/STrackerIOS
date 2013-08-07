@@ -14,6 +14,7 @@
  */
 @interface EpisodeCommentsViewController : CommentsViewController
 {
+    @private
     Episode *_episode;
 }
 

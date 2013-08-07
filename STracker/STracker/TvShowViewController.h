@@ -15,16 +15,26 @@
  */
 @interface TvShowViewController : RatingsViewController <UIActionSheetDelegate>
 {
+    @private
     __weak IBOutlet UILabel *_airDay;
+    @private
     __weak IBOutlet UILabel *_firstAired;
+    @private
     __weak IBOutlet UIImageView *_poster;
+    @private
     __weak IBOutlet UITextView *_genres;
+    @private
     IBOutlet UISwipeGestureRecognizer *_swipeGestureSeasons;
+    @private
     IBOutlet UISwipeGestureRecognizer *_swipeGestureDescription;
     
+    @private
     UIActionSheet *_actionSheet;
+    @private
     UIAlertView *_alertSubscribe;
+    @private
     UIAlertView *_alertUnsubscribe;
+    @private
     TvShow *_tvshow;
 }
 

@@ -25,6 +25,7 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
  */
 @interface STrackerServerHttpClient : AFHTTPClient
 {
+    @private
     AppDelegate *_app;
 }
 

@@ -14,6 +14,7 @@ typedef void (^FinishDownloadImage)(UIImage *image);
 
 @interface DownloadFiles : NSObject
 {
+    @private
     dispatch_queue_t downloadImagesQueue;
 }
 

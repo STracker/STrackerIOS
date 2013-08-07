@@ -15,8 +15,11 @@
  */
 @interface FacebookView : UIView<FBLoginViewDelegate>
 {
+    @private
     AppDelegate *_app;
+    @private
     Finish _finish;
+    @private
     FBLoginView *_fb;
 }
 

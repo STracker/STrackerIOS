@@ -14,6 +14,7 @@
  */
 @interface TvShowCommentsViewController : CommentsViewController
 {
+    @private
     TvShow *_tvshow;
 }
 

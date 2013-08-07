@@ -16,11 +16,16 @@
  */
 @interface CommentViewController : BaseViewController
 {
+    @private
     __weak IBOutlet UITextView *_body;
+    @private
     __weak IBOutlet UIButton *_userProfile;
+    @private
     __weak IBOutlet UILabel *_userName;
     
+    @private
     UIAlertView *_alertDelete;
+    @private
     Comment *_comment;
 }
 
