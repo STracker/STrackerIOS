@@ -12,7 +12,7 @@
 
 /*!
  @discussion Override init method for set _app field. This 
- field is by all info controllers.
+ field is used by all info controllers.
  */
 - (id)init
 {
