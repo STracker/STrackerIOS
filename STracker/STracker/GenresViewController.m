@@ -19,7 +19,7 @@
 {
     // Open a table with tvshows synopses (all tvshows from this particular genre).
     GenreSynopsis *synopse = [_data objectAtIndex:indexPath.row];
-    [[GenresController sharedObject] getGenre:synopse.uri finish:^(id obj) {
+    [GenresController getGenre:synopse.uri finish:^(id obj) {
         
         TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:obj andTitle:synopse.name];
         [self.navigationController pushViewController:view animated:YES];

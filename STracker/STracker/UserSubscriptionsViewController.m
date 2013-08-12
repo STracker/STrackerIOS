@@ -38,7 +38,7 @@
     // Only for take the user object in App.
     [_app loginInFacebook:^(id obj) {
         
-        [[UsersController sharedObject] getUserFavoritesTvShows:uri finish:^(id subscriptions) {
+        [UsersController getUserFavoritesTvShows:uri finish:^(id subscriptions) {
             
             User *user = obj;
             user.subscriptions = subscriptions;

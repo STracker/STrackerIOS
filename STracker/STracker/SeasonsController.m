@@ -12,7 +12,7 @@
 
 @implementation SeasonsController
 
-- (void)getSeason:(NSString *)uri finish:(Finish)finish
++ (void)getSeason:(NSString *)uri finish:(Finish)finish
 {
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -22,23 +22,9 @@
         finish(season);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
-}
-
-#pragma mark - InfoController abstract methods.
-
-+ (id)sharedObject
-{
-    static SeasonsController *sharedObject = nil;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedObject = [[SeasonsController alloc] init];
-    });
-    
-    return sharedObject;
 }
 
 @end

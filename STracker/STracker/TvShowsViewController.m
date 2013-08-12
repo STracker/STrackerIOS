@@ -19,7 +19,7 @@
 {
     // Open a particular tvshow controller...
     TvShowSynopsis *synopse = [_data objectAtIndex:indexPath.row];
-    [[TvShowsController sharedObject] getTvShow:synopse.uri finish:^(id obj) {
+    [TvShowsController getTvShow:synopse.uri finish:^(id obj) {
         
         TvShowViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"TvShowView"] initWithTvShow:obj];
         

@@ -20,13 +20,13 @@
 	<key>STrackerUsersURI</key>
 	<string>users</string>
 	<key>STrackerUserFriendsURI</key>
-	<string>userfriends</string>
+	<string>user/friends</string>
 	<key>STrackerUserFriendRequestsURI</key>
-	<string>userfriendrequests</string>
+	<string>user/friendrequests</string>
 	<key>STrackerUserFriendsSuggestionsURI</key>
-	<string>usersuggestions</string>
+	<string>user/suggestions</string>
 	<key>STrackerUserSubscriptionsURI</key>
-	<string>usersubscriptions</string>
+	<string>user/subscriptions</string>
 	<key>STrackerGenresURI</key>
 	<string>genres</string>
 	<key>STrackerTvShowsURI</key>

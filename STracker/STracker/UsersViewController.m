@@ -34,7 +34,7 @@
         
         NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
         uri = [uri stringByAppendingString:[NSString stringWithFormat:@"/%@", synopse.identifier]];
-        [[UsersController sharedObject] getUser:uri finish:^(id obj) {
+        [UsersController getUser:uri finish:^(id obj) {
             
             UserProfileViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"UserProfile"] initWithUserInfo:obj];
             [self.navigationController pushViewController:view animated:YES];

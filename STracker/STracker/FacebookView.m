@@ -63,7 +63,7 @@
     
     // Register the user into STracker server.
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
-    [[UsersController sharedObject] registUser:uri withUser:me finish:^(id obj) {
+    [UsersController registUser:uri withUser:me finish:^(id obj) {
         
         // If success, execute callback.
         _finish(obj);

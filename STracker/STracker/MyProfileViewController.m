@@ -41,7 +41,7 @@
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
     uri = [uri stringByAppendingString:[NSString stringWithFormat:@"/%@", _user.identifier]];
     
-    [[UsersController sharedObject] getUser:uri finish:^(id obj) {
+    [UsersController getUser:uri finish:^(id obj) {
         
         [_app setUser:obj];
         _user = obj;

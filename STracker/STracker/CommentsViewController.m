@@ -85,7 +85,7 @@
     [_composeComment setEnabled:YES];
     
     // Post comment to STracker server.
-    [[CommentController sharedObject] postComment:_commentsUri comment:text finish:^(id obj) {
+    [CommentController postComment:_commentsUri comment:text finish:^(id obj) {
         
         // In this moment the user is already logged in, this call is only for get the user object.
         [_app loginInFacebook:^(id obj) {
@@ -115,7 +115,7 @@
  */
 - (void)getComments
 {
-    [[CommentController sharedObject] getComments:_commentsUri finish:^(NSArray *comments) {
+    [CommentController getComments:_commentsUri finish:^(NSArray *comments) {
         
         // Set and reload table's data.
         _data = comments;

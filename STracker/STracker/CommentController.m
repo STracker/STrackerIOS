@@ -12,18 +12,7 @@
 
 @implementation CommentController
 
-/*!
- @discussion Override init method for set _app field.
- */
-- (id)init
-{
-    if (self = [super init])
-        _app = [[UIApplication sharedApplication] delegate];
-    
-    return self;
-}
-
-- (void)getComments:(NSString *)uri finish:(Finish) finish
++ (void)getComments:(NSString *)uri finish:(Finish) finish
 {
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -38,33 +27,29 @@
         finish(data);
      
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-- (void)postComment:(NSString *)uri comment:(NSString *)comment finish:(Finish) finish
++ (void)postComment:(NSString *)uri comment:(NSString *)comment finish:(Finish) finish
 {
-    [_app loginInFacebook:^(User *user) {
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:comment, @"", nil];
         
-        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:comment, @"", nil];
-        
-        [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
+    [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
             
+        // Nothing todo here...
             
-            // Nothing todo here...
+        // Invoke callback.
+        finish(nil);
             
-            // Invoke callback.
-            finish(nil);
-            
-        } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-            
-            [[_app getAlertViewForErrors:error.localizedDescription] show];
-        }];
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-- (void)deleteComment:(NSString *)uri finish:(Finish)finish
++ (void)deleteComment:(NSString *)uri finish:(Finish)finish
 {
     [[STrackerServerHttpClient sharedClient] deleteRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -72,23 +57,9 @@
         finish(nil);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
-}
-
-#pragma mark - InfoController abstract methods.
-
-+ (id)sharedObject
-{
-    static CommentController *sharedObject = nil;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedObject = [[CommentController alloc] init];
-    });
-    
-    return sharedObject;
 }
 
 @end

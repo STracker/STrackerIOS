@@ -27,7 +27,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Suggestion *suggestion = [_data objectAtIndex:indexPath.row];
-    [[TvShowsController sharedObject] getTvShow:suggestion.tvshow.uri finish:^(id obj) {
+    [TvShowsController getTvShow:suggestion.tvshow.uri finish:^(id obj) {
         
         TvShowViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"TvShowView"] initWithTvShow:obj];
         
@@ -50,7 +50,7 @@
     // user object from App.
     [_app loginInFacebook:^(id obj) {
         
-        [[UsersController sharedObject] getFriendsSuggestions:uri finish:^(id suggestions) {
+        [UsersController getFriendsSuggestions:uri finish:^(id suggestions) {
 
             User *user = obj;
             user.suggestions = suggestions;

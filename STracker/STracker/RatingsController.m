@@ -12,7 +12,7 @@
 
 @implementation RatingsController
 
-- (void)getRating:(NSString *)uri finish:(Finish) finish
++ (void)getRating:(NSString *)uri finish:(Finish) finish
 {
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -22,12 +22,12 @@
         finish(rating);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-- (void)postRating:(NSString *)uri withRating:(float)rating finish:(Finish) finish
++ (void)postRating:(NSString *)uri withRating:(float)rating finish:(Finish) finish
 {
     NSString * ratingStr = [NSString stringWithFormat:@"%d", (int)rating];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObject:ratingStr] forKeys:[NSArray arrayWithObject:@""]];
@@ -40,23 +40,9 @@
         finish(nil);
             
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-            
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
-}
-
-#pragma mark - InfoController abstract methods.
-
-+ (id)sharedObject
-{
-    static RatingsController *sharedObject = nil;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedObject = [[RatingsController alloc] init];
-    });
-    
-    return sharedObject;
 }
 
 @end

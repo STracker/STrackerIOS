@@ -91,7 +91,7 @@
     // Add friend.
     if (!_isFriend)
     {
-        [[UsersController sharedObject] inviteUser:uri withUser:_user finish:^(id obj) {
+        [UsersController inviteUser:uri withUser:_user finish:^(id obj) {
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"The invitation request has been sent successfully." message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             
@@ -104,7 +104,7 @@
     // Remove friend.
     uri = [uri stringByAppendingFormat:@"/%@", _user.identifier];
     
-    [[UsersController sharedObject] deleteFriend:uri finish:^(id obj) {
+    [UsersController deleteFriend:uri finish:^(id obj) {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Friend removed." message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         

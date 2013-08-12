@@ -6,21 +6,21 @@
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "InfoController.h"
+#import "AppDelegate.h"
 #import "TvShow.h"
 
 /*!
  @discussion Info controller for manage television show 
  information.
  */
-@interface TvShowsController : InfoController
+@interface TvShowsController : NSObject
 
 /*!
  @discussion Get one television show.
  @param uri         The uri for make the request.
  @param finish      The finish callback.
  */
-- (void)getTvShow:(NSString *)uri finish:(Finish) finish;
++ (void)getTvShow:(NSString *)uri finish:(Finish) finish;
 
 /*!
  @discussion Get television shows with same name.
@@ -28,13 +28,13 @@
  @param uri     The uri for make the request.
  @param finish  The finish callback.
  */
-- (void)getTvShowsByName:(NSString *)name uri:(NSString *)uri finish:(Finish) finish;
++ (void)getTvShowsByName:(NSString *)name uri:(NSString *)uri finish:(Finish) finish;
 
 /*!
  @discussion Get Top rated television shows.
  @param uri     The uri for make the request.
  @param finish  The finish callback.
  */
-- (void)getTvShowsTopRated:(NSString *)uri finish:(Finish) finish;
++ (void)getTvShowsTopRated:(NSString *)uri finish:(Finish) finish;
 
 @end

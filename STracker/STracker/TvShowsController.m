@@ -11,7 +11,7 @@
 
 @implementation TvShowsController
 
-- (void)getTvShow:(NSString *)uri finish:(Finish) finish
++ (void)getTvShow:(NSString *)uri finish:(Finish) finish
 {
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -21,12 +21,12 @@
         finish(tvshow);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-- (void)getTvShowsByName:(NSString *)name uri:(NSString *)uri finish:(Finish)finish
++ (void)getTvShowsByName:(NSString *)name uri:(NSString *)uri finish:(Finish)finish
 {
     NSDictionary *query = [[NSDictionary alloc] initWithObjectsAndKeys:name, @"name", nil];
     
@@ -36,12 +36,12 @@
         finish([self parseTvShowsToArray:result]);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-- (void)getTvShowsTopRated:(NSString *)uri finish:(Finish) finish
++ (void)getTvShowsTopRated:(NSString *)uri finish:(Finish) finish
 {
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
               
@@ -49,29 +49,15 @@
         finish([self parseTvShowsToArray:result]);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 
 }
 
-#pragma mark - InfoController abstract methods.
-
-+ (id)sharedObject
-{
-    static TvShowsController *sharedObject = nil;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedObject = [[TvShowsController alloc] init];
-    });
-    
-    return sharedObject;
-}
-
 #pragma mark - TvShowsController private auxiliary methods.
 
-- (NSArray *)parseTvShowsToArray:(id) result
++ (NSArray *)parseTvShowsToArray:(id) result
 {
     NSMutableArray *data = [[NSMutableArray alloc] init];
     for (NSDictionary *item in result)

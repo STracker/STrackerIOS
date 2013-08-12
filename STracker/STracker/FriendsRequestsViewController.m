@@ -25,7 +25,7 @@
     // Only for take the user object in App.
     [_app loginInFacebook:^(id obj) {
         
-        [[UsersController sharedObject] getFriendsRequests:uri finish:^(id requests) {
+        [UsersController getFriendsRequests:uri finish:^(id requests) {
             
             User *user = obj;
             user.friendRequests = requests;

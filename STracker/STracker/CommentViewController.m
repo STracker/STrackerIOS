@@ -80,7 +80,7 @@
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
     uri = [uri stringByAppendingString:[NSString stringWithFormat:@"/%@", _comment.user.identifier]];
     
-    [[UsersController sharedObject] getUser:uri finish:^(id obj) {
+    [UsersController getUser:uri finish:^(id obj) {
         
         UserProfileViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"UserProfile"] initWithUserInfo:obj];
         [self.navigationController pushViewController:view animated:YES];
@@ -94,7 +94,7 @@
  */
 - (void)deleteComment
 {
-    [[CommentController sharedObject] deleteComment:_comment.uri finish:^(id obj) {
+    [CommentController deleteComment:_comment.uri finish:^(id obj) {
         
         // Go back.
         [self.navigationController popViewControllerAnimated:YES];

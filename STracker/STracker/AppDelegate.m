@@ -142,13 +142,13 @@
 - (void)verifyStatus
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendRequestsURI"];
-    [[UsersController sharedObject] getFriendsRequests:uri finish:^(id obj) {
+    [UsersController getFriendsRequests:uri finish:^(id obj) {
         
         _user.friendRequests = obj;
     }];
     
    uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsSuggestionsURI"];
-    [[UsersController sharedObject] getFriendsSuggestions:uri finish:^(id obj) {
+    [UsersController getFriendsSuggestions:uri finish:^(id obj) {
         
         _user.suggestions = obj;
     }];

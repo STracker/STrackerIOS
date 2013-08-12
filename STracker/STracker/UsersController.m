@@ -13,7 +13,7 @@
 
 @implementation UsersController
 
--(void)registUser:(NSString *)uri withUser:(User *)user finish:(Finish)finish
++ (void)registUser:(NSString *)uri withUser:(User *)user finish:(Finish)finish
 {
     NSArray *keys = [[NSArray alloc] initWithObjects:@"Name", @"Email", @"Photo", nil];
     NSArray *values = [[NSArray alloc] initWithObjects:user.name, user.email, user.photoUrl, nil];
@@ -27,14 +27,12 @@
         finish(me);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        NSLog(@"%@", error.description);
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-- (void)searchUser:(NSString *)uri withName:(NSString *)name finish:(Finish)finish
++ (void)searchUser:(NSString *)uri withName:(NSString *)name finish:(Finish)finish
 {
     NSDictionary *query = [[NSDictionary alloc] initWithObjectsAndKeys:name, @"name", nil];
     
@@ -44,12 +42,12 @@
         finish([self parseUsersToArray:result]);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-- (void)getUser:(NSString *)uri finish:(Finish)finish
++ (void)getUser:(NSString *)uri finish:(Finish)finish
 {
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -59,12 +57,12 @@
         finish(user);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-- (void)inviteUser:(NSString *)uri withUser:(User *)user finish:(Finish)finish
++ (void)inviteUser:(NSString *)uri withUser:(User *)user finish:(Finish)finish
 {
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:user.identifier, @"", nil];
     
@@ -74,12 +72,12 @@
         finish(nil);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-- (void)deleteFriend:(NSString *)uri finish:(Finish)finish
++ (void)deleteFriend:(NSString *)uri finish:(Finish)finish
 {
     [[STrackerServerHttpClient sharedClient] deleteRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -87,12 +85,12 @@
         finish(nil);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-- (void)getFriends:(NSString *)uri finish:(Finish)finish
++ (void)getFriends:(NSString *)uri finish:(Finish)finish
 {
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -100,12 +98,12 @@
         finish([self parseUsersToArray:result]);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-- (void)getFriendsRequests:(NSString *)uri finish:(Finish)finish
++ (void)getFriendsRequests:(NSString *)uri finish:(Finish)finish
 {
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -113,12 +111,11 @@
         finish([self parseUsersToArray:result]);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];    }];
 }
 
-- (void)getFriendsSuggestions:(NSString *)uri finish:(Finish)finish
++ (void)getFriendsSuggestions:(NSString *)uri finish:(Finish)finish
 {
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -133,12 +130,12 @@
         finish(data);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-- (void)getUserFavoritesTvShows:(NSString *)uri finish:(Finish)finish
++ (void)getUserFavoritesTvShows:(NSString *)uri finish:(Finish)finish
 {
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -153,12 +150,12 @@
         finish(data);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-- (void)postFavoriteTvShow:(NSString *)uri tvshowId:(NSString *)tvshowId finish:(Finish)finish
++ (void)postFavoriteTvShow:(NSString *)uri tvshowId:(NSString *)tvshowId finish:(Finish)finish
 {
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:tvshowId, @"", nil];
     
@@ -168,12 +165,12 @@
         finish(nil);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-- (void)deleteFavoriteTvShow:(NSString *)uri finish:(Finish)finish
++ (void)deleteFavoriteTvShow:(NSString *)uri finish:(Finish)finish
 {
     [[STrackerServerHttpClient sharedClient] deleteRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -181,28 +178,14 @@
         finish(nil);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
-}
-
-#pragma mark - InfoController abstract methods.
-
-+ (id)sharedObject
-{
-    static UsersController *sharedObject = nil;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedObject = [[UsersController alloc] init];
-    });
-    
-    return sharedObject;
 }
 
 #pragma mark - UsersController private auxiliary methods.
 
-- (NSArray *)parseUsersToArray:(id) result
++ (NSArray *)parseUsersToArray:(id) result
 {
     NSMutableArray *data = [[NSMutableArray alloc] init];
     for (NSDictionary *item in result)

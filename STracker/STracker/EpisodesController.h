@@ -6,19 +6,19 @@
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "InfoController.h"
+#import "AppDelegate.h"
 
 /*!
  @discussion Info controller for manage seasons
  information.
  */
-@interface EpisodesController : InfoController
+@interface EpisodesController : NSObject
 
 /*!
  @discussion Get one episode from request uri.
  @param uri     The request uri.
  @param finish  The finish callback.
  */
-- (void)getEpisode:(NSString *)uri finish:(Finish) finish;
++ (void)getEpisode:(NSString *)uri finish:(Finish) finish;
 
 @end

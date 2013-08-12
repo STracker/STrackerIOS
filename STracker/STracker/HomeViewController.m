@@ -80,7 +80,7 @@
 - (void) imagePager:(KIImagePager *)imagePager didSelectImageAtIndex:(NSUInteger)index
 {
     TvShowSynopsis *synopse = [_top objectAtIndex:index];
-    [[TvShowsController sharedObject] getTvShow:synopse.uri finish:^(id obj) {
+    [TvShowsController getTvShow:synopse.uri finish:^(id obj) {
         
         TvShowViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"TvShowView"] initWithTvShow:obj];
         
@@ -145,7 +145,7 @@
 - (void)getTopRated
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTopRatedTvShowsURI"];
-   [[TvShowsController sharedObject] getTvShowsTopRated:uri finish:^(id obj) {
+   [TvShowsController getTvShowsTopRated:uri finish:^(id obj) {
        
        // Set and reload data from imagePager.
        _top = obj;
@@ -160,7 +160,7 @@
 - (void)searchGenres
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerGenresURI"];
-    [[GenresController sharedObject] getGenres:uri finish:^(id obj) {
+    [GenresController getGenres:uri finish:^(id obj) {
         
         GenresViewController *view = [[GenresViewController alloc] initWithData:obj andTitle:@"Genres"];
         [self.navigationController pushViewController:view animated:YES];
@@ -200,7 +200,7 @@
 - (void)searchSeriesAux:(NSString *)name
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowsURI"];
-    [[TvShowsController sharedObject] getTvShowsByName:name uri:uri finish:^(id obj) {
+    [TvShowsController getTvShowsByName:name uri:uri finish:^(id obj) {
         
         TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:obj];
         [self.navigationController pushViewController:view animated:YES];
@@ -217,7 +217,7 @@
     [_app loginInFacebook:^(id obj) {
         
         NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
-        [[UsersController sharedObject] searchUser:uri withName:name finish:^(id obj) {
+        [UsersController searchUser:uri withName:name finish:^(id obj) {
             
             UsersViewController *view = [[UsersViewController alloc] initWithData:obj andTitle:@"Search results"];
             

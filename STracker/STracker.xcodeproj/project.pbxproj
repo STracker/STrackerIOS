@@ -95,7 +95,6 @@
 		D8B5394517AAE13F00E0D4CE /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B5394417AAE13F00E0D4CE /* FriendsViewController.m */; };
 		D8FC678617886C5B00A06D40 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FC678517886C5B00A06D40 /* FacebookSDK.framework */; };
 		D8FCACB1179EE91B00CC91E4 /* CommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FCACB0179EE91B00CC91E4 /* CommentController.m */; };
-		D8FCACB5179F164B00CC91E4 /* InfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FCACB4179F164B00CC91E4 /* InfoController.m */; };
 		D8FCACB8179F1DB500CC91E4 /* TvShowsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FCACB7179F1DB500CC91E4 /* TvShowsController.m */; };
 		D8FCACBB179F30AF00CC91E4 /* SeasonsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FCACBA179F30AF00CC91E4 /* SeasonsController.m */; };
 		D8FCACBE179F335500CC91E4 /* EpisodesController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FCACBD179F335500CC91E4 /* EpisodesController.m */; };
@@ -251,8 +250,6 @@
 		D8FC678517886C5B00A06D40 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		D8FCACAF179EE91B00CC91E4 /* CommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentController.h; sourceTree = "<group>"; };
 		D8FCACB0179EE91B00CC91E4 /* CommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentController.m; sourceTree = "<group>"; };
-		D8FCACB3179F164B00CC91E4 /* InfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoController.h; sourceTree = "<group>"; };
-		D8FCACB4179F164B00CC91E4 /* InfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoController.m; sourceTree = "<group>"; };
 		D8FCACB6179F1DB500CC91E4 /* TvShowsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TvShowsController.h; sourceTree = "<group>"; };
 		D8FCACB7179F1DB500CC91E4 /* TvShowsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShowsController.m; sourceTree = "<group>"; };
 		D8FCACB9179F30AF00CC91E4 /* SeasonsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeasonsController.h; sourceTree = "<group>"; };
@@ -634,8 +631,6 @@
 		D8FCACB2179F031F00CC91E4 /* InfoControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D8FCACB3179F164B00CC91E4 /* InfoController.h */,
-				D8FCACB4179F164B00CC91E4 /* InfoController.m */,
 				8C8E14AC17A0272F00A4B48C /* GenresController.h */,
 				8C8E14AD17A0272F00A4B48C /* GenresController.m */,
 				D8FCACB6179F1DB500CC91E4 /* TvShowsController.h */,
@@ -859,7 +854,6 @@
 				8CC6C100179D8B280085B036 /* RatingsController.m in Sources */,
 				8CC6C104179DABBE0085B036 /* ActorsViewController.m in Sources */,
 				D8FCACB1179EE91B00CC91E4 /* CommentController.m in Sources */,
-				D8FCACB5179F164B00CC91E4 /* InfoController.m in Sources */,
 				D8FCACB8179F1DB500CC91E4 /* TvShowsController.m in Sources */,
 				D8FCACBB179F30AF00CC91E4 /* SeasonsController.m in Sources */,
 				D8FCACBE179F335500CC91E4 /* EpisodesController.m in Sources */,
@@ -1062,6 +1056,7 @@
 				8C36013717B146A800CA10D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D8782EB7174E6E160025CF79 /* Build configuration list for PBXProject "STracker" */ = {
 			isa = XCConfigurationList;

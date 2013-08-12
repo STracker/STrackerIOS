@@ -12,7 +12,7 @@
 
 @implementation GenresController
 
-- (void)getGenres:(NSString *)uri finish:(Finish)finish
++ (void)getGenres:(NSString *)uri finish:(Finish)finish
 {
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -27,12 +27,12 @@
         finish(data);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-- (void)getGenre:(NSString *) uri finish:(Finish) finish
++ (void)getGenre:(NSString *) uri finish:(Finish) finish
 {
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -42,23 +42,9 @@
         finish(genre);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
-}
-
-#pragma mark - InfoController abstract methods.
-
-+ (id)sharedObject
-{
-    static GenresController *sharedObject = nil;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedObject = [[GenresController alloc] init];
-    });
-    
-    return sharedObject;
 }
 
 @end

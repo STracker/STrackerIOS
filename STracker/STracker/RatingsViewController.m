@@ -34,7 +34,7 @@
     // Needed to be logged in Facebook for post an rating.
     [_app loginInFacebook:^(id obj) {
         
-        [[RatingsController sharedObject] postRating:_ratingsUri withRating:rating finish:^(id obj) {
+        [RatingsController postRating:_ratingsUri withRating:rating finish:^(id obj) {
             
             // Nothing todo...
         }];
@@ -59,7 +59,7 @@
  */
 - (void)getRating
 {
-    [[RatingsController sharedObject] getRating:_ratingsUri finish:^(id obj) {
+    [RatingsController getRating:_ratingsUri finish:^(id obj) {
         
         _average.text = [NSString stringWithFormat:@"%d/5 from %d user(s)", ((Rating *)obj).rating, ((Rating *)obj).numberOfUsers];
         _rating.rating = ((Rating *)obj).rating;

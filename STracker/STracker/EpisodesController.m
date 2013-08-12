@@ -12,7 +12,7 @@
 
 @implementation EpisodesController
 
-- (void)getEpisode:(NSString *)uri finish:(Finish)finish
++ (void)getEpisode:(NSString *)uri finish:(Finish)finish
 {
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -22,23 +22,9 @@
         finish(episode);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[_app getAlertViewForErrors:error.localizedDescription] show];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
     }];
-}
-
-#pragma mark - InfoController abstract methods.
-
-+ (id)sharedObject
-{
-    static EpisodesController *sharedObject = nil;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedObject = [[EpisodesController alloc] init];
-    });
-    
-    return sharedObject;
 }
 
 @end

@@ -230,7 +230,7 @@
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURI"];
     
-    [[UsersController sharedObject] postFavoriteTvShow:uri tvshowId:_tvshow.tvshowId finish:^(id obj) {
+    [UsersController postFavoriteTvShow:uri tvshowId:_tvshow.tvshowId finish:^(id obj) {
         
         // Update actionsheet options to unsubscribe.
         _actionSheet = nil;
@@ -248,7 +248,7 @@
     
     uri = [uri stringByAppendingFormat:@"/%@", _tvshow.tvshowId];
     
-    [[UsersController sharedObject] deleteFavoriteTvShow:uri finish:^(id obj) {
+    [UsersController deleteFavoriteTvShow:uri finish:^(id obj) {
         
         // Update actionsheet options to unsubscribe.
         _actionSheet = nil;
