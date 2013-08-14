@@ -21,7 +21,9 @@
     GenreSynopsis *synopse = [_data objectAtIndex:indexPath.row];
     [GenresController getGenre:synopse.uri finish:^(id obj) {
         
-        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:obj andTitle:synopse.name];
+        Genre *genre = obj;
+        
+        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:genre.tvshows andTitle:synopse.name];
         [self.navigationController pushViewController:view animated:YES];
     }];
 }

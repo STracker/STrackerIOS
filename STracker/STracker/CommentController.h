@@ -16,11 +16,18 @@
 @interface CommentController : NSObject
 
 /*!
- @discussion Get comments from the request Uri.
+ @discussion Get tvshow comments from the request Uri.
  @param uri     Request Uri.
  @param finish  The callback when download is finish.
  */
-+ (void)getComments:(NSString *)uri finish:(Finish) finish;
++ (void)getTvShowComments:(NSString *)uri finish:(Finish) finish;
+
+/*!
+ @discussion Get episode comments from the request Uri.
+ @param uri     Request Uri.
+ @param finish  The callback when download is finish.
+ */
++ (void)getEpisodeComments:(NSString *)uri finish:(Finish) finish;
 
 /*!
  @discussion Post one comment into STracker server.

@@ -22,9 +22,9 @@
      */
     _episode = episode;
     _ratingsUri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeRatingsURI"];
-    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.tvshowId];
-    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%d", _episode.seasonNumber]];
-    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%d", _episode.episodeNumber]];
+    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.identifier.tvshowId];
+    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%d", _episode.identifier.seasonNumber]];
+    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%d", _episode.identifier.episodeNumber]];
 
     
     return self;

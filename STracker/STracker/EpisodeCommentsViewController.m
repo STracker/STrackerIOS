@@ -7,6 +7,8 @@
 //
 
 #import "EpisodeCommentsViewController.h"
+#import "CommentController.h"
+#import "Comment.h"
 
 @implementation EpisodeCommentsViewController
 
@@ -18,13 +20,22 @@
         
         // Set uri for this episodes comments.
         _commentsUri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeCommentsURI"];
-        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.tvshowId];
-        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%d", _episode.seasonNumber]];
-        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%d", _episode.episodeNumber]];
+        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.identifier.tvshowId];
+        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%d", _episode.identifier.seasonNumber]];
+        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%d", _episode.identifier.episodeNumber]];
     }
     
     
     return self;
+}
+
+- (void)getComments
+{
+    [CommentController getEpisodeComments:_commentsUri finish:^(EpisodeComments *obj) {
+       
+        _data = obj.comments;
+        [_tableView reloadData];
+    }];
 }
 
 @end

@@ -19,7 +19,7 @@
 @end
 
 /*!
- @discussion This object defines the person synopse entity object.
+ @discussion This object defines the person synopsis entity object.
  */
 @interface PersonSynopsis : EntitySynopsis
 

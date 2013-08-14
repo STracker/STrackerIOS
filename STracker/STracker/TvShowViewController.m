@@ -26,7 +26,7 @@
      */
     _tvshow = tvshow;
     _ratingsUri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowRatingsURI"];
-    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"id" withString:_tvshow.tvshowId];
+    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"id" withString:_tvshow.identifier];
 
     return self;
 }
@@ -61,7 +61,7 @@
         // Verify if user already have this tvshow in subcriptions.
         for (Subscription *subscription in user.subscriptions)
         {
-            if ([subscription.tvshow.tvshowId isEqual:_tvshow.tvshowId])
+            if ([subscription.tvshow.identifier isEqual:_tvshow.identifier])
             {
                 _actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:/*@"Seasons", */@"Cast", @"Comments", @"Unsubscribe", @"Suggest", nil];
                 
@@ -230,7 +230,7 @@
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURI"];
     
-    [UsersController postFavoriteTvShow:uri tvshowId:_tvshow.tvshowId finish:^(id obj) {
+    [UsersController postFavoriteTvShow:uri tvshowId:_tvshow.identifier finish:^(id obj) {
         
         // Update actionsheet options to unsubscribe.
         _actionSheet = nil;
@@ -246,7 +246,7 @@
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURI"];
     
-    uri = [uri stringByAppendingFormat:@"/%@", _tvshow.tvshowId];
+    uri = [uri stringByAppendingFormat:@"/%@", _tvshow.identifier];
     
     [UsersController deleteFavoriteTvShow:uri finish:^(id obj) {
         

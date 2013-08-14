@@ -9,13 +9,30 @@
 #import "Entity.h"
 
 /*!
- @discussion This object defines the episode entity object.
+ @discussion This object defines the identifier of the episodes.
  */
-@interface Episode : Entity
+@interface EpisodeId : NSObject
 
 @property(nonatomic, copy) NSString *tvshowId;
 @property(nonatomic) int seasonNumber;
 @property(nonatomic) int episodeNumber;
+
+/*!
+ @discussion Init method that constructs the object with values passed
+ in parameters.
+ @param parameters The dictionary of parameters.
+ @return An instance of EpisodeId.
+ */
+- (id)initWithDictionary:(NSDictionary *)parameters;
+
+@end
+
+/*!
+ @discussion This object defines the episode entity object.
+ */
+@interface Episode : Entity
+
+@property(nonatomic, strong) EpisodeId *identifier;
 @property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSString *description;
 @property(nonatomic, copy) NSString *date;
@@ -26,13 +43,11 @@
 @end
 
 /*!
- @discussion This object defines the episode synopse entity object.
+ @discussion This object defines the episode synopsis entity object.
  */
 @interface EpisodeSynopsis : EntitySynopsis
 
-@property(nonatomic, copy) NSString *tvshowId;
-@property(nonatomic) int seasonNumber;
-@property(nonatomic) int episodeNumber;
+@property(nonatomic, strong) EpisodeId *identifier;
 @property(nonatomic, copy) NSString *date;
 
 @end

@@ -9,22 +9,38 @@
 #import "Entity.h"
 
 /*!
+ @discussion This object defines the identifier of the seasons.
+ */
+@interface SeasonId : NSObject
+
+@property(nonatomic, copy) NSString *tvshowId;
+@property(nonatomic) int seasonNumber;
+
+/*!
+ @discussion Init method that constructs the object with values passed
+ in parameters.
+ @param parameters The dictionary of parameters.
+ @return An instance of SeasonId.
+ */
+- (id)initWithDictionary:(NSDictionary *)parameters;
+
+@end
+
+/*!
  @discussion This object defines the season entity object.
  */
 @interface Season : Entity
 
-@property(nonatomic, copy) NSString *tvshowId;
-@property(nonatomic) int seasonNumber;
+@property(nonatomic, strong) SeasonId *identifier;
 @property(nonatomic, retain) NSArray *episodes;
 
 @end
 
 /*!
- @discussion This object defines the season synopse entity object.
+ @discussion This object defines the season synopsis entity object.
  */
 @interface SeasonSynopsis : EntitySynopsis
 
-@property(nonatomic, copy) NSString *tvshowId;
-@property(nonatomic) int seasonNumber;
+@property(nonatomic, strong) SeasonId *identifier;
 
 @end

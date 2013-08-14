@@ -19,8 +19,8 @@
         NSMutableArray *data = [[NSMutableArray alloc] init];
         for (NSDictionary *item in result)
         {
-            GenreSynopsis *synopse = [[GenreSynopsis alloc] initWithDictionary:item];
-            [data addObject:synopse];
+            GenreSynopsis *synopsis = [[GenreSynopsis alloc] initWithDictionary:item];
+            [data addObject:synopsis];
         }
         
         // Invoke callback.

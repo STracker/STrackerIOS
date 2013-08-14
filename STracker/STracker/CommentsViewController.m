@@ -24,7 +24,7 @@
     [self getComments];
 }
 
-- (void)popupTextViewHook:(NSString *)text
+- (void)getComments
 {
     [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
 }
@@ -105,22 +105,6 @@
 - (void)shakeEvent
 {
     [self getComments];
-}
-
-#pragma mark - CommentsViewController private auxiliary methods.
-
-/*!
- @discussion Auxiliary method for request the comments and reload the table with the 
- new information.
- */
-- (void)getComments
-{
-    [CommentController getComments:_commentsUri finish:^(NSArray *comments) {
-        
-        // Set and reload table's data.
-        _data = comments;
-        [_tableView reloadData];
-    }];
 }
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "TvShowCommentsViewController.h"
+#import "CommentController.h"
+#import "Comment.h"
 
 @implementation TvShowCommentsViewController
 
@@ -18,10 +20,19 @@
         
         // Set uri for this television show comments.
         _commentsUri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowCommentsURI"];
-        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"id" withString:_tvshow.tvshowId];
+        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"id" withString:_tvshow.identifier];
     }    
     
     return self;
+}
+
+- (void)getComments
+{
+    [CommentController getTvShowComments:_commentsUri finish:^(TvShowComments *obj) {
+        
+        _data = obj.comments;
+        [_tableView reloadData];
+    }];
 }
 
 @end

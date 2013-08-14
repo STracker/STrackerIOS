@@ -7,8 +7,6 @@
 //
 
 #import "Unit_Tests.h"
-#import "UsersController.h"
-#import "TvShowsController.h"
 
 @implementation Unit_Tests
 
@@ -24,18 +22,6 @@
     // Tear-down code here.
     
     [super tearDown];
-}
-
-- (void)testTvShowGet
-{
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTopRatedTvShowsURI"];
-    [[TvShowsController sharedObject] getTvShow:uri finish:^(id obj) {
-        
-        TvShow *tvshow = obj;
-        
-        STAssertEquals(tvshow.name, @"Breaking Bad", @"");
-        STAssertEquals(tvshow.tvshowId, @"tt0903747", @"");
-    }]
 }
 
 @end

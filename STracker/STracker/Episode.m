@@ -9,9 +9,9 @@
 #import "Episode.h"
 #import "Actor.h"
 
-@implementation Episode
+@implementation EpisodeId
 
-@synthesize tvshowId, seasonNumber, episodeNumber, name, description, date, poster, directors, guestActors;
+@synthesize tvshowId, seasonNumber, episodeNumber;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
@@ -20,6 +20,22 @@
         tvshowId = [parameters objectForKey:@"TvShowId"];
         seasonNumber = [[parameters objectForKey:@"SeasonNumber"] intValue];
         episodeNumber = [[parameters objectForKey:@"EpisodeNumber"] intValue];
+    }
+    
+    return self;
+}
+
+@end
+
+@implementation Episode
+
+@synthesize identifier, name, description, date, poster, directors, guestActors;
+
+- (id)initWithDictionary:(NSDictionary *)parameters
+{
+    if (self = [super init])
+    {
+        identifier = [[EpisodeId alloc] initWithDictionary:[parameters objectForKey:@"Id"]];
         name = [parameters objectForKey:@"Name"];
         description = [parameters objectForKey:@"Description"];
         date = [parameters objectForKey:@"Date"];
@@ -49,15 +65,13 @@
 
 @implementation EpisodeSynopsis
 
-@synthesize tvshowId, seasonNumber, episodeNumber, date;
+@synthesize identifier, date;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
     if (self = [super init])
     {
-        tvshowId = [parameters objectForKey:@"TvShowId"];
-        seasonNumber = [[parameters objectForKey:@"SeasonNumber"] intValue];
-        episodeNumber = [[parameters objectForKey:@"EpisodeNumber"] intValue];
+        identifier = [[EpisodeId alloc] initWithDictionary:[parameters objectForKey:@"Id"]];
         self.name = [parameters objectForKey:@"Name"];
         date = [parameters objectForKey:@"Date"];
         self.uri = [parameters objectForKey:@"Uri"];

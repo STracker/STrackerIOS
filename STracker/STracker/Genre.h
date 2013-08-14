@@ -20,7 +20,7 @@
 @end
 
 /*!
- @discussion This object defines the genre synopse entity object.
+ @discussion This object defines the genre synopsis entity object.
  */
 @interface GenreSynopsis : EntitySynopsis
 

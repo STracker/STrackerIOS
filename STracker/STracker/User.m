@@ -18,7 +18,7 @@
 {
     if (self = [super initWithDictionary:parameters])
     {
-        identifier = [parameters objectForKey:@"Key"];
+        identifier = [parameters objectForKey:@"Id"];
         email = [parameters objectForKey:@"Email"];
         
         NSMutableArray *friendsAux = [[NSMutableArray alloc] init];

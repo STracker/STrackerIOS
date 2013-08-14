@@ -15,7 +15,7 @@
  */
 @interface TvShow : Entity
 
-@property(nonatomic, copy) NSString *tvshowId;
+@property(nonatomic, copy) NSString *identifier;
 @property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSString *description;
 @property(nonatomic, copy) NSString *runtime;
@@ -30,11 +30,11 @@
 @end
 
 /*!
- @discussion This object defines the television show synopse entity object.
+ @discussion This object defines the television show synopsis entity object.
  */
 @interface TvShowSynopsis : EntitySynopsis
 
-@property(nonatomic, copy) NSString *tvshowId;
+@property(nonatomic, copy) NSString *identifier;
 @property(nonatomic, copy) NSString *poster;
 
 @end

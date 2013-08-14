@@ -26,3 +26,51 @@
 }
 
 @end
+
+@implementation TvShowComments
+
+@synthesize tvshowId, comments;
+
+- (id)initWithDictionary:(NSDictionary *)parameters
+{
+    if (self = [super init])
+    {
+        tvshowId = [parameters objectForKey:@"Id"];
+        
+        NSMutableArray *commentsAux = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in [parameters objectForKey:@"Comments"])
+        {
+            Comment *comment = [[Comment alloc] initWithDictionary:item];
+            [commentsAux addObject:comment];
+        }
+        comments = commentsAux;
+    }
+    
+    return self;
+}
+
+@end
+
+@implementation EpisodeComments
+
+@synthesize episodeId, comments;
+
+- (id)initWithDictionary:(NSDictionary *)parameters
+{
+    if (self = [super init])
+    {
+        episodeId = [[EpisodeId alloc] initWithDictionary:[parameters objectForKey:@"Id"]];
+        
+        NSMutableArray *commentsAux = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in [parameters objectForKey:@"Comments"])
+        {
+            Comment *comment = [[Comment alloc] initWithDictionary:item];
+            [commentsAux addObject:comment];
+        }
+        comments = commentsAux;
+    }
+    
+    return self;
+}
+
+@end

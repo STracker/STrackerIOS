@@ -9,9 +9,9 @@
 #import "Season.h"
 #import "Episode.h"
 
-@implementation Season
+@implementation SeasonId
 
-@synthesize tvshowId, seasonNumber, episodes;
+@synthesize tvshowId, seasonNumber;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
@@ -19,9 +19,25 @@
     {
         tvshowId = [parameters objectForKey:@"TvShowId"];
         seasonNumber = [[parameters objectForKey:@"SeasonNumber"] intValue];
+    }
+    
+    return self;
+}
+
+@end
+
+@implementation Season
+
+@synthesize identifier, episodes;
+
+- (id)initWithDictionary:(NSDictionary *)parameters
+{
+    if (self = [super init])
+    {
+        identifier = [[SeasonId alloc] initWithDictionary:[parameters objectForKey:@"Id"]];
         
         NSMutableArray *episodesAux = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in [parameters objectForKey:@"EpisodeSynopsis"])
+        for (NSDictionary *item in [parameters objectForKey:@"Episodes"])
         {
             EpisodeSynopsis *episode = [[EpisodeSynopsis alloc] initWithDictionary:item];
             [episodesAux addObject:episode];
@@ -37,15 +53,14 @@
 #pragma mark - Synopsis object.
 @implementation SeasonSynopsis
 
-@synthesize tvshowId, seasonNumber;
+@synthesize identifier;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
     if (self = [super init])
     {
-        tvshowId = [parameters objectForKey:@"TvShowId"];
-        seasonNumber = [[parameters objectForKey:@"SeasonNumber"] intValue];
-        self.name = [NSString stringWithFormat:@"Season %d", seasonNumber];
+        identifier = [[SeasonId alloc] initWithDictionary:[parameters objectForKey:@"Id"]];
+        self.name = [NSString stringWithFormat:@"Season %d", identifier.seasonNumber];
         self.uri = [parameters objectForKey:@"Uri"];
     }
 

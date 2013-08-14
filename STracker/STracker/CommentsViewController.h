@@ -21,10 +21,9 @@
 }
 
 /*!
- @discussion Hook method for post the comment in STracker 
- server. It's implemented in episodes comments table and 
- television comments table.
+ @discussion It's implemented in episodes comments table and
+ television comments table for get the comments from STracker.
  */
-- (void)popupTextViewHook:(NSString *)text;
+- (void)getComments;
 
 @end

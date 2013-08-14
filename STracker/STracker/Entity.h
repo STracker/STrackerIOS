@@ -24,20 +24,20 @@
 @end
 
 /*!
- @discussion This object defines the base synopse object for all synopses models.
+ @discussion This object defines the base synopsis object for all synopses models.
  */
 @interface EntitySynopsis : NSObject
 
 @property(nonatomic, copy) NSString *name;
 
-// Every synopse contains one uri for your model.
+// Every synopsis contains one uri for your model.
 @property(nonatomic, copy) NSString *uri;
 
 /*!
  @discussion Init method that constructs the object with values passed
  in parameters.
  @param parameters The dictionary of parameters.
- @return An instance of EntitySynopse.
+ @return An instance of EntitySynopsis.
  */
 - (id)initWithDictionary:(NSDictionary *)parameters;
 

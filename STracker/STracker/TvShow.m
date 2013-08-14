@@ -13,13 +13,13 @@
 
 @implementation TvShow
 
-@synthesize tvshowId, name, description, runtime, firstAired, airDay, genres, seasons, actors, rating, poster;
+@synthesize identifier, name, description, runtime, firstAired, airDay, genres, seasons, actors, rating, poster;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
     if (self = [super init])
     {
-        tvshowId = [parameters objectForKey:@"TvShowId"];
+        identifier = [parameters objectForKey:@"Id"];
         name = [parameters objectForKey:@"Name"];
         description = [parameters objectForKey:@"Description"];
         runtime = [parameters objectForKey:@"Runtime"];
@@ -36,7 +36,7 @@
         genres = genresAux;
         
         NSMutableArray *seasonsAux = [[NSMutableArray alloc] init];
-        for(NSDictionary *item in [parameters objectForKey:@"SeasonSynopsis"])
+        for(NSDictionary *item in [parameters objectForKey:@"Seasons"])
         {
             SeasonSynopsis *season = [[SeasonSynopsis alloc] initWithDictionary:item];
             [seasonsAux addObject:season];
@@ -59,13 +59,13 @@
 
 @implementation TvShowSynopsis
 
-@synthesize tvshowId, poster;
+@synthesize identifier, poster;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
     if (self = [super init])
     {
-        tvshowId = [parameters objectForKey:@"Id"];
+        identifier = [parameters objectForKey:@"Id"];
         self.name = [parameters objectForKey:@"Name"];
         poster = [parameters objectForKey:@"Poster"];
         self.uri = [parameters objectForKey:@"Uri"];

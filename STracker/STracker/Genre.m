@@ -20,7 +20,7 @@
         name = [parameters objectForKey:@"Id"];
         
         NSMutableArray *tvshowsAux = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in [parameters objectForKey:@"TvShowsSinopsis"])
+        for (NSDictionary *item in [parameters objectForKey:@"Tvshows"])
         {
             TvShowSynopsis *tvshow = [[TvShowSynopsis alloc] initWithDictionary:item];
             [tvshowsAux addObject:tvshow];
