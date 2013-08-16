@@ -13,8 +13,9 @@
 
 @implementation UsersController
 
-+ (void)registUser:(NSString *)uri withUser:(User *)user finish:(Finish)finish
++ (void)registUser:(User *)user finish:(Finish)finish
 {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
     NSArray *keys = [[NSArray alloc] initWithObjects:@"Name", @"Email", @"Photo", nil];
     NSArray *values = [[NSArray alloc] initWithObjects:user.name, user.email, user.photoUrl, nil];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:values forKeys:keys];
@@ -26,14 +27,16 @@
         // Invoke callback.
         finish(me);
         
+        
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-+ (void)searchUser:(NSString *)uri withName:(NSString *)name finish:(Finish)finish
++ (void)searchUser:(NSString *)name finish:(Finish)finish
 {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
     NSDictionary *query = [[NSDictionary alloc] initWithObjectsAndKeys:name, @"name", nil];
     
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:query success:^(AFJSONRequestOperation *operation, id result) {
@@ -42,12 +45,13 @@
         finish([self parseUsersToArray:result]);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withVersion:nil];
 }
 
-+ (void)getUser:(NSString *)uri finish:(Finish)finish
++ (void)getUser:(NSString *)uri withVersion:(NSString *)version finish:(Finish) finish
 {
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -57,33 +61,37 @@
         finish(user);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withVersion:version];
 }
 
-+ (void)getUser:(NSString *)uri finish:(Finish)finish withCacheControl:(NSString *)versionNumber
++ (void)getMe:(NSString *)identifier withVersion:(NSString *)version finish:(Finish) finish
 {
-    [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocolWithoutCacheLocalData:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
+    uri = [uri stringByAppendingFormat:@"/%@", identifier];
+    
+    [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocoAndlWithoutCacheLocalData:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         User *user = nil;
         
-        if (result != nil) 
+        if (result != nil)
             user = [[User alloc] initWithDictionary:result];
-  
+        
         // Invoke callback.
         finish(user);
-        
+
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
         
-    } withCacheControl:versionNumber];
+    } withVersion:version];
 }
 
-+ (void)inviteUser:(NSString *)uri withUser:(User *)user finish:(Finish)finish
++ (void)inviteUser:(User *)user finish:(Finish)finish
 {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsURI"];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:user.identifier, @"", nil];
     
     [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
@@ -92,51 +100,63 @@
         finish(nil);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-+ (void)deleteFriend:(NSString *)uri finish:(Finish)finish
++ (void)deleteFriend:(NSString *)friendId finish:(Finish)finish
 {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsURI"];
+    uri = [uri stringByAppendingFormat:@"/%@", friendId];
+    
     [[STrackerServerHttpClient sharedClient] deleteRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         // Invoke callback.
         finish(nil);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-+ (void)getFriends:(NSString *)uri finish:(Finish)finish
++ (void)getFriends:(Finish)finish
 {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsURI"];
+    
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         // Invoke callback.
         finish([self parseUsersToArray:result]);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withVersion:nil];
 }
 
-+ (void)getFriendsRequests:(NSString *)uri finish:(Finish)finish
++ (void)getFriendsRequests:(Finish)finish
 {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendRequestsURI"];
+    
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         // Invoke callback.
         finish([self parseUsersToArray:result]);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];    }];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+    
+    } withVersion:nil];
 }
 
-+ (void)getFriendsSuggestions:(NSString *)uri finish:(Finish)finish
++ (void)getFriendsSuggestions:(Finish)finish
 {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsSuggestionsURI"];
+    
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         NSMutableArray *data = [[NSMutableArray alloc] init];
@@ -150,13 +170,16 @@
         finish(data);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withVersion:nil];
 }
 
-+ (void)getUserFavoritesTvShows:(NSString *)uri finish:(Finish)finish
++ (void)getUserSubscriptions:(Finish) finish;
 {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURI"];
+    
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         NSMutableArray *data = [[NSMutableArray alloc] init];
@@ -170,13 +193,15 @@
         finish(data);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withVersion:nil];
 }
 
-+ (void)postFavoriteTvShow:(NSString *)uri tvshowId:(NSString *)tvshowId finish:(Finish)finish
++ (void)postSubscription:(NSString *)tvshowId finish:(Finish)finish
 {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURI"];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:tvshowId, @"", nil];
     
     [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
@@ -185,21 +210,24 @@
         finish(nil);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 
-+ (void)deleteFavoriteTvShow:(NSString *)uri finish:(Finish)finish
++ (void)deleteSubscription:(NSString *)tvshowId finish:(Finish)finish
 {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURI"];
+    uri = [uri stringByAppendingFormat:@"/%@", tvshowId];
+    
     [[STrackerServerHttpClient sharedClient] deleteRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         // Invoke callback.
         finish(nil);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 

@@ -60,13 +60,24 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 + (id)sharedClient;
 
 /*!
+ @discussion Because the entities synopsis don't have the version of the 
+ entity, this method try to get the version of the entity in NSURLCache 
+ shared cache. The usage of this method is for get the version, for use it 
+ in the header If-None-Match.
+ @param uri The entity uri for search in the cache.
+ @return The version if the entity exists in cache, or nil if not.
+ */
+- (NSString *)tryGeVersionFromtCachedData:(NSString *)uri;
+
+/*!
  @discussion Method for making an HTTP GET request to STracker server.
  @param uri     The uri.
  @param query   The query, is optional.
  @param success The callback for success request.
  @param failure The callback for failure request.
+ @param version Entity version number, for cache control (not required).
  */
-- (void)getRequest:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
+- (void)getRequest:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withVersion:(NSString *) version;
 
 /*!
  @discussion Method for making an HTTP GET request to STracker server with the Hawk protocol
@@ -75,8 +86,9 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
  @param query   The query, is optional.
  @param success The callback for success request.
  @param failure The callback for failure request.
+ @param version Entity version number, for cache control (not required).
  */
-- (void)getRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
+- (void)getRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withVersion:(NSString *) version;
 
 /*!
  @discussion Method for making an HTTP POST request to STracker server.
@@ -116,44 +128,25 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 - (void)deleteRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
 
 /*!
- @discussion Method for making an HTTP GET request to STracker server.
- @param uri             The uri.
- @param query           The query, is optional.
- @param success         The callback for success request.
- @param failure         The callback for failure request.
- @param versionNumber   The version number for set the If-None-Match HTTP header.
- */
-- (void)getRequest:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withCacheControl:(NSString *) versionNumber;
-
-/*!
  @discussion Method for making an HTTP GET request to STracker server.  Not use
  the local cache data.
- @param uri             The uri.
- @param query           The query, is optional.
- @param success         The callback for success request.
- @param failure         The callback for failure request.
- @param versionNumber   The version number for set the If-None-Match HTTP header.
+ @param uri     The uri.
+ @param query   The query, is optional.
+ @param success The callback for success request.
+ @param failure The callback for failure request.
+ @param version The version number for set the If-None-Match HTTP header.
  */
-- (void)getRequestWithoutCacheLocalData:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withCacheControl:(NSString *) versionNumber;
-
-/*!
- @discussion Method for making an HTTP GET request to STracker server.
- @param uri             The uri.
- @param query           The query, is optional.
- @param success         The callback for success request.
- @param failure         The callback for failure request.
- @param versionNumber   The version number for set the If-None-Match HTTP header.
- */
-- (void)getRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withCacheControl:(NSString *) versionNumber;
+- (void)getRequestWithoutCacheLocalData:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withVersion:(NSString *) version;
 
 /*!
  @discussion Method for making an HTTP GET request to STracker server. Not use 
  the local cache data.
- @param uri             The uri.
- @param query           The query, is optional.
- @param success         The callback for success request.
- @param failure         The callback for failure request.
- @param versionNumber   The version number for set the If-None-Match HTTP header.
+ @param uri     The uri.
+ @param query   The query, is optional.
+ @param success The callback for success request.
+ @param failure The callback for failure request.
+ @param version The version number for set the If-None-Match HTTP header.
  */
-- (void)getRequestWithHawkProtocolWithoutCacheLocalData:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withCacheControl:(NSString *) versionNumber;
+- (void)getRequestWithHawkProtocoAndlWithoutCacheLocalData:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withVersion:(NSString *) version;
+
 @end

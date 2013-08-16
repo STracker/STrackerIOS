@@ -17,7 +17,6 @@
 @interface CommentsViewController : BaseTableViewController <YIPopupTextViewDelegate>
 {
     UIBarButtonItem *_composeComment;
-    NSString *_commentsUri;
 }
 
 /*!
@@ -25,5 +24,11 @@
  television comments table for get the comments from STracker.
  */
 - (void)getComments;
+
+/*!
+ @discussion It's implemented in episodes comments table and
+ television comments table for post the comment in STracker server.
+ */
+- (void)postComment:(NSString *)comment;
 
 @end

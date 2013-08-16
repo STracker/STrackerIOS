@@ -31,7 +31,7 @@
     @private
     UIAlertView *_alertSubscribe;
     @private
-    UIAlertView *_alertUnsubscribe;
+    UIAlertView *_alertUnsubscribe;    
     @private
     TvShow *_tvshow;
 }

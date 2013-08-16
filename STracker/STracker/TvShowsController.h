@@ -17,24 +17,23 @@
 
 /*!
  @discussion Get one television show.
- @param uri         The uri for make the request.
- @param finish      The finish callback.
+ @param uri     The resource uri.
+ @param version The version of the resource, for cache control.
+ @param finish  The finish callback.
  */
-+ (void)getTvShow:(NSString *)uri finish:(Finish) finish;
++ (void)getTvShow:(NSString *)uri withVersion:(NSString *)version finish:(Finish) finish;
 
 /*!
  @discussion Get television shows with same name.
  @param name    The tvshow name.
- @param uri     The uri for make the request.
  @param finish  The finish callback.
  */
-+ (void)getTvShowsByName:(NSString *)name uri:(NSString *)uri finish:(Finish) finish;
++ (void)getTvShowsByName:(NSString *)name finish:(Finish) finish;
 
 /*!
  @discussion Get Top rated television shows.
- @param uri     The uri for make the request.
  @param finish  The finish callback.
  */
-+ (void)getTvShowsTopRated:(NSString *)uri finish:(Finish) finish;
++ (void)getTvShowsTopRated:(Finish) finish;
 
 @end

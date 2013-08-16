@@ -8,6 +8,7 @@
 
 #import "CommentsViewController.h"
 #import "Episode.h"
+#import "Comment.h"
 
 /*!
  @discussion Table view for episodes comments.
@@ -16,6 +17,8 @@
 {
     @private
     Episode *_episode;
+    @private
+    EpisodeComments *_comments;
 }
 
 /*!

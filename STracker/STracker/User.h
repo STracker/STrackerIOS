@@ -11,23 +11,25 @@
 /*!
  @discussion This object defines the user entity object.
  */
-@interface User : Entity
+@interface User : Entity <Deserialize>
 
 @property(nonatomic, copy) NSString *identifier;
 @property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSString *photoUrl;
 @property(nonatomic, copy) NSString *email;
-@property(nonatomic, strong) NSArray *friends;
-@property(nonatomic, strong) NSMutableArray *subscriptions;
-@property(nonatomic, strong) NSArray *suggestions;
-@property(nonatomic, strong) NSArray *friendRequests;
+
+// This next properties are mutable dictionaries for fast search, insert and delete.
+@property(nonatomic, strong) NSMutableDictionary *friends;
+@property(nonatomic, strong) NSMutableDictionary *subscriptions;
+@property(nonatomic, strong) NSMutableDictionary *suggestions;
+@property(nonatomic, strong) NSMutableDictionary *friendRequests;
 
 @end
 
 /*!
  @discussion This object defines the user synopsis entity object.
  */
-@interface UserSynopsis : EntitySynopsis
+@interface UserSynopsis : EntitySynopsis <Deserialize>
 
 @property(nonatomic, copy) NSString *identifier;
 @property(nonatomic, copy) NSString *photoUrl;

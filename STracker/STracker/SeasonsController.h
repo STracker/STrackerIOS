@@ -16,9 +16,10 @@
 
 /*!
  @discussion Get one season from request uri.
- @param uri     The request uri.
+ @param uri     The resource uri.
+ @param version The version of the resource, for cache control.
  @param finish  The finish callback.
  */
-+ (void)getSeason:(NSString *)uri finish:(Finish) finish;
++ (void)getSeason:(NSString *)uri whitVersion:(NSString *) version finish:(Finish) finish;
 
 @end

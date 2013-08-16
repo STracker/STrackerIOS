@@ -8,31 +8,27 @@
 
 #import "EpisodeCommentsViewController.h"
 #import "CommentController.h"
-#import "Comment.h"
 
 @implementation EpisodeCommentsViewController
 
 - (id)initWithEpisode:(Episode *)episode
 {
     if (self = [super init])
-    {
         _episode = episode;
-        
-        // Set uri for this episodes comments.
-        _commentsUri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeCommentsURI"];
-        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.identifier.tvshowId];
-        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%d", _episode.identifier.seasonNumber]];
-        _commentsUri = [_commentsUri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%d", _episode.identifier.episodeNumber]];
-    }
-    
     
     return self;
 }
 
 - (void)getComments
 {
-    [CommentController getEpisodeComments:_commentsUri finish:^(EpisodeComments *obj) {
-       
+    // For cache control...
+    NSString *version = nil;
+    if (_comments != nil)
+        version = [NSString stringWithFormat:@"%d", _comments.version];
+    
+    [CommentController getEpisodeComments:_episode.identifier withVersion:version finish:^(EpisodeComments *obj) {
+        
+        _comments = obj;
         _data = obj.comments;
         [_tableView reloadData];
     }];

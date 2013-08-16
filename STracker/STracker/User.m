@@ -23,37 +23,33 @@
         photoUrl = [parameters objectForKey:@"Photo"];
         email = [parameters objectForKey:@"Email"];
         
-        NSMutableArray *friendsAux = [[NSMutableArray alloc] init];
+        friends = [[NSMutableDictionary alloc] init];
         for (NSDictionary * item in [parameters objectForKey:@"Friends"])
         {
             UserSynopsis *friend = [[UserSynopsis alloc] initWithDictionary:item];
-            [friendsAux addObject:friend];
+            [friends setValue:friend forKey:friend.identifier];
         }
-        friends = friendsAux;
         
-        NSMutableArray *subscriptionsAux = [[NSMutableArray alloc] init];
+        subscriptions = [[NSMutableDictionary alloc] init];
         for (NSDictionary *item in [parameters objectForKey:@"Subscriptions"])
         {
             Subscription *subscription = [[Subscription alloc] initWithDictionary:item];
-            [subscriptionsAux addObject:subscription];
+            [subscriptions setValue:subscription forKey:subscription.tvshow.identifier];
         }
-        subscriptions = subscriptionsAux;
         
-        NSMutableArray *friendRequestsAux = [[NSMutableArray alloc] init];
+        friendRequests = [[NSMutableDictionary alloc] init];
         for (NSDictionary *item in [parameters objectForKey:@"FriendRequests"])
         {
             UserSynopsis *request = [[UserSynopsis alloc] initWithDictionary:item];
-            [friendRequestsAux addObject:request];
+            [friendRequests setValue:request forKey:request.identifier];
         }
-        friendRequests = friendRequestsAux;
         
-        NSMutableArray *suggestionsAux = [[NSMutableArray alloc] init];
+        suggestions = [[NSMutableDictionary alloc] init];
         for (NSDictionary *item in [parameters objectForKey:@"Suggestions"])
         {
             Suggestion *suggestion = [[Suggestion alloc] initWithDictionary:item];
-            [suggestionsAux addObject:suggestion];
+            [suggestions setValue:suggestion forKey:suggestion.tvshow.identifier];
         }
-        suggestions = suggestionsAux;
     }
     
     return self;

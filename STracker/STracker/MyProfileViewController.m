@@ -10,8 +10,7 @@
 #import "UsersController.h"
 #import "SuggestionsViewController.h"
 #import "UserSubscriptionsViewController.h"
-#import "FriendsRequestsViewController.h"
-#import "FriendsViewController.h"
+#import "UsersViewController.h"
 
 @implementation MyProfileViewController
 
@@ -41,9 +40,8 @@
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
     uri = [uri stringByAppendingString:[NSString stringWithFormat:@"/%@", _user.identifier]];
     
-    [UsersController getUser:uri finish:^(id obj) {
+    [_app getUser:^(id obj) {
         
-        [_app setUser:obj];
         _user = obj;
         
         // Update userInformation.
@@ -110,7 +108,7 @@
  */
 - (void)suggestions
 {
-    SuggestionsViewController *view = [[SuggestionsViewController alloc] initWithData:_user.suggestions andTitle:@"Suggestions"];
+    SuggestionsViewController *view = [[SuggestionsViewController alloc] initWithData:_user.suggestions.allValues andTitle:@"Suggestions"];
     
     [self.navigationController pushViewController:view animated:YES];
 }
@@ -120,7 +118,7 @@
  */
 - (void)friendRequests
 {
-    FriendsRequestsViewController *view = [[FriendsRequestsViewController alloc] initWithData:_user.friendRequests andTitle:@"Friend requests"];
+    UsersViewController *view = [[UsersViewController alloc] initWithData:_user.friendRequests.allValues andTitle:@"Friend requests"];
     
     [self.navigationController pushViewController:view animated:YES];
 }
@@ -130,7 +128,7 @@
  */
 - (void)subscriptions
 {
-    UserSubscriptionsViewController *view = [[UserSubscriptionsViewController alloc] initWithData:_user.subscriptions andTitle:@"Subscriptions"];
+    UsersViewController *view = [[UsersViewController alloc] initWithData:_user.subscriptions.allValues andTitle:@"Subscriptions"];
     
     [self.navigationController pushViewController:view animated:YES];
 }
@@ -140,7 +138,7 @@
  */
 - (void)friends
 {
-    FriendsViewController *view = [[FriendsViewController alloc] initWithData:_user.friends andTitle:@"Friends"];
+    UsersViewController *view = [[UsersViewController alloc] initWithData:_user.friends.allValues andTitle:@"Friends"];
     
     [self.navigationController pushViewController:view animated:YES];
 }

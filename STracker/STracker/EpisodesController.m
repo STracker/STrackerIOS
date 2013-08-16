@@ -12,7 +12,7 @@
 
 @implementation EpisodesController
 
-+ (void)getEpisode:(NSString *)uri finish:(Finish)finish
++ (void)getEpisode:(NSString *)uri withVersion:(NSString *) version finish:(Finish) finish
 {
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -22,9 +22,10 @@
         finish(episode);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withVersion:version];
 }
 
 @end

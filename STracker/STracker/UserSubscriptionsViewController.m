@@ -22,35 +22,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-}
-
-#pragma mark - BaseViewController abstract methods.
-
-/*!
- @discussion In this case, the data for refreshing is the
- user's subscriptions.
- */
-- (void)shakeEvent
-{
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURI"];
-    
-    // Only for take the user object in App.
-    [_app getUpdatedUser:^(id obj) {
-        
-        [UsersController getUserFavoritesTvShows:uri finish:^(id subscriptions) {
-            
-            User *user = obj;
-            user.subscriptions = subscriptions;
-            
-            // Updating user in App.
-            [_app setUser:user];
-            
-            // Reload data.
-            _data = subscriptions;
-            [_tableView reloadData];
-        }];
-    }];
+    // TODO
 }
 
 @end

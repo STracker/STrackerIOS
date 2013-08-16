@@ -7,14 +7,14 @@
 //
 
 #import "TvShowViewController.h"
-#import "DownloadFiles.h"
-#import "Genre.h"
 #import "SeasonsViewController.h"
 #import "ActorsViewController.h"
 #import "TvShowCommentsViewController.h"
 #import "UIViewController+KNSemiModal.h"
 #import "UsersController.h"
-#import "Subscription.h"
+#import "RatingsController.h"
+#import "UIImageView+AFNetworking.h"
+#import "Genre.h"
 
 @implementation TvShowViewController
 
@@ -25,9 +25,6 @@
      created from storyboard.
      */
     _tvshow = tvshow;
-    _ratingsUri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowRatingsURI"];
-    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"id" withString:_tvshow.identifier];
-
     return self;
 }
 
@@ -114,10 +111,27 @@
         if (alertView == _alertUnsubscribe)
             [self unsubscribeRequest];
     }
-        
     
     [alertView setDelegate:nil];
     alertView = nil;
+}
+
+#pragma mark - RatingsViewController abstract methods.
+
+- (void)postRating:(float)rating
+{
+    [RatingsController postTvShowRating:rating tvshowId:_tvshow.identifier finish:^(id obj) {
+        
+        // Nothing todo...
+    }];
+}
+
+- (void)getRating
+{
+    [RatingsController getTvShowRating:_tvshow.identifier finish:^(id obj) {
+        
+        [super setRatingInfo:obj];
+    }];
 }
 
 #pragma mark - TvShowViewController auxiliary private methods.
@@ -139,10 +153,7 @@
     
     _genres.text = str;
     
-    [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:_tvshow.poster] finish:^(UIImage *image) {
-        
-        _poster.image = image;
-    }];
+    [_poster setImageWithURL:[NSURL URLWithString:_tvshow.poster]];
 }
 
 /*!
@@ -163,7 +174,6 @@
     [self.navigationController pushViewController:view animated:YES];
 }
 
-
 /*!
  @discussion Auxiliary method for showing the users comments.
  */
@@ -178,21 +188,16 @@
  */
 - (void)subscribe
 {
-    // Needed to be logged to perform this action.
-    [_app getUpdatedUser:^(User *user) {
+    [_app getUser:^(User *user) {
         
-        for (Subscription *sub in user.subscriptions)
+        if ([user.subscriptions objectForKey:_tvshow.identifier] == nil)
         {
-            if ([sub.tvshow.identifier isEqualToString:_tvshow.identifier])
-            {
-                _alertUnsubscribe = [[UIAlertView alloc] initWithTitle:@"Attention - allready subscribed!" message:[NSString stringWithFormat:@"you really want to unsubscribe %@?", _tvshow.name] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-                
-                [_alertUnsubscribe show];
-                
-                return;
-            }
+            _alertUnsubscribe = [[UIAlertView alloc] initWithTitle:@"Attention - allready subscribed!" message:[NSString stringWithFormat:@"you really want to unsubscribe %@?", _tvshow.name] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+            
+            [_alertUnsubscribe show];
+            return;
         }
-        
+               
         _alertSubscribe = [[UIAlertView alloc] initWithTitle:@"Attention" message:[NSString stringWithFormat:@"you really want to subscribe %@?", _tvshow.name] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
         
         [_alertSubscribe show];
@@ -205,11 +210,20 @@
  */
 - (void)subscribeRequest
 {
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURI"];
-    
-    [UsersController postFavoriteTvShow:uri tvshowId:_tvshow.identifier finish:^(id obj) {
+    [_app getUser:^(User *user) {
         
-        
+        [UsersController postSubscription:_tvshow.identifier finish:^(id obj) {
+            
+            /*
+             Increment user version, and add subscription to subscriptions list,
+             this way when have a request to server for user information, the server will not
+             response with all user information, instead will response with an 304 - Not modified
+             code and then the application have little internet consumption.
+             */
+            id subscription = [_tvshow getSynopsis];
+            [user.subscriptions setValue:subscription forKey:_tvshow.identifier];
+            user.version++;
+        }];
     }];
 }
 
@@ -219,30 +233,17 @@
  */
 - (void)unsubscribeRequest
 {
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURI"];
-    uri = [uri stringByAppendingFormat:@"/%@", _tvshow.identifier];
-    
-    [UsersController deleteFavoriteTvShow:uri finish:^(id obj) {
+    [_app getUser:^(User *user) {
         
-        /*
-        User *user = [_app getUser];
-        Subscription *subToRemove;
-        for (Subscription *sub in user.subscriptions)
-        {
-            if ([sub.tvshow.identifier isEqualToString:_tvshow.identifier])
-            {
-                subToRemove = sub;
-                break;
-            }
-        }
-        
-        if (subToRemove == nil)
-            return;
-        
-        // Remove subscription from list and increment the version, for use the cache control.
-        [user.subscriptions removeObject:subToRemove];
-        user.version++;
-         */
+        [UsersController deleteSubscription:_tvshow.identifier finish:^(id obj) {
+            
+            /*
+             Increment user version, and remove subscription from subscriptions list,
+             same idea of the above subscribe action.
+             */
+            [user.subscriptions removeObjectForKey:_tvshow.identifier];
+            user.version++;
+        }];
     }];
 }
 

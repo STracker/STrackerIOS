@@ -12,9 +12,9 @@
 
 @implementation CommentController
 
-+ (void)getTvShowComments:(NSString *)uri finish:(Finish) finish
++ (void)getTvShowComments:(NSString *)tvshowId withVersion:(NSString *)version finish:(Finish) finish
 {
-    [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    [[STrackerServerHttpClient sharedClient] getRequest:[CommentController constructTvShowUri:tvshowId] query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         TvShowComments *comments = [[TvShowComments alloc] initWithDictionary:result];
 
@@ -22,14 +22,15 @@
         finish(comments);
      
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withVersion:version];
 }
 
-+ (void)getEpisodeComments:(NSString *)uri finish:(Finish)finish
++ (void)getEpisodeComments:(EpisodeId *)episodeId withVersion:(NSString *)version finish:(Finish) finish
 {
-    [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    [[STrackerServerHttpClient sharedClient] getRequest:[CommentController constructEpisodeUri:episodeId] query:nil success:^(AFJSONRequestOperation *operation, id result) {
     
         EpisodeComments *comments = [[EpisodeComments alloc] initWithDictionary:result];
         
@@ -37,27 +38,20 @@
         finish(comments);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
-    }];
-
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withVersion:version];
 }
 
-+ (void)postComment:(NSString *)uri comment:(NSString *)comment finish:(Finish) finish
++ (void)postTvShowComment:(NSString *)tvshowId comment:(NSString *)comment finish:(Finish)finish
 {
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:comment, @"", nil];
-        
-    [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
-            
-        // Nothing todo here...
-            
-        // Invoke callback.
-        finish(nil);
-            
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+    [CommentController postComment:[CommentController constructTvShowUri:tvshowId] comment:comment finish:finish];
+}
+
++ (void)postEpisodeComment:(EpisodeId *)episodeId comment:(NSString *)comment finish:(Finish)finish
+{
+    [CommentController postComment:[CommentController constructEpisodeUri:episodeId] comment:comment finish:finish];
 }
 
 + (void)deleteComment:(NSString *)uri finish:(Finish)finish
@@ -68,8 +62,51 @@
         finish(nil);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
+#pragma mark - CommentsController auxiliary private methods.
+
+/*!
+ @discussion Auxiliary method for generate the television show comments uri.
+ */
++ (NSString *)constructTvShowUri:(NSString *)tvshowId
+{
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowCommentsURI"];
+    uri = [uri stringByReplacingOccurrencesOfString:@"id" withString:tvshowId];
+    
+    return uri;
+}
+
+/*!
+ @discussion Auxiliary method for generate the episode comments uri.
+ */
++ (NSString *)constructEpisodeUri:(EpisodeId *)episodeId
+{
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeCommentsURI"];
+    uri = [uri stringByReplacingOccurrencesOfString:@"tvshowId" withString:episodeId.tvshowId];
+    uri = [uri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%d", episodeId.seasonNumber]];
+    uri = [uri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%d", episodeId.episodeNumber]];
+    
+    return uri;
+}
+
+/*!
+ @discussion Auxiliary method for post one user's comment into STracker.
+ */
++ (void)postComment:(NSString *)uri comment:(NSString *)comment finish:(Finish) finish
+{
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:comment, @"", nil];
+        
+    [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
+            
+        // Invoke callback.
+        finish(nil);
+            
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
     }];
 }
 

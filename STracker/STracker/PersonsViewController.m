@@ -7,7 +7,6 @@
 //
 
 #import "PersonsViewController.h"
-#import "DownloadFiles.h"
 
 @implementation PersonsViewController
 

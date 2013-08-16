@@ -10,6 +10,11 @@
 
 @implementation BaseTableViewController
 
+- (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
+{
+    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
+}
+
 - (id)initWithData:(NSArray *)data
 {
     self = [super init];
@@ -41,11 +46,6 @@
     _app = [[UIApplication sharedApplication] delegate];
     
     [self configureViewStyle];
-}
-
-- (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
-{
-    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
 }
 
 #pragma mark - Table view data source.

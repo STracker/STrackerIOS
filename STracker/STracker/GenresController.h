@@ -16,17 +16,16 @@
 
 /*!
  @discussion Get all genres available.
- @param uri         The uri for make the request.
- @param finish      The finish callback.
+ @param finish  The finish callback.
  */
-+ (void)getGenres:(NSString *)uri finish:(Finish) finish;
++ (void)getGenres:(Finish) finish;
 
 /*!
  @discussion Get one genre from request uri.
- @param name    The genre name.
- @param uri     The uri for make the request.
+ @param uri     The resource uri.
+ @param version The version of the resource, for cache control.
  @param finish  The finish callback.
  */
-+ (void)getGenre:(NSString *) uri finish:(Finish) finish;
++ (void)getGenre:(NSString *) uri withVersion:(NSString *)version finish:(Finish) finish;
 
 @end

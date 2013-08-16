@@ -30,7 +30,7 @@
 /*!
  @discussion This object defines the episode entity object.
  */
-@interface Episode : Entity
+@interface Episode : Entity <Deserialize>
 
 @property(nonatomic, strong) EpisodeId *identifier;
 @property(nonatomic, copy) NSString *name;
@@ -45,7 +45,7 @@
 /*!
  @discussion This object defines the episode synopsis entity object.
  */
-@interface EpisodeSynopsis : EntitySynopsis
+@interface EpisodeSynopsis : EntitySynopsis <Deserialize>
 
 @property(nonatomic, strong) EpisodeId *identifier;
 @property(nonatomic, copy) NSString *date;

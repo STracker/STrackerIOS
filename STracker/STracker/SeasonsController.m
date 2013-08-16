@@ -12,7 +12,7 @@
 
 @implementation SeasonsController
 
-+ (void)getSeason:(NSString *)uri finish:(Finish)finish
++ (void)getSeason:(NSString *)uri whitVersion:(NSString *) version finish:(Finish) finish
 {
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -22,9 +22,10 @@
         finish(season);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withVersion:version];
 }
 
 @end

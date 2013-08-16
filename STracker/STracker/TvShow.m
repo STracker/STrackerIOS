@@ -55,6 +55,21 @@
     return self;
 }
 
+- (EntitySynopsis *)getSynopsis
+{
+    TvShowSynopsis *synopsis = [[TvShowSynopsis alloc] init];
+    synopsis.name = [self identifier];
+    
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowsURI"];
+    uri = [uri stringByAppendingFormat:@"/%@", [self identifier]];
+    synopsis.uri = uri;
+    
+    synopsis.identifier = [self identifier];
+    synopsis.poster = [self poster];
+    
+    return synopsis;
+}
+
 @end
 
 #pragma mark - Synopsis object.

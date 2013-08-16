@@ -13,7 +13,7 @@
 /*!
  @discussion This object defines the television show entity object.
  */
-@interface TvShow : Entity
+@interface TvShow : Entity <Deserialize, EntityDelegate>
 
 @property(nonatomic, copy) NSString *identifier;
 @property(nonatomic, copy) NSString *name;
@@ -32,7 +32,7 @@
 /*!
  @discussion This object defines the television show synopsis entity object.
  */
-@interface TvShowSynopsis : EntitySynopsis
+@interface TvShowSynopsis : EntitySynopsis <Deserialize>
 
 @property(nonatomic, copy) NSString *identifier;
 @property(nonatomic, copy) NSString *poster;

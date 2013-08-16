@@ -38,7 +38,6 @@
 		8CC6C104179DABBE0085B036 /* ActorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6C103179DABBE0085B036 /* ActorsViewController.m */; };
 		8CC7C4E517A0804800FD2675 /* BackgroundPattern2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CC7C4E417A0804800FD2675 /* BackgroundPattern2.png */; };
 		8CCA695217A1E7F50078E699 /* UsersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA695117A1E7F50078E699 /* UsersController.m */; };
-		8CD10DC2176E81BD00F81F7C /* DownloadFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD10DC1176E81BD00F81F7C /* DownloadFiles.m */; };
 		8CD10DCE176E8DA300F81F7C /* Calendar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CD10DCD176E8DA300F81F7C /* Calendar_icon.png */; };
 		958B692C8AB84E8FB6B7F544 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86A72A6102254A888262B579 /* libPods.a */; };
 		D802E6511788811000ABD08F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FC677F17886B2300A06D40 /* Security.framework */; };
@@ -91,8 +90,6 @@
 		D8B5393317AAADB100E0D4CE /* Suggestion.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B5393217AAADB100E0D4CE /* Suggestion.m */; };
 		D8B5393717AABFB600E0D4CE /* SuggestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B5393617AABFB600E0D4CE /* SuggestionsViewController.m */; };
 		D8B5393E17AAD99900E0D4CE /* UserSubscriptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B5393D17AAD99900E0D4CE /* UserSubscriptionsViewController.m */; };
-		D8B5394217AADEC800E0D4CE /* FriendsRequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B5394117AADEC800E0D4CE /* FriendsRequestsViewController.m */; };
-		D8B5394517AAE13F00E0D4CE /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B5394417AAE13F00E0D4CE /* FriendsViewController.m */; };
 		D8FC678617886C5B00A06D40 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FC678517886C5B00A06D40 /* FacebookSDK.framework */; };
 		D8FCACB1179EE91B00CC91E4 /* CommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FCACB0179EE91B00CC91E4 /* CommentController.m */; };
 		D8FCACB8179F1DB500CC91E4 /* TvShowsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FCACB7179F1DB500CC91E4 /* TvShowsController.m */; };
@@ -173,8 +170,6 @@
 		8CC7C4E417A0804800FD2675 /* BackgroundPattern2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundPattern2.png; sourceTree = "<group>"; };
 		8CCA695017A1E7F50078E699 /* UsersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersController.h; sourceTree = "<group>"; };
 		8CCA695117A1E7F50078E699 /* UsersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersController.m; sourceTree = "<group>"; };
-		8CD10DC0176E81BD00F81F7C /* DownloadFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadFiles.h; sourceTree = "<group>"; };
-		8CD10DC1176E81BD00F81F7C /* DownloadFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadFiles.m; sourceTree = "<group>"; };
 		8CD10DCD176E8DA300F81F7C /* Calendar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Calendar_icon.png; sourceTree = "<group>"; };
 		D802E6551788815700ABD08F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D802E657178882AD00ABD08F /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKResources.bundle; sourceTree = "<group>"; };
@@ -239,10 +234,6 @@
 		D8B5393617AABFB600E0D4CE /* SuggestionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestionsViewController.m; sourceTree = "<group>"; };
 		D8B5393C17AAD99900E0D4CE /* UserSubscriptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSubscriptionsViewController.h; sourceTree = "<group>"; };
 		D8B5393D17AAD99900E0D4CE /* UserSubscriptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSubscriptionsViewController.m; sourceTree = "<group>"; };
-		D8B5394017AADEC800E0D4CE /* FriendsRequestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsRequestsViewController.h; sourceTree = "<group>"; };
-		D8B5394117AADEC800E0D4CE /* FriendsRequestsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsRequestsViewController.m; sourceTree = "<group>"; };
-		D8B5394317AAE13F00E0D4CE /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
-		D8B5394417AAE13F00E0D4CE /* FriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsViewController.m; sourceTree = "<group>"; };
 		D8FC677B17886B1200A06D40 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D8FC677D17886B1800A06D40 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D8FC677F17886B2300A06D40 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -344,8 +335,6 @@
 			children = (
 				D887E3841753B22000E3BABB /* STrackerServerHttpClient.h */,
 				D887E3851753B22000E3BABB /* STrackerServerHttpClient.m */,
-				8CD10DC0176E81BD00F81F7C /* DownloadFiles.h */,
-				8CD10DC1176E81BD00F81F7C /* DownloadFiles.m */,
 			);
 			name = HttpClients;
 			sourceTree = "<group>";
@@ -368,7 +357,6 @@
 				D887E39B17540AAC00E3BABB /* ProfileController */,
 				D8B5393417AABF7700E0D4CE /* Suggestions */,
 				D8B5393817AAD89800E0D4CE /* Subscriptions */,
-				D8B5393F17AADEAB00E0D4CE /* Friends */,
 				8C8E14AF17A0344F00A4B48C /* RatingsController */,
 				D8FFA0AC179C62760058E825 /* SynopsisTableController */,
 				8C67EDDA1764D5AC003278F8 /* GenresController */,
@@ -617,17 +605,6 @@
 			name = Subscriptions;
 			sourceTree = "<group>";
 		};
-		D8B5393F17AADEAB00E0D4CE /* Friends */ = {
-			isa = PBXGroup;
-			children = (
-				D8B5394017AADEC800E0D4CE /* FriendsRequestsViewController.h */,
-				D8B5394117AADEC800E0D4CE /* FriendsRequestsViewController.m */,
-				D8B5394317AAE13F00E0D4CE /* FriendsViewController.h */,
-				D8B5394417AAE13F00E0D4CE /* FriendsViewController.m */,
-			);
-			name = Friends;
-			sourceTree = "<group>";
-		};
 		D8FCACB2179F031F00CC91E4 /* InfoControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -838,7 +815,6 @@
 				8C67EDF417651D5D003278F8 /* Person.m in Sources */,
 				8C67EDF717651E55003278F8 /* Actor.m in Sources */,
 				8C67EDFB176525E9003278F8 /* PersonsViewController.m in Sources */,
-				8CD10DC2176E81BD00F81F7C /* DownloadFiles.m in Sources */,
 				D802E65D17888C6E00ABD08F /* User.m in Sources */,
 				D802E66417889C7E00ABD08F /* FacebookView.m in Sources */,
 				8C1AB39E178C4A2500ED7142 /* CommentsViewController.m in Sources */,
@@ -866,8 +842,6 @@
 				D8B5393317AAADB100E0D4CE /* Suggestion.m in Sources */,
 				D8B5393717AABFB600E0D4CE /* SuggestionsViewController.m in Sources */,
 				D8B5393E17AAD99900E0D4CE /* UserSubscriptionsViewController.m in Sources */,
-				D8B5394217AADEC800E0D4CE /* FriendsRequestsViewController.m in Sources */,
-				D8B5394517AAE13F00E0D4CE /* FriendsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

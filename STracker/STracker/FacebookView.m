@@ -19,8 +19,6 @@
     self = [super initWithFrame:CGRectMake(0, 0, 0, 43)];
     if (self)
     {
-        _app = [[UIApplication sharedApplication] delegate]; 
-        
         _fb = [[FBLoginView alloc] initWithReadPermissions:[NSArray arrayWithObject:@"email"]];
         [_fb setDelegate:self];
         [self addSubview:_fb];
@@ -39,7 +37,7 @@
 
 - (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error
 {
-    [[_app getAlertViewForErrors:error.localizedDescription] show];
+    [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
 }
 
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
@@ -59,13 +57,13 @@
     HawkCredentials *credentials = [[HawkCredentials alloc] init];
     credentials.identifier = me.identifier;
     credentials.key = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"HawkKey"];
-    _app.hawkCredentials = credentials;
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    app.hawkCredentials = credentials;
     
     // Register the user into STracker server.
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
-    [UsersController registUser:uri withUser:me finish:^(id obj) {
-        
-        // If success, execute callback.
+    [UsersController registUser:me finish:^(id obj) {
+       
         _finish(obj);
     }];
 }

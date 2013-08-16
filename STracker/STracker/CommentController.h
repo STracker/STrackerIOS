@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
+#import "Episode.h"
 
 /*!
  @discussion Info controller for manage comments 
@@ -17,29 +18,39 @@
 
 /*!
  @discussion Get tvshow comments from the request Uri.
- @param uri     Request Uri.
- @param finish  The callback when download is finish.
+ @param tvshowId    The television show identifier.
+ @param version     The version of the resource, for cache control.
+ @param finish      The callback when download is finish.
  */
-+ (void)getTvShowComments:(NSString *)uri finish:(Finish) finish;
++ (void)getTvShowComments:(NSString *)tvshowId withVersion:(NSString *)version finish:(Finish) finish;
 
 /*!
  @discussion Get episode comments from the request Uri.
- @param uri     Request Uri.
- @param finish  The callback when download is finish.
+ @param episodeId   The episode identifier.
+ @param version     The version of the resource, for cache control.
+ @param finish      The callback when download is finish.
  */
-+ (void)getEpisodeComments:(NSString *)uri finish:(Finish) finish;
++ (void)getEpisodeComments:(EpisodeId *)episodeId withVersion:(NSString *)version finish:(Finish) finish;
+
+/*!
+ @discussion Post one television show comment into STracker server.
+ @param tvshowId    The television show identifier.
+ @param comment     The comment.
+ @param finish      The callback when post is finish.
+ */
++ (void)postTvShowComment:(NSString *)tvshowId comment:(NSString *)comment finish:(Finish) finish;
 
 /*!
  @discussion Post one comment into STracker server.
- @param uri     The Uri for post.
- @param comment The comment.
- @param finish  The callback when post is finish.
+ @param episodeId   The television show identifier.
+ @param comment     The comment.
+ @param finish      The callback when post is finish.
  */
-+ (void)postComment:(NSString *)uri comment:(NSString *)comment finish:(Finish) finish;
++ (void)postEpisodeComment:(EpisodeId *)episodeId comment:(NSString *)comment finish:(Finish) finish;
 
 /*!
  @discussion Delete one comment into STracker server.
- @param uri     The Uri for delete.
+ @param uri     The comment uri.
  @param finish  The callback when delete is complete.
  */
 + (void)deleteComment:(NSString *)uri finish:(Finish) finish;

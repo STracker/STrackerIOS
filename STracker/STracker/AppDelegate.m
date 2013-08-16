@@ -88,21 +88,18 @@
 
 #pragma mark - AppDelegate public methods.
 
-- (void)getUpdatedUser:(Finish)finish
+- (void)getUser:(Finish)finish
 {
     if (_user != nil)
     {
         // Verify if the user information is updated.
-        NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
-        uri = [uri stringByAppendingString:[NSString stringWithFormat:@"/%@", _user.identifier]];
-        
-        [UsersController getUser:uri finish:^(User *user) {
+        [UsersController getMe:_user.identifier withVersion:[NSString stringWithFormat:@"%d", _user.version] finish:^(User *user) {
             
             if (user != nil)
                 _user = user;
             
             finish(_user);
-        } withCacheControl:[NSString stringWithFormat:@"%d", _user.version]];
+        }];
         
         return;
     }
@@ -124,17 +121,9 @@
     [self.window.rootViewController presentSemiView:fb];
 }
 
-- (User *)getUser
-{
-    return _user;
-}
+#pragma mark - AppDelegate class methods.
 
-- (void)setUser:(User *)newUser
-{
-    _user = newUser;
-}
-
-- (UIAlertView *)getAlertViewForErrors:(NSString *)msgError
++ (UIAlertView *)getAlertViewForErrors:(NSString *)msgError
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msgError delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
     
@@ -165,6 +154,7 @@
  */
 - (void)verifyStatus
 {
+    /*
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendRequestsURI"];
     [UsersController getFriendsRequests:uri finish:^(id obj) {
         
@@ -176,6 +166,7 @@
         
         _user.suggestions = obj;
     }];
+     */
 }
 
 @end

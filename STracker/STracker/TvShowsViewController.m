@@ -18,11 +18,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Open a particular tvshow controller...
-    TvShowSynopsis *synopse = [_data objectAtIndex:indexPath.row];
-    [TvShowsController getTvShow:synopse.uri finish:^(id obj) {
+    TvShowSynopsis *synopse = [_data objectAtIndex:indexPath.row];    
+    [TvShowsController getTvShow:synopse.uri withVersion:nil finish:^(id obj) {
         
         TvShowViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"TvShowView"] initWithTvShow:obj];
-        
         [self.navigationController pushViewController:view animated:YES];
     }];
 }

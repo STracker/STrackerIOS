@@ -29,7 +29,7 @@
 /*!
  @discussion This object defines the season entity object.
  */
-@interface Season : Entity
+@interface Season : Entity <Deserialize>
 
 @property(nonatomic, strong) SeasonId *identifier;
 @property(nonatomic, retain) NSArray *episodes;
@@ -39,7 +39,7 @@
 /*!
  @discussion This object defines the season synopsis entity object.
  */
-@interface SeasonSynopsis : EntitySynopsis
+@interface SeasonSynopsis : EntitySynopsis <Deserialize>
 
 @property(nonatomic, strong) SeasonId *identifier;
 

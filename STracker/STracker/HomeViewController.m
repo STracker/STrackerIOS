@@ -7,11 +7,9 @@
 //
 
 #import "HomeViewController.h"
-#import "TvShow.h"
 #import "TvShowsViewController.h"
 #import "MyProfileViewController.h"
 #import "GenresViewController.h"
-#import "Genre.h"
 #import "TvShowViewController.h"
 #import "TvShowsController.h"
 #import "GenresController.h"
@@ -41,8 +39,7 @@
 
 - (IBAction)userOptions:(id)sender
 {
-    // For this action is necessary the user was logged into Facebook account.
-    [_app getUpdatedUser:^(User *user) {
+    [_app getUser:^(User *user) {
         
         MyProfileViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"MyProfile"] initWithUserInfo:user];
         [self.navigationController pushViewController:view animated:YES];
@@ -80,10 +77,9 @@
 - (void) imagePager:(KIImagePager *)imagePager didSelectImageAtIndex:(NSUInteger)index
 {
     TvShowSynopsis *synopse = [_top objectAtIndex:index];
-    [TvShowsController getTvShow:synopse.uri finish:^(id obj) {
+    [TvShowsController getTvShow:synopse.uri withVersion:nil finish:^(id obj) {
         
         TvShowViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"TvShowView"] initWithTvShow:obj];
-        
         [self.navigationController pushViewController:view animated:YES];
     }];
 }
@@ -144,13 +140,12 @@
  */
 - (void)getTopRated
 {
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTopRatedTvShowsURI"];
-   [TvShowsController getTvShowsTopRated:uri finish:^(id obj) {
-       
-       // Set and reload data from imagePager.
-       _top = obj;
-       [_imagePager reloadData];
-   }];
+    [TvShowsController getTvShowsTopRated:^(id obj) {
+        
+        // Set and reload data from imagePager.
+        _top = obj;
+        [_imagePager reloadData];
+    }];
 }
 
 /*!
@@ -159,13 +154,11 @@
  */
 - (void)searchGenres
 {
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerGenresURI"];
-    [GenresController getGenres:uri finish:^(id obj) {
+    [GenresController getGenres:^(id obj) {
         
         GenresViewController *view = [[GenresViewController alloc] initWithData:obj andTitle:@"Genres"];
         [self.navigationController pushViewController:view animated:YES];
     }];
-     
 }
 
 /*!
@@ -199,8 +192,7 @@
  */
 - (void)searchSeriesAux:(NSString *)name
 {
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowsURI"];
-    [TvShowsController getTvShowsByName:name uri:uri finish:^(id obj) {
+    [TvShowsController getTvShowsByName:name finish:^(id obj) {
         
         TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:obj];
         [self.navigationController pushViewController:view animated:YES];
@@ -214,13 +206,12 @@
  */
 - (void)searchUsersAux:(NSString *)name
 {
-    [_app getUpdatedUser:^(id obj) {
+    // Needed to be logged in.
+    [_app getUser:^(id obj) {
         
-        NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
-        [UsersController searchUser:uri withName:name finish:^(id obj) {
+        [UsersController searchUser:name finish:^(id obj) {
             
             UsersViewController *view = [[UsersViewController alloc] initWithData:obj andTitle:@"Search results"];
-            
             [self.navigationController pushViewController:view animated:YES];
         }];
     }];

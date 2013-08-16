@@ -7,10 +7,11 @@
 //
 
 #import "EpisodeViewController.h"
-#import "DownloadFiles.h"
 #import "ActorsViewController.h"
 #import "EpisodeCommentsViewController.h"
 #import "UIViewController+KNSemiModal.h"
+#import "RatingsController.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation EpisodeViewController
 
@@ -21,12 +22,6 @@
      created from storyboard.
      */
     _episode = episode;
-    _ratingsUri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodeRatingsURI"];
-    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"tvshowId" withString:_episode.identifier.tvshowId];
-    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%d", _episode.identifier.seasonNumber]];
-    _ratingsUri = [_ratingsUri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%d", _episode.identifier.episodeNumber]];
-
-    
     return self;
 }
 
@@ -41,8 +36,8 @@
 {
     _poster = nil;
     _date = nil;
-    
     _swipeGestureDescription = nil;
+    
     [super viewDidUnload];
 }
 
@@ -87,6 +82,25 @@
     [actionSheet setDelegate:nil];
 }
 
+#pragma mark - RatingsViewController abstract methods.
+
+- (void)postRating:(float)rating
+{
+    [RatingsController postEpisodeRating:rating episodeId:_episode.identifier finish:^(id obj) {
+        
+        // Nothing todo...
+    }];
+}
+
+- (void)getRating
+{
+    [RatingsController getEpisodeRating:_episode.identifier finish:^(id obj) {
+        
+        [super setRatingInfo:obj];
+    }];
+}
+
+
 #pragma mark - EpisodeViewController auxiliary private methods.
 
 /*!
@@ -99,10 +113,7 @@
     self.navigationItem.title = _episode.name;
     
     _date.text = _episode.date;
-    
-    [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:_episode.poster] finish:^(UIImage *image) {
-        _poster.image = image;
-    }];
+    [_poster setImageWithURL:[NSURL URLWithString:_episode.poster]];
 }
 
 /*!
@@ -111,7 +122,6 @@
 - (void)guestActors
 {
     ActorsViewController *view = [[ActorsViewController alloc] initWithData:_episode.guestActors andTitle:@"Guest actors"];
-    
     [self.navigationController pushViewController:view animated:YES];
 }
 
@@ -121,7 +131,6 @@
 - (void)directors
 {
     PersonsViewController *view = [[PersonsViewController alloc] initWithData:_episode.directors andTitle:@"Directors"];
-    
     [self.navigationController pushViewController:view animated:YES];
 }
 
@@ -131,7 +140,6 @@
 - (void)comments
 {
     EpisodeCommentsViewController *view = [[EpisodeCommentsViewController alloc] initWithEpisode:_episode];
-    
     [self.navigationController pushViewController:view animated:YES];
 }
 

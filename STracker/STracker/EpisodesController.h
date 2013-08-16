@@ -16,9 +16,10 @@
 
 /*!
  @discussion Get one episode from request uri.
- @param uri     The request uri.
+ @param uri     The resource uri.
+ @param version The version of the resource, for cache control.
  @param finish  The finish callback.
  */
-+ (void)getEpisode:(NSString *)uri finish:(Finish) finish;
++ (void)getEpisode:(NSString *)uri withVersion:(NSString *) version finish:(Finish) finish;
 
 @end

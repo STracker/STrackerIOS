@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+// Only for EntityDelegate knows the EntitySynopsis type...
+@class EntitySynopsis;
+
 /*!
  @discussion Protocol for deserialize objects.
  */
@@ -20,6 +23,19 @@
  @return An instance of the object deserialized.
  */
 - (id)initWithDictionary:(NSDictionary *)parameters;
+
+@end
+
+/*!
+ @discussion Protocol for entities.
+ */
+@protocol EntityDelegate
+
+/*!
+ @discussion Method for generate the entity synopsis.
+ @return An instance of the entity synopsis.
+ */
+- (EntitySynopsis *)getSynopsis;
 
 @end
 

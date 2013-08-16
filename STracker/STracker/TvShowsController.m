@@ -11,7 +11,7 @@
 
 @implementation TvShowsController
 
-+ (void)getTvShow:(NSString *)uri finish:(Finish) finish
++ (void)getTvShow:(NSString *)uri withVersion:(NSString *)version finish:(Finish) finish
 {
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -21,13 +21,15 @@
         finish(tvshow);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withVersion:version];
 }
 
-+ (void)getTvShowsByName:(NSString *)name uri:(NSString *)uri finish:(Finish)finish
++ (void)getTvShowsByName:(NSString *)name finish:(Finish)finish
 {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowsURI"];
     NSDictionary *query = [[NSDictionary alloc] initWithObjectsAndKeys:name, @"name", nil];
     
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:query success:^(AFJSONRequestOperation *operation, id result) {
@@ -36,22 +38,25 @@
         finish([self parseTvShowsToArray:result]);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withVersion:nil];
 }
 
-+ (void)getTvShowsTopRated:(NSString *)uri finish:(Finish) finish
++ (void)getTvShowsTopRated:(Finish) finish
 {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTopRatedTvShowsURI"];
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
               
         // Invoke callback.
         finish([self parseTvShowsToArray:result]);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withVersion:nil];
 
 }
 

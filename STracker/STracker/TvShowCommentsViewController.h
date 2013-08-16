@@ -8,6 +8,7 @@
 
 #import "CommentsViewController.h"
 #import "TvShow.h"
+#import "Comment.h"
 
 /*!
  @discussion Table of television shows comments.
@@ -16,6 +17,8 @@
 {
     @private
     TvShow *_tvshow;
+    @private
+    TvShowComments *_comments;
 }
 
 /*!

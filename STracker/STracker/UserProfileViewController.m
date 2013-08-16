@@ -20,7 +20,7 @@
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     
     // Already loged in in this moment, so only retrieves the current user information.
-    [app getUpdatedUser:^(id obj) {
+    [app getUser:^(id obj) {
         
         User *me = obj;
         
@@ -76,7 +76,7 @@
  */
 - (void)friends
 {
-    UsersViewController *view = [[UsersViewController alloc] initWithData:_user.friends andTitle:@"Friends"];
+    UsersViewController *view = [[UsersViewController alloc] initWithData:_user.friends.allValues andTitle:@"Friends"];
     
     [self.navigationController pushViewController:view animated:YES];
 }
@@ -86,8 +86,8 @@
  */
 - (void)inviteOrRemove
 {
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsURI"];
    
+    /*
     // Add friend.
     if (!_isFriend)
     {
@@ -110,6 +110,7 @@
         
         [alert show];
     }];
+     */
 }
 
 @end

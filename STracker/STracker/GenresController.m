@@ -12,8 +12,9 @@
 
 @implementation GenresController
 
-+ (void)getGenres:(NSString *)uri finish:(Finish)finish
++ (void)getGenres:(Finish) finish
 {
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerGenresURI"];
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         NSMutableArray *data = [[NSMutableArray alloc] init];
@@ -27,12 +28,13 @@
         finish(data);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withVersion:nil];
 }
 
-+ (void)getGenre:(NSString *) uri finish:(Finish) finish
++ (void)getGenre:(NSString *) uri withVersion:(NSString *)version finish:(Finish) finish
 {
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
@@ -42,9 +44,10 @@
         finish(genre);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [[app getAlertViewForErrors:error.localizedDescription] show];
-    }];
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withVersion:version];
 }
 
 @end

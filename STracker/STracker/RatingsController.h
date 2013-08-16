@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
+#import "Episode.h"
 
 /*!
  @discussion Info controller for manage ratings 
@@ -16,18 +17,33 @@
 @interface RatingsController : NSObject
 
 /*!
- @discussion Get rating from STracker server.
- @param uri     The request uri. Normally from tv show or episode.
- @param finish  The finish callback.
+ @discussion Get telvision show rating from STracker server.
+ @param tvshowId    The identifier of the television show.
+ @param finish      The finish callback.
  */
-+ (void)getRating:(NSString *)uri finish:(Finish) finish;
++ (void)getTvShowRating:(NSString *)tvshowId finish:(Finish) finish;
 
 /*!
- @discussion Post an rating in STracker server.
- @param uri     The request uri. Normally from tv show or episode.
- @param rating  The user's rating.
- @param finish  The finish callback.
+ @discussion Get episode rating from STracker server.
+ @param episodeId   The identifier of the episode.
+ @param finish      The finish callback.
  */
-+ (void)postRating:(NSString *)uri withRating:(float)rating finish:(Finish) finish;
++ (void)getEpisodeRating:(EpisodeId *)episodeId finish:(Finish) finish;
+
+/*!
+ @discussion Post an television show rating in STracker server.
+ @param rating      The user's rating.
+ @param tvshowId    The identifier of the television show.
+ @param finish      The finish callback.
+ */
++ (void)postTvShowRating:(float)rating tvshowId:(NSString *)tvshowId finish:(Finish) finish;
+
+/*!
+ @discussion Post an episode rating in STracker server.
+ @param rating      The user's rating.
+ @param episodeId   The identifier of the episode.
+ @param finish      The finish callback.
+ */
++ (void)postEpisodeRating:(float)rating episodeId:(EpisodeId *)episodeId finish:(Finish) finish;
 
 @end

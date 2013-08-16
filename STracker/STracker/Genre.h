@@ -12,7 +12,7 @@
 /*!
  @discussion This object defines the genre entity object.
  */
-@interface Genre : Entity
+@interface Genre : Entity <Deserialize>
 
 @property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSArray *tvshows;
@@ -22,6 +22,6 @@
 /*!
  @discussion This object defines the genre synopsis entity object.
  */
-@interface GenreSynopsis : EntitySynopsis
+@interface GenreSynopsis : EntitySynopsis <Deserialize>
 
 @end

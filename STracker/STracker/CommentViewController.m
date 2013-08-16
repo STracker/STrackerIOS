@@ -32,7 +32,7 @@
     _body.text = _comment.body;
     _userName.text = _comment.user.name;
 
-    [_app getUpdatedUser:^(User *user) {
+    [_app getUser:^(User *user) {
 
         if ([user.identifier isEqualToString:_comment.user.identifier])
         {
@@ -48,8 +48,8 @@
 {
     _body = nil;
     _userProfile = nil;
-    
     _userName = nil;
+    
     [super viewDidUnload];
 }
 
@@ -77,10 +77,7 @@
 
 - (IBAction)openUserProfile
 {
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
-    uri = [uri stringByAppendingString:[NSString stringWithFormat:@"/%@", _comment.user.identifier]];
-    
-    [UsersController getUser:uri finish:^(id obj) {
+    [UsersController getUser:_comment.user.uri withVersion:nil finish:^(id obj) {
         
         UserProfileViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"UserProfile"] initWithUserInfo:obj];
         [self.navigationController pushViewController:view animated:YES];

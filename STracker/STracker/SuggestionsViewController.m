@@ -27,41 +27,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Suggestion *suggestion = [_data objectAtIndex:indexPath.row];
-    [TvShowsController getTvShow:suggestion.tvshow.uri finish:^(id obj) {
+    
+    [TvShowsController getTvShow:suggestion.tvshow.uri withVersion:nil finish:^(id obj) {
         
         TvShowViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"TvShowView"] initWithTvShow:obj];
         
         [self.navigationController pushViewController:view animated:YES];
-    }];
-}
-
-#pragma mark - BaseViewController abstract methods.
-
-/*!
- @discussion In this case, the data for refreshing is the
- user information. So its needed in the end to set user
- information in App.
- */
-- (void)shakeEvent
-{
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsSuggestionsURI"];
-    
-    // In this moment, already have loged in, so only returns the
-    // user object from App.
-    [_app getUpdatedUser:^(id obj) {
-        
-        [UsersController getFriendsSuggestions:uri finish:^(id suggestions) {
-
-            User *user = obj;
-            user.suggestions = suggestions;
-                
-            // Set user information with new suggestions in App.
-            [_app setUser:user];
-                
-            // Reload suggestions in table.
-            _data = suggestions;
-            [_tableView reloadData];
-        }];
     }];
 }
 

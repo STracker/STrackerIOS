@@ -25,7 +25,7 @@
 /*!
  @discussion This object defines the comments of one television show.
  */
-@interface TvShowComments : Entity
+@interface TvShowComments : Entity <Deserialize>
 
 @property(nonatomic, strong) NSString *tvshowId;
 @property(nonatomic, strong) NSArray *comments;
@@ -34,8 +34,8 @@
 
 /*!
  @discussion This object defines the comments of one television show.
- */
-@interface EpisodeComments : Entity
+ */ 
+@interface EpisodeComments : Entity <Deserialize>
 
 @property(nonatomic, strong) EpisodeId *episodeId;
 @property(nonatomic, strong) NSArray *comments;

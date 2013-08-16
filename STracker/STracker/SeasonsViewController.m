@@ -17,11 +17,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SeasonSynopsis *synopse = [_data objectAtIndex:indexPath.row];
-    [SeasonsController getSeason:synopse.uri finish:^(id obj) {
+    SeasonSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
+    
+    [SeasonsController getSeason:synopsis.uri whitVersion:nil finish:^(Season *season) {
         
-        Season *season = obj;
-        SeasonViewController *view = [[SeasonViewController alloc] initWithData:season.episodes andTitle:synopse.name];
+        SeasonViewController *view = [[SeasonViewController alloc] initWithData:season.episodes andTitle:synopsis.name];
         [self.navigationController pushViewController:view animated:YES];
     }];
 }
