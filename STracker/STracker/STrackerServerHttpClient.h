@@ -20,20 +20,20 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 
 /*!
  @discussion AFNetworking use the NSURLCache object to store in the disc the 
- cached data, is a nice feature, but in the case of STracker is not... Because
- the STracker have 3 application clients, so if the user change one entity and 
- this entity it was previous stored in local cache in iOS application, when user 
- opens the 
- 
- 
- 
- . But in the case of STracker, there is the probability
- of the user making changes into the Web, and so are never reflected in iOS
- application because the data in cache is old.
- The STracker server, returns the status code 304 when the version number of 
- the entity is equal to the version sended in If-None-Match HTTP request header.
+ cached data, is a nice feature, but in the case of STracker, have some 
+ problems namely in POST - GET users because it is possible to change user's
+ data in other application. So if already have in cache previous user information 
+ from one GET request, and user change the information in the Web, 
+ and then make the login in iOS application, will be make one POST 
+ request to STracker server that will be response with the user's 
+ information updated. If after that, the user make a GET request for 
+ user's information, the server will be response with an 304 and the 
+ AFNetworking will return the data that have in cache from previous GET operation. 
+ The problem is that the data is not updated. This is a particular case, and 
+ happens only with user's information entity.
  This category adds one new method to AFHTTPClient for making HTTP GET requests 
- ignoring the local cache data. 
+ ignoring the local cache data. So its needed to check the status code and ETag 
+ header value in the server response.
  */
 @interface AFHTTPClient (IgnoreCacheData)
 
@@ -126,6 +126,17 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 - (void)getRequest:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withCacheControl:(NSString *) versionNumber;
 
 /*!
+ @discussion Method for making an HTTP GET request to STracker server.  Not use
+ the local cache data.
+ @param uri             The uri.
+ @param query           The query, is optional.
+ @param success         The callback for success request.
+ @param failure         The callback for failure request.
+ @param versionNumber   The version number for set the If-None-Match HTTP header.
+ */
+- (void)getRequestWithoutCacheLocalData:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withCacheControl:(NSString *) versionNumber;
+
+/*!
  @discussion Method for making an HTTP GET request to STracker server.
  @param uri             The uri.
  @param query           The query, is optional.
@@ -134,4 +145,15 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
  @param versionNumber   The version number for set the If-None-Match HTTP header.
  */
 - (void)getRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withCacheControl:(NSString *) versionNumber;
+
+/*!
+ @discussion Method for making an HTTP GET request to STracker server. Not use 
+ the local cache data.
+ @param uri             The uri.
+ @param query           The query, is optional.
+ @param success         The callback for success request.
+ @param failure         The callback for failure request.
+ @param versionNumber   The version number for set the If-None-Match HTTP header.
+ */
+- (void)getRequestWithHawkProtocolWithoutCacheLocalData:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withCacheControl:(NSString *) versionNumber;
 @end

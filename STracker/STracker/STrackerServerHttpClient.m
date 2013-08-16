@@ -16,7 +16,7 @@
     
     // Extra code.
     [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-    // End extra code.
+    //
     
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
     [self enqueueHTTPRequestOperation:operation];
@@ -229,6 +229,49 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        // Clean If-None-Match header.
+        [self setDefaultHeader:@"If-None-Match" value:nil];
+        
+        if (failure != nil)
+            failure((AFJSONRequestOperation *)operation, error);
+    }];
+}
+
+- (void)getRequestWithoutCacheLocalData:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withCacheControl:(NSString *)versionNumber
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    // Set If-None-Match HTTP request header.
+    [self setDefaultHeader:@"If-None-Match" value:versionNumber];
+    
+    [self getPathWithoutLocalCache:uri parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        // Clean If-None-Match header.
+        [self setDefaultHeader:@"If-None-Match" value:nil];
+        
+        if (success != nil)
+            success((AFJSONRequestOperation *)operation, responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        // Clean If-None-Match header.
+        [self setDefaultHeader:@"If-None-Match" value:nil];
+        
+        if (operation.response.statusCode == 304)
+        {
+            NSString *etag = [operation.response.allHeaderFields objectForKey:@"ETag"];
+            if ([etag isEqualToString:[NSString stringWithFormat:@"\"%@\"", versionNumber]])
+            {
+                success((AFJSONRequestOperation *)operation, nil);
+                return;
+            }
+        }
+        
         if (failure != nil)
             failure((AFJSONRequestOperation *)operation, error);
     }];
@@ -267,16 +310,65 @@
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
-        if (operation.response.statusCode == 304)
-        {
-            success((AFJSONRequestOperation *)operation, nil);
-        }
+        // Clean Authorization header.
+        [self setDefaultHeader:@"Authorization" value:nil];
+        
+        // Clean If-None-Match header.
+        [self setDefaultHeader:@"If-None-Match" value:nil];
+        
+        if (failure != nil)
+            failure((AFJSONRequestOperation *)operation, error);
+    }];
+}
+
+- (void)getRequestWithHawkProtocolWithoutCacheLocalData:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withCacheControl:(NSString *)versionNumber
+{
+    // Generate and set the Authorization header with Hawk protocol.
+    NSString *url = [NSString stringWithFormat:@"%@%@", self.baseURL, uri];
+    if (query != nil)
+        url = [url stringByAppendingString:[NSString stringWithFormat:@"?%@", [self transformDictionaryToQueryString:query]]];
+    
+    NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"GET" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:_app.hawkCredentials ext:nil payload:nil payloadValidation:NO];
+    
+    [self setDefaultHeader:@"Authorization" value:header];
+    
+    // Set If-None-Match HTTP request header.
+    [self setDefaultHeader:@"If-None-Match" value:versionNumber];
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    [self getPathWithoutLocalCache:uri parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         // Clean Authorization header.
         [self setDefaultHeader:@"Authorization" value:nil];
         
         // Clean If-None-Match header.
         [self setDefaultHeader:@"If-None-Match" value:nil];
+        
+        if (success != nil)
+            success((AFJSONRequestOperation *)operation, responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        // Clean Authorization header.
+        [self setDefaultHeader:@"Authorization" value:nil];
+        
+        // Clean If-None-Match header.
+        [self setDefaultHeader:@"If-None-Match" value:nil];
+        
+        if (operation.response.statusCode == 304)
+        {
+            NSString *etag = [operation.response.allHeaderFields objectForKey:@"ETag"];
+            if ([etag isEqualToString:[NSString stringWithFormat:@"\"%@\"", versionNumber]])
+            {
+                success((AFJSONRequestOperation *)operation, nil);
+                return;
+            }
+        }
         
         if (failure != nil)
             failure((AFJSONRequestOperation *)operation, error);

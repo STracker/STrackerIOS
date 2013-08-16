@@ -64,10 +64,13 @@
 
 + (void)getUser:(NSString *)uri finish:(Finish)finish withCacheControl:(NSString *)versionNumber
 {
-    [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocolWithoutCacheLocalData:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
-        User *user = [[User alloc] initWithDictionary:result];
+        User *user = nil;
         
+        if (result != nil) 
+            user = [[User alloc] initWithDictionary:result];
+  
         // Invoke callback.
         finish(user);
         
