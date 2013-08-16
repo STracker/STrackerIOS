@@ -32,7 +32,7 @@
     _body.text = _comment.body;
     _userName.text = _comment.user.name;
 
-    [_app loginInFacebook:^(User *user) {
+    [_app getUpdatedUser:^(User *user) {
 
         if ([user.identifier isEqualToString:_comment.user.identifier])
         {

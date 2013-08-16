@@ -20,6 +20,8 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     
+    // Start third party code...
+    
     // Facebook SDK * login flow *
     // Attempt to handle URLs to complete any auth (e.g., SSO) flow.
     return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication fallbackHandler:^(FBAppCall *call) {
@@ -33,6 +35,8 @@
                 [self handleAppLink:call.accessTokenData];
         }
     }];
+    
+    // ...end third party code
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -56,6 +60,8 @@
     [FBSession.activeSession close];
 }
 
+// Start third party code...
+
 // Helper method to wrap logic for handling app links.
 - (void)handleAppLink:(FBAccessTokenData *)appLinkToken {
     // Initialize a new blank session instance...
@@ -78,13 +84,26 @@
                           }];
 }
 
+// ...end third party code
+
 #pragma mark - AppDelegate public methods.
 
-- (void)loginInFacebook:(Finish)finish
+- (void)getUpdatedUser:(Finish)finish
 {
     if (_user != nil)
     {
-        finish(_user);
+        // Verify if the user information is updated.
+        NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
+        uri = [uri stringByAppendingString:[NSString stringWithFormat:@"/%@", _user.identifier]];
+        
+        [UsersController getUser:uri finish:^(User *user) {
+            
+            if (user != nil)
+                _user = user;
+            
+            finish(_user);
+        } withCacheControl:[NSString stringWithFormat:@"%d", _user.version]];
+        
         return;
     }
     
@@ -97,12 +116,17 @@
          Create looper for getting information from server.
          Needed to be logged for this.
          */
-        [self createLooper];
+        // [self createLooper];
         
         finish(obj);
     }];
     
     [self.window.rootViewController presentSemiView:fb];
+}
+
+- (User *)getUser
+{
+    return _user;
 }
 
 - (void)setUser:(User *)newUser

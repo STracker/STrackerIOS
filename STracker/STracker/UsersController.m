@@ -62,6 +62,23 @@
     }];
 }
 
++ (void)getUser:(NSString *)uri finish:(Finish)finish withCacheControl:(NSString *)versionNumber
+{
+    [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        User *user = [[User alloc] initWithDictionary:result];
+        
+        // Invoke callback.
+        finish(user);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [[app getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withCacheControl:versionNumber];
+}
+
 + (void)inviteUser:(NSString *)uri withUser:(User *)user finish:(Finish)finish
 {
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:user.identifier, @"", nil];

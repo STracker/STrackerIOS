@@ -11,7 +11,7 @@
 /*!
  @discussion This object defines the identifier of the episodes.
  */
-@interface EpisodeId : NSObject
+@interface EpisodeId : NSObject <Deserialize>
 
 @property(nonatomic, copy) NSString *tvshowId;
 @property(nonatomic) int seasonNumber;

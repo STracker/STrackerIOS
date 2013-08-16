@@ -10,22 +10,32 @@
 
 @implementation Entity
 
+@synthesize version;
+
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
-    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
-    return nil;
+    if (self = [super init])
+        version = [[parameters objectForKey:@"Version"] intValue];
+    
+    return self;
 }
 
 @end
 
+#pragma mark - Synopsis object.
 @implementation EntitySynopsis
 
 @synthesize name, uri;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
-    [NSException raise:@"Invoked abstract method" format:@"Invoked abstract method"];
-    return nil;
+    if (self = [super init])
+    {
+        name = [parameters objectForKey:@"Name"];
+        uri = [parameters objectForKey:@"Uri"];
+    }
+    
+    return self;
 }
 
 @end

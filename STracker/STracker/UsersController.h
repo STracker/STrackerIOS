@@ -39,6 +39,13 @@
 + (void)getUser:(NSString *)uri finish:(Finish) finish;
 
 /*!
+ @discussion Get an particular user.
+ @param uri     The request uri.
+ @param finish  The finish callback.
+ */
++ (void)getUser:(NSString *)uri finish:(Finish) finish withCacheControl:(NSString *)versionNumber;
+
+/*!
  @discussion Send user friend request.
  @param uri     The request uri.
  @param user    The user's information object.

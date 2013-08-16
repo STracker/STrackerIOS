@@ -47,7 +47,7 @@
     Comment *comment = [_data objectAtIndex:indexPath.row];
     
     // Needed to be Logged in Facebook to view the comment.
-    [_app loginInFacebook:^(User *user) {
+    [_app getUpdatedUser:^(User *user) {
         
         CommentViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"CommentView"] initWithComment:comment];
         [self.navigationController pushViewController:view animated:YES];
@@ -59,7 +59,7 @@
 - (void)addComment
 {
     // Needed to be Logged in Facebook to create an comment.
-    [_app loginInFacebook:^(User *user) {
+    [_app getUpdatedUser:^(User *user) {
         
         [_composeComment setEnabled:NO];
         YIPopupTextView *popupTextView = [[YIPopupTextView alloc] initWithPlaceHolder:@"comment here" maxCount:0 buttonStyle:YIPopupTextViewButtonStyleRightCancelAndDone tintsDoneButton:YES];
@@ -88,7 +88,7 @@
     [CommentController postComment:_commentsUri comment:text finish:^(id obj) {
         
         // In this moment the user is already logged in, this call is only for get the user object.
-        [_app loginInFacebook:^(id obj) {
+        [_app getUpdatedUser:^(id obj) {
             User *user = obj;
             UIAlertView *alertConfirm = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Hi %@", user.name] message:@"your comment will be processed..." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
             

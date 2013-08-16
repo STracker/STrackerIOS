@@ -28,7 +28,7 @@
         episodesWatched = episodesAux;
     }
     
-    return self;
+    return self; 
 }
 
 @end

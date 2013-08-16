@@ -18,7 +18,7 @@
 {
     UserSynopsis *synopse = [_data objectAtIndex:indexPath.row];
     
-    [_app loginInFacebook:^(id obj) {
+    [_app getUpdatedUser:^(id obj) {
         
         User *me = obj;
         

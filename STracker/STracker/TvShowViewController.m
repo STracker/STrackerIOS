@@ -54,27 +54,9 @@
 
 - (IBAction)options:(UIBarButtonItem *)sender
 {
-    [_app loginInFacebook:^(id obj) {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:/*@"Seasons", */@"Cast", @"Comments", @"Subscription", @"Suggest", nil];
         
-        User *user = obj;
-        Boolean exists = NO;
-        // Verify if user already have this tvshow in subcriptions.
-        for (Subscription *subscription in user.subscriptions)
-        {
-            if ([subscription.tvshow.identifier isEqual:_tvshow.identifier])
-            {
-                _actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:/*@"Seasons", */@"Cast", @"Comments", @"Unsubscribe", @"Suggest", nil];
-                
-                exists = YES;
-                break;
-            }
-        }
-    
-        if (!exists)
-            _actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:/*@"Seasons", */@"Cast", @"Comments", @"Subscribe", @"Suggest", nil];
-        
-        [_actionSheet showFromBarButtonItem:sender animated:YES];
-    }];
+    [actionSheet showFromBarButtonItem:sender animated:YES];
 }
 
 - (IBAction)openSeasons:(id)sender
@@ -113,10 +95,7 @@
             [self comments];
             break;
         case 2:
-            if ([[actionSheet buttonTitleAtIndex:2] isEqual:@"Subscribe"])
-                [self subscribe];
-            if ([[actionSheet buttonTitleAtIndex:2] isEqual:@"Unsubscribe"])
-                [self unsubscribe];
+            [self subscribe];
             break;
     }
     
@@ -195,30 +174,28 @@
 }
 
 /*!
- @discussion Auxiliary method for subscribe this tvshow. 
+ @discussion Auxiliary method for subscribe or unsubscribe this tvshow. 
  */
 - (void)subscribe
 {
     // Needed to be logged to perform this action.
-    [_app loginInFacebook:^(id obj) {
+    [_app getUpdatedUser:^(User *user) {
+        
+        for (Subscription *sub in user.subscriptions)
+        {
+            if ([sub.tvshow.identifier isEqualToString:_tvshow.identifier])
+            {
+                _alertUnsubscribe = [[UIAlertView alloc] initWithTitle:@"Attention - allready subscribed!" message:[NSString stringWithFormat:@"you really want to unsubscribe %@?", _tvshow.name] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+                
+                [_alertUnsubscribe show];
+                
+                return;
+            }
+        }
         
         _alertSubscribe = [[UIAlertView alloc] initWithTitle:@"Attention" message:[NSString stringWithFormat:@"you really want to subscribe %@?", _tvshow.name] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
         
         [_alertSubscribe show];
-    }];
-}
-
-/*!
- @discussion Auxiliary method for unsubscribe this tvshow.
- */
-- (void)unsubscribe
-{
-    // Needed to be logged to perform this action.
-    [_app loginInFacebook:^(id obj) {
-        
-        _alertUnsubscribe = [[UIAlertView alloc] initWithTitle:@"Attention" message:[NSString stringWithFormat:@"you really want to unsubscribe %@?", _tvshow.name] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        
-        [_alertUnsubscribe show];
     }];
 }
 
@@ -232,9 +209,7 @@
     
     [UsersController postFavoriteTvShow:uri tvshowId:_tvshow.identifier finish:^(id obj) {
         
-        // Update actionsheet options to unsubscribe.
-        _actionSheet = nil;
-        _actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:/*@"Seasons", */@"Cast", @"Comments", @"Unsubscribe", @"Suggest", nil];
+        
     }];
 }
 
@@ -245,14 +220,29 @@
 - (void)unsubscribeRequest
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURI"];
-    
     uri = [uri stringByAppendingFormat:@"/%@", _tvshow.identifier];
     
     [UsersController deleteFavoriteTvShow:uri finish:^(id obj) {
         
-        // Update actionsheet options to unsubscribe.
-        _actionSheet = nil;
-        _actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:/*@"Seasons", */@"Cast", @"Comments", @"Subscribe", @"Suggest", nil];
+        /*
+        User *user = [_app getUser];
+        Subscription *subToRemove;
+        for (Subscription *sub in user.subscriptions)
+        {
+            if ([sub.tvshow.identifier isEqualToString:_tvshow.identifier])
+            {
+                subToRemove = sub;
+                break;
+            }
+        }
+        
+        if (subToRemove == nil)
+            return;
+        
+        // Remove subscription from list and increment the version, for use the cache control.
+        [user.subscriptions removeObject:subToRemove];
+        user.version++;
+         */
     }];
 }
 

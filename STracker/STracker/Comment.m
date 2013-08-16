@@ -27,13 +27,14 @@
 
 @end
 
+#pragma mark - TvShowComments object.
 @implementation TvShowComments
 
 @synthesize tvshowId, comments;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
-    if (self = [super init])
+    if (self = [super initWithDictionary:parameters])
     {
         tvshowId = [parameters objectForKey:@"Id"];
         
@@ -51,13 +52,14 @@
 
 @end
 
+#pragma mark - EpisodeComments object.
 @implementation EpisodeComments
 
 @synthesize episodeId, comments;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
-    if (self = [super init])
+    if (self = [super initWithDictionary:parameters])
     {
         episodeId = [[EpisodeId alloc] initWithDictionary:[parameters objectForKey:@"Id"]];
         

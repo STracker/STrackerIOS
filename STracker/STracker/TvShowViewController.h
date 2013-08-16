@@ -27,9 +27,7 @@
     IBOutlet UISwipeGestureRecognizer *_swipeGestureSeasons;
     @private
     IBOutlet UISwipeGestureRecognizer *_swipeGestureDescription;
-    
-    @private
-    UIActionSheet *_actionSheet;
+ 
     @private
     UIAlertView *_alertSubscribe;
     @private

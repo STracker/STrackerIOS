@@ -27,13 +27,19 @@ typedef void (^Finish)(id obj);
 @property(nonatomic, strong) HawkCredentials *hawkCredentials;
 
 /*!
- @discussion This method returns the user information.
+ @discussion This method returns the most recent user information.
  If the user information are null prompt the user one view for 
- Login with Facebook account.
+ Login.
  @param finish The callback for execute code after the Login.
  @return The user information object.
  */
-- (void)loginInFacebook:(Finish) finish;
+- (void)getUpdatedUser:(Finish) finish;
+
+/*!
+ @discussion This method returns the value of the user, can be nil or not.
+ The caller should know that the user is not nil.
+ */
+- (User *)getUser;
 
 /*!
  @discussion Well... sometimes is needed to set user with new 
@@ -42,13 +48,13 @@ typedef void (^Finish)(id obj);
  its needed to update the user in App with the new friends.
  @param newUser The user object with updated information.
  */
-- (void)setUser:(User *)newUser;
+- (void)setUser:(User *) newUser;
 
 /*!
  @discussion This method returns one alert view with one message error.
  @param msgError The message of the error.
  @return The alert view.
  */
-- (UIAlertView *)getAlertViewForErrors:(NSString *)msgError;
+- (UIAlertView *)getAlertViewForErrors:(NSString *) msgError;
 
 @end

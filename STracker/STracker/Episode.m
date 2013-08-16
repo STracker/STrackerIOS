@@ -33,7 +33,7 @@
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
-    if (self = [super init])
+    if (self = [super initWithDictionary:parameters])
     {
         identifier = [[EpisodeId alloc] initWithDictionary:[parameters objectForKey:@"Id"]];
         name = [parameters objectForKey:@"Name"];
@@ -63,18 +63,17 @@
 
 @end
 
+#pragma mark - Synopsis object.
 @implementation EpisodeSynopsis
 
 @synthesize identifier, date;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
-    if (self = [super init])
+    if (self = [super initWithDictionary:parameters])
     {
         identifier = [[EpisodeId alloc] initWithDictionary:[parameters objectForKey:@"Id"]];
-        self.name = [parameters objectForKey:@"Name"];
         date = [parameters objectForKey:@"Date"];
-        self.uri = [parameters objectForKey:@"Uri"];
     }
     
     return self;

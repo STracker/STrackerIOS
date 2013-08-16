@@ -16,7 +16,7 @@
     [super viewDidLoad];
     
     int count = 0;
-    for (PersonSynopsis *person in _data)
+    for (Person *person in _data)
     {
         count++;
         if (person.photo != nil)
@@ -36,7 +36,7 @@
 {
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     
-    PersonSynopsis *person = [_data objectAtIndex:indexPath.row];
+    Person *person = [_data objectAtIndex:indexPath.row];
     cell.textLabel.text = person.name;
     cell.imageView.image = person.photo;
     

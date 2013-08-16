@@ -8,6 +8,22 @@
 
 #import "STrackerServerHttpClient.h"
 
+@implementation AFHTTPClient (IgnoreCacheData)
+
+- (void)getPathWithoutLocalCache:(NSString *)path parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:parameters];
+    
+    // Extra code.
+    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    // End extra code.
+    
+    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
+    [self enqueueHTTPRequestOperation:operation];
+}
+
+@end
+
 @implementation STrackerServerHttpClient
 
 /*!
@@ -24,6 +40,7 @@
         
         [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
         [self setDefaultHeader:@"Accept" value:@"application/json"];
+        
     }
     
     return self;
@@ -188,6 +205,83 @@
         if (failure != nil)
             failure((AFJSONRequestOperation *)operation, error);
     }];
+}
+
+#pragma mark - Caching methods.
+
+- (void)getRequest:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withCacheControl:(NSString *)versionNumber
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    // Set If-None-Match HTTP request header.
+    [self setDefaultHeader:@"If-None-Match" value:versionNumber];
+    
+    [self getPathWithoutLocalCache:uri parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        // Clean If-None-Match header.
+        [self setDefaultHeader:@"If-None-Match" value:nil];
+        
+        if (success != nil)
+            success((AFJSONRequestOperation *)operation, responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        if (failure != nil)
+            failure((AFJSONRequestOperation *)operation, error);
+    }];
+}
+
+- (void)getRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withCacheControl:(NSString *)versionNumber
+{
+    // Generate and set the Authorization header with Hawk protocol.
+    NSString *url = [NSString stringWithFormat:@"%@%@", self.baseURL, uri];
+    if (query != nil)
+        url = [url stringByAppendingString:[NSString stringWithFormat:@"?%@", [self transformDictionaryToQueryString:query]]];
+    
+    NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"GET" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:_app.hawkCredentials ext:nil payload:nil payloadValidation:NO];
+    
+    [self setDefaultHeader:@"Authorization" value:header];
+    
+    // Set If-None-Match HTTP request header.
+    [self setDefaultHeader:@"If-None-Match" value:versionNumber];
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    [self getPath:uri parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        // Clean Authorization header.
+        [self setDefaultHeader:@"Authorization" value:nil];
+        
+        // Clean If-None-Match header.
+        [self setDefaultHeader:@"If-None-Match" value:nil];
+        
+        if (success != nil)
+            success((AFJSONRequestOperation *)operation, responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        if (operation.response.statusCode == 304)
+        {
+            success((AFJSONRequestOperation *)operation, nil);
+        }
+        
+        // Clean Authorization header.
+        [self setDefaultHeader:@"Authorization" value:nil];
+        
+        // Clean If-None-Match header.
+        [self setDefaultHeader:@"If-None-Match" value:nil];
+        
+        if (failure != nil)
+            failure((AFJSONRequestOperation *)operation, error);
+    }];
+
 }
 
 #pragma mark - STrackerServerHttpClient private auxiliary methods.

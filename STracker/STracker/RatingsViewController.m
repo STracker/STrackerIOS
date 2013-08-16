@@ -32,7 +32,7 @@
 -(void)newRating:(DLStarRatingControl *)control :(float)rating
 {
     // Needed to be logged in Facebook for post an rating.
-    [_app loginInFacebook:^(id obj) {
+    [_app getUpdatedUser:^(id obj) {
         
         [RatingsController postRating:_ratingsUri withRating:rating finish:^(id obj) {
             

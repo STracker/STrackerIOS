@@ -12,13 +12,15 @@
 
 @implementation User
 
-@synthesize identifier, email, friends, subscriptions, friendRequests, suggestions;
+@synthesize identifier, name, photoUrl, email, friends, subscriptions, friendRequests, suggestions;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
     if (self = [super initWithDictionary:parameters])
     {
         identifier = [parameters objectForKey:@"Id"];
+        name = [parameters objectForKey:@"Name"];
+        photoUrl = [parameters objectForKey:@"Photo"];
         email = [parameters objectForKey:@"Email"];
         
         NSMutableArray *friendsAux = [[NSMutableArray alloc] init];
@@ -30,7 +32,7 @@
         friends = friendsAux;
         
         NSMutableArray *subscriptionsAux = [[NSMutableArray alloc] init];
-        for (NSDictionary *item in [parameters objectForKey:@"SubscriptionList"])
+        for (NSDictionary *item in [parameters objectForKey:@"Subscriptions"])
         {
             Subscription *subscription = [[Subscription alloc] initWithDictionary:item];
             [subscriptionsAux addObject:subscription];
@@ -59,14 +61,18 @@
 
 @end
 
+#pragma mark - Synopsis object.
 @implementation UserSynopsis
 
-@synthesize identifier;
+@synthesize identifier, photoUrl, photo;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
-    if (self = [super initWithDictionary:parameters])
+    if (self = [super init])
+    {
         identifier = [parameters objectForKey:@"Id"];
+        photoUrl = [parameters objectForKey:@"Photo"];
+    }
     
     return self;
 }

@@ -13,7 +13,7 @@
 /*!
  @discussion This object defines the suggestion entity object.
  */
-@interface Suggestion : Entity
+@interface Suggestion : NSObject <Deserialize>
 
 @property(nonatomic, strong) UserSynopsis *user;
 @property(nonatomic, strong) TvShowSynopsis *tvshow;

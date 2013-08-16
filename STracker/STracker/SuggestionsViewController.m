@@ -48,7 +48,7 @@
     
     // In this moment, already have loged in, so only returns the
     // user object from App.
-    [_app loginInFacebook:^(id obj) {
+    [_app getUpdatedUser:^(id obj) {
         
         [UsersController getFriendsSuggestions:uri finish:^(id suggestions) {
 

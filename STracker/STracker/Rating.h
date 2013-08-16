@@ -9,11 +9,11 @@
 #import "Entity.h"
 
 /*!
- @discussion This object defines the rating entity object.
+ @discussion This object defines the rating object.
  */
-@interface Rating : Entity
+@interface Rating : NSObject <Deserialize>
 
 @property(nonatomic) int rating;
 @property(nonatomic) int numberOfUsers;
-
+ 
 @end

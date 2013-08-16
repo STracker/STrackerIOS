@@ -42,7 +42,7 @@
 - (IBAction)userOptions:(id)sender
 {
     // For this action is necessary the user was logged into Facebook account.
-    [_app loginInFacebook:^(User *user) {
+    [_app getUpdatedUser:^(User *user) {
         
         MyProfileViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"MyProfile"] initWithUserInfo:user];
         [self.navigationController pushViewController:view animated:YES];
@@ -214,7 +214,7 @@
  */
 - (void)searchUsersAux:(NSString *)name
 {
-    [_app loginInFacebook:^(id obj) {
+    [_app getUpdatedUser:^(id obj) {
         
         NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
         [UsersController searchUser:uri withName:name finish:^(id obj) {

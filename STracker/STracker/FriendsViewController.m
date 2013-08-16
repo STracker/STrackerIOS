@@ -22,7 +22,7 @@
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsURI"];
     
     // Only for take the user object in App.
-    [_app loginInFacebook:^(id obj) {
+    [_app getUpdatedUser:^(id obj) {
         
         [UsersController getFriends:uri finish:^(id friends) {
             

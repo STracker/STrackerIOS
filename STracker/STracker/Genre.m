@@ -15,7 +15,7 @@
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
-    if (self = [super init])
+    if (self = [super initWithDictionary:parameters])
     {
         name = [parameters objectForKey:@"Id"];
         
@@ -33,17 +33,12 @@
 
 @end
 
+#pragma mark - Synopsis object.
 @implementation GenreSynopsis
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
-    if (self = [super init])
-    {
-        self.name = [parameters objectForKey:@"Id"];
-        self.uri = [parameters objectForKey:@"Uri"];
-    }
-    
-    return self;
+    return [super initWithDictionary:parameters];
 }
 
 @end

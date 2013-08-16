@@ -17,7 +17,7 @@
 @property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSArray *tvshows;
 
-@end
+@end 
 
 /*!
  @discussion This object defines the genre synopsis entity object.

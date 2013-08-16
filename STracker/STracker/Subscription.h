@@ -10,9 +10,9 @@
 #import "TvShow.h"
 
 /*!
- @discussion This object defines the subscription entity object.
+ @discussion This object defines the subscription object.
  */
-@interface Subscription : Entity
+@interface Subscription : NSObject <Deserialize>
 
 @property(nonatomic, strong) TvShowSynopsis *tvshow;
 @property(nonatomic, strong) NSArray *episodesWatched;

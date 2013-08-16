@@ -36,7 +36,7 @@
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURI"];
     
     // Only for take the user object in App.
-    [_app loginInFacebook:^(id obj) {
+    [_app getUpdatedUser:^(id obj) {
         
         [UsersController getUserFavoritesTvShows:uri finish:^(id subscriptions) {
             

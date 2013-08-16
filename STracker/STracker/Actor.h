@@ -11,7 +11,7 @@
 /*!
  @discussion This object defines the actor entity object.
  */
-@interface Actor : PersonSynopsis
+@interface Actor : Person <Deserialize>
 
 @property(nonatomic, copy) NSString *characterName;
 

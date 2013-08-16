@@ -17,7 +17,7 @@
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
-    if (self = [super init])
+    if (self = [super initWithDictionary:parameters])
     {
         identifier = [parameters objectForKey:@"Id"];
         name = [parameters objectForKey:@"Name"];
@@ -57,18 +57,17 @@
 
 @end
 
+#pragma mark - Synopsis object.
 @implementation TvShowSynopsis
 
 @synthesize identifier, poster;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
-    if (self = [super init])
+    if (self = [super initWithDictionary:parameters])
     {
         identifier = [parameters objectForKey:@"Id"];
-        self.name = [parameters objectForKey:@"Name"];
         poster = [parameters objectForKey:@"Poster"];
-        self.uri = [parameters objectForKey:@"Uri"];
     }
     
     return self;

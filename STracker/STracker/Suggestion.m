@@ -20,7 +20,7 @@
         
         tvshow = [[TvShowSynopsis alloc] initWithDictionary:[parameters objectForKey:@"TvShow"]];
     }
-    
+     
     return self;
 }
 

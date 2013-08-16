@@ -11,21 +11,11 @@
 /*!
  @discussion This object defines the person entity object.
  */
-@interface Person : Entity
+@interface Person : NSObject <Deserialize>
 
 @property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSString *photoUrl;
 
-@end
-
-/*!
- @discussion This object defines the person synopsis entity object.
- */
-@interface PersonSynopsis : EntitySynopsis
-
-@property(nonatomic, copy) NSString *photoUrl;
-
-// Necessary for save the photo in table views.
 @property(nonatomic, strong) UIImage *photo;
 
 @end

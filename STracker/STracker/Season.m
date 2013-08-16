@@ -32,7 +32,7 @@
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
-    if (self = [super init])
+    if (self = [super initWithDictionary:parameters])
     {
         identifier = [[SeasonId alloc] initWithDictionary:[parameters objectForKey:@"Id"]];
         
@@ -57,15 +57,10 @@
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
-    if (self = [super init])
-    {
+    if (self = [super initWithDictionary:parameters])
         identifier = [[SeasonId alloc] initWithDictionary:[parameters objectForKey:@"Id"]];
-        self.name = [NSString stringWithFormat:@"Season %d", identifier.seasonNumber];
-        self.uri = [parameters objectForKey:@"Uri"];
-    }
 
     return self;
 }
-
 
 @end

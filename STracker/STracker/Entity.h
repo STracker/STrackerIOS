@@ -9,36 +9,38 @@
 #import <Foundation/Foundation.h>
 
 /*!
- @discussion This object defines the base entity object for all models.
+ @discussion Protocol for deserialize objects.
  */
-@interface Entity : NSObject
+@protocol Deserialize
 
 /*!
- @discussion Init method that constructs the object with values passed 
+ @discussion Init method that constructs the object with values passed
  in parameters.
  @param parameters The dictionary of parameters.
- @return An instance of Entity.
+ @return An instance of the object deserialized.
  */
 - (id)initWithDictionary:(NSDictionary *)parameters;
 
 @end
 
 /*!
+ @discussion This object defines the base entity object for all models.
+ */
+@interface Entity : NSObject <Deserialize>
+
+// All entities have an version number for caching.
+@property(nonatomic) int version;
+
+@end
+
+/*!
  @discussion This object defines the base synopsis object for all synopses models.
  */
-@interface EntitySynopsis : NSObject
+@interface EntitySynopsis : NSObject <Deserialize>
 
 @property(nonatomic, copy) NSString *name;
 
 // Every synopsis contains one uri for your model.
 @property(nonatomic, copy) NSString *uri;
-
-/*!
- @discussion Init method that constructs the object with values passed
- in parameters.
- @param parameters The dictionary of parameters.
- @return An instance of EntitySynopsis.
- */
-- (id)initWithDictionary:(NSDictionary *)parameters;
 
 @end

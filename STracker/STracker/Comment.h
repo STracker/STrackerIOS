@@ -11,9 +11,9 @@
 #import "Episode.h"
 
 /*!
- @discussion This object defines the comment entity object.
+ @discussion This object defines the comment object.
  */
-@interface Comment : Entity
+@interface Comment : NSObject <Deserialize>
 
 @property(nonatomic, copy) NSString *identifier;
 @property(nonatomic, copy) NSString *body;
