@@ -54,13 +54,13 @@
 }
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
 
 - (void) awakeFromNib
 {
@@ -94,19 +94,19 @@
 - (void) initalizeImageCounter
 {
     /*_indicatorBackground = [[UIView alloc] initWithFrame:CGRectMake(_scrollView.frame.size.width-(kOverlayWidth-4),
-                                                                    _scrollView.frame.size.height-kOverlayHeight,
-                                                                    kOverlayWidth,
-                                                                    kOverlayHeight)];
+     _scrollView.frame.size.height-kOverlayHeight,
+     kOverlayWidth,
+     kOverlayHeight)];
      
-    _indicatorBackground.backgroundColor = [UIColor whiteColor];
-    _indicatorBackground.alpha = 0.7f;
-    _indicatorBackground.layer.cornerRadius = 5.0f;
-    
-    UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 18, 18)];
-    [icon setImage:[UIImage imageNamed:@"KICamera"]];
-    icon.center = CGPointMake(_indicatorBackground.frame.size.width-18, _indicatorBackground.frame.size.height/2);
-    //[_indicatorBackground addSubview:icon];
-    */
+     _indicatorBackground.backgroundColor = [UIColor whiteColor];
+     _indicatorBackground.alpha = 0.7f;
+     _indicatorBackground.layer.cornerRadius = 5.0f;
+     
+     UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 18, 18)];
+     [icon setImage:[UIImage imageNamed:@"KICamera"]];
+     icon.center = CGPointMake(_indicatorBackground.frame.size.width-18, _indicatorBackground.frame.size.height/2);
+     //[_indicatorBackground addSubview:icon];
+     */
     
     _countLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 48, 24)];
     [_countLabel setTextAlignment:NSTextAlignmentCenter];
@@ -154,7 +154,7 @@
             [imageView setBackgroundColor:[UIColor clearColor]];
             [imageView setContentMode:[_dataSource contentModeForImage:i]];
             [imageView setTag:i];
-
+            
             // Asynchronously retrieve image
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                 NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:(NSString *)[aImageUrls objectAtIndex:i]]];

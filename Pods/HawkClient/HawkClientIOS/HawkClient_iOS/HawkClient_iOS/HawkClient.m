@@ -89,8 +89,7 @@
     NSString *header = @"hawk.1.header";
     method = [method uppercaseString];
     NSString *query = (url.query == nil) ? @"" : [NSString stringWithFormat:@"?%@", url.query];
-    NSString *uri = [NSString stringWithFormat:@"%@%@", url.path, query];
-    NSString *host = url.host;
+    NSString *uri = [NSString stringWithFormat:@"%@%@", url.path, query];    NSString *host = url.host;
     
     // Creating the normalized string.
     return [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n", header, timestamp, nonce, method, uri, host, payload, ext];

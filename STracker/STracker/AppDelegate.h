@@ -17,23 +17,21 @@ typedef void (^Finish)(id obj);
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
     // Current user information.
-    @private
+@private
     User *_user;
 }
 
-@property (strong, nonatomic) UIWindow *window;
-
-// Core data properties.
-@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-//
-
+@property(nonatomic, strong) UIWindow *window;
 @property(nonatomic, strong) UIStoryboard *storyboard;
 // The Hawk credentials, necessary to make protected requests to STracker server.
 @property(nonatomic, strong) HawkCredentials *hawkCredentials;
 
-// Core Data methods.
+
+// Core Data logic.
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 //
