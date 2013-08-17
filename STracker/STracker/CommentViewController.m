@@ -77,7 +77,7 @@
 
 - (IBAction)openUserProfile
 {
-    [UsersController getUser:_comment.user.uri withVersion:nil finish:^(id obj) {
+    [UsersController getUser:_comment.user.uri finish:^(id obj) {
         
         UserProfileViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"UserProfile"] initWithUserInfo:obj];
         [self.navigationController pushViewController:view animated:YES];

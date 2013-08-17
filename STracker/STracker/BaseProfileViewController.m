@@ -7,7 +7,7 @@
 //
 
 #import "BaseProfileViewController.h"
-#import "DownloadFiles.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation BaseProfileViewController
 
@@ -46,10 +46,7 @@
     // Set properties of basic user information.
     _name.text = _user.name;
     
-    [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:_user.photoUrl] finish:^(UIImage *image) {
-        
-        _photo.image = image;
-    }];
+    [_photo setImageWithURL:[NSURL URLWithString:_user.photoUrl]];
 }
 
 #pragma mark - Shake gesture.

@@ -12,9 +12,12 @@
 
 @implementation CommentController
 
-+ (void)getTvShowComments:(NSString *)tvshowId withVersion:(NSString *)version finish:(Finish) finish
++ (void)getTvShowComments:(NSString *)tvshowId finish:(Finish) finish
 {
-    [[STrackerServerHttpClient sharedClient] getRequest:[CommentController constructTvShowUri:tvshowId] query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    NSString *uri = [CommentController constructTvShowUri:tvshowId];
+    NSString *version = [[STrackerServerHttpClient sharedClient] tryGeVersionFromtCachedData:uri];
+    
+    [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         TvShowComments *comments = [[TvShowComments alloc] initWithDictionary:result];
 
@@ -28,9 +31,12 @@
     } withVersion:version];
 }
 
-+ (void)getEpisodeComments:(EpisodeId *)episodeId withVersion:(NSString *)version finish:(Finish) finish
++ (void)getEpisodeComments:(EpisodeId *)episodeId finish:(Finish) finish
 {
-    [[STrackerServerHttpClient sharedClient] getRequest:[CommentController constructEpisodeUri:episodeId] query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    NSString *uri = [CommentController constructEpisodeUri:episodeId];
+    NSString *version = [[STrackerServerHttpClient sharedClient] tryGeVersionFromtCachedData:uri];
+    
+    [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
     
         EpisodeComments *comments = [[EpisodeComments alloc] initWithDictionary:result];
         

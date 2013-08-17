@@ -19,7 +19,7 @@
 {
     SeasonSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
     
-    [SeasonsController getSeason:synopsis.uri whitVersion:nil finish:^(Season *season) {
+    [SeasonsController getSeason:synopsis.uri finish:^(Season *season) {
         
         SeasonViewController *view = [[SeasonViewController alloc] initWithData:season.episodes andTitle:synopsis.name];
         [self.navigationController pushViewController:view animated:YES];

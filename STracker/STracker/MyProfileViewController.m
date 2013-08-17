@@ -128,7 +128,7 @@
  */
 - (void)subscriptions
 {
-    UsersViewController *view = [[UsersViewController alloc] initWithData:_user.subscriptions.allValues andTitle:@"Subscriptions"];
+    UserSubscriptionsViewController *view = [[UserSubscriptionsViewController alloc] initWithData:_user.subscriptions.allValues andTitle:@"Subscriptions"];
     
     [self.navigationController pushViewController:view animated:YES];
 }

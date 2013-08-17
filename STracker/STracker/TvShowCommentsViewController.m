@@ -28,7 +28,7 @@
     if (_comments != nil)
         version = [NSString stringWithFormat:@"%d", _comments.version];
     
-    [CommentController getTvShowComments:_tvshow.identifier withVersion:version finish:^(TvShowComments *obj) {
+    [CommentController getTvShowComments:_tvshow.identifier finish:^(TvShowComments *obj) {
         
         _comments = obj;
         _data = obj.comments;

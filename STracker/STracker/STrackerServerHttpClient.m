@@ -8,22 +8,6 @@
 
 #import "STrackerServerHttpClient.h"
 
-@implementation AFHTTPClient (IgnoreCacheData)
-
-- (void)getPathWithoutLocalCache:(NSString *)path parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
-{
-    NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:parameters];
-    
-    // Extra code.
-    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-    //
-    
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
-    [self enqueueHTTPRequestOperation:operation];
-}
-
-@end
-
 @implementation STrackerServerHttpClient
 
 /*!
@@ -68,10 +52,16 @@
     if (data == nil)
         return nil;
     
+    // For debug...
+    NSLog(@"disc capacity %d", cache.diskCapacity);
+    NSLog(@"disc usage %d", cache.currentDiskUsage);
+    NSLog(@"memory capacity %d", cache.memoryCapacity);
+    NSLog(@"memory usage %d", cache.currentMemoryUsage);
+    
     NSError* error;
     NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
     
-    return (error == nil) ? nil : [json objectForKey:@"Version"];
+    return (error != nil) ? nil : [NSString stringWithFormat:@"%d", [[json objectForKey:@"Version"] intValue]];
 }
 
 - (void)getRequest:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withVersion:(NSString *) version
@@ -236,89 +226,6 @@
     }];
 }
 
-#pragma mark - Without local cache methods.
-
-- (void)getRequestWithoutCacheLocalData:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withVersion:(NSString *)version
-{
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
-    // Set If-None-Match HTTP request header.
-    [self setDefaultHeader:@"If-None-Match" value:version];
-    
-    [self getPathWithoutLocalCache:uri parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        
-        // Clean If-None-Match header.
-        [self setDefaultHeader:@"If-None-Match" value:nil];
-        
-        if (success != nil)
-            success((AFJSONRequestOperation *)operation, responseObject);
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        
-        // Clean If-None-Match header.
-        [self setDefaultHeader:@"If-None-Match" value:nil];
-        
-        if ([self checkIfResponseIsNotModified:operation version:version])
-        {
-            success((AFJSONRequestOperation *)operation, nil);
-            return;
-        }
-        
-        if (failure != nil)
-            failure((AFJSONRequestOperation *)operation, error);
-    }];
-}
-
-- (void)getRequestWithHawkProtocoAndlWithoutCacheLocalData:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withVersion:(NSString *)version
-{
-    // Generate and set the Authorization header with Hawk protocol.
-    NSString *url = [NSString stringWithFormat:@"%@%@", self.baseURL, uri];
-    if (query != nil)
-        url = [url stringByAppendingString:[NSString stringWithFormat:@"?%@", [self transformDictionaryToQueryString:query]]];
-    
-    NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"GET" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:_app.hawkCredentials ext:nil payload:nil payloadValidation:NO];
-    
-    [self setDefaultHeader:@"Authorization" value:header];
-    
-    // Set If-None-Match HTTP request header.
-    [self setDefaultHeader:@"If-None-Match" value:version];
-    
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
-    [self getPathWithoutLocalCache:uri parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        
-        // Clean headers.
-        [self setDefaultHeader:@"Authorization" value:nil];
-        [self setDefaultHeader:@"If-None-Match" value:nil];
-        
-        if (success != nil)
-            success((AFJSONRequestOperation *)operation, responseObject);
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        
-        // Clean headers.
-        [self setDefaultHeader:@"Authorization" value:nil];
-        [self setDefaultHeader:@"If-None-Match" value:nil];
-        
-        if ([self checkIfResponseIsNotModified:operation version:version])
-        {
-            success((AFJSONRequestOperation *)operation, nil);
-            return;
-        }
-        
-        if (failure != nil)
-            failure((AFJSONRequestOperation *)operation, error);
-    }];
-}
-
 #pragma mark - STrackerServerHttpClient private auxiliary methods.
 
 - (NSString *)trasnformPayloadToUrlEncoded:(NSDictionary *)parameters
@@ -353,24 +260,6 @@
     }
     
     return query;
-}
-
-/*!
- @discussion Auxiliary method for check if status code is 304 (Not modified). Also checks if the ETag value is equal to 
- value in version, if is equal, the entity did not change.
- */
-- (BOOL)checkIfResponseIsNotModified:(AFHTTPRequestOperation *)operation version:(NSString *) version
-{
-    if (operation.response.statusCode == 304)
-    {
-        NSString *etag = [operation.response.allHeaderFields objectForKey:@"ETag"];
-        if ([etag isEqualToString:[NSString stringWithFormat:@"\"%@\"", version]])
-        {
-            return YES;
-        }
-    }
-    
-    return NO;
 }
 
 @end

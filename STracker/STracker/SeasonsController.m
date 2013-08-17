@@ -12,8 +12,10 @@
 
 @implementation SeasonsController
 
-+ (void)getSeason:(NSString *)uri whitVersion:(NSString *) version finish:(Finish) finish
++ (void)getSeason:(NSString *)uri finish:(Finish) finish
 {
+    NSString *version = [[STrackerServerHttpClient sharedClient] tryGeVersionFromtCachedData:uri];
+    
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         Season *season = [[Season alloc] initWithDictionary:result];

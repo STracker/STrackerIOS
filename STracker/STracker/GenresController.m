@@ -34,8 +34,10 @@
     } withVersion:nil];
 }
 
-+ (void)getGenre:(NSString *) uri withVersion:(NSString *)version finish:(Finish) finish
++ (void)getGenre:(NSString *) uri finish:(Finish) finish
 {
+    NSString *version = [[STrackerServerHttpClient sharedClient] tryGeVersionFromtCachedData:uri];
+    
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         Genre *genre = [[Genre alloc] initWithDictionary:result];

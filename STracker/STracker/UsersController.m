@@ -22,12 +22,8 @@
     
     [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
         
-        User *me = [[User alloc] initWithDictionary:result];
-        
-        // Invoke callback.
-        finish(me);
-        
-        
+        [self getMe:user.identifier finish:finish];
+    
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         
         [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
@@ -51,8 +47,10 @@
     } withVersion:nil];
 }
 
-+ (void)getUser:(NSString *)uri withVersion:(NSString *)version finish:(Finish) finish
++ (void)getUser:(NSString *)uri finish:(Finish) finish
 {
+    NSString *version = [[STrackerServerHttpClient sharedClient] tryGeVersionFromtCachedData:uri];
+    
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         User *user = [[User alloc] initWithDictionary:result];
@@ -67,21 +65,20 @@
     } withVersion:version];
 }
 
-+ (void)getMe:(NSString *)identifier withVersion:(NSString *)version finish:(Finish) finish
++ (void)getMe:(NSString *)identifier finish:(Finish) finish
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
     uri = [uri stringByAppendingFormat:@"/%@", identifier];
     
-    [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocoAndlWithoutCacheLocalData:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    NSString *version = [[STrackerServerHttpClient sharedClient] tryGeVersionFromtCachedData:uri];
+    
+    [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
-        User *user = nil;
-        
-        if (result != nil)
-            user = [[User alloc] initWithDictionary:result];
+        User *user = [[User alloc] initWithDictionary:result];
         
         // Invoke callback.
         finish(user);
-
+        
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         
         [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];

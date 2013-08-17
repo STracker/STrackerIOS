@@ -93,11 +93,9 @@
     if (_user != nil)
     {
         // Verify if the user information is updated.
-        [UsersController getMe:_user.identifier withVersion:[NSString stringWithFormat:@"%d", _user.version] finish:^(User *user) {
+        [UsersController getMe:_user.identifier finish:^(User *user) {
             
-            if (user != nil)
-                _user = user;
-            
+            _user = user;
             finish(_user);
         }];
         

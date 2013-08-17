@@ -32,18 +32,16 @@
 /*!
  @discussion Get an particular user.
  @param uri     The resource uri.
- @param version The version of the resource, for cache control.
  @param finish  The finish callback.
  */
-+ (void)getUser:(NSString *)uri withVersion:(NSString *)version finish:(Finish) finish;
++ (void)getUser:(NSString *)uri finish:(Finish) finish;
 
 /*!
  @discussion Get an the current user information. Normally for updates.
  @param identifier  The current user identifier.
- @param version     The version of the resource, for cache control.
  @param finish      The finish callback.
  */
-+ (void)getMe:(NSString *)identifier withVersion:(NSString *)version finish:(Finish) finish;
++ (void)getMe:(NSString *)identifier finish:(Finish) finish;
 
 /*!
  @discussion Send user friend request.

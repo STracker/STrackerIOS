@@ -12,8 +12,10 @@
 
 @implementation EpisodesController
 
-+ (void)getEpisode:(NSString *)uri withVersion:(NSString *) version finish:(Finish) finish
++ (void)getEpisode:(NSString *)uri finish:(Finish) finish
 {
+    NSString *version = [[STrackerServerHttpClient sharedClient] tryGeVersionFromtCachedData:uri];
+    
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         Episode *episode = [[Episode alloc] initWithDictionary:result];

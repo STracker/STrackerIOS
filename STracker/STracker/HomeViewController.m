@@ -77,7 +77,7 @@
 - (void) imagePager:(KIImagePager *)imagePager didSelectImageAtIndex:(NSUInteger)index
 {
     TvShowSynopsis *synopse = [_top objectAtIndex:index];
-    [TvShowsController getTvShow:synopse.uri withVersion:nil finish:^(id obj) {
+    [TvShowsController getTvShow:synopse.uri finish:^(id obj) {
         
         TvShowViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"TvShowView"] initWithTvShow:obj];
         [self.navigationController pushViewController:view animated:YES];

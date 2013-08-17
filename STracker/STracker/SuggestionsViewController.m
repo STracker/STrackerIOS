@@ -28,7 +28,7 @@
 {
     Suggestion *suggestion = [_data objectAtIndex:indexPath.row];
     
-    [TvShowsController getTvShow:suggestion.tvshow.uri withVersion:nil finish:^(id obj) {
+    [TvShowsController getTvShow:suggestion.tvshow.uri finish:^(id obj) {
         
         TvShowViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"TvShowView"] initWithTvShow:obj];
         

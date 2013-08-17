@@ -64,7 +64,7 @@
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
-    if (self = [super init])
+    if (self = [super initWithDictionary:parameters])
     {
         identifier = [parameters objectForKey:@"Id"];
         photoUrl = [parameters objectForKey:@"Photo"];

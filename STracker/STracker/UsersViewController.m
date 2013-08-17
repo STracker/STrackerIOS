@@ -28,7 +28,7 @@
             return;
         }
         
-        [UsersController getUser:synopsis.uri withVersion:nil finish:^(id obj) {
+        [UsersController getUser:synopsis.uri finish:^(id obj) {
             
             UserProfileViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"UserProfile"] initWithUserInfo:obj];
             [self.navigationController pushViewController:view animated:YES];

@@ -19,18 +19,16 @@
 /*!
  @discussion Get tvshow comments from the request Uri.
  @param tvshowId    The television show identifier.
- @param version     The version of the resource, for cache control.
  @param finish      The callback when download is finish.
  */
-+ (void)getTvShowComments:(NSString *)tvshowId withVersion:(NSString *)version finish:(Finish) finish;
++ (void)getTvShowComments:(NSString *)tvshowId finish:(Finish) finish;
 
 /*!
  @discussion Get episode comments from the request Uri.
  @param episodeId   The episode identifier.
- @param version     The version of the resource, for cache control.
  @param finish      The callback when download is finish.
  */
-+ (void)getEpisodeComments:(EpisodeId *)episodeId withVersion:(NSString *)version finish:(Finish) finish;
++ (void)getEpisodeComments:(EpisodeId *)episodeId finish:(Finish) finish;
 
 /*!
  @discussion Post one television show comment into STracker server.

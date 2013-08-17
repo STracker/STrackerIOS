@@ -7,28 +7,13 @@
 //
 
 #import "PersonsViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation PersonsViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    int count = 0;
-    for (Person *person in _data)
-    {
-        count++;
-        if (person.photo != nil)
-            continue;
-        
-        [[DownloadFiles sharedObject] downloadImageFromUrl:[NSURL URLWithString:person.photoUrl] finish:^(UIImage *image) {
-            
-            person.photo = image;
-            
-            if (count == [_data count])
-                [_tableView reloadData];
-        }];
-    }
 }
 
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
@@ -37,8 +22,8 @@
     
     Person *person = [_data objectAtIndex:indexPath.row];
     cell.textLabel.text = person.name;
-    cell.imageView.image = person.photo;
-    
+    [cell.imageView setImageWithURL:[NSURL URLWithString:person.photoUrl]];
+        
     // TODO, resize image.
 }
 

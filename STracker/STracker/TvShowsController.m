@@ -11,8 +11,10 @@
 
 @implementation TvShowsController
 
-+ (void)getTvShow:(NSString *)uri withVersion:(NSString *)version finish:(Finish) finish
++ (void)getTvShow:(NSString *)uri finish:(Finish) finish
 {
+    NSString *version = [[STrackerServerHttpClient sharedClient] tryGeVersionFromtCachedData:uri];
+    
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
         TvShow *tvshow = [[TvShow alloc] initWithDictionary:result];

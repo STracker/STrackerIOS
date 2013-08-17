@@ -20,7 +20,7 @@
     // Opens an particular episode.
     EpisodeSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
     
-    [EpisodesController getEpisode:synopsis.uri withVersion:nil finish:^(id obj) {
+    [EpisodesController getEpisode:synopsis.uri finish:^(id obj) {
         EpisodeViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"EpisodeView"] initWithEpisode: obj];
         
         [self.navigationController pushViewController:view animated:YES];

@@ -23,9 +23,8 @@
 /*!
  @discussion Get one genre from request uri.
  @param uri     The resource uri.
- @param version The version of the resource, for cache control.
  @param finish  The finish callback.
  */
-+ (void)getGenre:(NSString *) uri withVersion:(NSString *)version finish:(Finish) finish;
++ (void)getGenre:(NSString *) uri finish:(Finish) finish;
 
 @end
