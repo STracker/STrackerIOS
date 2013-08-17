@@ -30,10 +30,13 @@
     }];
 }
 
-+ (void)searchUser:(NSString *)name finish:(Finish)finish
++ (void)searchUser:(NSString *)name withRange:(Range *)range finish:(Finish)finish
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
-    NSDictionary *query = [[NSDictionary alloc] initWithObjectsAndKeys:name, @"name", nil];
+    
+    NSArray *keys = [[NSArray alloc] initWithObjects:@"name", @"start", @"end", nil];
+    NSArray *values = [[NSArray alloc] initWithObjects:name, [NSString stringWithFormat:@"%d", range.start], [NSString stringWithFormat:@"%d", range.end], nil];
+    NSDictionary *query = [[NSDictionary alloc] initWithObjects:values forKeys:keys];
     
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:query success:^(AFJSONRequestOperation *operation, id result) {
         

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "TvShow.h"
+#import "Range.h"
 
 /*!
  @discussion Info controller for manage television show 
@@ -25,9 +26,10 @@
 /*!
  @discussion Get television shows with same name.
  @param name    The tvshow name.
+ @param range   The search range.
  @param finish  The finish callback.
  */
-+ (void)getTvShowsByName:(NSString *)name finish:(Finish) finish;
++ (void)getTvShowsByName:(NSString *)name withRange:(Range *)range finish:(Finish) finish;
 
 /*!
  @discussion Get Top rated television shows.

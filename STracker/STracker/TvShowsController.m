@@ -29,10 +29,13 @@
     } withVersion:version];
 }
 
-+ (void)getTvShowsByName:(NSString *)name finish:(Finish)finish
++ (void)getTvShowsByName:(NSString *)name withRange:(Range *)range finish:(Finish)finish
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowsURI"];
-    NSDictionary *query = [[NSDictionary alloc] initWithObjectsAndKeys:name, @"name", nil];
+    
+    NSArray *keys = [[NSArray alloc] initWithObjects:@"name", @"start", @"end", nil];
+    NSArray *values = [[NSArray alloc] initWithObjects:name, [NSString stringWithFormat:@"%d", range.start], [NSString stringWithFormat:@"%d", range.end], nil];
+    NSDictionary *query = [[NSDictionary alloc] initWithObjects:values forKeys:keys];
     
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:query success:^(AFJSONRequestOperation *operation, id result) {
         

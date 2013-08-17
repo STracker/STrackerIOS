@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "User.h"
+#import "Range.h"
 
 /*!
  @discussion Info controller for manage users 
@@ -25,9 +26,10 @@
 /*!
  @discussion Search for users in server.
  @param name    The name for search.
+ @param range   The search range.
  @param finish  The finish callback.
  */
-+ (void)searchUser:(NSString *)name finish:(Finish) finish;
++ (void)searchUser:(NSString *)name withRange:(Range *)range finish:(Finish) finish;
 
 /*!
  @discussion Get an particular user.

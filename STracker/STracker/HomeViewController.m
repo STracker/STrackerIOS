@@ -192,9 +192,13 @@
  */
 - (void)searchSeriesAux:(NSString *)name
 {
-    [TvShowsController getTvShowsByName:name finish:^(id obj) {
+    Range *range = [[Range alloc] init];
+    range.start = 0;
+    range.end = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerElemsPerSearch"] intValue];
+    
+    [TvShowsController getTvShowsByName:name withRange:range finish:^(id obj) {
         
-        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:obj];
+        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:obj andTitle:name];
         [self.navigationController pushViewController:view animated:YES];
     }];
 }
@@ -209,9 +213,13 @@
     // Needed to be logged in.
     [_app getUser:^(id obj) {
         
-        [UsersController searchUser:name finish:^(id obj) {
+        Range *range = [[Range alloc] init];
+        range.start = 0;
+        range.end = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerElemsPerSearch"] intValue];
+        
+        [UsersController searchUser:name withRange:range finish:^(id obj) {
             
-            UsersViewController *view = [[UsersViewController alloc] initWithData:obj andTitle:@"Search results"];
+            UsersViewController *view = [[UsersViewController alloc] initWithData:obj andTitle:name];
             [self.navigationController pushViewController:view animated:YES];
         }];
     }];

@@ -10,6 +10,7 @@
 		8C1AB39E178C4A2500ED7142 /* CommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AB39D178C4A2500ED7142 /* CommentsViewController.m */; };
 		8C1AB3A1178C4BF400ED7142 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AB3A0178C4BF400ED7142 /* Comment.m */; };
 		8C1AB3A4178C50BC00ED7142 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AB3A3178C50BC00ED7142 /* CommentViewController.m */; };
+		8C2E04C517BF152B0039F31E /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E04C417BF152A0039F31E /* Range.m */; };
 		8C36012817B146A800CA10D8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C36012717B146A800CA10D8 /* SenTestingKit.framework */; };
 		8C36012917B146A800CA10D8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EBF174E6E160025CF79 /* UIKit.framework */; };
 		8C36012A17B146A800CA10D8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8782EC1174E6E160025CF79 /* Foundation.framework */; };
@@ -118,6 +119,8 @@
 		8C1AB3A0178C4BF400ED7142 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		8C1AB3A2178C50BB00ED7142 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		8C1AB3A3178C50BC00ED7142 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		8C2E04C317BF152A0039F31E /* Range.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Range.h; sourceTree = "<group>"; };
+		8C2E04C417BF152A0039F31E /* Range.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Range.m; sourceTree = "<group>"; };
 		8C36012617B146A800CA10D8 /* Unit_Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Unit_Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C36012717B146A800CA10D8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		8C36012D17B146A800CA10D8 /* Unit_Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Unit_Tests-Info.plist"; sourceTree = "<group>"; };
@@ -438,6 +441,8 @@
 				D88B0471178D63A5001587B5 /* Subscription.m */,
 				D8B5393117AAADB100E0D4CE /* Suggestion.h */,
 				D8B5393217AAADB100E0D4CE /* Suggestion.m */,
+				8C2E04C317BF152A0039F31E /* Range.h */,
+				8C2E04C417BF152A0039F31E /* Range.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -842,6 +847,7 @@
 				D8B5393317AAADB100E0D4CE /* Suggestion.m in Sources */,
 				D8B5393717AABFB600E0D4CE /* SuggestionsViewController.m in Sources */,
 				D8B5393E17AAD99900E0D4CE /* UserSubscriptionsViewController.m in Sources */,
+				8C2E04C517BF152B0039F31E /* Range.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
