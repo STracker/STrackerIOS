@@ -2,6 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>${PRODUCT_NAME}</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIdentifier</key>
+	<string>pt.STracker.${PRODUCT_NAME:rfc1034identifier}</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -13,62 +31,44 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>FacebookAppID</key>
+	<string>516839011711939</string>
 	<key>HawkKey</key>
 	<string>werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn</string>
-	<key>STrackerTopTvShowsNumber</key>
-	<integer>5</integer>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>STrackerElemsPerSearch</key>
 	<integer>5</integer>
-	<key>STrackerUsersURI</key>
-	<string>users</string>
-	<key>STrackerUserFriendsURI</key>
-	<string>user/friends</string>
+	<key>STrackerEpisodeCommentsURI</key>
+	<string>tvshows/tvshowId/seasons/seasonNumber/episodes/episodeNumber/comments</string>
+	<key>STrackerEpisodeRatingsURI</key>
+	<string>tvshows/tvshowId/seasons/seasonNumber/episodes/episodeNumber/ratings</string>
+	<key>STrackerGenresURI</key>
+	<string>genres</string>
+	<key>STrackerServerBaseURL</key>
+	<string>http://strackerserverdev.apphb.com/api</string>
+	<key>STrackerTopRatedTvShowsURI</key>
+	<string>tvshows/toprated</string>
+	<key>STrackerTopTvShowsNumber</key>
+	<integer>5</integer>
+	<key>STrackerTvShowCommentsURI</key>
+	<string>tvshows/id/comments</string>
+	<key>STrackerTvShowRatingsURI</key>
+	<string>tvshows/id/ratings</string>
+	<key>STrackerTvShowsURI</key>
+	<string>tvshows</string>
 	<key>STrackerUserFriendRequestsURI</key>
 	<string>user/friendrequests</string>
 	<key>STrackerUserFriendsSuggestionsURI</key>
 	<string>user/suggestions</string>
+	<key>STrackerUserFriendsURI</key>
+	<string>user/friends</string>
 	<key>STrackerUserSubscriptionsURI</key>
 	<string>user/subscriptions</string>
-	<key>STrackerGenresURI</key>
-	<string>genres</string>
-	<key>STrackerTvShowsURI</key>
-	<string>tvshows</string>
-	<key>STrackerTopRatedTvShowsURI</key>
-	<string>tvshows/toprated</string>
-	<key>STrackerTvShowCommentsURI</key>
-	<string>tvshows/id/comments</string>
-	<key>STrackerEpisodeCommentsURI</key>
-	<string>tvshows/tvshowId/seasons/seasonNumber/episodes/episodeNumber/comments</string>
-	<key>STrackerTvShowRatingsURI</key>
-	<string>tvshows/id/ratings</string>
-	<key>STrackerEpisodeRatingsURI</key>
-	<string>tvshows/tvshowId/seasons/seasonNumber/episodes/episodeNumber/ratings</string>
-	<key>STrackerServerBaseURL</key>
-	<string>http://strackerserverdev.apphb.com/api</string>
-	<key>FacebookAppID</key>
-	<string>516839011711939</string>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
-	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
-	<key>CFBundleExecutable</key>
-	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIdentifier</key>
-	<string>ChallengeIT.${PRODUCT_NAME:rfc1034identifier}</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>1.0</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<key>STrackerUsersURI</key>
+	<string>users</string>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard_iPhone</string>
 	<key>UIMainStoryboardFile~ipad</key>
@@ -84,9 +84,6 @@
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>
