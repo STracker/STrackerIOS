@@ -19,7 +19,8 @@
     self = [super initWithFrame:CGRectMake(0, 0, 0, 43)];
     if (self)
     {
-        _fb = [[FBLoginView alloc] initWithReadPermissions:[NSArray arrayWithObject:@"email"]];
+        NSArray *permissions = [NSArray arrayWithObjects:@"email", nil];
+        _fb = [[FBLoginView alloc] initWithReadPermissions:permissions];
         [_fb setDelegate:self];
         [self addSubview:_fb];
         
@@ -48,10 +49,8 @@
     User *me = [[User alloc] init];
     me.identifier = user.id;
     me.name = user.name;
+    me.Email = [user objectForKey:@"email"];
     me.photoUrl = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large", me.identifier];
-    
-    // TODO
-    me.Email = @"test@test.com";
     
     // Set Hawk credentials for authenticated requests to server.
     HawkCredentials *credentials = [[HawkCredentials alloc] init];

@@ -65,8 +65,9 @@
 // Helper method to wrap logic for handling app links.
 - (void)handleAppLink:(FBAccessTokenData *)appLinkToken {
     // Initialize a new blank session instance...
+    NSArray *permissions = [NSArray arrayWithObjects:@"email", nil];
     FBSession *appLinkSession = [[FBSession alloc] initWithAppID:nil
-                                                     permissions:nil
+                                                     permissions:permissions
                                                  defaultAudience:FBSessionDefaultAudienceNone
                                                  urlSchemeSuffix:nil
                                               tokenCacheStrategy:[FBSessionTokenCachingStrategy nullCacheInstance]];
