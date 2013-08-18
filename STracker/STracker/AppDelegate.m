@@ -10,6 +10,12 @@
 #import "FacebookView.h"
 #import "UIViewController+KNSemiModal.h"
 #import "UsersController.h"
+#import "UserData.h"
+#import "UserSynopsisData.h"
+#import "TvShowSynopsisData.h"
+#import "EpisodeSynopsisData.h"
+#import "SuggestionData.h"
+#import "SubscriptionData.h"
 
 @implementation AppDelegate
 
@@ -194,22 +200,42 @@
 
 - (void)getUser:(Finish)finish
 {
+    NSError *error;
+   
+    // Verify if exists in DB.
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"UserSynopsis" inManagedObjectContext:self.managedObjectContext];
+    
+    [fetchRequest setEntity:entity];
+    
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    for (UserSynopsis *user in fetchedObjects)
+    {
+        NSLog(@"Name: %@", user.name);
+                
+        //[self.managedObjectContext deleteObject:user];
+    }
+    
+    //[self.managedObjectContext save:&error];
+    
     if (_user != nil)
     {
         // Verify if the user information is updated.
         [UsersController getMe:_user.identifier finish:^(User *user) {
             
             _user = user;
+            
             finish(_user);
         }];
         
         return;
     }
     
-    FacebookView *fb = [[FacebookView alloc] initWithCallback:^(id obj) {
+    FacebookView *fb = [[FacebookView alloc] initWithCallback:^(User *user) {
         
         [self.window.rootViewController dismissSemiModalView];
-        _user = obj;
+        _user = user;
         
         /*
          Create looper for getting information from server.
@@ -217,7 +243,46 @@
          */
         // [self createLooper];
         
-        finish(obj);
+        /*
+        if ([fetchedObjects count] == 0) {
+            // Save in Locally.
+            UserData *newData = [NSEntityDescription insertNewObjectForEntityForName:@"UserData" inManagedObjectContext:self.managedObjectContext];
+            
+            newData.identifier = user.identifier;
+            newData.name = user.name;
+            newData.email = user.email;
+            newData.photoUrl = user.photoUrl;
+            
+            
+            NSMutableArray *array = [[NSMutableArray alloc] init];
+            
+            for (UserSynopsis *synopsis in user.friends.allValues)
+            {
+                UserSynopsisData *uData = [NSEntityDescription insertNewObjectForEntityForName:@"UserSynopsisData" inManagedObjectContext:self.managedObjectContext];
+                
+                uData.name = synopsis.name;
+                uData.identifier = synopsis.identifier;
+                uData.uri = synopsis.uri;
+                uData.photoUrl = synopsis.photoUrl;
+                
+                [array addObject:uData];
+            }
+            
+            newData.friends = [[NSSet alloc] initWithArray:array];
+            
+            
+            //newData.friendRequests = [[NSSet alloc] initWithArray:user.friendRequests.allValues];
+            //newData.friends = [[NSSet alloc] initWithArray:user.friends.allValues];
+            //newData.subscriptions = [[NSSet alloc] initWithArray:user.subscriptions.allValues];
+            //newData.suggestions = [[NSSet alloc] initWithArray:user.suggestions.allValues];
+            
+            NSError *error;
+            [self.managedObjectContext save:&error];
+            if (error)
+                NSLog(@"error saving in DB");
+        }
+        */
+        finish(user);
     }];
     
     [self.window.rootViewController presentSemiView:fb];

@@ -52,11 +52,13 @@
     if (data == nil)
         return nil;
     
+    /*
     // For debug...
     NSLog(@"disc capacity %d", cache.diskCapacity);
     NSLog(@"disc usage %d", cache.currentDiskUsage);
     NSLog(@"memory capacity %d", cache.memoryCapacity);
     NSLog(@"memory usage %d", cache.currentMemoryUsage);
+    */
     
     NSError* error;
     NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
