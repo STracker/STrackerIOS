@@ -178,6 +178,11 @@
     } withVersion:nil];
 }
 
++ (void)postSuggestion:(NSString *)tvshowId forFriend:(NSString *)friendId finish:(Finish)finish
+{
+    // TODO
+}
+
 + (void)getUserSubscriptions:(Finish) finish;
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURI"];

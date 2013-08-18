@@ -15,15 +15,15 @@
 #pragma mark - FacebookView public methods.
 - (id)initWithCallback:(Finish) finish
 {
-    // 43 is the heigth of the FBLoginView button.
-    self = [super initWithFrame:CGRectMake(0, 0, 0, 43)];
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    self = [super initWithFrame:CGRectMake(0, 0, screenBounds.size.width, 60)];
     if (self)
     {
         NSArray *permissions = [NSArray arrayWithObjects:@"email", nil];
         _fb = [[FBLoginView alloc] initWithReadPermissions:permissions];
         [_fb setDelegate:self];
         [self addSubview:_fb];
-        
+        [_fb setCenter:self.center];
         _finish = finish;
     }
     

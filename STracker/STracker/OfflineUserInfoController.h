@@ -37,6 +37,12 @@
 - (void)create:(User *)user;
 
 /*!
+ @discussion Async version of create method.
+ @user  The user information to store in the BD.
+ */
+- (void)createAsync:(User *)user;
+
+/*!
  @discussion Read method. Note that method don't receives any identifier, 
  because there is only one user in BD, the current user information. 
  This method also parse the UserData for User object for better use of user's 
@@ -50,6 +56,12 @@
  @param user The new information.
  */
 - (void)update:(User *)user;
+
+/*!
+ @discussion Async version of update method.
+ @param user The new information.
+ */
+- (void)updateAsync:(User *)user;
 
 /*!
  @discussion Delete method. Not used in this application.

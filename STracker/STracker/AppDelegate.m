@@ -10,7 +10,6 @@
 #import "FacebookView.h"
 #import "UIViewController+KNSemiModal.h"
 #import "UsersController.h"
-#import "OfflineUserInfoController.h"
 
 @implementation AppDelegate
 
@@ -18,7 +17,7 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-@synthesize storyboard, hawkCredentials;
+@synthesize storyboard, hawkCredentials, dbController;
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -78,6 +77,8 @@
         storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
     else
         storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+    
+    dbController = [[OfflineUserInfoController alloc] initWithContext:self.managedObjectContext];
     
     return YES;
 }
@@ -193,24 +194,24 @@
 
 #pragma mark - AppDelegate public methods.
 
-- (void)getUser:(Finish)finish
+- (void)getUpdatedUser:(Finish)finish
 {
+    /*
     // First verify if exists in DB.
     OfflineUserInfoController *off = [[OfflineUserInfoController alloc] initWithContext:self.managedObjectContext];
     
     User *dbUser = [off read];
     if (dbUser != nil)
     {
-        /*
+        
          The user exists, lets get the version number for make a request 
          to server for see if this user is updated.
-         */
         [UsersController getMe:dbUser.identifier finish:^(User *user) {
             
             if (user.version > dbUser.version)
             {
                 // Update the user information in DB.
-                [off update:user];
+                [off updateAsync:user];
             }
             
             // Set the user information in memory.
@@ -223,6 +224,7 @@
         
         return;
     }
+    */
     
     if (_user != nil)
     {
@@ -235,6 +237,42 @@
             finish(_user);
         }];
         */
+        finish(_user);
+        return;
+    }
+    
+    FacebookView *fb = [[FacebookView alloc] initWithCallback:^(User *user) {
+        
+        [self.window.rootViewController dismissSemiModalView];
+        _user = user;
+        
+        /*
+         Create looper for getting information from server.
+         Needed to be logged for this.
+         */
+        // [self createLooper];
+        
+        
+        finish(user);
+    }];
+    
+    [self.window.rootViewController presentSemiView:fb];
+}
+
+- (void)getUser:(Finish) finish
+{
+    if (_user != nil)
+    {
+        /*
+         // Verify if the user information is updated.
+         [UsersController getMe:_user.identifier finish:^(User *user) {
+         
+         _user = user;
+         
+         finish(_user);
+         }];
+         */
+        finish(_user);
         return;
     }
     

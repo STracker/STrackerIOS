@@ -15,6 +15,7 @@
 #import "RatingsController.h"
 #import "UIImageView+AFNetworking.h"
 #import "Genre.h"
+#import "Subscription.h"
 
 @implementation TvShowViewController
 
@@ -93,6 +94,8 @@
             break;
         case 2:
             [self subscribe];
+        case 3:
+            [self suggestion];
             break;
     }
     
@@ -184,13 +187,32 @@
 }
 
 /*!
+ @discussion Auxiliary method for send this suggestion to one friend.
+ */
+- (void)suggestion
+{
+    /*
+     Need to be the most updated information for get the updated 
+     friends list.
+     */
+    [_app getUpdatedUser:^(id obj) {
+        
+        
+    }];
+}
+
+/*!
  @discussion Auxiliary method for subscribe or unsubscribe this tvshow. 
  */
 - (void)subscribe
 {
-    [_app getUser:^(User *user) {
+    /*
+     Need the most updated information for see if the user have this 
+     subcription or not.
+     */
+    [_app getUpdatedUser:^(User *user) {
         
-        if ([user.subscriptions objectForKey:_tvshow.identifier] == nil)
+        if ([user.subscriptions objectForKey:_tvshow.identifier] != nil)
         {
             _alertUnsubscribe = [[UIAlertView alloc] initWithTitle:@"Attention - allready subscribed!" message:[NSString stringWithFormat:@"you really want to unsubscribe %@?", _tvshow.name] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
             
@@ -210,19 +232,27 @@
  */
 - (void)subscribeRequest
 {
-    [_app getUser:^(User *user) {
+    [UsersController postSubscription:_tvshow.identifier finish:^(id obj) {
         
-        [UsersController postSubscription:_tvshow.identifier finish:^(id obj) {
+        /*
+         Add subscription to user in memory and update the user in DB.
+         Using getUser because in the action "subscribe", already use the 
+         getUpdatedUser, so the user information is the must updated.
+         */
+        [_app getUser:^(User *user) {
             
-            /*
-             Increment user version, and add subscription to subscriptions list,
-             this way when have a request to server for user information, the server will not
-             response with all user information, instead will response with an 304 - Not modified
-             code and then the application have little internet consumption.
-             */
-            id subscription = [_tvshow getSynopsis];
-            [user.subscriptions setValue:subscription forKey:_tvshow.identifier];
+            // Increment version for cache purposes.
             user.version++;
+            
+            Subscription *subscription = [[Subscription alloc] init];
+            subscription.tvshow = (TvShowSynopsis *)[_tvshow getSynopsis];
+            subscription.episodesWatched = [[NSMutableArray alloc] init];
+            
+            // Set user's information in memory.
+            [user.subscriptions setObject:subscription forKey:_tvshow.identifier];
+            
+            // Update in DB.
+            [_app.dbController updateAsync:user];
         }];
     }];
 }
@@ -233,16 +263,23 @@
  */
 - (void)unsubscribeRequest
 {
-    [_app getUser:^(User *user) {
+    [UsersController deleteSubscription:_tvshow.identifier finish:^(id obj) {
         
-        [UsersController deleteSubscription:_tvshow.identifier finish:^(id obj) {
+        /*
+         Remove subscription from user in memory and update the user in DB.
+         Using getUser because in the action "subscribe", already use the
+         getUpdatedUser, so the user information is the must updated.
+         */
+        [_app getUser:^(User *user) {
             
-            /*
-             Increment user version, and remove subscription from subscriptions list,
-             same idea of the above subscribe action.
-             */
-            [user.subscriptions removeObjectForKey:_tvshow.identifier];
+            // Increment version for cache purposes.
             user.version++;
+            
+            // Remove from user's information in memory.
+            [user.subscriptions removeObjectForKey:_tvshow.identifier];
+            
+            // Update in DB.
+            [_app.dbController updateAsync:user];
         }];
     }];
 }

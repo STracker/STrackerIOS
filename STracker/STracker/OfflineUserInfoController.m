@@ -8,6 +8,7 @@
 
 #import "OfflineUserInfoController.h"
 #import "UserData.h"
+#import "AsyncQueue.h"
 
 @implementation OfflineUserInfoController
 
@@ -33,6 +34,14 @@
         NSLog(@"error: %@", error.description);
 }
 
+- (void)createAsync:(User *)user
+{
+    [[AsyncQueue sharedObject] performAsyncOperation:^{
+        
+        [self create:user];
+    }];
+}
+
 - (User *)read
 {
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"UserData" inManagedObjectContext:_context];
@@ -41,6 +50,11 @@
     
     NSError *error;
     NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
+    if (error || [fetchedObjects count] == 0)
+    {
+        NSLog(@"error: %@", error.description);
+        return nil;
+    }
     
     UserData *uData = [fetchedObjects objectAtIndex:0]; // Only have one...
     
@@ -55,7 +69,7 @@
     
     NSError *error;
     NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
-    if (error)
+    if (error || [fetchedObjects count] == 0)
     {
         NSLog(@"error: %@", error.description);
         return;
@@ -70,6 +84,14 @@
     [_context save:&error];
     if (error)
         NSLog(@"error: %@", error.description);
+}
+
+- (void)updateAsync:(User *)user
+{
+    [[AsyncQueue sharedObject] performAsyncOperation:^{
+        
+        [self update:user];
+    }];
 }
 
 - (void)remove

@@ -20,7 +20,7 @@
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     
     // Already loged in in this moment, so only retrieves the current user information.
-    [app getUser:^(id obj) {
+    [app getUpdatedUser:^(id obj) {
         
         User *me = obj;
         

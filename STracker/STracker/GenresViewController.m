@@ -17,7 +17,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Open a table with tvshows synopses (all tvshows from this particular genre).
+    // Open a table with tvshows synopsis (all tvshows from this particular genre).
     GenreSynopsis *synopse = [_data objectAtIndex:indexPath.row];
     [GenresController getGenre:synopse.uri finish:^(Genre *genre) {
         

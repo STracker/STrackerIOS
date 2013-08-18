@@ -39,7 +39,7 @@
 
 - (IBAction)userOptions:(id)sender
 {
-    [_app getUser:^(User *user) {
+    [_app getUpdatedUser:^(User *user) {
         
         MyProfileViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"MyProfile"] initWithUserInfo:user];
         [self.navigationController pushViewController:view animated:YES];
@@ -179,10 +179,13 @@
  */
 - (void)searchUsers
 {
-    _alertUser = [[UIAlertView alloc] initWithTitle:@"Insert the name of the user" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Search", nil];
-    _alertUser.alertViewStyle = UIAlertViewStylePlainTextInput;
-    
-    [_alertUser show];
+    [_app getUser:^(id obj) {
+        
+        _alertUser = [[UIAlertView alloc] initWithTitle:@"Insert the name of the user" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Search", nil];
+        _alertUser.alertViewStyle = UIAlertViewStylePlainTextInput;
+        
+        [_alertUser show];
+    }];
 }
 
 /*!
@@ -210,18 +213,14 @@
  */
 - (void)searchUsersAux:(NSString *)name
 {
-    // Needed to be logged in.
-    [_app getUser:^(id obj) {
+    Range *range = [[Range alloc] init];
+    range.start = 0;
+    range.end = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerElemsPerSearch"] intValue];
         
-        Range *range = [[Range alloc] init];
-        range.start = 0;
-        range.end = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerElemsPerSearch"] intValue];
-        
-        [UsersController searchUser:name withRange:range finish:^(id obj) {
+    [UsersController searchUser:name withRange:range finish:^(id obj) {
             
-            UsersViewController *view = [[UsersViewController alloc] initWithData:obj andTitle:name];
-            [self.navigationController pushViewController:view animated:YES];
-        }];
+        UsersViewController *view = [[UsersViewController alloc] initWithData:obj andTitle:name];
+        [self.navigationController pushViewController:view animated:YES];
     }];
 }
 

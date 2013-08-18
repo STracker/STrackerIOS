@@ -44,7 +44,7 @@
 {
     UserSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
     
-    [_app getUser:^(User *me) {
+    [_app getUpdatedUser:^(User *me) {
         
         // Verify if the user is the current user.
         if ([me.identifier isEqualToString:synopsis.identifier])

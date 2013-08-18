@@ -79,6 +79,14 @@
 + (void)getFriendsSuggestions:(Finish) finish;
 
 /*!
+ @discussion Send one suggestion to one friend.
+ @param tvshowId    Television show identifier.
+ @param friendId    User's friend identifier.
+ @param finish      The finish callback.
+ */
++ (void)postSuggestion:(NSString *)tvshowId forFriend:(NSString *)friendId finish:(Finish) finish;
+
+/*!
  @discussion Get current user's favorites television shows.
  @param finish  The finish callback.
  */

@@ -45,7 +45,7 @@
 
 -(void)newRating:(DLStarRatingControl *)control :(float)rating
 {
-    // Needed to be logged in Facebook for post an rating.
+    // Need to be logged.
     [_app getUser:^(id obj) {
         
         [self postRating:rating];

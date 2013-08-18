@@ -15,6 +15,6 @@
 @interface Subscription : NSObject <Deserialize>
 
 @property(nonatomic, strong) TvShowSynopsis *tvshow;
-@property(nonatomic, strong) NSArray *episodesWatched;
+@property(nonatomic, strong) NSMutableArray *episodesWatched;
 
 @end

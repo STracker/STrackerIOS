@@ -55,7 +55,7 @@
     return self;
 }
 
-- (EntitySynopsis *)getSynopsis
+- (TvShowSynopsis *)getSynopsis
 {
     TvShowSynopsis *synopsis = [[TvShowSynopsis alloc] init];
     synopsis.name = [self identifier];

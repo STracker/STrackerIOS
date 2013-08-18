@@ -40,7 +40,7 @@
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
     uri = [uri stringByAppendingString:[NSString stringWithFormat:@"/%@", _user.identifier]];
     
-    [_app getUser:^(id obj) {
+    [_app getUpdatedUser:^(id obj) {
         
         _user = obj;
         

@@ -11,20 +11,11 @@
 
 #define CELLIDENTIFIER @"BaseTableCell"
 
-@protocol BaseTableViewControllerDelegate
-
-/*!
- @discussion This method is a hook method, that is implemented in the sub-table views.
- */
-- (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath;
-
-@end
-
 /*!
  @discussion This controller is a base controller for table views.
  Contains all things that are equal beteween the table views.
  */
-@interface BaseTableViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource, BaseTableViewControllerDelegate>
+@interface BaseTableViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource>
 {
     NSArray *_data;
     NSString *_tableTitle;
@@ -48,5 +39,10 @@
  @return An instance of BaseTableViewController.
  */
 - (id)initWithData:(NSArray *)data andTitle:(NSString *)title;
+
+/*!
+ @discussion This method is a hook method, that is implemented in the sub-table views.
+ */
+- (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath;
 
 @end

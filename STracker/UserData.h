@@ -22,7 +22,7 @@
 
 /*
  For the next objects, I don't use the relationships in Core Data (one-to-many), 
- because never occurs any query for this objects. So is use the dynamic typification 
+ because never occurs any query for this objects. So is used the dynamic typification 
  of the objective-c. Because this entities are "transformables", is necessary to 
  implement the encode/decode methods.
  */
