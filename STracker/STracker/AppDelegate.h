@@ -51,7 +51,7 @@ typedef void (^Finish)(id obj);
  @discussion This method returns the user information that 
  it's in memory. Attention: this method may return out of date 
  user's information. So is the caller have the responsibility to 
- know when want the information updated or not, if want the must 
+ know when want the information updated or not, if want the most 
  updated information, may call the method above.
  If the user is nil, performs a Login.
  @param finish The callback for execute code after the Login.
