@@ -37,5 +37,4 @@
 // Necessary for save the photo in table views.
 @property(nonatomic, strong) UIImage *photo;
 
-
 @end

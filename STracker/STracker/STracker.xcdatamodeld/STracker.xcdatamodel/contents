@@ -1,52 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="EpisodeSynopsisData" representedClassName="EpisodeSynopsisData" syncable="YES">
-        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="episodeNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="seasonNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="tvshowId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="uri" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="SubscriptionData" representedClassName="SubscriptionData" syncable="YES">
-        <relationship name="episodesWatched" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EpisodeSynopsisData" syncable="YES"/>
-        <relationship name="heldBy" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="UserData" inverseName="subscriptions" inverseEntity="UserData" syncable="YES"/>
-        <relationship name="tvshow" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TvShowSynopsisData" syncable="YES"/>
-    </entity>
-    <entity name="SuggestionData" representedClassName="SuggestionData" syncable="YES">
-        <relationship name="heldBy" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="UserData" inverseName="suggestions" inverseEntity="UserData" syncable="YES"/>
-        <relationship name="tvshow" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TvShowSynopsisData" syncable="YES"/>
-        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="UserSynopsisData" syncable="YES"/>
-    </entity>
-    <entity name="TvShowSynopsisData" representedClassName="TvShowSynopsisData" syncable="YES">
-        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="poster" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="uri" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
     <entity name="UserData" representedClassName="UserData" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="friendRequests" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="friends" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photoUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subscriptions" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="suggestions" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="version" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="friendRequests" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserSynopsisData" syncable="YES"/>
-        <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserSynopsisData" syncable="YES"/>
-        <relationship name="subscriptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SubscriptionData" inverseName="heldBy" inverseEntity="SubscriptionData" syncable="YES"/>
-        <relationship name="suggestions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SuggestionData" inverseName="heldBy" inverseEntity="SuggestionData" syncable="YES"/>
-    </entity>
-    <entity name="UserSynopsisData" representedClassName="UserSynopsisData" syncable="YES">
-        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="photoUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="uri" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="EpisodeSynopsisData" positionX="567" positionY="189" width="128" height="133"/>
-        <element name="SubscriptionData" positionX="421" positionY="63" width="128" height="88"/>
-        <element name="SuggestionData" positionX="144" positionY="78" width="128" height="88"/>
-        <element name="TvShowSynopsisData" positionX="259" positionY="228" width="128" height="103"/>
         <element name="UserData" positionX="270" positionY="-180" width="128" height="178"/>
-        <element name="UserSynopsisData" positionX="-29" positionY="90" width="128" height="103"/>
     </elements>
 </model>

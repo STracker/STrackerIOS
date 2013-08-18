@@ -17,7 +17,7 @@ typedef void (^Finish)(id obj);
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
     // Current user information.
-@private
+    @private
     User *_user;
 }
 

@@ -87,4 +87,29 @@
     
     return self;
 }
+
+#pragma mark - Encode and decode methods for use in Core Data user entity.
+
+- (id)initWithCoder: (NSCoder *)aCoder
+{
+    self = [super init];
+    if (self)
+    {
+        self.name = [aCoder decodeObjectForKey:@"Name"];
+        self.uri = [aCoder decodeObjectForKey:@"Uri"];
+        self.identifier = [aCoder decodeObjectForKey:@"Id"];
+        self.poster = [aCoder decodeObjectForKey:@"Poster"];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:self.name forKey:@"Name"];
+    [coder encodeObject:self.uri forKey:@"Uri"];
+    [coder encodeObject:self.identifier forKey:@"Id"];
+    [coder encodeObject:self.poster forKey:@"Poster"];
+}
+
 @end

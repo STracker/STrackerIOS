@@ -31,4 +31,24 @@
     return self; 
 }
 
+#pragma mark - Encode and decode methods for use in Core Data user entity.
+
+- (id)initWithCoder: (NSCoder *)aCoder
+{
+    self = [super init];
+    if (self)
+    {
+        self.tvshow = [aCoder decodeObjectForKey:@"TvShow"];
+        self.episodesWatched = [aCoder decodeObjectForKey:@"EpisodesWatched"];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:self.tvshow forKey:@"TvShow"];
+    [coder encodeObject:self.episodesWatched forKey:@"EpisodesWatched"];
+}
+
 @end

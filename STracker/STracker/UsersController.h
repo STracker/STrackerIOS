@@ -42,8 +42,9 @@
  @discussion Get an the current user information. Normally for updates.
  @param identifier  The current user identifier.
  @param finish      The finish callback.
+ @param version     The version of user's information in database.
  */
-+ (void)getMe:(NSString *)identifier finish:(Finish) finish;
++ (void)getMe:(NSString *)identifier finish:(Finish) finish withVersion:(NSString *) version;
 
 /*!
  @discussion Send user friend request.

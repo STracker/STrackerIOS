@@ -22,7 +22,7 @@
     
     [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
         
-        [self getMe:user.identifier finish:finish];
+        [self getMe:user.identifier finish:finish withVersion:nil];
     
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         
@@ -68,12 +68,14 @@
     } withVersion:version];
 }
 
-+ (void)getMe:(NSString *)identifier finish:(Finish) finish
++ (void)getMe:(NSString *)identifier finish:(Finish) finish withVersion:(NSString *) version
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
     uri = [uri stringByAppendingFormat:@"/%@", identifier];
     
-    NSString *version = [[STrackerServerHttpClient sharedClient] tryGeVersionFromtCachedData:uri];
+    // if version from database is nil, try get it from local cache data.
+    if (version == nil)
+        version = [[STrackerServerHttpClient sharedClient] tryGeVersionFromtCachedData:uri];
     
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         

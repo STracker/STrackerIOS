@@ -7,9 +7,6 @@
 //
 
 #import "UserData.h"
-#import "SubscriptionData.h"
-#import "SuggestionData.h"
-
 
 @implementation UserData
 
