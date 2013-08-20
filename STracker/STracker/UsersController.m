@@ -79,10 +79,10 @@
     
     [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
         
-        User *user = [[User alloc] initWithDictionary:result];
+        User *me = [[User alloc] initWithDictionary:result];
         
         // Invoke callback.
-        finish(user);
+        finish(me);
         
     } failure:^(AFJSONRequestOperation *operation, NSError *error) {
         
@@ -180,7 +180,20 @@
 
 + (void)postSuggestion:(NSString *)tvshowId forFriend:(NSString *)friendId finish:(Finish)finish
 {
-    // TODO
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsSuggestionsURI"];
+    uri = [uri stringByAppendingFormat:@"/%@", tvshowId];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:friendId, @"", nil];
+    
+    [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Invoke callback.
+        finish(nil);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+    }];
 }
 
 + (void)getUserSubscriptions:(Finish) finish;

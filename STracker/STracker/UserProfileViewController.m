@@ -8,8 +8,8 @@
 
 #import "UserProfileViewController.h"
 #import "UsersViewController.h"
-#import "AppDelegate.h"
 #import "UsersController.h"
+#import "UserSubscriptionsViewController.h"
 
 @implementation UserProfileViewController
 
@@ -17,22 +17,14 @@
 {
     [super viewDidLoad];
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    
     // Already loged in in this moment, so only retrieves the current user information.
-    [app getUpdatedUser:^(id obj) {
-        
-        User *me = obj;
+    [_app getUser:^(User *me) {
         
         // Verify if this user is already friend of the current user.
-        for (UserSynopsis *synopse in _user.friends)
+        if ([_user.friends objectForKey:me.identifier] != nil)
         {
-            if ([synopse.identifier isEqualToString:me.identifier])
-            {
-                _inviteCell.textLabel.text = @"Remove friend";
-                _isFriend = YES;
-                break;
-            }
+            _inviteCell.textLabel.text = @"Remove friend";
+            _isFriend = YES;
         }
     }];
 }
@@ -40,6 +32,7 @@
 - (void)viewDidUnload
 {
     _inviteCell = nil;
+    
     [super viewDidUnload];
 }
 
@@ -68,7 +61,9 @@
  */
 - (void)subscriptions
 {
-    //TODO
+    UserSubscriptionsViewController *view = [[UserSubscriptionsViewController alloc] initWithData:_user.subscriptions.allValues andTitle:@"Subscriptions"];
+    
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 /*!
@@ -86,12 +81,10 @@
  */
 - (void)inviteOrRemove
 {
-   
-    /*
     // Add friend.
     if (!_isFriend)
     {
-        [UsersController inviteUser:uri withUser:_user finish:^(id obj) {
+        [UsersController inviteUser:_user finish:^(id obj) {
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"The invitation request has been sent successfully." message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             
@@ -102,15 +95,17 @@
     }
     
     // Remove friend.
-    uri = [uri stringByAppendingFormat:@"/%@", _user.identifier];
-    
-    [UsersController deleteFriend:uri finish:^(id obj) {
+    [UsersController deleteFriend:_user.identifier finish:^(id obj) {
         
+        _isFriend = NO;
+        _inviteCell.textLabel.text = @"Add friend";
+    
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Friend removed." message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         
         [alert show];
     }];
-     */
+    
+    
 }
 
 @end

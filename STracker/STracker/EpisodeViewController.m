@@ -247,7 +247,17 @@
             Subscription *sub = [user.subscriptions objectForKey:_episode.identifier.tvshowId];
             
             // Remove the episode from subscription's watched episodes.
-            [sub.episodesWatched removeObject:[_episode getSynopsis]];
+            EpisodeSynopsis *epiToRemove;
+            for (EpisodeSynopsis *epi in sub.episodesWatched)
+            {
+                if ((epi.identifier.seasonNumber == _episode.identifier.seasonNumber) && (epi.identifier.episodeNumber == _episode.identifier.episodeNumber))
+                {
+                    epiToRemove = epi;
+                    break;
+                }
+            }
+            
+            [sub.episodesWatched removeObject:epiToRemove];
             
             // Increment version for cache purposes.
             user.version++;

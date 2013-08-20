@@ -23,11 +23,6 @@
 
 - (void)getComments
 {
-    // For cache control...
-    NSString *version = nil;
-    if (_comments != nil)
-        version = [NSString stringWithFormat:@"%d", _comments.version];
-    
     [CommentController getTvShowComments:_tvshow.identifier finish:^(TvShowComments *obj) {
         
         _comments = obj;

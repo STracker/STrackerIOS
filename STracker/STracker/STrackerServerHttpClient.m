@@ -101,7 +101,7 @@
     if (query != nil)
         url = [url stringByAppendingString:[NSString stringWithFormat:@"?%@", [self transformDictionaryToQueryString:query]]];
     
-    NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"GET" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:_app.hawkCredentials ext:nil payload:nil payloadValidation:NO];
+    NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"GET" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:[_app getHawkCredentials] ext:nil payload:nil payloadValidation:NO];
     
     [self setDefaultHeader:@"Authorization" value:header];
     
@@ -156,7 +156,7 @@
 {    
     // Generate and set the Authorization header with Hawk protocol.
     NSString *url = [NSString stringWithFormat:@"%@%@", self.baseURL, uri];
-    NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"POST" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:_app.hawkCredentials ext:nil payload:[self trasnformPayloadToUrlEncoded:parameters] payloadValidation:YES];
+    NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"POST" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:[_app getHawkCredentials] ext:nil payload:[self trasnformPayloadToUrlEncoded:parameters] payloadValidation:YES];
     
     [self setDefaultHeader:@"Authorization" value:header];
     
@@ -203,7 +203,7 @@
 {
     // Generate and set the Authorization header with Hawk protocol.
     NSString *url = [NSString stringWithFormat:@"%@%@", self.baseURL, uri];
-    NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"DELETE" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:_app.hawkCredentials ext:nil payload:nil payloadValidation:NO];
+    NSString *header = [HawkClient generateAuthorizationHeader:[NSURL URLWithString:url] method:@"DELETE" timestamp:[HawkClient getTimestamp] nonce:[HawkClient generateNonce] credentials:[_app getHawkCredentials] ext:nil payload:nil payloadValidation:NO];
     
     [self setDefaultHeader:@"Authorization" value:header];
     

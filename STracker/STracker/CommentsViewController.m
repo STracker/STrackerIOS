@@ -52,7 +52,7 @@
     Comment *comment = [_data objectAtIndex:indexPath.row];
     
     // Needed to be Logged in Facebook to view the comment.
-    [_app getUpdatedUser:^(User *user) {
+    [_app getUser:^(User *user) {
         
         CommentViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"CommentView"] initWithComment:comment];
         [self.navigationController pushViewController:view animated:YES];
@@ -63,8 +63,11 @@
 
 - (void)addComment
 {
-    // Needed to be Logged in Facebook to create an comment.
-    [_app getUpdatedUser:^(User *user) {
+    /* 
+     Needed to be Logged in Facebook to create an comment.
+     Don't need to be the must updated user information.
+     */
+    [_app getUser:^(User *user) {
         
         [_composeComment setEnabled:NO];
         YIPopupTextView *popupTextView = [[YIPopupTextView alloc] initWithPlaceHolder:@"comment here" maxCount:0 buttonStyle:YIPopupTextViewButtonStyleRightCancelAndDone tintsDoneButton:YES];

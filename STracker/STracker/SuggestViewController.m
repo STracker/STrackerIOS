@@ -8,6 +8,7 @@
 
 #import "SuggestViewController.h"
 #import "UsersController.h"
+#import "User.h"
 
 @implementation SuggestViewController
 
@@ -21,7 +22,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    UserSynopsis *friend = [_data objectAtIndex:indexPath.row];
+    [UsersController postSuggestion:_tvshowId forFriend:friend.identifier finish:^(id obj) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"Suggestion send to %@", friend.name] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        
+        [alert show];
+    }];
 }
 
 @end

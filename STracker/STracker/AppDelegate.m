@@ -17,7 +17,7 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-@synthesize storyboard, hawkCredentials, dbController;
+@synthesize storyboard, dbController;
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -196,102 +196,66 @@
 
 - (void)getUpdatedUser:(Finish)finish
 {
-    /*
     // First verify if exists in DB.
     OfflineUserInfoController *off = [[OfflineUserInfoController alloc] initWithContext:self.managedObjectContext];
     
     User *dbUser = [off read];
-    if (dbUser != nil)
+    if (dbUser == nil)
     {
-        
-         The user exists, lets get the version number for make a request 
-         to server for see if this user is updated.
-        [UsersController getMe:dbUser.identifier finish:^(User *user) {
-            
-            if (user.version > dbUser.version)
-            {
-                // Update the user information in DB.
-                [off updateAsync:user];
-            }
-            
-            // Set the user information in memory.
-            _user = user;
-            
-            // Invoke the callback.
-            finish(_user);
-            
-        } withVersion:[NSString stringWithFormat:@"%d", dbUser.version]];
-        
-        return;
-    }
-    */
-    
-    if (_user != nil)
-    {
-        /*
-        // Verify if the user information is updated.
-        [UsersController getMe:_user.identifier finish:^(User *user) {
-            
-            _user = user;
-            
-            finish(_user);
-        }];
-        */
-        finish(_user);
+        [self loginWithFacebook:finish];
         return;
     }
     
-    FacebookView *fb = [[FacebookView alloc] initWithCallback:^(User *user) {
+    // Set Hawk credentials.
+    [self setHawkCredentials:dbUser.identifier];
+    
+    /*
+     The user exists, lets get the version number for make a request
+     to server for see if this user is updated.
+     */
+    [UsersController getMe:dbUser.identifier finish:^(User *user) {
         
-        [self.window.rootViewController dismissSemiModalView];
+        if (user.version > dbUser.version)
+        {
+            // Update the user information in DB.
+            /*
+             This update are not async because next to this, can 
+             make open the user's controller and the information 
+             to show must be updated.
+             */
+            [off update:user];
+        }
+        
+        // Set the user information in memory.
         _user = user;
         
-        /*
-         Create looper for getting information from server.
-         Needed to be logged for this.
-         */
-        // [self createLooper];
+        // Invoke the callback.
+        finish(_user);
         
-        
-        finish(user);
-    }];
-    
-    [self.window.rootViewController presentSemiView:fb];
+    } withVersion:[NSString stringWithFormat:@"%d", dbUser.version]];
 }
 
 - (void)getUser:(Finish) finish
 {
     if (_user != nil)
     {
-        /*
-         // Verify if the user information is updated.
-         [UsersController getMe:_user.identifier finish:^(User *user) {
-         
-         _user = user;
-         
-         finish(_user);
-         }];
-         */
         finish(_user);
         return;
     }
-    
-    FacebookView *fb = [[FacebookView alloc] initWithCallback:^(User *user) {
-        
-        [self.window.rootViewController dismissSemiModalView];
-        _user = user;
-        
-        /*
-         Create looper for getting information from server.
-         Needed to be logged for this.
-         */
-        // [self createLooper];
-        
-        
-        finish(user);
-    }];
-    
-    [self.window.rootViewController presentSemiView:fb];
+
+    [self loginWithFacebook:finish];
+}
+
+- (void)setHawkCredentials:(NSString *)userId
+{
+    hawkCredentials = [[HawkCredentials alloc] init];
+    hawkCredentials.identifier = userId;
+    hawkCredentials.key = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"HawkKey"];
+}
+
+- (HawkCredentials *)getHawkCredentials
+{
+    return hawkCredentials;
 }
 
 #pragma mark - AppDelegate class methods.
@@ -304,6 +268,34 @@
 }
 
 #pragma mark - AppDelegate auxiliary private methods.
+
+/*!
+ @discussion Auxiliary method for make a login with Facebook account.
+ @param finish  The finish callback.
+ */
+- (void)loginWithFacebook:(Finish) finish
+{
+    FacebookView *fb = [[FacebookView alloc] initWithCallback:^(User *user) {
+        
+        [self.window.rootViewController dismissSemiModalView];
+        _user = user;
+        
+        /*
+         Create looper for getting information from server.
+         Needed to be logged for this.
+         */
+        // [self createLooper];
+        
+        
+        // Save in DB.
+        [self.dbController create:user];
+        
+        // Invoke callback.
+        finish(user);
+    }];
+    
+    [self.window.rootViewController presentSemiView:fb];
+}
 
 /*!
  @discussion Auxiliary method for getting periodically information from

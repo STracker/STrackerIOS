@@ -53,12 +53,8 @@
     me.photoUrl = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large", me.identifier];
     
     // Set Hawk credentials for authenticated requests to server.
-    HawkCredentials *credentials = [[HawkCredentials alloc] init];
-    credentials.identifier = me.identifier;
-    credentials.key = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"HawkKey"];
-    
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    app.hawkCredentials = credentials;
+    [app setHawkCredentials:me.identifier];
     
     // Register the user into STracker server.
     [UsersController registUser:me finish:^(id obj) {

@@ -21,16 +21,21 @@
 
 - (void)getComments
 {
-    // For cache control...
-    NSString *version = nil;
-    if (_comments != nil)
-        version = [NSString stringWithFormat:@"%d", _comments.version];
-    
     [CommentController getEpisodeComments:_episode.identifier finish:^(EpisodeComments *obj) {
         
         _comments = obj;
         _data = obj.comments;
         [_tableView reloadData];
+    }];
+}
+
+- (void)postComment:(NSString *)comment
+{
+    [CommentController postEpisodeComment:_episode.identifier comment:comment finish:^(id obj) {
+        
+        UIAlertView *alertConfirm = [[UIAlertView alloc] initWithTitle:nil message:@"your comment will be processed..." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        
+        [alertConfirm show];
     }];
 }
 

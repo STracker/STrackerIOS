@@ -16,6 +16,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "Genre.h"
 #import "Subscription.h"
+#import "SuggestViewController.h"
 
 @implementation TvShowViewController
 
@@ -195,9 +196,11 @@
      Need to be the most updated information for get the updated 
      friends list.
      */
-    [_app getUpdatedUser:^(id obj) {
+    [_app getUpdatedUser:^(User *me) {
         
+        SuggestViewController *view = [[SuggestViewController alloc] initWithData:me.friends.allValues andTvShowId:_tvshow.identifier];
         
+        [self.navigationController pushViewController:view animated:YES];
     }];
 }
 

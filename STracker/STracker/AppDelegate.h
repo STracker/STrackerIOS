@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "User.h"
-#import "HawkCredentials.h"
 #import "OfflineUserInfoController.h"
+#import "HawkCredentials.h"
 
 // Definition of finish callback.
 typedef void (^Finish)(id obj);
@@ -20,13 +20,14 @@ typedef void (^Finish)(id obj);
     // Current user information.
     @private
     User *_user;
+    
+    // The Hawk credentials, necessary to make protected requests to STracker server.
+    @private
+    HawkCredentials *hawkCredentials;
 }
 
 @property(nonatomic, strong) UIWindow *window;
 @property(nonatomic, strong) UIStoryboard *storyboard;
-// The Hawk credentials, necessary to make protected requests to STracker server.
-@property(nonatomic, strong) HawkCredentials *hawkCredentials;
-
 @property(nonatomic, strong, readonly) OfflineUserInfoController *dbController;
 
 // Core Data logic.
@@ -57,6 +58,18 @@ typedef void (^Finish)(id obj);
  @param finish The callback for execute code after the Login.
  */
 - (void)getUser:(Finish) finish;
+
+/*!
+ @discussion This method create and set the hawk credentials.
+ @param userId  The current user identifier.
+ */
+- (void)setHawkCredentials:(NSString *)userId;
+
+/*!
+ @discussion This method returns the hawk credentials.
+ @return    The user's Hawk credentials.
+ */
+- (HawkCredentials *)getHawkCredentials;
 
 /*!
  @discussion This method returns one alert view with one message error (Class method).
