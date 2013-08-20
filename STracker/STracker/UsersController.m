@@ -238,8 +238,39 @@
     }];
 }
 
++ (void)postWatchedEpisode:(EpisodeId *)episodeId finish:(Finish)finish
+{
+    [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:[self constructEpisodeUri:episodeId] parameters:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Invoke callback.
+        finish(nil);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
++ (void)deleteWatchedEpisode:(EpisodeId *)episodeId finish:(Finish)finish
+{
+    [[STrackerServerHttpClient sharedClient] deleteRequestWithHawkProtocol:[self constructEpisodeUri:episodeId] query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Invoke callback.
+        finish(nil);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
 #pragma mark - UsersController private auxiliary methods.
 
+/*!
+ @discussion Auxiliary method for create an array of users from one dictionary.
+ @result    The dictionary that contains the users.
+ @return The array of the users synopsis objects.
+ */
 + (NSArray *)parseUsersToArray:(id) result
 {
     NSMutableArray *data = [[NSMutableArray alloc] init];
@@ -250,6 +281,20 @@
     }
     
     return data;
+}
+
+/*!
+ @discussion Auxiliary method for generate the uri for post and delete watched episodes requests.
+ 
+ */
++ (NSString *)constructEpisodeUri:(EpisodeId *)episodeId
+{
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerWatchedEpisodeURI"];
+    uri = [uri stringByReplacingOccurrencesOfString:@"tvshowId" withString:episodeId.tvshowId];
+    uri = [uri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%d", episodeId.seasonNumber]];
+    uri = [uri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%d", episodeId.episodeNumber]];
+    
+    return uri;
 }
 
 @end

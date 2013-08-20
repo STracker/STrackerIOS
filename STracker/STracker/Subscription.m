@@ -19,11 +19,11 @@
     {
         tvshow = [[TvShowSynopsis alloc] initWithDictionary:[parameters objectForKey:@"TvShow"]];
         
-        NSMutableArray *episodes = [[NSMutableArray alloc] init];
+        episodesWatched = [[NSMutableArray alloc] init];
         for (NSDictionary *item in [parameters objectForKey:@"EpisodesWatched"])
         {
             EpisodeSynopsis *episode = [[EpisodeSynopsis alloc] initWithDictionary:item];
-            [episodes addObject:episode];
+            [episodesWatched addObject:episode];
         }
     }
     

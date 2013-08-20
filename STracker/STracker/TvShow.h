@@ -21,6 +21,7 @@
 @property(nonatomic, copy) NSString *runtime;
 @property(nonatomic, copy) NSString *airDay;
 @property(nonatomic, copy) NSString *firstAired;
+@property(nonatomic, copy) NSString *airTime;
 @property(nonatomic, copy) NSString *poster;
 @property(nonatomic, retain) NSArray *genres;
 @property(nonatomic, retain) NSArray *seasons;

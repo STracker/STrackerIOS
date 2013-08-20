@@ -25,6 +25,11 @@
     
     @private
     Episode *_episode;
+    
+    @private
+    UIAlertView *_alertWatched;
+    @private
+    UIAlertView *_alertUnWatched;
 }
 
 /*!

@@ -29,8 +29,12 @@
 	<string>user/suggestions</string>
 	<key>STrackerUserSubscriptionsURI</key>
 	<string>user/subscriptions</string>
+	<key>STrackerWatchedEpisodeURI</key>
+	<string>user/subscriptions/tvshowId/watchedepisodes/seasonNumber/episodeNumber</string>
 	<key>STrackerGenresURI</key>
 	<string>genres</string>
+	<key>STrackerEpisodesURI</key>
+	<string>tvshows/tvshowId/seasons/seasonNumber/episodes/episodeNumber</string>
 	<key>STrackerTvShowsURI</key>
 	<string>tvshows</string>
 	<key>STrackerTopRatedTvShowsURI</key>

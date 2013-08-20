@@ -13,7 +13,7 @@
 
 @implementation TvShow
 
-@synthesize identifier, name, description, runtime, firstAired, airDay, genres, seasons, actors, rating, poster;
+@synthesize identifier, name, description, runtime, firstAired, airDay, airTime, genres, seasons, actors, rating, poster;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
@@ -25,6 +25,7 @@
         runtime = [parameters objectForKey:@"Runtime"];
         airDay = [parameters objectForKey:@"AirDay"];
         firstAired = [parameters objectForKey:@"FirstAired"];
+        airTime = [parameters objectForKey:@"AirTime"];
         poster = [parameters objectForKey:@"Poster"];
         
         NSMutableArray *genresAux = [[NSMutableArray alloc] init];

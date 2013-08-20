@@ -581,6 +581,95 @@
         <image name="Search.png" width="16" height="16"/>
         <image name="Shows_icon.png" width="32" height="32"/>
     </resources>
+    <classes>
+        <class className="BaseProfileViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BaseProfileViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="_name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_photo" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="BaseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BaseViewController.h"/>
+        </class>
+        <class className="CommentViewController" superclassName="BaseViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CommentViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="openUserProfile"/>
+                <relationship kind="outlet" name="_body" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="_userName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_userProfile" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="DLStarRatingControl" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DLStarRatingControl.h"/>
+            <relationships>
+                <relationship kind="outlet" name="delegate"/>
+            </relationships>
+        </class>
+        <class className="EpisodeViewController" superclassName="RatingsViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EpisodeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="openDescription:"/>
+                <relationship kind="action" name="options:"/>
+                <relationship kind="outlet" name="_date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_poster" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="_swipeGestureDescription" candidateClass="UISwipeGestureRecognizer"/>
+            </relationships>
+        </class>
+        <class className="HomeViewController" superclassName="BaseViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="searchOptions:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="userOptions:"/>
+                <relationship kind="outlet" name="_imagePager" candidateClass="KIImagePager"/>
+            </relationships>
+        </class>
+        <class className="KIImagePager" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/KIImagePager.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dataSource"/>
+                <relationship kind="outlet" name="delegate"/>
+            </relationships>
+        </class>
+        <class className="MyProfileViewController" superclassName="BaseProfileViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyProfileViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="_requests" candidateClass="TDBadgedCell"/>
+                <relationship kind="outlet" name="_suggestions" candidateClass="TDBadgedCell"/>
+            </relationships>
+        </class>
+        <class className="RatingsViewController" superclassName="BaseViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RatingsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="_average" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_rating" candidateClass="DLStarRatingControl"/>
+            </relationships>
+        </class>
+        <class className="TDBadgedCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TDBadgedCell.h"/>
+        </class>
+        <class className="TvShowViewController" superclassName="RatingsViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TvShowViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="openDescription:"/>
+                <relationship kind="action" name="openSeasons:"/>
+                <relationship kind="action" name="options:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="_airDay" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_firstAired" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_genres" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="_poster" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="_swipeGestureDescription" candidateClass="UISwipeGestureRecognizer"/>
+                <relationship kind="outlet" name="_swipeGestureSeasons" candidateClass="UISwipeGestureRecognizer"/>
+            </relationships>
+        </class>
+        <class className="UserProfileViewController" superclassName="BaseProfileViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UserProfileViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="_inviteCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

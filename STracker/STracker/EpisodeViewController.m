@@ -12,6 +12,8 @@
 #import "UIViewController+KNSemiModal.h"
 #import "RatingsController.h"
 #import "UIImageView+AFNetworking.h"
+#import "Subscription.h"
+#import "UsersController.h"
 
 @implementation EpisodeViewController
 
@@ -44,7 +46,7 @@
 #pragma mark - IBActions.
 - (IBAction)options:(id)sender
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Guest Actors", @"Directors", @"Comments", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Guest Actors", @"Directors", @"Comments", @"Watched", nil];
     
     [actionSheet showFromBarButtonItem:sender animated:YES];
 }
@@ -77,6 +79,9 @@
         case 2:
             [self comments];
             break;
+        case 3:
+            [self watched];
+            break;
     }
     
     [actionSheet setDelegate:nil];
@@ -100,6 +105,22 @@
     }];
 }
 
+#pragma mark - UIAlert View delegates.
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != 0)
+    {
+        if (alertView == _alertWatched)
+            [self watechedRequest];
+        
+        if (alertView == _alertUnWatched)
+            [self unWatechedRequest];
+    }
+    
+    [alertView setDelegate:nil];
+    alertView = nil;
+}
 
 #pragma mark - EpisodeViewController auxiliary private methods.
 
@@ -141,6 +162,100 @@
 {
     EpisodeCommentsViewController *view = [[EpisodeCommentsViewController alloc] initWithEpisode:_episode];
     [self.navigationController pushViewController:view animated:YES];
+}
+
+/*!
+ @discussion Auxiliary method for mark/unmark as seen, the episode.
+ */
+- (void)watched
+{
+    /*
+     Need the most updated information for see if the user have this
+     episode marked or not.
+     */
+    [_app getUpdatedUser:^(User *user) {
+        
+        Subscription *sub = [user.subscriptions objectForKey:_episode.identifier.tvshowId];
+        if (sub == nil)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention!" message:@"you are not subscribed to this television show." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            
+            [alert show];
+            return;
+        }
+        
+        for (EpisodeSynopsis *epi in sub.episodesWatched)
+        {
+            if ((epi.identifier.seasonNumber == _episode.identifier.seasonNumber) && (epi.identifier.episodeNumber == _episode.identifier.episodeNumber)) {
+                
+                _alertUnWatched = [[UIAlertView alloc] initWithTitle:@"Attention - allready marked as seen!" message:@"you really want to unmark?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+                
+                [_alertUnWatched show];
+                
+                return;
+            }
+        }
+        
+        _alertWatched = [[UIAlertView alloc] initWithTitle:@"Attention" message:@"you really want to mark this episode as seen?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        
+        [_alertWatched show];
+    }];
+}
+
+/*!
+ @discussion Auxiliary method for make one request for mark the episode as seen.
+ */
+- (void)watechedRequest
+{
+   [UsersController postWatchedEpisode:_episode.identifier finish:^(id obj) {
+       
+       /*
+        Add this wateched episode to user in memory and update the user in DB.
+        Using getUser because in the action "watched", already use the
+        getUpdatedUser, so the user information is the must updated.
+        */
+       [_app getUser:^(User *user) {
+        
+           Subscription *sub = [user.subscriptions objectForKey:_episode.identifier.tvshowId];
+           
+           // Add the episode to subscription's watched episodes.
+           [sub.episodesWatched addObject:[_episode getSynopsis]];
+           
+           // Increment version for cache purposes.
+           user.version++;
+           
+           // Update in DB.
+           [_app.dbController updateAsync:user];
+       }];
+   }];
+}
+
+/*!
+ @discussion Auxiliary method for make one request for unmark the episode as seen.
+ */
+- (void)unWatechedRequest
+{
+    [UsersController deleteWatchedEpisode:_episode.identifier finish:^(id obj) {
+        
+        /*
+         Remove this watched episode from user in memory and update the user in DB.
+         Using getUser because in the action "watched", already use the
+         getUpdatedUser, so the user information is the must updated.
+         */
+        [_app getUser:^(User *user) {
+            
+            Subscription *sub = [user.subscriptions objectForKey:_episode.identifier.tvshowId];
+            
+            // Remove the episode from subscription's watched episodes.
+            [sub.episodesWatched removeObject:[_episode getSynopsis]];
+            
+            // Increment version for cache purposes.
+            user.version++;
+            
+            // Update in DB.
+            [_app.dbController updateAsync:user];
+        }];
+    }];
 }
 
 @end

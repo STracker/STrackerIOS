@@ -241,15 +241,15 @@
          */
         [_app getUser:^(User *user) {
             
-            // Increment version for cache purposes.
-            user.version++;
-            
             Subscription *subscription = [[Subscription alloc] init];
             subscription.tvshow = (TvShowSynopsis *)[_tvshow getSynopsis];
             subscription.episodesWatched = [[NSMutableArray alloc] init];
             
             // Set user's information in memory.
             [user.subscriptions setObject:subscription forKey:_tvshow.identifier];
+            
+            // Increment version for cache purposes.
+            user.version++;
             
             // Update in DB.
             [_app.dbController updateAsync:user];
@@ -271,12 +271,12 @@
          getUpdatedUser, so the user information is the must updated.
          */
         [_app getUser:^(User *user) {
+
+            // Remove from user's information in memory.
+            [user.subscriptions removeObjectForKey:_tvshow.identifier];
             
             // Increment version for cache purposes.
             user.version++;
-            
-            // Remove from user's information in memory.
-            [user.subscriptions removeObjectForKey:_tvshow.identifier];
             
             // Update in DB.
             [_app.dbController updateAsync:user];

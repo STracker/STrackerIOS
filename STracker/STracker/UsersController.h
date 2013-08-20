@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "User.h"
 #import "Range.h"
+#import "Episode.h"
 
 /*!
  @discussion Info controller for manage users 
@@ -107,4 +108,19 @@
  @param finish      The finish callback.
  */
 + (void)deleteSubscription:(NSString *)tvshowId finish:(Finish) finish;
+
+/*!
+ @discussion Make a request for mark one episode as seen.
+ @param episodeId   The id of the episode.
+ @param finish      The finish callback.
+ */
++ (void)postWatchedEpisode:(EpisodeId *)episodeId finish:(Finish) finish;
+
+/*!
+ @discussion Make a request for unmark one episode as seen.
+ @param episodeId   The id of the episode.
+ @param finish      The finish callback.
+ */
++ (void)deleteWatchedEpisode:(EpisodeId *)episodeId finish:(Finish) finish;
+
 @end

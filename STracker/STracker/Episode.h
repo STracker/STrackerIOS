@@ -30,7 +30,7 @@
 /*!
  @discussion This object defines the episode entity object.
  */
-@interface Episode : Entity <Deserialize>
+@interface Episode : Entity <Deserialize, EntityDelegate>
 
 @property(nonatomic, strong) EpisodeId *identifier;
 @property(nonatomic, copy) NSString *name;

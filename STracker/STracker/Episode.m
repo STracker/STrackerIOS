@@ -61,6 +61,23 @@
     return self;
 }
 
+- (EpisodeSynopsis *)getSynopsis
+{
+    EpisodeSynopsis *synopsis = [[EpisodeSynopsis alloc] init];
+    synopsis.name = self.name;
+    
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerEpisodesURI"];
+    uri = [uri stringByReplacingOccurrencesOfString:@"tvshowId" withString:self.identifier.tvshowId];
+    uri = [uri stringByReplacingOccurrencesOfString:@"seasonNumber" withString:[NSString stringWithFormat:@"%d", self.identifier.seasonNumber]];
+    uri = [uri stringByReplacingOccurrencesOfString:@"episodeNumber" withString:[NSString stringWithFormat:@"%d", self.identifier.episodeNumber]];
+    
+    synopsis.uri = uri;
+    synopsis.identifier = self.identifier;
+    synopsis.date = self.date;
+    
+    return synopsis;
+}
+
 @end
 
 #pragma mark - Synopsis object.
