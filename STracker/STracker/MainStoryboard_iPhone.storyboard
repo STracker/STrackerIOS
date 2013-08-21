@@ -438,6 +438,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="_body" destination="diY-k4-mx4" id="eGH-wY-iX4"/>
+                        <outlet property="_openUserBt" destination="Uqj-hN-Wpa" id="wow-wo-VCG"/>
                         <outlet property="_userName" destination="rdl-cv-jlP" id="2iR-gc-qHW"/>
                         <outlet property="_userProfile" destination="Uqj-hN-Wpa" id="Piw-nL-xUv"/>
                     </connections>
@@ -597,6 +598,7 @@
             <relationships>
                 <relationship kind="action" name="openUserProfile"/>
                 <relationship kind="outlet" name="_body" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="_openUserBt" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="_userName" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="_userProfile" candidateClass="UIButton"/>
             </relationships>

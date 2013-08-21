@@ -55,6 +55,21 @@
     return self;
 }
 
+- (UserSynopsis *)getSynopsis
+{
+    UserSynopsis *synopsis = [[UserSynopsis alloc] init];
+    synopsis.name = self.name;
+    
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
+    uri = [uri stringByAppendingFormat:@"/%@", [self identifier]];
+    synopsis.uri = uri;
+    
+    synopsis.identifier = self.identifier;
+    synopsis.photoUrl = self.photoUrl;
+    
+    return synopsis;
+}
+
 @end
 
 #pragma mark - Synopsis object.

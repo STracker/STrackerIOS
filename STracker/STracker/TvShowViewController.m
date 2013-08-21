@@ -95,6 +95,7 @@
             break;
         case 2:
             [self subscribe];
+            break;
         case 3:
             [self suggestion];
             break;

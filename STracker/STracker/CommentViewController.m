@@ -40,6 +40,9 @@
             UIBarButtonItem *bt = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteCommentSelector)];
             
             [self.navigationItem setRightBarButtonItem:bt animated:YES];
+            
+            // Hide the button to open user profile.
+            [_openUserBt setHidden:YES];
         }
     }];
 }
@@ -50,6 +53,7 @@
     _userProfile = nil;
     _userName = nil;
     
+    _openUserBt = nil;
     [super viewDidUnload];
 }
 

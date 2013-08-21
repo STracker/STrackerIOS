@@ -19,6 +19,8 @@
     __weak IBOutlet UITableViewCell *_inviteCell;
     @private
     Boolean _isFriend;
+    @private
+    Boolean _invitedMe;
 }
 
 @end

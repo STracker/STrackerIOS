@@ -155,6 +155,40 @@
     } withVersion:nil];
 }
 
++ (void)acceptFriendRequest:(NSString *)userId finish:(Finish)finish
+{
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendRequestsURI"];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:userId, @"", nil];
+    
+    [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Invoke callback.
+        finish(nil);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
++ (void)rejectFriendRequest:(NSString *)userId finish:(Finish)finish
+{
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendRequestsURI"];
+    uri = [uri stringByAppendingFormat:@"/%@", userId];
+   
+    
+    [[STrackerServerHttpClient sharedClient] deleteRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Invoke callback.
+        finish(nil);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
 + (void)getFriendsSuggestions:(Finish)finish
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsSuggestionsURI"];

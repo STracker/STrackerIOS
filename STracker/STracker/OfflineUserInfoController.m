@@ -63,6 +63,20 @@
 
 - (void)update:(User *)user
 {
+    [self remove];
+    [self create:user];
+}
+
+- (void)updateAsync:(User *)user
+{
+    [[AsyncQueue sharedObject] performAsyncOperation:^{
+        
+        [self update:user];
+    }];
+}
+
+- (void)remove
+{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"UserData" inManagedObjectContext:_context];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:entity];
@@ -77,26 +91,12 @@
     
     UserData *uData = [fetchedObjects objectAtIndex:0]; // Only have one...
     
-    // Update information.
-    uData = [self parseUser:user];
+    [_context deleteObject:uData];
     
     // Perform action.
     [_context save:&error];
     if (error)
         NSLog(@"error: %@", error.description);
-}
-
-- (void)updateAsync:(User *)user
-{
-    [[AsyncQueue sharedObject] performAsyncOperation:^{
-        
-        [self update:user];
-    }];
-}
-
-- (void)remove
-{
-    [NSException raise:@"Not implemented." format:@"Not implemented."];
 }
 
 #pragma mark - OfflineUserInfoController auxiliary private methods.

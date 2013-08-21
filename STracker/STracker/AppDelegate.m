@@ -196,26 +196,30 @@
 
 - (void)getUpdatedUser:(Finish)finish
 {
-    // First verify if exists in DB.
-    OfflineUserInfoController *off = [[OfflineUserInfoController alloc] initWithContext:self.managedObjectContext];
-    
-    User *dbUser = [off read];
-    if (dbUser == nil)
+    // First verify if the user exists in memory.
+    if (_user == nil)
     {
-        [self loginWithFacebook:finish];
-        return;
-    }
-    
-    // Set Hawk credentials.
-    [self setHawkCredentials:dbUser.identifier];
-    
+        // Verify if exists in DB.
+        User *dbUser = [self.dbController read];
+        if (dbUser == nil)
+        {
+            [self loginWithFacebook:finish];
+            return;
+        }
+        
+        // Set the user information in memory.
+        _user = dbUser;
+        
+        // Set Hawk credentials.
+        [self setHawkCredentials:dbUser.identifier];
+    }    
     /*
      The user exists, lets get the version number for make a request
      to server for see if this user is updated.
      */
-    [UsersController getMe:dbUser.identifier finish:^(User *user) {
+    [UsersController getMe:_user.identifier finish:^(User *user) {
         
-        if (user.version > dbUser.version)
+        if (user.version > _user.version)
         {
             // Update the user information in DB.
             /*
@@ -223,22 +227,34 @@
              make open the user's controller and the information 
              to show must be updated.
              */
-            [off update:user];
+            [self.dbController update:user];
+            
+            // Set the user information in memory.
+            _user = user;
         }
-        
-        // Set the user information in memory.
-        _user = user;
         
         // Invoke the callback.
         finish(_user);
         
-    } withVersion:[NSString stringWithFormat:@"%d", dbUser.version]];
+    } withVersion:[NSString stringWithFormat:@"%d", _user.version]];
 }
 
 - (void)getUser:(Finish) finish
 {
     if (_user != nil)
     {
+        finish(_user);
+        return;
+    }
+    
+    // Try get from DB.
+    User *dbUser = [self.dbController read];
+    if (dbUser != nil)
+    {
+        _user = dbUser;
+        
+        // Set Hawk credentials.
+        [self setHawkCredentials:dbUser.identifier];
         finish(_user);
         return;
     }

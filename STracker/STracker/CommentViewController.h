@@ -22,6 +22,8 @@
     __weak IBOutlet UIButton *_userProfile;
     @private
     __weak IBOutlet UILabel *_userName;
+    @private
+    __weak IBOutlet UIButton *_openUserBt;
     
     @private
     UIAlertView *_alertDelete;

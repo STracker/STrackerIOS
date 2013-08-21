@@ -64,7 +64,7 @@
 - (void)updateAsync:(User *)user;
 
 /*!
- @discussion Delete method. Not used in this application.
+ @discussion Delete method.
  */
 - (void)remove;
 @end

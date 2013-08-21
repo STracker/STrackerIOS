@@ -11,7 +11,7 @@
 /*!
  @discussion This object defines the user entity object.
  */
-@interface User : Entity <Deserialize>
+@interface User : Entity <Deserialize, EntityDelegate>
 
 @property(nonatomic, copy) NSString *identifier;
 @property(nonatomic, copy) NSString *name;

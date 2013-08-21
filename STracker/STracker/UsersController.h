@@ -55,7 +55,7 @@
 + (void)inviteUser:(User *)user finish:(Finish) finish;
 
 /*!
- @discussion Delete user friend request.
+ @discussion Delete user friend.
  @param friendId    The user's friend identifier.
  @param finish      The finish callback.
  */
@@ -72,6 +72,20 @@
  @param finish  The finish callback.
  */
 + (void)getFriendsRequests:(Finish) finish;
+
+/*!
+ @discussion Accept one friend request.
+ @param userId  The identifier of the user who sends the request.
+ @param finish  The finish callback.
+ */
++ (void)acceptFriendRequest:(NSString *)userId finish:(Finish) finish;
+
+/*!
+ @discussion Reject one friend request.
+ @param userId  The identifier of the user who sends the request.
+ @param finish  The finish callback.
+ */
++ (void)rejectFriendRequest:(NSString *)userId finish:(Finish) finish;
 
 /*!
  @discussion Get current user's friends suggestions.
