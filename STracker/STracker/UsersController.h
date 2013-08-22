@@ -137,4 +137,10 @@
  */
 + (void)deleteWatchedEpisode:(EpisodeId *)episodeId finish:(Finish) finish;
 
+/*!
+ @discussion Get the current user calendar.
+ @param finish  The finish callback.
+ */
++ (void)getUserCalendar:(Finish) finish;
+
 @end

@@ -17,11 +17,11 @@
 @property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSString *photoUrl;
 @property(nonatomic, copy) NSString *email;
+@property(nonatomic, strong) NSMutableArray *suggestions;
 
 // This next properties are mutable dictionaries for fast search, insert and delete.
 @property(nonatomic, strong) NSMutableDictionary *friends;
 @property(nonatomic, strong) NSMutableDictionary *subscriptions;
-@property(nonatomic, strong) NSMutableDictionary *suggestions;
 @property(nonatomic, strong) NSMutableDictionary *friendRequests;
 
 @end

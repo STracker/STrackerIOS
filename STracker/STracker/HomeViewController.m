@@ -7,14 +7,14 @@
 //
 
 #import "HomeViewController.h"
-#import "TvShowsViewController.h"
+#import "TvShowViewController.h"
 #import "MyProfileViewController.h"
 #import "GenresViewController.h"
-#import "TvShowViewController.h"
 #import "TvShowsController.h"
 #import "GenresController.h"
 #import "UsersController.h"
-#import "UsersViewController.h"
+#import "SearchResultsUsersViewController.h"
+#import "SearchResultsTvShowsViewController.h"
 
 @implementation HomeViewController
 
@@ -201,7 +201,7 @@
     
     [TvShowsController getTvShowsByName:name withRange:range finish:^(id obj) {
         
-        TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:obj andTitle:name];
+        SearchResultsTvShowsViewController *view = [[SearchResultsTvShowsViewController alloc] initWithData:obj andTitle:name];
         [self.navigationController pushViewController:view animated:YES];
     }];
 }
@@ -219,7 +219,7 @@
         
     [UsersController searchUser:name withRange:range finish:^(id obj) {
             
-        UsersViewController *view = [[UsersViewController alloc] initWithData:obj andTitle:name];
+        SearchResultsUsersViewController *view = [[SearchResultsUsersViewController alloc] initWithData:obj andTitle:name];
         [self.navigationController pushViewController:view animated:YES];
     }];
 }

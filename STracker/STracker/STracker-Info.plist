@@ -21,6 +21,8 @@
 	<integer>5</integer>
 	<key>STrackerUsersURI</key>
 	<string>users</string>
+	<key>STrackerUserCalendarURI</key>
+	<string>user/calendar</string>
 	<key>STrackerUserFriendsURI</key>
 	<string>user/friends</string>
 	<key>STrackerUserFriendRequestsURI</key>

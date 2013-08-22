@@ -10,6 +10,7 @@
 #import "FacebookView.h"
 #import "UIViewController+KNSemiModal.h"
 #import "UsersController.h"
+#import "FXReachability.h"
 
 @implementation AppDelegate
 
@@ -78,7 +79,16 @@
     else
         storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionChange) name:FXReachabilityStatusDidChangeNotification object:nil];
+    
     dbController = [[OfflineUserInfoController alloc] initWithContext:self.managedObjectContext];
+    
+    // Set user information with local information in DB.
+    _user = [dbController read];
+    _oldUser = _user;
+    
+    // Set Hawk credentials.
+    [self setHawkCredentials:_user.identifier];
     
     return YES;
 }
@@ -86,10 +96,25 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [FBAppCall handleDidBecomeActive];
+    
+    /*
+     Create looper for getting information from server.
+     */
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL enabled = [defaults boolForKey:@"update_value"];
+    if (!enabled)
+    {
+        [_timer invalidate];
+        _timer = nil;
+        return;
+    }
+    
+    [self createLooper];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    // Don´t need to close the session.
     [FBSession.activeSession close];
     
     // Saves changes in the application's managed object context before the application terminates.
@@ -196,47 +221,21 @@
 
 - (void)getUpdatedUser:(Finish)finish
 {
-    // First verify if the user exists in memory.
     if (_user == nil)
     {
-        // Verify if exists in DB.
-        User *dbUser = [self.dbController read];
-        if (dbUser == nil)
-        {
-            [self loginWithFacebook:finish];
-            return;
-        }
-        
-        // Set the user information in memory.
-        _user = dbUser;
-        
-        // Set Hawk credentials.
-        [self setHawkCredentials:dbUser.identifier];
-    }    
-    /*
-     The user exists, lets get the version number for make a request
-     to server for see if this user is updated.
-     */
-    [UsersController getMe:_user.identifier finish:^(User *user) {
-        
-        if (user.version > _user.version)
-        {
-            // Update the user information in DB.
-            /*
-             This update are not async because next to this, can 
-             make open the user's controller and the information 
-             to show must be updated.
-             */
-            [self.dbController update:user];
-            
-            // Set the user information in memory.
-            _user = user;
-        }
-        
-        // Invoke the callback.
-        finish(_user);
-        
-    } withVersion:[NSString stringWithFormat:@"%d", _user.version]];
+        [self loginWithFacebook:finish];
+        return;
+    }
+    
+    // Only if have connectivity.
+    if ([FXReachability isReachable])
+        /*
+         The user exists, lets get the version number for make a request
+         to server for see if this user is updated.
+         */
+        [self updateUserInformation:finish];
+    
+    finish(_user);
 }
 
 - (void)getUser:(Finish) finish
@@ -247,18 +246,6 @@
         return;
     }
     
-    // Try get from DB.
-    User *dbUser = [self.dbController read];
-    if (dbUser != nil)
-    {
-        _user = dbUser;
-        
-        // Set Hawk credentials.
-        [self setHawkCredentials:dbUser.identifier];
-        finish(_user);
-        return;
-    }
-
     [self loginWithFacebook:finish];
 }
 
@@ -296,13 +283,6 @@
         [self.window.rootViewController dismissSemiModalView];
         _user = user;
         
-        /*
-         Create looper for getting information from server.
-         Needed to be logged for this.
-         */
-        // [self createLooper];
-        
-        
         // Save in DB.
         [self.dbController create:user];
         
@@ -314,40 +294,93 @@
 }
 
 /*!
+ @discussion Auxiliary method for update _user and user information in DB.
+ */
+- (void)updateUserInformation:(Finish) finish
+{
+    [UsersController getMe:_user.identifier finish:^(User *user) {
+        
+        if (user.version > _user.version)
+        {
+            // Update the user information in DB.
+            /*
+             This update are not async because next to this, can
+             make open the user's controller and the information
+             to show must be updated.
+             */
+            [self.dbController update:user];
+            
+            // Set the user information in memory.
+            _user = user;
+        }
+        
+        // Invoke the callback.
+        finish(_user);
+        
+    } withVersion:[NSString stringWithFormat:@"%d", _user.version]];
+}
+
+/*!
+ @discussion Selector method for see changes in connectivity.
+ */
+- (void)connectionChange
+{
+    if (![FXReachability isReachable])
+    {
+        [_timer invalidate];
+        _timer = nil;
+    }
+    else
+    {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        BOOL enabled = [defaults boolForKey:@"update_value"];
+        if (enabled)
+            [self createLooper];
+    }
+}
+
+#pragma mark - Looper methods.
+
+/*!
  @discussion Auxiliary method for getting periodically information from
  server, like if exists friends requests for user or suggestions from others
  users.
  */
 - (void)createLooper
 {
-    /*NSTimer *timer = */[NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(verifyStatus) userInfo:nil repeats:YES];
+    if (_timer != nil)
+        return;
     
-    /*
-     Don't fire now, because the request login in facebook returns
-     the updated user information.
-     */
-    // [timer fire];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(looperCall) userInfo:nil repeats:YES];
 }
 
 /*!
- @discussion Method that is invoked when is time for getting the information
- from server.
+ @discussion Method that is invoked when is time for getting 
+ the user information from server.
  */
-- (void)verifyStatus
+- (void)looperCall
 {
-    /*
-     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendRequestsURI"];
-     [UsersController getFriendsRequests:uri finish:^(id obj) {
-     
-     _user.friendRequests = obj;
-     }];
-     
-     uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsSuggestionsURI"];
-     [UsersController getFriendsSuggestions:uri finish:^(id obj) {
-     
-     _user.suggestions = obj;
-     }];
-     */
+    if (_user == nil)
+        return;
+    
+    NSLog(@"looperCall");
+    
+    [self updateUserInformation:^(User *user) {
+        
+        if (_oldUser.friendRequests.count < user.friendRequests.count)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention!" message:@"New friend request received." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
+            [alert show];
+        }
+        
+        if (_oldUser.suggestions.count < user.suggestions.count)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention!" message:@"New suggestion received." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
+            [alert show];
+        }
+        
+        _oldUser = _user;
+    }];
 }
 
 @end

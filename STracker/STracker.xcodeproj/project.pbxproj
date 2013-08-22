@@ -93,6 +93,10 @@
 		8CF8CD8417C031FE00FF1DD0 /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD7717C031FE00FF1DD0 /* Range.m */; };
 		D8387F6417C10F3A0081D7B0 /* AsyncQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D8387F6317C10F3A0081D7B0 /* AsyncQueue.m */; };
 		D8387F6B17C147270081D7B0 /* SuggestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8387F6A17C147270081D7B0 /* SuggestViewController.m */; };
+		D880841A17C6541F001F4D20 /* SearchResultsTvShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D880841917C6541F001F4D20 /* SearchResultsTvShowsViewController.m */; };
+		D880841D17C65535001F4D20 /* SearchResultsUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D880841C17C65535001F4D20 /* SearchResultsUsersViewController.m */; };
+		D8AA08F817C658F100AAF048 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D8AA08F717C658F100AAF048 /* Settings.bundle */; };
+		D8AA08FE17C680A900AAF048 /* UserCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AA08FD17C680A900AAF048 /* UserCalendar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -246,6 +250,13 @@
 		D8387F6317C10F3A0081D7B0 /* AsyncQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncQueue.m; sourceTree = "<group>"; };
 		D8387F6917C147270081D7B0 /* SuggestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestViewController.h; sourceTree = "<group>"; };
 		D8387F6A17C147270081D7B0 /* SuggestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestViewController.m; sourceTree = "<group>"; };
+		D880841817C6541F001F4D20 /* SearchResultsTvShowsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsTvShowsViewController.h; sourceTree = "<group>"; };
+		D880841917C6541F001F4D20 /* SearchResultsTvShowsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsTvShowsViewController.m; sourceTree = "<group>"; };
+		D880841B17C65535001F4D20 /* SearchResultsUsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsUsersViewController.h; sourceTree = "<group>"; };
+		D880841C17C65535001F4D20 /* SearchResultsUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsUsersViewController.m; sourceTree = "<group>"; };
+		D8AA08F717C658F100AAF048 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		D8AA08FC17C680A900AAF048 /* UserCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCalendar.h; sourceTree = "<group>"; };
+		D8AA08FD17C680A900AAF048 /* UserCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCalendar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,6 +368,7 @@
 			children = (
 				8CF8CCD317C02F8200FF1DD0 /* images */,
 				8CF8CC9417C02D2700FF1DD0 /* STracker-Info.plist */,
+				D8AA08F717C658F100AAF048 /* Settings.bundle */,
 				8CF8CC9517C02D2700FF1DD0 /* InfoPlist.strings */,
 				8CF8CC9817C02D2700FF1DD0 /* main.m */,
 				8CF8CC9A17C02D2700FF1DD0 /* STracker-Prefix.pch */,
@@ -471,6 +483,8 @@
 				8CF8CD3117C030F800FF1DD0 /* ActorsViewController.m */,
 				8CF8CD3217C030F800FF1DD0 /* UsersViewController.h */,
 				8CF8CD3317C030F800FF1DD0 /* UsersViewController.m */,
+				D880841B17C65535001F4D20 /* SearchResultsUsersViewController.h */,
+				D880841C17C65535001F4D20 /* SearchResultsUsersViewController.m */,
 			);
 			name = persons;
 			sourceTree = "<group>";
@@ -500,6 +514,8 @@
 			children = (
 				8CF8CD1F17C030E200FF1DD0 /* TvShowsViewController.h */,
 				8CF8CD2017C030E200FF1DD0 /* TvShowsViewController.m */,
+				D880841817C6541F001F4D20 /* SearchResultsTvShowsViewController.h */,
+				D880841917C6541F001F4D20 /* SearchResultsTvShowsViewController.m */,
 				8CF8CD2117C030E200FF1DD0 /* TvShowViewController.h */,
 				8CF8CD2217C030E200FF1DD0 /* TvShowViewController.m */,
 			);
@@ -609,6 +625,8 @@
 				8CF8CD6717C031FE00FF1DD0 /* Genre.m */,
 				8CF8CD6817C031FE00FF1DD0 /* User.h */,
 				8CF8CD6917C031FE00FF1DD0 /* User.m */,
+				D8AA08FC17C680A900AAF048 /* UserCalendar.h */,
+				D8AA08FD17C680A900AAF048 /* UserCalendar.m */,
 				8CF8CD6A17C031FE00FF1DD0 /* Comment.h */,
 				8CF8CD6B17C031FE00FF1DD0 /* Comment.m */,
 				8CF8CD6C17C031FE00FF1DD0 /* Rating.h */,
@@ -725,6 +743,7 @@
 				8CF8CCE717C02F8C00FF1DD0 /* BackgroundPattern2.png in Resources */,
 				8CF8CCEA17C02FA000FF1DD0 /* MainStoryboard_iPhone.storyboard in Resources */,
 				8CF8CCEB17C02FA000FF1DD0 /* MainStoryboard_iPad.storyboard in Resources */,
+				D8AA08F817C658F100AAF048 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -839,6 +858,9 @@
 				8C5AB45E17C044D000A9EA08 /* OfflineUserInfoController.m in Sources */,
 				D8387F6417C10F3A0081D7B0 /* AsyncQueue.m in Sources */,
 				D8387F6B17C147270081D7B0 /* SuggestViewController.m in Sources */,
+				D880841A17C6541F001F4D20 /* SearchResultsTvShowsViewController.m in Sources */,
+				D880841D17C65535001F4D20 /* SearchResultsUsersViewController.m in Sources */,
+				D8AA08FE17C680A900AAF048 /* UserCalendar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

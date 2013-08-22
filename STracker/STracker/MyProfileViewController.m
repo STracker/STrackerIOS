@@ -108,7 +108,7 @@
  */
 - (void)suggestions
 {
-    SuggestionsViewController *view = [[SuggestionsViewController alloc] initWithData:_user.suggestions.allValues andTitle:@"Suggestions"];
+    SuggestionsViewController *view = [[SuggestionsViewController alloc] initWithData:_user.suggestions andTitle:@"Suggestions"];
     
     [self.navigationController pushViewController:view animated:YES];
 }

@@ -10,6 +10,7 @@
 #import "STrackerServerHttpClient.h"
 #import "Suggestion.h"
 #import "Subscription.h"
+#import "UserCalendar.h"
 
 @implementation UsersController
 
@@ -309,6 +310,24 @@
         
         [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
     }];
+}
+
++ (void)getUserCalendar:(Finish)finish
+{
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserCalendarURI"];
+    
+    [[STrackerServerHttpClient sharedClient] getRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        UserCalendar *calendar = [[UserCalendar alloc] initWithDictionary:result];
+        
+        // Invoke callback.
+        finish(calendar);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        
+    } withVersion:nil];
 }
 
 #pragma mark - UsersController private auxiliary methods.

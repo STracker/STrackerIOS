@@ -44,11 +44,11 @@
             [friendRequests setValue:request forKey:request.identifier];
         }
         
-        suggestions = [[NSMutableDictionary alloc] init];
+        suggestions = [[NSMutableArray alloc] init];
         for (NSDictionary *item in [parameters objectForKey:@"Suggestions"])
         {
             Suggestion *suggestion = [[Suggestion alloc] initWithDictionary:item];
-            [suggestions setValue:suggestion forKey:suggestion.tvshow.identifier];
+            [suggestions addObject:suggestion];
         }
     }
     
