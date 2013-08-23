@@ -19,7 +19,7 @@
 {
     self = [super init];
     if (self)
-        _data = data;
+        _data = [[NSMutableArray alloc] initWithArray:data];
     
     return self;
 }

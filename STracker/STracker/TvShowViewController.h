@@ -29,9 +29,7 @@
     IBOutlet UISwipeGestureRecognizer *_swipeGestureDescription;
  
     @private
-    UIAlertView *_alertSubscribe;
-    @private
-    UIAlertView *_alertUnsubscribe;    
+    UIAlertView *_alertSubscribe;  
     @private
     TvShow *_tvshow;
 }

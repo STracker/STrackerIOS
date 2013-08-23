@@ -89,7 +89,7 @@
     
     // Set Hawk credentials.
     [self setHawkCredentials:_user.identifier];
-    
+
     // Get user calendar.
     [self updateUserCalendar];
     
@@ -288,6 +288,9 @@
         // Save in DB.
         [self.dbController create:user];
         
+        // Update calendar.
+        [self updateUserCalendar];
+        
         // Invoke callback.
         finish(user);
     }];
@@ -304,16 +307,17 @@
         
         if (user.version > _user.version)
         {
+            // Set the user information in memory.
+            user.calendar = _user.calendar;
+            _user = user;
+            
             // Update the user information in DB.
             /*
              This update are not async because next to this, can
              make open the user's controller and the information
              to show must be updated.
              */
-            [self.dbController update:user];
-            
-            // Set the user information in memory.
-            _user = user;
+            [self.dbController updateAsync:_user];
         }
         
         // Invoke the callback.
@@ -322,6 +326,9 @@
     } withVersion:[NSString stringWithFormat:@"%d", _user.version]];
 }
 
+/*!
+ @discussion Auxiliary method for update user calendar.
+ */
 - (void)updateUserCalendar
 {
     if (_user == nil)
@@ -331,9 +338,8 @@
         
         _user.calendar = calendar;
         
-        // Define the local notifications for each episode in calendar.
-        
-        // TODO
+        // Update in DB.
+        [dbController updateAsync:_user];
     }];
 }
 
@@ -368,7 +374,8 @@
     if (_timer != nil)
         return;
     
-    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(looperCall) userInfo:nil repeats:YES];
+    // TODO -> put the seconds in users defaults.
+    _timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(looperCall) userInfo:nil repeats:YES];
 }
 
 /*!

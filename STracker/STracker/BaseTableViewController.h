@@ -17,7 +17,7 @@
  */
 @interface BaseTableViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource>
 {
-    NSArray *_data;
+    NSMutableArray *_data;
     NSString *_tableTitle;
     
     UITableView *_tableView;

@@ -102,6 +102,13 @@
 + (void)postSuggestion:(NSString *)tvshowId forFriend:(NSString *)friendId finish:(Finish) finish;
 
 /*!
+ @discussion Remove suggestion from user's suggestions list in STracker.
+ @param tvshowId    Television show identifier.
+ @param finish      The finish callback.
+ */
++ (void)deleteSuggestion:(NSString *)tvshowId finish:(Finish) finish;
+
+/*!
  @discussion Get current user's favorites television shows.
  @param finish  The finish callback.
  */

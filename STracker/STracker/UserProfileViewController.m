@@ -73,6 +73,22 @@
     alertView = nil;
 }
 
+#pragma mark - shake gesture.
+
+- (void)shakeEvent
+{
+    // Need to construct the uri because the user don't have the uri, only the identifier.
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
+    uri = [uri stringByAppendingFormat:@"/%@", _user.identifier];
+    
+    [_app getUpdatedUser:^(id obj) {
+        
+        _user = obj;
+        
+        // Update userInformation.
+        [super fillUserInformation];
+    }];
+}
 
 #pragma mark - UserProfileViewController private auxiliary methods. Note: the next methods have a diferent implementation than the MyProfileViewController.
 

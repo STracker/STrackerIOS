@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "BaseTableViewController.h"
+#import "BaseEditTableViewController.h"
 
 /*!
  @discussion Table for viewing user's friends suggestions.
  */
-@interface SuggestionsViewController : BaseTableViewController
+@interface SuggestionsViewController : BaseEditTableViewController
 
 @end

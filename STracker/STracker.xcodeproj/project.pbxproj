@@ -98,6 +98,7 @@
 		D880841D17C65535001F4D20 /* SearchResultsUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D880841C17C65535001F4D20 /* SearchResultsUsersViewController.m */; };
 		D8AA08F817C658F100AAF048 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D8AA08F717C658F100AAF048 /* Settings.bundle */; };
 		D8AA08FE17C680A900AAF048 /* UserCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AA08FD17C680A900AAF048 /* UserCalendar.m */; };
+		D8AB9C7417C7BADB00B40268 /* BaseEditTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AB9C7317C7BADA00B40268 /* BaseEditTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -260,6 +261,8 @@
 		D8AA08F717C658F100AAF048 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D8AA08FC17C680A900AAF048 /* UserCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCalendar.h; sourceTree = "<group>"; };
 		D8AA08FD17C680A900AAF048 /* UserCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCalendar.m; sourceTree = "<group>"; };
+		D8AB9C7217C7BADA00B40268 /* BaseEditTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEditTableViewController.h; sourceTree = "<group>"; };
+		D8AB9C7317C7BADA00B40268 /* BaseEditTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEditTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -434,6 +437,8 @@
 				8CF8CCED17C0300900FF1DD0 /* BaseViewController.m */,
 				8CF8CCEE17C0300900FF1DD0 /* BaseTableViewController.h */,
 				8CF8CCEF17C0300900FF1DD0 /* BaseTableViewController.m */,
+				D8AB9C7217C7BADA00B40268 /* BaseEditTableViewController.h */,
+				D8AB9C7317C7BADA00B40268 /* BaseEditTableViewController.m */,
 				8CF8CCF017C0300900FF1DD0 /* BaseProfileViewController.h */,
 				8CF8CCF117C0300900FF1DD0 /* BaseProfileViewController.m */,
 				8CF8CCF617C0303700FF1DD0 /* facebookLogin */,
@@ -875,6 +880,7 @@
 				D880841D17C65535001F4D20 /* SearchResultsUsersViewController.m in Sources */,
 				D8AA08FE17C680A900AAF048 /* UserCalendar.m in Sources */,
 				8CC17A6917C6A8BF00C10530 /* UserCalendarViewController.m in Sources */,
+				D8AB9C7417C7BADB00B40268 /* BaseEditTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

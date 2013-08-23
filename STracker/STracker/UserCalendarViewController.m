@@ -11,6 +11,7 @@
 #import "Episode.h"
 #import "EpisodeViewController.h"
 #import "EpisodesController.h"
+#import "UsersController.h"
 
 @implementation UserCalendarViewController
 
@@ -64,6 +65,25 @@
         
         EpisodeViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"EpisodeView"] initWithEpisode: obj];
         [self.navigationController pushViewController:view animated:YES];
+    }];
+}
+
+#pragma mark - Shake gesture.
+
+- (void)shakeEvent
+{
+    [UsersController getUserCalendar:^(UserCalendar *calendar) {
+        
+        _data = (NSMutableArray *)calendar.entries;
+        [_tableView reloadData];
+        
+        [_app getUser:^(User *me) {
+            
+            me.calendar = calendar;
+            
+            // Update in DB.
+            [_app.dbController updateAsync:me];
+        }];
     }];
 }
 

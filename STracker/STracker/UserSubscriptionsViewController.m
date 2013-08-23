@@ -20,6 +20,31 @@
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%d episodes watched", subscription.episodesWatched.count];
 }
 
+- (void)deleteHookForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Subscription *subscription = [_data objectAtIndex:indexPath.row];
+    
+    [_data removeObjectAtIndex:indexPath.row];
+    
+    [UsersController deleteSubscription:subscription.tvshow.identifier finish:^(id obj) {
+        
+        /*
+         Remove subscription from user in memory and update the user in DB.
+         */
+        [_app getUser:^(User *me) {
+            
+            // Remove from user's information in memory.
+            [me.subscriptions removeObjectForKey:subscription.tvshow.identifier];
+            
+            // Increment version for cache purposes.
+            me.version++;
+            
+            // Update in DB.
+            [_app.dbController updateAsync:me];
+        }];
+    }];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // TODO

@@ -26,7 +26,7 @@
     [CommentController getTvShowComments:_tvshow.identifier finish:^(TvShowComments *obj) {
         
         _comments = obj;
-        _data = obj.comments;
+        _data = (NSMutableArray *)obj.comments;
         [_tableView reloadData];
     }];
 }

@@ -112,9 +112,6 @@
     {
         if (alertView == _alertSubscribe)
             [self subscribeRequest];
-        
-        if (alertView == _alertUnsubscribe)
-            [self unsubscribeRequest];
     }
     
     [alertView setDelegate:nil];
@@ -218,9 +215,9 @@
         
         if ([user.subscriptions objectForKey:_tvshow.identifier] != nil)
         {
-            _alertUnsubscribe = [[UIAlertView alloc] initWithTitle:@"Attention - allready subscribed!" message:[NSString stringWithFormat:@"you really want to unsubscribe %@?", _tvshow.name] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+            _alertSubscribe = [[UIAlertView alloc] initWithTitle:@"Attention!" message:@"allready subscribed!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
             
-            [_alertUnsubscribe show];
+            [_alertSubscribe show];
             return;
         }
                
@@ -251,33 +248,6 @@
             
             // Set user's information in memory.
             [user.subscriptions setObject:subscription forKey:_tvshow.identifier];
-            
-            // Increment version for cache purposes.
-            user.version++;
-            
-            // Update in DB.
-            [_app.dbController updateAsync:user];
-        }];
-    }];
-}
-
-/*!
- @discussion Auxiliary method for make the unsubscribe
- request to STracker server.
- */
-- (void)unsubscribeRequest
-{
-    [UsersController deleteSubscription:_tvshow.identifier finish:^(id obj) {
-        
-        /*
-         Remove subscription from user in memory and update the user in DB.
-         Using getUser because in the action "subscribe", already use the
-         getUpdatedUser, so the user information is the must updated.
-         */
-        [_app getUser:^(User *user) {
-
-            // Remove from user's information in memory.
-            [user.subscriptions removeObjectForKey:_tvshow.identifier];
             
             // Increment version for cache purposes.
             user.version++;

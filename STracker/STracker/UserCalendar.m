@@ -28,6 +28,22 @@
     return self;
 }
 
+#pragma mark - Encode and decode methods for use in Core Data user entity.
+
+- (id)initWithCoder: (NSCoder *)aCoder
+{
+    self = [super init];
+    if (self)
+        self.entries = [aCoder decodeObjectForKey:@"Entries"];
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:self.entries forKey:@"Entries"];
+}
+
 @end
 
 @implementation UserCalendarEntry
@@ -57,10 +73,50 @@
     return self;
 }
 
+#pragma mark - Encode and decode methods for use in Core Data user entity.
+
+- (id)initWithCoder: (NSCoder *)aCoder
+{
+    self = [super init];
+    if (self)
+    {
+        self.date = [aCoder decodeObjectForKey:@"Date"];
+        self.episodes = [aCoder decodeObjectForKey:@"Episodes"];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:self.date forKey:@"Date"];
+    [coder encodeObject:self.episodes forKey:@"Episodes"];
+}
+
 @end
 
 @implementation EpisodeCalendar
 
 @synthesize tvshowName, episode;
+
+#pragma mark - Encode and decode methods for use in Core Data user entity.
+
+- (id)initWithCoder: (NSCoder *)aCoder
+{
+    self = [super init];
+    if (self)
+    {
+        self.tvshowName = [aCoder decodeObjectForKey:@"TvShowName"];
+        self.episode = [aCoder decodeObjectForKey:@"Episode"];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:self.tvshowName forKey:@"TvShowName"];
+    [coder encodeObject:self.episode forKey:@"Episode"];
+}
 
 @end

@@ -231,6 +231,22 @@
     }];
 }
 
++ (void)deleteSuggestion:(NSString *)tvshowId finish:(Finish)finish
+{
+    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserFriendsSuggestionsURI"];
+    uri = [uri stringByAppendingFormat:@"/%@", tvshowId];
+    
+    [[STrackerServerHttpClient sharedClient] deleteRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+        
+        // Invoke callback.
+        finish(nil);
+        
+    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+        
+        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+    }];
+}
+
 + (void)getUserSubscriptions:(Finish) finish;
 {
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUserSubscriptionsURI"];

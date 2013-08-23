@@ -24,7 +24,7 @@
     [CommentController getEpisodeComments:_episode.identifier finish:^(EpisodeComments *obj) {
         
         _comments = obj;
-        _data = obj.comments;
+        _data = (NSMutableArray *)obj.comments;
         [_tableView reloadData];
     }];
 }
