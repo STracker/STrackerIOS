@@ -9,11 +9,15 @@
             <objects>
                 <navigationController definesPresentationContext="YES" id="S53-AN-8fj" sceneMemberID="viewController">
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vjb-Cb-fno">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="Vjb-Cb-fno">
                         <rect key="frame" x="0.0" y="-44" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Tlj-Y5-YsM">
+                        <rect key="frame" x="0.0" y="416" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="cQy-gV-Iy8" kind="relationship" relationship="rootViewController" id="2AD-qd-zMd"/>
                     </connections>

@@ -12,7 +12,7 @@
 
 @implementation User
 
-@synthesize identifier, name, photoUrl, email, friends, subscriptions, friendRequests, suggestions;
+@synthesize identifier, name, photoUrl, email, friends, subscriptions, friendRequests, suggestions, calendar;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {

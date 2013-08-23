@@ -7,6 +7,7 @@
 //
 
 #import "Person.h"
+#import "UserCalendar.h"
 
 /*!
  @discussion This object defines the user entity object.
@@ -23,6 +24,9 @@
 @property(nonatomic, strong) NSMutableDictionary *friends;
 @property(nonatomic, strong) NSMutableDictionary *subscriptions;
 @property(nonatomic, strong) NSMutableDictionary *friendRequests;
+
+// Only for current user.
+@property(nonatomic, strong) UserCalendar *calendar;
 
 @end
 

@@ -11,6 +11,8 @@
 #import "SuggestionsViewController.h"
 #import "UserSubscriptionsViewController.h"
 #import "UsersViewController.h"
+#import "UserCalendarViewController.h"
+#import "UserCalendar.h"
 
 @implementation MyProfileViewController
 
@@ -37,9 +39,6 @@
  */
 - (void)shakeEvent
 {
-    NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
-    uri = [uri stringByAppendingString:[NSString stringWithFormat:@"/%@", _user.identifier]];
-    
     [_app getUpdatedUser:^(id obj) {
         
         _user = obj;
@@ -100,7 +99,8 @@
  */
 - (void)calendar
 {
-    //TODO
+    UserCalendarViewController *view = [[UserCalendarViewController alloc] initWithData:_user.calendar.entries andTitle:@"Calendar"];
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 /*!

@@ -90,6 +90,9 @@
     // Set Hawk credentials.
     [self setHawkCredentials:_user.identifier];
     
+    // Get user calendar.
+    [self updateUserCalendar];
+    
     return YES;
 }
 
@@ -234,8 +237,8 @@
          to server for see if this user is updated.
          */
         [self updateUserInformation:finish];
-    
-    finish(_user);
+    else
+        finish(_user);
 }
 
 - (void)getUser:(Finish) finish
@@ -265,8 +268,7 @@
 
 + (UIAlertView *)getAlertViewForErrors:(NSString *)msgError
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msgError delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
-    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention!" message:msgError delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
     return alert;
 }
 
@@ -320,6 +322,21 @@
     } withVersion:[NSString stringWithFormat:@"%d", _user.version]];
 }
 
+- (void)updateUserCalendar
+{
+    if (_user == nil)
+        return;
+    
+    [UsersController getUserCalendar:^(UserCalendar *calendar) {
+        
+        _user.calendar = calendar;
+        
+        // Define the local notifications for each episode in calendar.
+        
+        // TODO
+    }];
+}
+
 /*!
  @discussion Selector method for see changes in connectivity.
  */
@@ -363,21 +380,18 @@
     if (_user == nil)
         return;
     
-    NSLog(@"looperCall");
+    NSLog(@"debug: looperCall");
     
     [self updateUserInformation:^(User *user) {
         
+        // Update calendar.
+        [self updateUserCalendar];
+        
         if (_oldUser.friendRequests.count < user.friendRequests.count)
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention!" message:@"New friend request received." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
-            [alert show];
-        }
+            [AppDelegate getAlertViewForErrors:@"New friend request received."];
         
         if (_oldUser.suggestions.count < user.suggestions.count)
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention!" message:@"New suggestion received." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
-            [alert show];
-        }
+            [AppDelegate getAlertViewForErrors:@"New suggestion received."];
         
         _oldUser = _user;
     }];

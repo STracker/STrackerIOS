@@ -83,6 +83,14 @@
     _tableView.backgroundView = nil;
     _tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
     [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    /*
+     Without this, the last cell don't appear, because this controller is not an UITableViewController and 
+     exists the top bar for navigation controller.
+    */
+    CGRect frame = _tableView.frame;
+    frame.size.height -= 44; // 44 is the size of top bar.
+    _tableView.frame = frame;
 }
 
 /*!
@@ -90,7 +98,7 @@
  */
 - (void)configureCellView:(UITableViewCell *)cell
 {
-    [cell.textLabel setFont:[UIFont fontWithName:@"Futura Medium" size:22.0]];
+    [cell.textLabel setFont:[UIFont fontWithName:@"Futura Medium" size:20.0]];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 }
 

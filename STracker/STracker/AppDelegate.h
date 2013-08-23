@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "User.h"
-#import "UserCalendar.h"
 #import "OfflineUserInfoController.h"
 #import "HawkCredentials.h"
 
@@ -24,14 +23,11 @@ typedef void (^Finish)(id obj);
     // Necessary for looper.
     @private
     User *_oldUser;
-    @private
-    UserCalendar *_calendar;
     
     // The Hawk credentials, necessary to make protected requests to STracker server.
     @private
     HawkCredentials *hawkCredentials;
     
-    // Timer for update looper.
     @private
     NSTimer *_timer;
 }

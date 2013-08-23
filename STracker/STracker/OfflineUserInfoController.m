@@ -31,7 +31,7 @@
     NSError *error;
     [_context save:&error];
     if (error)
-        NSLog(@"error: %@", error.description);
+        NSLog(@"error create: %@", error.description);
 }
 
 - (void)createAsync:(User *)user
@@ -52,7 +52,7 @@
     NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
     if (error || [fetchedObjects count] == 0)
     {
-        NSLog(@"error: %@", error.description);
+        NSLog(@"error read: %@", error.description);
         return nil;
     }
     
@@ -85,7 +85,7 @@
     NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
     if (error || [fetchedObjects count] == 0)
     {
-        NSLog(@"error: %@", error.description);
+        NSLog(@"error remove: %@", error.description);
         return;
     }
     
@@ -96,7 +96,7 @@
     // Perform action.
     [_context save:&error];
     if (error)
-        NSLog(@"error: %@", error.description);
+        NSLog(@"error remove: %@", error.description);
 }
 
 #pragma mark - OfflineUserInfoController auxiliary private methods.
@@ -117,6 +117,7 @@
     newData.friendRequests = user.friendRequests;
     newData.suggestions = user.suggestions;
     newData.subscriptions = user.subscriptions;
+    newData.calendar = user.calendar;
     newData.version = [[NSNumber alloc] initWithInt:user.version];
     
     return newData;
@@ -138,6 +139,7 @@
     user.friendRequests = userData.friendRequests;
     user.suggestions = userData.suggestions;
     user.subscriptions = userData.subscriptions;
+    user.calendar = userData.calendar;
     user.version = [userData.version intValue];
     
     return user;

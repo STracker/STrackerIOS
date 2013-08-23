@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Entity.h"
 #import "TvShow.h"
+#import "Episode.h"
 
 /*!
  @discussion Class that defines the user episodes calendar.
@@ -22,7 +23,16 @@
 @interface UserCalendarEntry : NSObject <Deserialize>
 
 @property(nonatomic, copy) NSString *date;
-@property(nonatomic, strong) TvShowSynopsis *tvshow;
-@property(nonatomic, strong) NSArray *episodes;
+@property(nonatomic, strong) NSMutableArray *episodes;
 
 @end
+
+@interface EpisodeCalendar : NSObject
+
+@property(nonatomic, copy) NSString *tvshowName;
+@property(nonatomic, strong) EpisodeSynopsis *episode;
+
+@end
+
+
+

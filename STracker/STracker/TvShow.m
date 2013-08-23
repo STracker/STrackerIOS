@@ -59,7 +59,7 @@
 - (TvShowSynopsis *)getSynopsis
 {
     TvShowSynopsis *synopsis = [[TvShowSynopsis alloc] init];
-    synopsis.name = [self identifier];
+    synopsis.name = [self name];
     
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerTvShowsURI"];
     uri = [uri stringByAppendingFormat:@"/%@", [self identifier]];

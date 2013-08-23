@@ -169,6 +169,21 @@
  */
 - (void)watched
 {
+    // Verify date.
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *dateFromString = [[NSDate alloc] init];
+    dateFromString = [dateFormatter dateFromString:_episode.date];
+    
+    if ([dateFromString compare:[NSDate date]] == NSOrderedDescending)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention!" message:@"this episode has not yet aired." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
+        
+        [alert show];
+        return;
+    }
+    
+    
     /*
      Need the most updated information for see if the user have this
      episode marked or not.

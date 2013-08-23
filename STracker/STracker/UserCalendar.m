@@ -7,7 +7,6 @@
 //
 
 #import "UserCalendar.h"
-#import "Episode.h"
 
 @implementation UserCalendar
 
@@ -33,7 +32,7 @@
 
 @implementation UserCalendarEntry
 
-@synthesize date, tvshow, episodes;
+@synthesize date, episodes;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
@@ -41,21 +40,27 @@
     {
         date = [parameters objectForKey:@"Date"];
         
+        episodes = [[NSMutableArray alloc] init];
         for (NSDictionary *entry in [parameters objectForKey:@"Entries"])
         {
-            tvshow = [[TvShowSynopsis alloc] initWithDictionary:[entry objectForKey:@"TvShow"]];
-            
-            NSMutableArray *episodesAux = [[NSMutableArray alloc] init];
             for (NSDictionary *item in [entry objectForKey:@"Episodes"])
             {
-                EpisodeSynopsis *episode = [[EpisodeSynopsis alloc] initWithDictionary:item];
-                [episodesAux addObject:episode];
+                EpisodeCalendar *epiC = [[EpisodeCalendar alloc] init];
+                epiC.tvshowName = [[entry objectForKey:@"TvShow"] objectForKey:@"Name"];
+                epiC.episode = [[EpisodeSynopsis alloc] initWithDictionary:item];
+                
+                [episodes addObject:epiC];
             }
-            episodes = episodesAux;
         }
     }
     
     return self;
 }
+
+@end
+
+@implementation EpisodeCalendar
+
+@synthesize tvshowName, episode;
 
 @end
