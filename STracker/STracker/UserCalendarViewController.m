@@ -36,14 +36,15 @@
     cell.detailTextLabel.text = epiC.tvshowName;
 }
 
+
+#pragma mark - Table view data source.
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     UserCalendarEntry *entry = [_data objectAtIndex:section];
     
     return entry.date;
 }
-
-#pragma mark - Table view data source.
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -72,18 +73,10 @@
 
 - (void)shakeEvent
 {
-    [UsersController getUserCalendar:^(UserCalendar *calendar) {
+    [_app getUpdatedCalendar:^(UserCalendar *calendar) {
         
         _data = (NSMutableArray *)calendar.entries;
         [_tableView reloadData];
-        
-        [_app getUser:^(User *me) {
-            
-            me.calendar = calendar;
-            
-            // Update in DB.
-            [_app.dbController updateAsync:me];
-        }];
     }];
 }
 

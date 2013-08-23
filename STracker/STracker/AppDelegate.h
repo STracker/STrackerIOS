@@ -50,7 +50,7 @@ typedef void (^Finish)(id obj);
  If the user information are null, prompt to the user one view for
  Login. If don't have internet connectivity, tries to get user from 
  DB.
- @param finish The callback for execute code after the Login.
+ @param finish The callback.
  */
 - (void)getUpdatedUser:(Finish) finish;
 
@@ -61,9 +61,28 @@ typedef void (^Finish)(id obj);
  know when want the information updated or not, if want the most 
  updated information, may call the method above.
  If the user is nil, performs a Login action.
- @param finish The callback for execute code after the Login.
+ @param finish The callback.
  */
 - (void)getUser:(Finish) finish;
+
+/*!
+ @discussion Performs the delete of the user information in memmory and BD,
+ also close session in FB.
+ */
+- (void)deleteUser;
+
+/*!
+ @discussion Gets the must updated calendar.
+ @param finish The callback.
+ */
+- (void)getUpdatedCalendar:(Finish) finish;
+
+/*!
+ @discussion Gets the calendar user. If nil, performs a request to 
+ server.
+ @param finish The callback.
+ */
+- (void)getCalendar:(Finish) finish;
 
 /*!
  @discussion This method create and set the hawk credentials.

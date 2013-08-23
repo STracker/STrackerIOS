@@ -11,6 +11,7 @@
 		8C5AB45817C0367C00A9EA08 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5AB45717C0367C00A9EA08 /* UserData.m */; };
 		8C5AB45E17C044D000A9EA08 /* OfflineUserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5AB45D17C044D000A9EA08 /* OfflineUserInfoController.m */; };
 		8CC17A6917C6A8BF00C10530 /* UserCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC17A6817C6A8BF00C10530 /* UserCalendarViewController.m */; };
+		8CC1E1F317C805BE004EED2B /* SubscriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1E1F217C805BE004EED2B /* SubscriptionViewController.m */; };
 		8CF8CC8B17C02D2700FF1DD0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF8CC8A17C02D2700FF1DD0 /* UIKit.framework */; };
 		8CF8CC8D17C02D2700FF1DD0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF8CC8C17C02D2700FF1DD0 /* Foundation.framework */; };
 		8CF8CC8F17C02D2700FF1DD0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF8CC8E17C02D2700FF1DD0 /* CoreGraphics.framework */; };
@@ -119,6 +120,8 @@
 		8C5AB45D17C044D000A9EA08 /* OfflineUserInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineUserInfoController.m; sourceTree = "<group>"; };
 		8CC17A6717C6A8BF00C10530 /* UserCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCalendarViewController.h; sourceTree = "<group>"; };
 		8CC17A6817C6A8BF00C10530 /* UserCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCalendarViewController.m; sourceTree = "<group>"; };
+		8CC1E1F117C805BE004EED2B /* SubscriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionViewController.h; sourceTree = "<group>"; };
+		8CC1E1F217C805BE004EED2B /* SubscriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionViewController.m; sourceTree = "<group>"; };
 		8CF8CC8717C02D2700FF1DD0 /* STracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CF8CC8A17C02D2700FF1DD0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8CF8CC8C17C02D2700FF1DD0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -572,6 +575,8 @@
 			children = (
 				8CF8CD1317C030CA00FF1DD0 /* UserSubscriptionsViewController.h */,
 				8CF8CD1417C030CA00FF1DD0 /* UserSubscriptionsViewController.m */,
+				8CC1E1F117C805BE004EED2B /* SubscriptionViewController.h */,
+				8CC1E1F217C805BE004EED2B /* SubscriptionViewController.m */,
 			);
 			name = subscriptions;
 			sourceTree = "<group>";
@@ -881,6 +886,7 @@
 				D8AA08FE17C680A900AAF048 /* UserCalendar.m in Sources */,
 				8CC17A6917C6A8BF00C10530 /* UserCalendarViewController.m in Sources */,
 				D8AB9C7417C7BADB00B40268 /* BaseEditTableViewController.m in Sources */,
+				8CC1E1F317C805BE004EED2B /* SubscriptionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

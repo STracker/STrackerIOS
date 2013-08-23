@@ -89,9 +89,6 @@
     
     // Set Hawk credentials.
     [self setHawkCredentials:_user.identifier];
-
-    // Get user calendar.
-    [self updateUserCalendar];
     
     return YES;
 }
@@ -117,9 +114,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Don´t need to close the session.
-    [FBSession.activeSession close];
-    
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
 }
@@ -252,6 +246,38 @@
     [self loginWithFacebook:finish];
 }
 
+- (void)deleteUser
+{
+    [FBSession.activeSession close];
+    hawkCredentials = nil;
+    _user = nil;
+    [self.dbController remove];
+}
+
+- (void)getUpdatedCalendar:(Finish)finish
+{
+    [UsersController getUserCalendar:^(UserCalendar *calendar) {
+        
+        _user.calendar = calendar;
+        
+        // Update in DB.
+        [dbController updateAsync:_user];
+        
+        finish(_user.calendar);
+    }];
+}
+
+- (void)getCalendar:(Finish)finish
+{
+    if (_user.calendar != nil)
+    {
+        finish(_user.calendar);
+        return;
+    }
+    
+    [self getUpdatedCalendar:finish];
+}
+
 - (void)setHawkCredentials:(NSString *)userId
 {
     hawkCredentials = [[HawkCredentials alloc] init];
@@ -288,9 +314,6 @@
         // Save in DB.
         [self.dbController create:user];
         
-        // Update calendar.
-        [self updateUserCalendar];
-        
         // Invoke callback.
         finish(user);
     }];
@@ -324,23 +347,6 @@
         finish(_user);
         
     } withVersion:[NSString stringWithFormat:@"%d", _user.version]];
-}
-
-/*!
- @discussion Auxiliary method for update user calendar.
- */
-- (void)updateUserCalendar
-{
-    if (_user == nil)
-        return;
-    
-    [UsersController getUserCalendar:^(UserCalendar *calendar) {
-        
-        _user.calendar = calendar;
-        
-        // Update in DB.
-        [dbController updateAsync:_user];
-    }];
 }
 
 /*!
@@ -391,14 +397,17 @@
     
     [self updateUserInformation:^(User *user) {
         
-        // Update calendar.
-        [self updateUserCalendar];
+        // Update also calendar to...
+        [self getUpdatedCalendar:^(id obj) {
+            
+            // Nothing todo...
+        }];
         
         if (_oldUser.friendRequests.count < user.friendRequests.count)
-            [AppDelegate getAlertViewForErrors:@"New friend request received."];
+            [[AppDelegate getAlertViewForErrors:@"New friend request received."] show];
         
         if (_oldUser.suggestions.count < user.suggestions.count)
-            [AppDelegate getAlertViewForErrors:@"New suggestion received."];
+            [[AppDelegate getAlertViewForErrors:@"New suggestion received."] show];
         
         _oldUser = _user;
     }];

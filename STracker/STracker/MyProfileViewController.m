@@ -35,7 +35,7 @@
 /*!
  @discussion In this case, the data for refreshing is the 
  user information. So its needed in the end to set user 
- information in App.
+ information in App and save in DB.
  */
 - (void)shakeEvent
 {
@@ -72,6 +72,8 @@
         case 5:
             [self suggestions];
             break;
+        case 6:
+            [self logout];
     }
 }
 
@@ -99,8 +101,11 @@
  */
 - (void)calendar
 {
-    UserCalendarViewController *view = [[UserCalendarViewController alloc] initWithData:_user.calendar.entries andTitle:@"Calendar"];
-    [self.navigationController pushViewController:view animated:YES];
+    [_app getCalendar:^(UserCalendar *calendar) {
+        
+        UserCalendarViewController *view = [[UserCalendarViewController alloc] initWithData:calendar.entries andTitle:@"Calendar"];
+        [self.navigationController pushViewController:view animated:YES];
+    }];
 }
 
 /*!
@@ -141,6 +146,16 @@
     UsersViewController *view = [[UsersViewController alloc] initWithData:_user.friends.allValues andTitle:@"Friends"];
     
     [self.navigationController pushViewController:view animated:YES];
+}
+
+/*!
+ @discussion Removes user information from application and pop for home view.
+ */
+- (void)logout
+{
+    [_app deleteUser];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

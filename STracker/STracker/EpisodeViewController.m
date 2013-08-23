@@ -175,7 +175,7 @@
     NSDate *dateFromString = [[NSDate alloc] init];
     dateFromString = [dateFormatter dateFromString:_episode.date];
     
-    if ([dateFromString compare:[NSDate date]] == NSOrderedDescending)
+    if ([_episode.date isEqualToString:@"N/A"] || [dateFromString compare:[NSDate date]] == NSOrderedDescending)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention!" message:@"this episode has not yet aired." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
         

@@ -9,6 +9,7 @@
 #import "UserSubscriptionsViewController.h"
 #import "Subscription.h"
 #import "UsersController.h"
+#import "SubscriptionViewController.h"
 
 @implementation UserSubscriptionsViewController
 
@@ -17,7 +18,7 @@
     Subscription *subscription = [_data objectAtIndex:indexPath.row];
     
     cell.textLabel.text = subscription.tvshow.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d episodes watched", subscription.episodesWatched.count];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d episode(s) watched", subscription.episodesWatched.count];
 }
 
 - (void)deleteHookForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -47,7 +48,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO
+    Subscription *sub = [_data objectAtIndex:indexPath.row];
+    
+    SubscriptionViewController *view = [[SubscriptionViewController alloc] initWithSubscription:sub];
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 @end
