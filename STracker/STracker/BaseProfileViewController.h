@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 
 
-#define BACKGROUND @"BackgroundPattern2.png"
+#define BACKGROUND @"BackgroundPattern.png"
 
 /*!
  @discussion Base controller for profiles views.

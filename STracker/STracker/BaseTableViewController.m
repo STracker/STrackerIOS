@@ -99,6 +99,7 @@
 - (void)configureCellView:(UITableViewCell *)cell
 {
     [cell.textLabel setFont:[UIFont fontWithName:@"Futura Medium" size:20.0]];
+    cell.textLabel.textColor = [UIColor whiteColor];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 }
 

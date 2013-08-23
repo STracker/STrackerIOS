@@ -9,7 +9,7 @@
 #import "BaseEditTableViewController.h"
 
 /*!
- @discussion Table view for listing the user subscriptions
+ @discussion Table view for listing the current user subscriptions
  (Favorite television shows).
  */
 @interface UserSubscriptionsViewController : BaseEditTableViewController

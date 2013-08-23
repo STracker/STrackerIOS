@@ -9,7 +9,7 @@
 #import "UserProfileViewController.h"
 #import "UsersViewController.h"
 #import "UsersController.h"
-#import "UserSubscriptionsViewController.h"
+#import "SubscriptionsViewController.h"
 
 @implementation UserProfileViewController
 
@@ -97,7 +97,7 @@
  */
 - (void)subscriptions
 {
-    UserSubscriptionsViewController *view = [[UserSubscriptionsViewController alloc] initWithData:_user.subscriptions.allValues andTitle:@"Subscriptions"];
+    SubscriptionsViewController *view = [[SubscriptionsViewController alloc] initWithData:_user.subscriptions.allValues andTitle:@"Subscriptions"];
     
     [self.navigationController pushViewController:view animated:YES];
 }

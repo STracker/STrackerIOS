@@ -84,12 +84,12 @@
  */
 - (void)setBadgesInfo
 {
-    _suggestions.badgeColor = [UIColor colorWithRed:0.35 green:0.142 blue:0.35 alpha:1.000];
+    _suggestions.badgeColor = [UIColor whiteColor];
     _suggestions.badge.radius = 5;
     _suggestions.badge.fontSize = 14;
     _suggestions.badgeString = [NSString stringWithFormat:@"%d", _user.suggestions.count];
     
-    _requests.badgeColor = [UIColor colorWithRed:0.792 green:0.197 blue:0.219 alpha:1.000];
+    _requests.badgeColor = [UIColor whiteColor];
     _requests.badge.radius = 5;
     _requests.badge.fontSize = 14;
     _requests.badgeString = [NSString stringWithFormat:@"%d", _user.friendRequests.count];
