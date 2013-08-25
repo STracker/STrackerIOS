@@ -101,6 +101,7 @@
 		D8AA08F817C658F100AAF048 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D8AA08F717C658F100AAF048 /* Settings.bundle */; };
 		D8AA08FE17C680A900AAF048 /* UserCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AA08FD17C680A900AAF048 /* UserCalendar.m */; };
 		D8AB9C7417C7BADB00B40268 /* BaseEditTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AB9C7317C7BADA00B40268 /* BaseEditTableViewController.m */; };
+		D8AC60B217C8FA1500153090 /* User_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D8AC60B117C8FA1500153090 /* User_icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -269,6 +270,7 @@
 		D8AA08FD17C680A900AAF048 /* UserCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCalendar.m; sourceTree = "<group>"; };
 		D8AB9C7217C7BADA00B40268 /* BaseEditTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEditTableViewController.h; sourceTree = "<group>"; };
 		D8AB9C7317C7BADA00B40268 /* BaseEditTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEditTableViewController.m; sourceTree = "<group>"; };
+		D8AC60B117C8FA1500153090 /* User_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = User_icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -422,6 +424,7 @@
 		8CF8CCD317C02F8200FF1DD0 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D8AC60B117C8FA1500153090 /* User_icon.png */,
 				8CF8CCD417C02F8C00FF1DD0 /* Calendar_icon.png */,
 				8CF8CCD517C02F8C00FF1DD0 /* star_icon.png */,
 				8CF8CCD617C02F8C00FF1DD0 /* Friends_icon.png */,
@@ -772,6 +775,7 @@
 				8CF8CCEA17C02FA000FF1DD0 /* MainStoryboard_iPhone.storyboard in Resources */,
 				8CF8CCEB17C02FA000FF1DD0 /* MainStoryboard_iPad.storyboard in Resources */,
 				D8AA08F817C658F100AAF048 /* Settings.bundle in Resources */,
+				D8AC60B217C8FA1500153090 /* User_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

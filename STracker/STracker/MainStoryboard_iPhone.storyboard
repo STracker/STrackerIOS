@@ -200,7 +200,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Top shows" id="QF4-7l-NkF">
-                        <barButtonItem key="leftBarButtonItem" image="Options.png" id="YxO-XE-qVL">
+                        <barButtonItem key="leftBarButtonItem" image="User_icon.png" id="YxO-XE-qVL">
                             <connections>
                                 <action selector="userOptions:" destination="cQy-gV-Iy8" id="uwi-0f-XeJ"/>
                             </connections>
@@ -620,6 +620,7 @@
         <image name="Options.png" width="16" height="16"/>
         <image name="Search.png" width="16" height="16"/>
         <image name="Shows_icon.png" width="32" height="32"/>
+        <image name="User_icon.png" width="16" height="16"/>
     </resources>
     <classes>
         <class className="BaseProfileViewController" superclassName="UITableViewController">
