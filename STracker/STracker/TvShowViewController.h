@@ -7,31 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TvShow.h"
 #import "RatingsViewController.h"
+
+@class TvShow;
 
 /*!
  @discussion This controller shows all information about an television show.
  */
 @interface TvShowViewController : RatingsViewController <UIActionSheetDelegate>
 {
-    @private
-    __weak IBOutlet UILabel *_airDay;
-    @private
-    __weak IBOutlet UILabel *_firstAired;
-    @private
-    __weak IBOutlet UIImageView *_poster;
-    @private
-    __weak IBOutlet UITextView *_genres;
-    @private
-    IBOutlet UISwipeGestureRecognizer *_swipeGestureSeasons;
-    @private
-    IBOutlet UISwipeGestureRecognizer *_swipeGestureDescription;
+    @private __weak IBOutlet UILabel *_airDay;
+    @private __weak IBOutlet UILabel *_firstAired;
+    @private __weak IBOutlet UIImageView *_poster;
+    @private __weak IBOutlet UITextView *_genres;
+    @private IBOutlet UISwipeGestureRecognizer *_swipeGestureSeasons;
+    @private IBOutlet UISwipeGestureRecognizer *_swipeGestureDescription;
  
-    @private
-    UIAlertView *_alertSubscribe;  
-    @private
-    TvShow *_tvshow;
+    @private UIAlertView *_alertSubscribe;  
+    @private TvShow *_tvshow;
 }
 
 /*!

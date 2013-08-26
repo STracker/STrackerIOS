@@ -7,6 +7,8 @@
 //
 
 #import "Comment.h"
+#import "User.h"
+#import "Episode.h"
 
 @implementation Comment
 

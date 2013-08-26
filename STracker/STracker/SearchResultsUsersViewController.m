@@ -7,7 +7,8 @@
 //
 
 #import "SearchResultsUsersViewController.h"
-#import "UsersController.h"
+#import "UsersRequests.h"
+#import "Range.h"
 
 @implementation SearchResultsUsersViewController
 
@@ -26,7 +27,7 @@
     range.start = [_data count];
     range.end = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerElemsPerSearch"] intValue] + [_data count];
     
-    [UsersController searchUser:_tableTitle withRange:range finish:^(id obj) {
+    [UsersRequests searchUser:_tableTitle withRange:range finish:^(id obj) {
         
         NSMutableArray *tvshows = [[NSMutableArray alloc] initWithArray:_data];
         [tvshows addObjectsFromArray:obj];

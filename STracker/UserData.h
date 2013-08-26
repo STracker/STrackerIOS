@@ -30,5 +30,5 @@
 @property (nonatomic, retain) id friends;
 @property (nonatomic, retain) id friendRequests;
 @property (nonatomic, retain) id suggestions;
-@property (nonatomic, retain) id calendar;
+
 @end

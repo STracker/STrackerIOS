@@ -7,7 +7,9 @@
 //
 
 #import "EpisodeCommentsViewController.h"
-#import "CommentController.h"
+#import "Episode.h"
+#import "Comment.h"
+#import "CommentsRequests.h"
 
 @implementation EpisodeCommentsViewController
 
@@ -21,7 +23,7 @@
 
 - (void)getComments
 {
-    [CommentController getEpisodeComments:_episode.identifier finish:^(EpisodeComments *obj) {
+    [CommentsRequests getEpisodeComments:_episode.identifier finish:^(EpisodeComments *obj) {
         
         _comments = obj;
         _data = (NSMutableArray *)obj.comments;
@@ -31,7 +33,7 @@
 
 - (void)postComment:(NSString *)comment
 {
-    [CommentController postEpisodeComment:_episode.identifier comment:comment finish:^(id obj) {
+    [CommentsRequests postEpisodeComment:_episode.identifier comment:comment finish:^(id obj) {
         
         UIAlertView *alertConfirm = [[UIAlertView alloc] initWithTitle:nil message:@"your comment will be processed..." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         

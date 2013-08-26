@@ -9,10 +9,10 @@
 #import "AppDelegate.h"
 
 /*!
- @discussion Info controller for manage seasons
+ @discussion Info requests for manage seasons
  information.
  */
-@interface SeasonsController : NSObject
+@interface SeasonsRequests : NSObject
 
 /*!
  @discussion Get one season from request uri.

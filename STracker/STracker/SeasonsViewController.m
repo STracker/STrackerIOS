@@ -7,7 +7,7 @@
 //
 
 #import "SeasonsViewController.h"
-#import "SeasonsController.h"
+#import "SeasonsRequests.h"
 #import "Season.h"
 #import "SeasonViewController.h"
 
@@ -19,7 +19,7 @@
 {
     SeasonSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
     
-    [SeasonsController getSeason:synopsis.uri finish:^(Season *season) {
+    [SeasonsRequests getSeason:synopsis.uri finish:^(Season *season) {
         
         SeasonViewController *view = [[SeasonViewController alloc] initWithData:season.episodes andTitle:synopsis.name];
         [self.navigationController pushViewController:view animated:YES];

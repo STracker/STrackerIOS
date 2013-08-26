@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
-#import "Episode.h"
+
+@class EpisodeId;
 
 /*!
- @discussion Info controller for manage comments 
+ @discussion Info requests for manage comments 
  information.
  */
-@interface CommentController : NSObject
+@interface CommentsRequests : NSObject
 
 /*!
  @discussion Get tvshow comments from the request Uri.

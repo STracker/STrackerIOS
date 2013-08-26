@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
-#import "Comment.h"
+
+@class Comment;
 
 /*!
  @discussion This view show the comment. And if the comment 
@@ -16,19 +17,13 @@
  */
 @interface CommentViewController : BaseViewController
 {
-    @private
-    __weak IBOutlet UITextView *_body;
-    @private
-    __weak IBOutlet UIButton *_userProfile;
-    @private
-    __weak IBOutlet UILabel *_userName;
-    @private
-    __weak IBOutlet UIButton *_openUserBt;
+    @private __weak IBOutlet UITextView *_body;
+    @private __weak IBOutlet UIButton *_userProfile;
+    @private __weak IBOutlet UILabel *_userName;
+    @private __weak IBOutlet UIButton *_openUserBt;
     
-    @private
-    UIAlertView *_alertDelete;
-    @private
-    Comment *_comment;
+    @private UIAlertView *_alertDelete;
+    @private Comment *_comment;
 }
 
 /*!

@@ -7,7 +7,7 @@
 //
 
 #import "GenresViewController.h"
-#import "GenresController.h"
+#import "GenresRequests.h"
 #import "Genre.h"
 #import "TvShowsViewController.h"
 
@@ -19,7 +19,7 @@
 {
     // Open a table with tvshows synopsis (all tvshows from this particular genre).
     GenreSynopsis *synopse = [_data objectAtIndex:indexPath.row];
-    [GenresController getGenre:synopse.uri finish:^(Genre *genre) {
+    [GenresRequests getGenre:synopse.uri finish:^(Genre *genre) {
         
         TvShowsViewController *view = [[TvShowsViewController alloc] initWithData:genre.tvshows andTitle:synopse.name];
         [self.navigationController pushViewController:view animated:YES];

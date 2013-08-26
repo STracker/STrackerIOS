@@ -7,15 +7,16 @@
 //
 
 #import "AppDelegate.h"
-#import "User.h"
-#import "Range.h"
-#import "Episode.h"
+
+@class EpisodeId;
+@class User;
+@class Range;
 
 /*!
- @discussion Info controller for manage users 
+ @discussion Info requests for manage users 
  information.
  */
-@interface UsersController : NSObject
+@interface UsersRequests : NSObject
 
 /*!
  @discussion Post an user in STracker server.
@@ -41,11 +42,10 @@
 
 /*!
  @discussion Get an the current user information. Normally for updates.
- @param identifier  The current user identifier.
+ @param user  The current user.
  @param finish      The finish callback.
- @param version     The version of user's information in database.
  */
-+ (void)getMe:(NSString *)identifier finish:(Finish) finish withVersion:(NSString *) version;
++ (void)getMe:(User *)user finish:(Finish) finish;
 
 /*!
  @discussion Send user friend request.

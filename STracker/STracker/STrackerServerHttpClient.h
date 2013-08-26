@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "AFHTTPClient.h"
 #import "AFJSONRequestOperation.h"
-#import "AppDelegate.h"
-#import "HawkClient.h"
 
 #define TIME_FORMAT @"yyyy-MM-dd HH:mm:ss"
+
+@class HawkCredentials;
 
 // Definition of callbacks (Success and Failure).
 typedef void (^Success)(AFJSONRequestOperation *operation, id result);
@@ -24,10 +24,6 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
  @see http://afnetworking.com/
  */
 @interface STrackerServerHttpClient : AFHTTPClient
-{
-    @private
-    AppDelegate *_app;
-}
 
 /*!
  @discussion Class method that returns a shared singleton instance.
@@ -58,13 +54,14 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 /*!
  @discussion Method for making an HTTP GET request to STracker server with the Hawk protocol
  protection.
- @param uri     The uri.
- @param query   The query, is optional.
- @param success The callback for success request.
- @param failure The callback for failure request.
- @param version Entity version number, for cache control (not required).
+ @param uri         The uri.
+ @param query       The query, is optional.
+ @param success     The callback for success request.
+ @param failure     The callback for failure request.
+ @param version     Entity version number, for cache control (not required).
+ @param credentials The hawk credentials (required).
  */
-- (void)getRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withVersion:(NSString *) version;
+- (void)getRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure withVersion:(NSString *) version andHawkCredentials:(HawkCredentials *)credentials;
 
 /*!
  @discussion Method for making an HTTP POST request to STracker server.
@@ -82,8 +79,9 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
  @param parameters  The parameters, body of the request.
  @param success     The callback for success request.
  @param failure     The callback for failure request.
+ @param credentials The hawk credentials (required).
  */
-- (void)postRequestWithHawkProtocol:(NSString *)uri parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure;
+- (void)postRequestWithHawkProtocol:(NSString *)uri parameters:(NSDictionary *)parameters success:(Success)success failure:(Failure)failure andHawkCredentials:(HawkCredentials *)credentials;
 
 /*!
  @discussion Method for making an HTTP DELETE request to STracker server.
@@ -96,11 +94,12 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
 
 /*!
  @discussion Method for making an HTTP DELETE request to STracker server with the Hawk protocol protection.
- @param uri     The uri.
- @param query   The query, is optional.
- @param success The callback for success request.
- @param failure The callback for failure request.
+ @param uri         The uri.
+ @param query       The query, is optional.
+ @param success     The callback for success request.
+ @param failure     The callback for failure request.
+ @param credentials The hawk credentials (required).
  */
-- (void)deleteRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure;
+- (void)deleteRequestWithHawkProtocol:(NSString *)uri query:(NSDictionary *)query success:(Success)success failure:(Failure)failure andHawkCredentials:(HawkCredentials *)credentials;;
 
 @end

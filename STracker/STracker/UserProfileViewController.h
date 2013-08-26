@@ -15,12 +15,9 @@
  */
 @interface UserProfileViewController : BaseProfileViewController
 {
-    @private
-    __weak IBOutlet UITableViewCell *_inviteCell;
-    @private
-    Boolean _isFriend;
-    @private
-    Boolean _invitedMe;
+    @private __weak IBOutlet UITableViewCell *_inviteCell;
+    @private Boolean _isFriend;
+    @private Boolean _invitedMe;
 }
 
 @end

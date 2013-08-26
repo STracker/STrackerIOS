@@ -134,6 +134,13 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5Kd-GA-Iv5">
+                                <rect key="frame" x="20" y="86" width="278" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" id="FQp-e4-82i" customClass="DLStarRatingControl">
                                 <rect key="frame" x="18" y="10" width="280" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -166,6 +173,7 @@
                     <connections>
                         <outlet property="_average" destination="oaj-J5-AI3" id="U6W-k7-bHZ"/>
                         <outlet property="_date" destination="B1e-nQ-QoE" id="4N6-gc-Vx3"/>
+                        <outlet property="_number" destination="5Kd-GA-Iv5" id="AvX-p2-dvV"/>
                         <outlet property="_poster" destination="hM1-hp-PgN" id="Z9D-EY-15I"/>
                         <outlet property="_rating" destination="FQp-e4-82i" id="m1N-al-FrA"/>
                         <outlet property="_swipeGestureDescription" destination="zTH-vh-cnH" id="eQx-Q4-duV"/>
@@ -441,6 +449,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="diY-k4-mx4">
                                 <rect key="frame" x="20" y="77" width="280" height="319"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -465,7 +474,7 @@
                                 <rect key="frame" x="20" y="25" width="254" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -655,6 +664,7 @@
                 <relationship kind="action" name="openDescription:"/>
                 <relationship kind="action" name="options:"/>
                 <relationship kind="outlet" name="_date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_number" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="_poster" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="_swipeGestureDescription" candidateClass="UISwipeGestureRecognizer"/>
             </relationships>

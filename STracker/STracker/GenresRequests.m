@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "GenresController.h"
+#import "GenresRequests.h"
 #import "STrackerServerHttpClient.h"
 #import "Genre.h"
 
-@implementation GenresController
+@implementation GenresRequests
 
 + (void)getGenres:(Finish) finish
 {

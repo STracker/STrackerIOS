@@ -7,15 +7,18 @@
 //
 
 #import "TvShowViewController.h"
+#import "TvShow.h"
+#import "Genre.h"
+#import "Subscription.h"
+#import "User.h"
+#import "UsersRequests.h"
+#import "RatingsRequests.h"
+#import "UserInfoManager.h"
 #import "SeasonsViewController.h"
 #import "ActorsViewController.h"
 #import "TvShowCommentsViewController.h"
 #import "UIViewController+KNSemiModal.h"
-#import "UsersController.h"
-#import "RatingsController.h"
 #import "UIImageView+AFNetworking.h"
-#import "Genre.h"
-#import "Subscription.h"
 #import "SuggestViewController.h"
 
 @implementation TvShowViewController
@@ -53,7 +56,7 @@
 
 - (IBAction)options:(UIBarButtonItem *)sender
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:/*@"Seasons", */@"Cast", @"Comments", @"Subscription", @"Suggest", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Information" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Seasons", @"Cast", @"Comments", @"Subscription", @"Suggest", nil];
         
     [actionSheet showFromBarButtonItem:sender animated:YES];
 }
@@ -82,21 +85,19 @@
 {
     switch (buttonIndex)
     {
-        /*
         case 0:
             [self seasons];
             break;
-        */
-        case 0:
+        case 1:
             [self cast];
             break;
-        case 1:
+        case 2:
             [self comments];
             break;
-        case 2:
+        case 3:
             [self subscribe];
             break;
-        case 3:
+        case 4:
             [self suggestion];
             break;
     }
@@ -122,7 +123,7 @@
 
 - (void)postRating:(float)rating
 {
-    [RatingsController postTvShowRating:rating tvshowId:_tvshow.identifier finish:^(id obj) {
+    [RatingsRequests postTvShowRating:rating tvshowId:_tvshow.identifier finish:^(id obj) {
         
         // Nothing todo...
     }];
@@ -130,7 +131,7 @@
 
 - (void)getRating
 {
-    [RatingsController getTvShowRating:_tvshow.identifier finish:^(id obj) {
+    [RatingsRequests getTvShowRating:_tvshow.identifier finish:^(id obj) {
         
         [super setRatingInfo:obj];
     }];
@@ -190,13 +191,9 @@
  */
 - (void)suggestion
 {
-    /*
-     Need to be the most updated information for get the updated 
-     friends list.
-     */
-    [_app getUpdatedUser:^(User *me) {
+    [_app.userManager getUser:^(User *user) {
         
-        SuggestViewController *view = [[SuggestViewController alloc] initWithData:me.friends.allValues andTvShowId:_tvshow.identifier];
+        SuggestViewController *view = [[SuggestViewController alloc] initWithData:user.friends.allValues andTvShowId:_tvshow.identifier];
         
         [self.navigationController pushViewController:view animated:YES];
     }];
@@ -207,11 +204,7 @@
  */
 - (void)subscribe
 {
-    /*
-     Need the most updated information for see if the user have this 
-     subcription or not.
-     */
-    [_app getUpdatedUser:^(User *user) {
+    [_app.userManager getUser:^(User *user) {
         
         if ([user.subscriptions objectForKey:_tvshow.identifier] != nil)
         {
@@ -220,7 +213,7 @@
             [_alertSubscribe show];
             return;
         }
-               
+        
         _alertSubscribe = [[UIAlertView alloc] initWithTitle:@"Attention" message:[NSString stringWithFormat:@"you really want to subscribe %@?", _tvshow.name] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
         
         [_alertSubscribe show];
@@ -233,27 +226,19 @@
  */
 - (void)subscribeRequest
 {
-    [UsersController postSubscription:_tvshow.identifier finish:^(id obj) {
+    [UsersRequests postSubscription:_tvshow.identifier finish:^(id obj) {
         
-        /*
-         Add subscription to user in memory and update the user in DB.
-         Using getUser because in the action "subscribe", already use the 
-         getUpdatedUser, so the user information is the must updated.
-         */
-        [_app getUser:^(User *user) {
+        // Update user info for cache purposes.
+        [_app.userManager getUser:^(User *user) {
             
             Subscription *subscription = [[Subscription alloc] init];
             subscription.tvshow = (TvShowSynopsis *)[_tvshow getSynopsis];
             subscription.episodesWatched = [[NSMutableArray alloc] init];
             
-            // Set user's information in memory.
             [user.subscriptions setObject:subscription forKey:_tvshow.identifier];
             
-            // Increment version for cache purposes.
-            user.version++;
-            
-            // Update in DB.
-            [_app.dbController updateAsync:user];
+            // Save changes.
+            [_app.userManager updateUser:user];
         }];
     }];
 }

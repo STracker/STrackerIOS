@@ -8,7 +8,9 @@
 
 #import "FacebookView.h"
 #import "UIViewController+KNSemiModal.h"
-#import "UsersController.h"
+#import "UsersRequests.h"
+#import "UserInfoManager.h"
+#import "User.h"
 
 @implementation FacebookView
 
@@ -43,24 +45,12 @@
 
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
 {
-    // Clear information for retrieving the new.
-    [FBSession.activeSession closeAndClearTokenInformation];
-    
     User *me = [[User alloc] init];
     me.identifier = user.id;
     me.name = user.name;
     me.Email = [user objectForKey:@"email"];
-    me.photoUrl = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large", me.identifier];
     
-    // Set Hawk credentials for authenticated requests to server.
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    [app setHawkCredentials:me.identifier];
-    
-    // Register the user into STracker server.
-    [UsersController registUser:me finish:^(id obj) {
-       
-        _finish(obj);
-    }];
+    _finish(me);
 }
 
 @end

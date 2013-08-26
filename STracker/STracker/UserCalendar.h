@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "Entity.h"
-#import "TvShow.h"
-#import "Episode.h"
+
+@class EpisodeSynopsis;
 
 /*!
  @discussion Class that defines the user episodes calendar.

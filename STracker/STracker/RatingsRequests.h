@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
-#import "Episode.h"
+
+@class EpisodeId;
 
 /*!
- @discussion Info controller for manage ratings 
+ @discussion Info requests for manage ratings 
  information.
  */
-@interface RatingsController : NSObject
+@interface RatingsRequests : NSObject
 
 /*!
  @discussion Get telvision show rating from STracker server.

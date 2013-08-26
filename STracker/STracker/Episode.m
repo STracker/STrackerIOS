@@ -83,6 +83,23 @@
     return self;
 }
 
+- (NSString *)constructNumber
+{
+    NSString *seasonN;
+    if (self.identifier.seasonNumber < 9)
+        seasonN = [NSString stringWithFormat:@"S0%d", self.identifier.seasonNumber];
+    else
+        seasonN = [NSString stringWithFormat:@"S%d", self.identifier.seasonNumber];
+    
+    NSString *episodeN;
+    if (self.identifier.episodeNumber < 9)
+        episodeN = [NSString stringWithFormat:@"E0%d", self.identifier.episodeNumber];
+    else
+        episodeN = [NSString stringWithFormat:@"E%d", self.identifier.episodeNumber];
+    
+    return [NSString stringWithFormat:@"%@%@ - %@",seasonN, episodeN, self.name];
+}
+
 - (EpisodeSynopsis *)getSynopsis
 {
     EpisodeSynopsis *synopsis = [[EpisodeSynopsis alloc] init];
@@ -116,6 +133,23 @@
     }
     
     return self;
+}
+
+- (NSString *)constructNumber
+{
+    NSString *seasonN;
+    if (self.identifier.seasonNumber < 9)
+        seasonN = [NSString stringWithFormat:@"S0%d", self.identifier.seasonNumber];
+    else
+        seasonN = [NSString stringWithFormat:@"S%d", self.identifier.seasonNumber];
+    
+    NSString *episodeN;
+    if (self.identifier.episodeNumber < 9)
+        episodeN = [NSString stringWithFormat:@"E0%d", self.identifier.episodeNumber];
+    else
+        episodeN = [NSString stringWithFormat:@"E%d", self.identifier.episodeNumber];
+    
+    return [NSString stringWithFormat:@"%@%@ - %@",seasonN, episodeN, self.name];
 }
 
 #pragma mark - Encode and decode methods for use in Core Data user entity.

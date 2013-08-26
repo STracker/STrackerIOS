@@ -7,7 +7,8 @@
 //
 
 #import "Entity.h"
-#import "TvShow.h"
+
+@class TvShowSynopsis;
 
 /*!
  @discussion This object defines the subscription object.

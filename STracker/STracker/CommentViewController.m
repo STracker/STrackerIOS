@@ -7,11 +7,12 @@
 //
 
 #import "CommentViewController.h"
-#import "STrackerServerHttpClient.h"
+#import "Comment.h"
 #import "User.h"
-#import "CommentController.h"
+#import "CommentsRequests.h"
 #import "UserProfileViewController.h"
-#import "UsersController.h"
+#import "UsersRequests.h"
+#import "UserInfoManager.h"
 
 @implementation CommentViewController
 
@@ -32,7 +33,7 @@
     _body.text = _comment.body;
     _userName.text = _comment.user.name;
 
-    [_app getUpdatedUser:^(User *user) {
+    [_app.userManager getUser:^(User *user) {
 
         if ([user.identifier isEqualToString:_comment.user.identifier])
         {
@@ -81,7 +82,7 @@
 
 - (IBAction)openUserProfile
 {
-    [UsersController getUser:_comment.user.uri finish:^(id obj) {
+    [UsersRequests getUser:_comment.user.uri finish:^(id obj) {
         
         UserProfileViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"UserProfile"] initWithUserInfo:obj];
         [self.navigationController pushViewController:view animated:YES];
@@ -95,7 +96,7 @@
  */
 - (void)deleteComment
 {
-    [CommentController deleteComment:_comment.uri finish:^(id obj) {
+    [CommentsRequests deleteComment:_comment.uri finish:^(id obj) {
         
         // Go back.
         [self.navigationController popViewControllerAnimated:YES];

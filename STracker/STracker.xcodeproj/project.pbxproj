@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		2B4C0D8EAAFB44B1B447908C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ED9FE3763AC4B219B9C6DB1 /* libPods.a */; };
 		8C5AB45817C0367C00A9EA08 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5AB45717C0367C00A9EA08 /* UserData.m */; };
-		8C5AB45E17C044D000A9EA08 /* OfflineUserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5AB45D17C044D000A9EA08 /* OfflineUserInfoController.m */; };
+		8C5AB45E17C044D000A9EA08 /* UserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5AB45D17C044D000A9EA08 /* UserInfoManager.m */; };
 		8CC17A6917C6A8BF00C10530 /* UserCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC17A6817C6A8BF00C10530 /* UserCalendarViewController.m */; };
 		8CC1E1F317C805BE004EED2B /* SubscriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1E1F217C805BE004EED2B /* SubscriptionViewController.m */; };
 		8CC1E1F617C81F89004EED2B /* SubscriptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1E1F517C81F89004EED2B /* SubscriptionsViewController.m */; };
@@ -74,13 +74,13 @@
 		8CF8CD4117C0310300FF1DD0 /* EpisodeCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD3C17C0310300FF1DD0 /* EpisodeCommentsViewController.m */; };
 		8CF8CD4217C0310300FF1DD0 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD3E17C0310300FF1DD0 /* CommentViewController.m */; };
 		8CF8CD4617C031DA00FF1DD0 /* STrackerServerHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD4517C031DA00FF1DD0 /* STrackerServerHttpClient.m */; };
-		8CF8CD5617C031F000FF1DD0 /* GenresController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD4917C031F000FF1DD0 /* GenresController.m */; };
-		8CF8CD5717C031F000FF1DD0 /* TvShowsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD4B17C031F000FF1DD0 /* TvShowsController.m */; };
-		8CF8CD5817C031F000FF1DD0 /* SeasonsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD4D17C031F000FF1DD0 /* SeasonsController.m */; };
-		8CF8CD5917C031F000FF1DD0 /* EpisodesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD4F17C031F000FF1DD0 /* EpisodesController.m */; };
-		8CF8CD5A17C031F000FF1DD0 /* RatingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD5117C031F000FF1DD0 /* RatingsController.m */; };
-		8CF8CD5B17C031F000FF1DD0 /* CommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD5317C031F000FF1DD0 /* CommentController.m */; };
-		8CF8CD5C17C031F000FF1DD0 /* UsersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD5517C031F000FF1DD0 /* UsersController.m */; };
+		8CF8CD5617C031F000FF1DD0 /* GenresRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD4917C031F000FF1DD0 /* GenresRequests.m */; };
+		8CF8CD5717C031F000FF1DD0 /* TvShowsRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD4B17C031F000FF1DD0 /* TvShowsRequests.m */; };
+		8CF8CD5817C031F000FF1DD0 /* SeasonsRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD4D17C031F000FF1DD0 /* SeasonsRequests.m */; };
+		8CF8CD5917C031F000FF1DD0 /* EpisodesRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD4F17C031F000FF1DD0 /* EpisodesRequests.m */; };
+		8CF8CD5A17C031F000FF1DD0 /* RatingsRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD5117C031F000FF1DD0 /* RatingsRequests.m */; };
+		8CF8CD5B17C031F000FF1DD0 /* CommentsRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD5317C031F000FF1DD0 /* CommentsRequests.m */; };
+		8CF8CD5C17C031F000FF1DD0 /* UsersRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD5517C031F000FF1DD0 /* UsersRequests.m */; };
 		8CF8CD7817C031FE00FF1DD0 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD5F17C031FE00FF1DD0 /* Entity.m */; };
 		8CF8CD7917C031FE00FF1DD0 /* TvShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD6117C031FE00FF1DD0 /* TvShow.m */; };
 		8CF8CD7A17C031FE00FF1DD0 /* Season.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD6317C031FE00FF1DD0 /* Season.m */; };
@@ -96,8 +96,12 @@
 		8CF8CD8417C031FE00FF1DD0 /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CD7717C031FE00FF1DD0 /* Range.m */; };
 		D8387F6417C10F3A0081D7B0 /* AsyncQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D8387F6317C10F3A0081D7B0 /* AsyncQueue.m */; };
 		D8387F6B17C147270081D7B0 /* SuggestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8387F6A17C147270081D7B0 /* SuggestViewController.m */; };
+		D849E11817CA590E007090D4 /* LoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D849E11717CA590E007090D4 /* LoginManager.m */; };
+		D849E11D17CAA943007090D4 /* UserCalendarData.m in Sources */ = {isa = PBXBuildFile; fileRef = D849E11C17CAA943007090D4 /* UserCalendarData.m */; };
+		D849E12017CAB462007090D4 /* CalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D849E11F17CAB462007090D4 /* CalendarManager.m */; };
 		D880841A17C6541F001F4D20 /* SearchResultsTvShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D880841917C6541F001F4D20 /* SearchResultsTvShowsViewController.m */; };
 		D880841D17C65535001F4D20 /* SearchResultsUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D880841C17C65535001F4D20 /* SearchResultsUsersViewController.m */; };
+		D886904717C98AE500B3584B /* AutomaticUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = D886904617C98AE500B3584B /* AutomaticUpdater.m */; };
 		D8AA08F817C658F100AAF048 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D8AA08F717C658F100AAF048 /* Settings.bundle */; };
 		D8AA08FE17C680A900AAF048 /* UserCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AA08FD17C680A900AAF048 /* UserCalendar.m */; };
 		D8AB9C7417C7BADB00B40268 /* BaseEditTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AB9C7317C7BADA00B40268 /* BaseEditTableViewController.m */; };
@@ -118,8 +122,8 @@
 		357BD2D1985C48108A787108 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		8C5AB45617C0367C00A9EA08 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserData.h; path = ../UserData.h; sourceTree = "<group>"; };
 		8C5AB45717C0367C00A9EA08 /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserData.m; path = ../UserData.m; sourceTree = "<group>"; };
-		8C5AB45C17C044D000A9EA08 /* OfflineUserInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineUserInfoController.h; sourceTree = "<group>"; };
-		8C5AB45D17C044D000A9EA08 /* OfflineUserInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineUserInfoController.m; sourceTree = "<group>"; };
+		8C5AB45C17C044D000A9EA08 /* UserInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoManager.h; sourceTree = "<group>"; };
+		8C5AB45D17C044D000A9EA08 /* UserInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoManager.m; sourceTree = "<group>"; };
 		8CC17A6717C6A8BF00C10530 /* UserCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCalendarViewController.h; sourceTree = "<group>"; };
 		8CC17A6817C6A8BF00C10530 /* UserCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCalendarViewController.m; sourceTree = "<group>"; };
 		8CC1E1F117C805BE004EED2B /* SubscriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionViewController.h; sourceTree = "<group>"; };
@@ -216,20 +220,20 @@
 		8CF8CD3E17C0310300FF1DD0 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		8CF8CD4417C031DA00FF1DD0 /* STrackerServerHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STrackerServerHttpClient.h; sourceTree = "<group>"; };
 		8CF8CD4517C031DA00FF1DD0 /* STrackerServerHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STrackerServerHttpClient.m; sourceTree = "<group>"; };
-		8CF8CD4817C031F000FF1DD0 /* GenresController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenresController.h; sourceTree = "<group>"; };
-		8CF8CD4917C031F000FF1DD0 /* GenresController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenresController.m; sourceTree = "<group>"; };
-		8CF8CD4A17C031F000FF1DD0 /* TvShowsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TvShowsController.h; sourceTree = "<group>"; };
-		8CF8CD4B17C031F000FF1DD0 /* TvShowsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShowsController.m; sourceTree = "<group>"; };
-		8CF8CD4C17C031F000FF1DD0 /* SeasonsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeasonsController.h; sourceTree = "<group>"; };
-		8CF8CD4D17C031F000FF1DD0 /* SeasonsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeasonsController.m; sourceTree = "<group>"; };
-		8CF8CD4E17C031F000FF1DD0 /* EpisodesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpisodesController.h; sourceTree = "<group>"; };
-		8CF8CD4F17C031F000FF1DD0 /* EpisodesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EpisodesController.m; sourceTree = "<group>"; };
-		8CF8CD5017C031F000FF1DD0 /* RatingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingsController.h; sourceTree = "<group>"; };
-		8CF8CD5117C031F000FF1DD0 /* RatingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingsController.m; sourceTree = "<group>"; };
-		8CF8CD5217C031F000FF1DD0 /* CommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentController.h; sourceTree = "<group>"; };
-		8CF8CD5317C031F000FF1DD0 /* CommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentController.m; sourceTree = "<group>"; };
-		8CF8CD5417C031F000FF1DD0 /* UsersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersController.h; sourceTree = "<group>"; };
-		8CF8CD5517C031F000FF1DD0 /* UsersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersController.m; sourceTree = "<group>"; };
+		8CF8CD4817C031F000FF1DD0 /* GenresRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenresRequests.h; sourceTree = "<group>"; };
+		8CF8CD4917C031F000FF1DD0 /* GenresRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenresRequests.m; sourceTree = "<group>"; };
+		8CF8CD4A17C031F000FF1DD0 /* TvShowsRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TvShowsRequests.h; sourceTree = "<group>"; };
+		8CF8CD4B17C031F000FF1DD0 /* TvShowsRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvShowsRequests.m; sourceTree = "<group>"; };
+		8CF8CD4C17C031F000FF1DD0 /* SeasonsRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeasonsRequests.h; sourceTree = "<group>"; };
+		8CF8CD4D17C031F000FF1DD0 /* SeasonsRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeasonsRequests.m; sourceTree = "<group>"; };
+		8CF8CD4E17C031F000FF1DD0 /* EpisodesRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpisodesRequests.h; sourceTree = "<group>"; };
+		8CF8CD4F17C031F000FF1DD0 /* EpisodesRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EpisodesRequests.m; sourceTree = "<group>"; };
+		8CF8CD5017C031F000FF1DD0 /* RatingsRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingsRequests.h; sourceTree = "<group>"; };
+		8CF8CD5117C031F000FF1DD0 /* RatingsRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingsRequests.m; sourceTree = "<group>"; };
+		8CF8CD5217C031F000FF1DD0 /* CommentsRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsRequests.h; sourceTree = "<group>"; };
+		8CF8CD5317C031F000FF1DD0 /* CommentsRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsRequests.m; sourceTree = "<group>"; };
+		8CF8CD5417C031F000FF1DD0 /* UsersRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersRequests.h; sourceTree = "<group>"; };
+		8CF8CD5517C031F000FF1DD0 /* UsersRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersRequests.m; sourceTree = "<group>"; };
 		8CF8CD5E17C031FE00FF1DD0 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		8CF8CD5F17C031FE00FF1DD0 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
 		8CF8CD6017C031FE00FF1DD0 /* TvShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TvShow.h; sourceTree = "<group>"; };
@@ -261,10 +265,18 @@
 		D8387F6317C10F3A0081D7B0 /* AsyncQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncQueue.m; sourceTree = "<group>"; };
 		D8387F6917C147270081D7B0 /* SuggestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestViewController.h; sourceTree = "<group>"; };
 		D8387F6A17C147270081D7B0 /* SuggestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestViewController.m; sourceTree = "<group>"; };
+		D849E11617CA590E007090D4 /* LoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginManager.h; sourceTree = "<group>"; };
+		D849E11717CA590E007090D4 /* LoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginManager.m; sourceTree = "<group>"; };
+		D849E11B17CAA943007090D4 /* UserCalendarData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCalendarData.h; sourceTree = "<group>"; };
+		D849E11C17CAA943007090D4 /* UserCalendarData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCalendarData.m; sourceTree = "<group>"; };
+		D849E11E17CAB462007090D4 /* CalendarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarManager.h; sourceTree = "<group>"; };
+		D849E11F17CAB462007090D4 /* CalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarManager.m; sourceTree = "<group>"; };
 		D880841817C6541F001F4D20 /* SearchResultsTvShowsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsTvShowsViewController.h; sourceTree = "<group>"; };
 		D880841917C6541F001F4D20 /* SearchResultsTvShowsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsTvShowsViewController.m; sourceTree = "<group>"; };
 		D880841B17C65535001F4D20 /* SearchResultsUsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsUsersViewController.h; sourceTree = "<group>"; };
 		D880841C17C65535001F4D20 /* SearchResultsUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsUsersViewController.m; sourceTree = "<group>"; };
+		D886904517C98AE500B3584B /* AutomaticUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutomaticUpdater.h; sourceTree = "<group>"; };
+		D886904617C98AE500B3584B /* AutomaticUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutomaticUpdater.m; sourceTree = "<group>"; };
 		D8AA08F717C658F100AAF048 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D8AA08FC17C680A900AAF048 /* UserCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCalendar.h; sourceTree = "<group>"; };
 		D8AA08FD17C680A900AAF048 /* UserCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCalendar.m; sourceTree = "<group>"; };
@@ -307,16 +319,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8C5AB44917C033F000A9EA08 /* coredata */ = {
+		8C5AB44917C033F000A9EA08 /* userInfoManager */ = {
 			isa = PBXGroup;
 			children = (
+				D849E11917CA591C007090D4 /* Login */,
 				8CF8CCA417C02D2700FF1DD0 /* STracker.xcdatamodeld */,
-				8C5AB45C17C044D000A9EA08 /* OfflineUserInfoController.h */,
-				8C5AB45D17C044D000A9EA08 /* OfflineUserInfoController.m */,
+				8C5AB45C17C044D000A9EA08 /* UserInfoManager.h */,
+				8C5AB45D17C044D000A9EA08 /* UserInfoManager.m */,
+				D849E11E17CAB462007090D4 /* CalendarManager.h */,
+				D849E11F17CAB462007090D4 /* CalendarManager.m */,
 				8C5AB45617C0367C00A9EA08 /* UserData.h */,
 				8C5AB45717C0367C00A9EA08 /* UserData.m */,
+				D849E11B17CAA943007090D4 /* UserCalendarData.h */,
+				D849E11C17CAA943007090D4 /* UserCalendarData.m */,
 			);
-			name = coredata;
+			name = userInfoManager;
 			sourceTree = "<group>";
 		};
 		8CC17A6617C6A81200C10530 /* userCalendar */ = {
@@ -375,12 +392,13 @@
 				8CF8CCE917C02FA000FF1DD0 /* MainStoryboard_iPad.storyboard */,
 				8CF8CC9B17C02D2700FF1DD0 /* AppDelegate.h */,
 				8CF8CC9C17C02D2700FF1DD0 /* AppDelegate.m */,
-				8CF8CD4317C031C600FF1DD0 /* HTTPClients */,
 				D8387F6517C10F4C0081D7B0 /* asyncQueue */,
-				8C5AB44917C033F000A9EA08 /* coredata */,
+				D886904417C98AB900B3584B /* automaticUpdater */,
+				8CF8CD4317C031C600FF1DD0 /* HTTPClients */,
+				8C5AB44917C033F000A9EA08 /* userInfoManager */,
 				8CF8CD5D17C031F400FF1DD0 /* models */,
-				8CF8CD4717C031E300FF1DD0 /* infoControllers */,
-				8CF8CCF517C0300E00FF1DD0 /* controllers&views */,
+				8CF8CD4717C031E300FF1DD0 /* infoRequests */,
+				8CF8CCF517C0300E00FF1DD0 /* controllers */,
 				8CF8CC9317C02D2700FF1DD0 /* Supporting Files */,
 			);
 			path = STracker;
@@ -439,7 +457,7 @@
 			name = images;
 			sourceTree = "<group>";
 		};
-		8CF8CCF517C0300E00FF1DD0 /* controllers&views */ = {
+		8CF8CCF517C0300E00FF1DD0 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
 				8CF8CCEC17C0300900FF1DD0 /* BaseViewController.h */,
@@ -450,7 +468,6 @@
 				D8AB9C7317C7BADA00B40268 /* BaseEditTableViewController.m */,
 				8CF8CCF017C0300900FF1DD0 /* BaseProfileViewController.h */,
 				8CF8CCF117C0300900FF1DD0 /* BaseProfileViewController.m */,
-				8CF8CCF617C0303700FF1DD0 /* facebookLogin */,
 				8CF8CCF717C0304400FF1DD0 /* home */,
 				8CF8CD0317C030A100FF1DD0 /* profile */,
 				8CC17A6617C6A81200C10530 /* userCalendar */,
@@ -465,16 +482,7 @@
 				8CF8CCF917C0305B00FF1DD0 /* persons */,
 				8CF8CCF817C0304E00FF1DD0 /* comments */,
 			);
-			name = "controllers&views";
-			sourceTree = "<group>";
-		};
-		8CF8CCF617C0303700FF1DD0 /* facebookLogin */ = {
-			isa = PBXGroup;
-			children = (
-				8CF8CD0417C030B200FF1DD0 /* FacebookView.h */,
-				8CF8CD0517C030B200FF1DD0 /* FacebookView.m */,
-			);
-			name = facebookLogin;
+			name = controllers;
 			sourceTree = "<group>";
 		};
 		8CF8CCF717C0304400FF1DD0 /* home */ = {
@@ -620,25 +628,25 @@
 			name = HTTPClients;
 			sourceTree = "<group>";
 		};
-		8CF8CD4717C031E300FF1DD0 /* infoControllers */ = {
+		8CF8CD4717C031E300FF1DD0 /* infoRequests */ = {
 			isa = PBXGroup;
 			children = (
-				8CF8CD4817C031F000FF1DD0 /* GenresController.h */,
-				8CF8CD4917C031F000FF1DD0 /* GenresController.m */,
-				8CF8CD4A17C031F000FF1DD0 /* TvShowsController.h */,
-				8CF8CD4B17C031F000FF1DD0 /* TvShowsController.m */,
-				8CF8CD4C17C031F000FF1DD0 /* SeasonsController.h */,
-				8CF8CD4D17C031F000FF1DD0 /* SeasonsController.m */,
-				8CF8CD4E17C031F000FF1DD0 /* EpisodesController.h */,
-				8CF8CD4F17C031F000FF1DD0 /* EpisodesController.m */,
-				8CF8CD5017C031F000FF1DD0 /* RatingsController.h */,
-				8CF8CD5117C031F000FF1DD0 /* RatingsController.m */,
-				8CF8CD5217C031F000FF1DD0 /* CommentController.h */,
-				8CF8CD5317C031F000FF1DD0 /* CommentController.m */,
-				8CF8CD5417C031F000FF1DD0 /* UsersController.h */,
-				8CF8CD5517C031F000FF1DD0 /* UsersController.m */,
+				8CF8CD4817C031F000FF1DD0 /* GenresRequests.h */,
+				8CF8CD4917C031F000FF1DD0 /* GenresRequests.m */,
+				8CF8CD4A17C031F000FF1DD0 /* TvShowsRequests.h */,
+				8CF8CD4B17C031F000FF1DD0 /* TvShowsRequests.m */,
+				8CF8CD4C17C031F000FF1DD0 /* SeasonsRequests.h */,
+				8CF8CD4D17C031F000FF1DD0 /* SeasonsRequests.m */,
+				8CF8CD4E17C031F000FF1DD0 /* EpisodesRequests.h */,
+				8CF8CD4F17C031F000FF1DD0 /* EpisodesRequests.m */,
+				8CF8CD5017C031F000FF1DD0 /* RatingsRequests.h */,
+				8CF8CD5117C031F000FF1DD0 /* RatingsRequests.m */,
+				8CF8CD5217C031F000FF1DD0 /* CommentsRequests.h */,
+				8CF8CD5317C031F000FF1DD0 /* CommentsRequests.m */,
+				8CF8CD5417C031F000FF1DD0 /* UsersRequests.h */,
+				8CF8CD5517C031F000FF1DD0 /* UsersRequests.m */,
 			);
-			name = infoControllers;
+			name = infoRequests;
 			sourceTree = "<group>";
 		};
 		8CF8CD5D17C031F400FF1DD0 /* models */ = {
@@ -683,6 +691,34 @@
 				D8387F6317C10F3A0081D7B0 /* AsyncQueue.m */,
 			);
 			name = asyncQueue;
+			sourceTree = "<group>";
+		};
+		D849E11917CA591C007090D4 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D849E11A17CA7209007090D4 /* FBview */,
+				D849E11617CA590E007090D4 /* LoginManager.h */,
+				D849E11717CA590E007090D4 /* LoginManager.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		D849E11A17CA7209007090D4 /* FBview */ = {
+			isa = PBXGroup;
+			children = (
+				8CF8CD0417C030B200FF1DD0 /* FacebookView.h */,
+				8CF8CD0517C030B200FF1DD0 /* FacebookView.m */,
+			);
+			name = FBview;
+			sourceTree = "<group>";
+		};
+		D886904417C98AB900B3584B /* automaticUpdater */ = {
+			isa = PBXGroup;
+			children = (
+				D886904517C98AE500B3584B /* AutomaticUpdater.h */,
+				D886904617C98AE500B3584B /* AutomaticUpdater.m */,
+			);
+			name = automaticUpdater;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -866,13 +902,13 @@
 				8CF8CD4117C0310300FF1DD0 /* EpisodeCommentsViewController.m in Sources */,
 				8CF8CD4217C0310300FF1DD0 /* CommentViewController.m in Sources */,
 				8CF8CD4617C031DA00FF1DD0 /* STrackerServerHttpClient.m in Sources */,
-				8CF8CD5617C031F000FF1DD0 /* GenresController.m in Sources */,
-				8CF8CD5717C031F000FF1DD0 /* TvShowsController.m in Sources */,
-				8CF8CD5817C031F000FF1DD0 /* SeasonsController.m in Sources */,
-				8CF8CD5917C031F000FF1DD0 /* EpisodesController.m in Sources */,
-				8CF8CD5A17C031F000FF1DD0 /* RatingsController.m in Sources */,
-				8CF8CD5B17C031F000FF1DD0 /* CommentController.m in Sources */,
-				8CF8CD5C17C031F000FF1DD0 /* UsersController.m in Sources */,
+				8CF8CD5617C031F000FF1DD0 /* GenresRequests.m in Sources */,
+				8CF8CD5717C031F000FF1DD0 /* TvShowsRequests.m in Sources */,
+				8CF8CD5817C031F000FF1DD0 /* SeasonsRequests.m in Sources */,
+				8CF8CD5917C031F000FF1DD0 /* EpisodesRequests.m in Sources */,
+				8CF8CD5A17C031F000FF1DD0 /* RatingsRequests.m in Sources */,
+				8CF8CD5B17C031F000FF1DD0 /* CommentsRequests.m in Sources */,
+				8CF8CD5C17C031F000FF1DD0 /* UsersRequests.m in Sources */,
 				8CF8CD7817C031FE00FF1DD0 /* Entity.m in Sources */,
 				8CF8CD7917C031FE00FF1DD0 /* TvShow.m in Sources */,
 				8CF8CD7A17C031FE00FF1DD0 /* Season.m in Sources */,
@@ -887,7 +923,7 @@
 				8CF8CD8317C031FE00FF1DD0 /* Suggestion.m in Sources */,
 				8CF8CD8417C031FE00FF1DD0 /* Range.m in Sources */,
 				8C5AB45817C0367C00A9EA08 /* UserData.m in Sources */,
-				8C5AB45E17C044D000A9EA08 /* OfflineUserInfoController.m in Sources */,
+				8C5AB45E17C044D000A9EA08 /* UserInfoManager.m in Sources */,
 				D8387F6417C10F3A0081D7B0 /* AsyncQueue.m in Sources */,
 				D8387F6B17C147270081D7B0 /* SuggestViewController.m in Sources */,
 				D880841A17C6541F001F4D20 /* SearchResultsTvShowsViewController.m in Sources */,
@@ -897,6 +933,10 @@
 				D8AB9C7417C7BADB00B40268 /* BaseEditTableViewController.m in Sources */,
 				8CC1E1F317C805BE004EED2B /* SubscriptionViewController.m in Sources */,
 				8CC1E1F617C81F89004EED2B /* SubscriptionsViewController.m in Sources */,
+				D886904717C98AE500B3584B /* AutomaticUpdater.m in Sources */,
+				D849E11817CA590E007090D4 /* LoginManager.m in Sources */,
+				D849E11D17CAA943007090D4 /* UserCalendarData.m in Sources */,
+				D849E12017CAB462007090D4 /* CalendarManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,6 +19,5 @@
 @dynamic suggestions;
 @dynamic friends;
 @dynamic friendRequests;
-@dynamic calendar;
 
 @end

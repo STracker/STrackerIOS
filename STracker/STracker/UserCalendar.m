@@ -7,6 +7,8 @@
 //
 
 #import "UserCalendar.h"
+#import "Episode.h"
+#import "TvShow.h"
 
 @implementation UserCalendar
 

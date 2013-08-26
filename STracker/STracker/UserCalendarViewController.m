@@ -10,8 +10,9 @@
 #import "UserCalendar.h"
 #import "Episode.h"
 #import "EpisodeViewController.h"
-#import "EpisodesController.h"
-#import "UsersController.h"
+#import "EpisodesRequests.h"
+#import "UsersRequests.h"
+#import "CalendarManager.h"
 
 @implementation UserCalendarViewController
 
@@ -19,20 +20,7 @@
 {
     UserCalendarEntry *entry = [_data objectAtIndex:indexPath.section];
     EpisodeCalendar *epiC = [entry.episodes objectAtIndex:indexPath.row];
-    
-    NSString *seasonN;
-    if (epiC.episode.identifier.seasonNumber < 9)
-        seasonN = [NSString stringWithFormat:@"S0%d", epiC.episode.identifier.seasonNumber];
-    else
-        seasonN = [NSString stringWithFormat:@"S%d", epiC.episode.identifier.seasonNumber];
-    
-    NSString *episodeN;
-    if (epiC.episode.identifier.episodeNumber < 9)
-        episodeN = [NSString stringWithFormat:@"E0%d", epiC.episode.identifier.episodeNumber];
-    else
-        episodeN = [NSString stringWithFormat:@"E%d", epiC.episode.identifier.episodeNumber];
-        
-    cell.textLabel.text = [NSString stringWithFormat:@"%@%@ - %@",seasonN, episodeN, epiC.episode.name];
+    cell.textLabel.text = [epiC.episode constructNumber];
     cell.detailTextLabel.text = epiC.tvshowName;
 }
 
@@ -62,7 +50,7 @@
     UserCalendarEntry *entry = [_data objectAtIndex:indexPath.section];
     EpisodeCalendar *epiC = [entry.episodes objectAtIndex:indexPath.row];
     
-    [EpisodesController getEpisode:epiC.episode.uri finish:^(id obj) {
+    [EpisodesRequests getEpisode:epiC.episode.uri finish:^(id obj) {
         
         EpisodeViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"EpisodeView"] initWithEpisode: obj];
         [self.navigationController pushViewController:view animated:YES];
@@ -73,7 +61,7 @@
 
 - (void)shakeEvent
 {
-    [_app getUpdatedCalendar:^(UserCalendar *calendar) {
+    [_app.calendarManager syncUserCalendar:^(UserCalendar *calendar) {
         
         _data = (NSMutableArray *)calendar.entries;
         [_tableView reloadData];

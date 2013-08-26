@@ -8,8 +8,11 @@
 
 #import "UserSubscriptionsViewController.h"
 #import "Subscription.h"
-#import "UsersController.h"
+#import "UsersRequests.h"
 #import "SubscriptionViewController.h"
+#import "UserInfoManager.h"
+#import "User.h"
+#import "TvShow.h"
 
 @implementation UserSubscriptionsViewController
 
@@ -27,21 +30,15 @@
     
     [_data removeObjectAtIndex:indexPath.row];
     
-    [UsersController deleteSubscription:subscription.tvshow.identifier finish:^(id obj) {
+    [UsersRequests deleteSubscription:subscription.tvshow.identifier finish:^(id obj) {
         
-        /*
-         Remove subscription from user in memory and update the user in DB.
-         */
-        [_app getUser:^(User *me) {
+        // Update local information.
+        [_app.userManager getUser:^(User *user) {
             
             // Remove from user's information in memory.
-            [me.subscriptions removeObjectForKey:subscription.tvshow.identifier];
+            [user.subscriptions removeObjectForKey:subscription.tvshow.identifier];
             
-            // Increment version for cache purposes.
-            me.version++;
-            
-            // Update in DB.
-            [_app.dbController updateAsync:me];
+            [_app.userManager updateUser:user];
         }];
     }];
 }

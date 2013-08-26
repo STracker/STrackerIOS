@@ -8,6 +8,7 @@
 
 #import "SubscriptionsViewController.h"
 #import "Subscription.h"
+#import "TvShow.h"
 #import "SubscriptionViewController.h"
 
 @implementation SubscriptionsViewController

@@ -7,12 +7,14 @@
 //
 
 #import "User.h"
+#import "TvShow.h"
 #import "Subscription.h"
 #import "Suggestion.h"
+#import "HawkCredentials.h"
 
 @implementation User
 
-@synthesize identifier, name, photoUrl, email, friends, subscriptions, friendRequests, suggestions, calendar;
+@synthesize identifier, name, photoUrl, email, friends, subscriptions, friendRequests, suggestions;
 
 - (id)initWithDictionary:(NSDictionary *)parameters
 {
@@ -53,6 +55,18 @@
     }
     
     return self;
+}
+
+- (HawkCredentials *)getHawkCredentials
+{
+    if (_hawkCredentials != nil)
+        return _hawkCredentials;
+    
+    _hawkCredentials = [[HawkCredentials alloc] init];
+    _hawkCredentials.identifier = self.identifier;
+    _hawkCredentials.key = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"HawkKey"];
+    
+    return _hawkCredentials;
 }
 
 - (UserSynopsis *)getSynopsis

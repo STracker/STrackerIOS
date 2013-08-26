@@ -7,13 +7,16 @@
 //
 
 #import "EpisodeViewController.h"
+#import "Episode.h"
+#import "Subscription.h"
+#import "User.h"
+#import "RatingsRequests.h"
+#import "UsersRequests.h"
+#import "UserInfoManager.h"
 #import "ActorsViewController.h"
 #import "EpisodeCommentsViewController.h"
 #import "UIViewController+KNSemiModal.h"
-#import "RatingsController.h"
 #import "UIImageView+AFNetworking.h"
-#import "Subscription.h"
-#import "UsersController.h"
 
 @implementation EpisodeViewController
 
@@ -40,6 +43,7 @@
     _date = nil;
     _swipeGestureDescription = nil;
     
+    _number = nil;
     [super viewDidUnload];
 }
 
@@ -91,7 +95,7 @@
 
 - (void)postRating:(float)rating
 {
-    [RatingsController postEpisodeRating:rating episodeId:_episode.identifier finish:^(id obj) {
+    [RatingsRequests postEpisodeRating:rating episodeId:_episode.identifier finish:^(id obj) {
         
         // Nothing todo...
     }];
@@ -99,7 +103,7 @@
 
 - (void)getRating
 {
-    [RatingsController getEpisodeRating:_episode.identifier finish:^(id obj) {
+    [RatingsRequests getEpisodeRating:_episode.identifier finish:^(id obj) {
         
         [super setRatingInfo:obj];
     }];
@@ -134,6 +138,9 @@
     self.navigationItem.title = _episode.name;
     
     _date.text = _episode.date;
+    
+    _number.text = [_episode constructNumber];
+    
     [_poster setImageWithURL:[NSURL URLWithString:_episode.poster]];
 }
 
@@ -183,12 +190,7 @@
         return;
     }
     
-    
-    /*
-     Need the most updated information for see if the user have this
-     episode marked or not.
-     */
-    [_app getUpdatedUser:^(User *user) {
+    [_app.userManager getUser:^(User *user) {
         
         Subscription *sub = [user.subscriptions objectForKey:_episode.identifier.tvshowId];
         if (sub == nil)
@@ -222,25 +224,17 @@
  */
 - (void)watechedRequest
 {
-   [UsersController postWatchedEpisode:_episode.identifier finish:^(id obj) {
+   [UsersRequests postWatchedEpisode:_episode.identifier finish:^(id obj) {
        
-       /*
-        Add this wateched episode to user in memory and update the user in DB.
-        Using getUser because in the action "watched", already use the
-        getUpdatedUser, so the user information is the must updated.
-        */
-       [_app getUser:^(User *user) {
+       // Update local information.
+       [_app.userManager getUser:^(User *user) {
         
            Subscription *sub = [user.subscriptions objectForKey:_episode.identifier.tvshowId];
            
            // Add the episode to subscription's watched episodes.
            [sub.episodesWatched addObject:[_episode getSynopsis]];
            
-           // Increment version for cache purposes.
-           user.version++;
-           
-           // Update in DB.
-           [_app.dbController updateAsync:user];
+           [_app.userManager updateUser:user];
        }];
    }];
 }
@@ -250,14 +244,10 @@
  */
 - (void)unWatechedRequest
 {
-    [UsersController deleteWatchedEpisode:_episode.identifier finish:^(id obj) {
+    [UsersRequests deleteWatchedEpisode:_episode.identifier finish:^(id obj) {
         
-        /*
-         Remove this watched episode from user in memory and update the user in DB.
-         Using getUser because in the action "watched", already use the
-         getUpdatedUser, so the user information is the must updated.
-         */
-        [_app getUser:^(User *user) {
+        // Update local information.
+        [_app.userManager getUser:^(User *user) {
             
             Subscription *sub = [user.subscriptions objectForKey:_episode.identifier.tvshowId];
             
@@ -274,11 +264,7 @@
             
             [sub.episodesWatched removeObject:epiToRemove];
             
-            // Increment version for cache purposes.
-            user.version++;
-            
-            // Update in DB.
-            [_app.dbController updateAsync:user];
+            [_app.userManager updateUser:user];
         }];
     }];
 }

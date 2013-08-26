@@ -8,8 +8,10 @@
 
 #import "UserProfileViewController.h"
 #import "UsersViewController.h"
-#import "UsersController.h"
+#import "UsersRequests.h"
 #import "SubscriptionsViewController.h"
+#import "User.h"
+#import "UserInfoManager.h"
 
 @implementation UserProfileViewController
 
@@ -17,7 +19,7 @@
 {
     [super viewDidLoad];
     
-    [_app getUpdatedUser:^(User *me) {
+    [_app.userManager getUser:^(User *me) {
         
         // Verify if this user is already friend of the current user.
         if ([_user.friends objectForKey:me.identifier] != nil)
@@ -81,7 +83,7 @@
     NSString *uri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerUsersURI"];
     uri = [uri stringByAppendingFormat:@"/%@", _user.identifier];
     
-    [_app getUpdatedUser:^(id obj) {
+    [UsersRequests getUser:uri finish:^(id obj) {
         
         _user = obj;
         
@@ -129,7 +131,7 @@
     // Add friend.
     if (!_isFriend)
     {
-        [UsersController inviteUser:_user finish:^(id obj) {
+        [UsersRequests inviteUser:_user finish:^(id obj) {
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"The invitation request has been sent successfully." message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             
@@ -140,7 +142,7 @@
     }
     
     // Remove friend.
-    [UsersController deleteFriend:_user.identifier finish:^(id obj) {
+    [UsersRequests deleteFriend:_user.identifier finish:^(id obj) {
         
         _isFriend = NO;
         _inviteCell.textLabel.text = @"Add friend";
@@ -149,14 +151,11 @@
         
         [alert show];
         
-        // Remove also from user information in memory and in DB.
-        [_app getUser:^(User *me) {
+        // Update local information.
+        [_app.userManager getUser:^(User *user) {
             
-            [me.friends removeObjectForKey:_user.identifier];
-            me.version++;
-            
-            //Update in DB.
-            [_app.dbController updateAsync:me];
+            [user.friends removeObjectForKey:_user.identifier];
+            [_app.userManager updateUser:user];
         }];
     }];
 }
@@ -166,21 +165,19 @@
  */
 - (void)acceptInvite
 {
-    [UsersController acceptFriendRequest:_user.identifier finish:^(id obj) {
+    [UsersRequests acceptFriendRequest:_user.identifier finish:^(id obj) {
         
         _invitedMe = NO;
         _isFriend = YES;
         _inviteCell.textLabel.text = @"Remove friend";
         
-        // Put this user as a friend in user information in memory and DB.
-        [_app getUser:^(User *me) {
+        // Update local information.
+        [_app.userManager getUser:^(User *user) {
             
-            [me.friendRequests removeObjectForKey:_user.identifier];
-            [me.friends setValue:[_user getSynopsis] forKey:_user.identifier];
-            me.version++;
+            [user.friendRequests removeObjectForKey:_user.identifier];
+            [user.friends setValue:[_user getSynopsis] forKey:_user.identifier];
             
-            // Update in DB.
-            [_app.dbController updateAsync:me];
+            [_app.userManager updateUser:user];
         }];
     }];
 }
@@ -190,19 +187,17 @@
  */
 - (void)rejecttInvite
 {
-    [UsersController rejectFriendRequest:_user.identifier finish:^(id obj) {
+    [UsersRequests rejectFriendRequest:_user.identifier finish:^(id obj) {
         
         _invitedMe = NO;
         _isFriend = NO;
         _inviteCell.textLabel.text = @"Add friend";
         
-        [_app getUser:^(User *me) {
+        // Update local information.
+        [_app.userManager getUser:^(User *user) {
             
-            [me.friendRequests removeObjectForKey:_user.identifier];
-            me.version++;
-            
-            // Update in DB.
-            [_app.dbController updateAsync:me];
+            [user.friendRequests removeObjectForKey:_user.identifier];
+            [_app.userManager updateUser:user];
         }];
     }];
 }

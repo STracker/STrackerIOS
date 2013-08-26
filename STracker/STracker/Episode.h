@@ -40,6 +40,13 @@
 @property(nonatomic, retain) NSArray *directors;
 @property(nonatomic, retain) NSArray *guestActors;
 
+/*!
+ @discussion Method that constructs the number of the episode 
+ like S01E01 - episode name.
+ @return The number.
+ */
+- (NSString *)constructNumber;
+
 @end
 
 /*!
@@ -49,5 +56,12 @@
 
 @property(nonatomic, strong) EpisodeId *identifier;
 @property(nonatomic, copy) NSString *date;
+
+/*!
+ @discussion Method that constructs the number of the episode
+ like S01E01 - episode name.
+ @return The number.
+ */
+- (NSString *)constructNumber;
 
 @end

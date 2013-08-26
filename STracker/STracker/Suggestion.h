@@ -7,8 +7,9 @@
 //
 
 #import "Entity.h"
-#import "TvShow.h"
-#import "User.h"
+
+@class UserSynopsis;
+@class TvShowSynopsis;
 
 /*!
  @discussion This object defines the suggestion entity object.

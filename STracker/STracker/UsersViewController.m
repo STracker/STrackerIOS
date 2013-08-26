@@ -8,7 +8,8 @@
 
 #import "UsersViewController.h"
 #import "User.h"
-#import "UsersController.h"
+#import "UsersRequests.h"
+#import "UserInfoManager.h"
 #import "UserProfileViewController.h"
 #import "MyProfileViewController.h"
 
@@ -18,8 +19,7 @@
 {
     UserSynopsis *synopsis = [_data objectAtIndex:indexPath.row];
     
-    // Don't need to be the most updated version of user information for this action.
-    [_app getUser:^(User *me) {
+    [_app.userManager getUser:^(User *me) {
         
         // Verify if the user is the current user.
         if ([me.identifier isEqualToString:synopsis.identifier])
@@ -29,7 +29,7 @@
             return;
         }
         
-        [UsersController getUser:synopsis.uri finish:^(id obj) {
+        [UsersRequests getUser:synopsis.uri finish:^(id obj) {
             
             UserProfileViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"UserProfile"] initWithUserInfo:obj];
             [self.navigationController pushViewController:view animated:YES];

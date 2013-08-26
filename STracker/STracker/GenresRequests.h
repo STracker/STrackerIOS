@@ -9,10 +9,10 @@
 #import "AppDelegate.h"
 
 /*!
- @discussion Info controller for manage television show
+ @discussion Info requests for manage television show
  information.
  */
-@interface GenresController : NSObject
+@interface GenresRequests : NSObject
 
 /*!
  @discussion Get all genres available.

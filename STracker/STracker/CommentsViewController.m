@@ -8,8 +8,10 @@
 
 #import "CommentsViewController.h"
 #import "Comment.h"
+#import "User.h"
 #import "CommentViewController.h"
-#import "CommentController.h"
+#import "CommentsRequests.h"
+#import "UserInfoManager.h"
 
 @implementation CommentsViewController
 
@@ -51,31 +53,20 @@
 {
     Comment *comment = [_data objectAtIndex:indexPath.row];
     
-    // Needed to be Logged in Facebook to view the comment.
-    [_app getUser:^(User *user) {
-        
-        CommentViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"CommentView"] initWithComment:comment];
+    CommentViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"CommentView"] initWithComment:comment];
         [self.navigationController pushViewController:view animated:YES];
-    }];
 }
 
 #pragma mark - Selectors.
 
 - (void)addComment
 {
-    /* 
-     Needed to be Logged in Facebook to create an comment.
-     Don't need to be the must updated user information.
-     */
-    [_app getUser:^(User *user) {
+    [_composeComment setEnabled:NO];
+    YIPopupTextView *popupTextView = [[YIPopupTextView alloc] initWithPlaceHolder:@"comment here" maxCount:0 buttonStyle:YIPopupTextViewButtonStyleRightCancelAndDone tintsDoneButton:YES];
         
-        [_composeComment setEnabled:NO];
-        YIPopupTextView *popupTextView = [[YIPopupTextView alloc] initWithPlaceHolder:@"comment here" maxCount:0 buttonStyle:YIPopupTextViewButtonStyleRightCancelAndDone tintsDoneButton:YES];
-        
-        popupTextView.delegate = self;
-        popupTextView.caretShiftGestureEnabled = YES;
-        [popupTextView showInView:self.view];
-    }];
+    popupTextView.delegate = self;
+    popupTextView.caretShiftGestureEnabled = YES;
+    [popupTextView showInView:self.view];
 }
 
 #pragma mark - YIPopupTextView delegates.

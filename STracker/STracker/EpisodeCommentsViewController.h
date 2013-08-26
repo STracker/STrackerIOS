@@ -7,18 +7,17 @@
 //
 
 #import "CommentsViewController.h"
-#import "Episode.h"
-#import "Comment.h"
+
+@class Episode;
+@class EpisodeComments;
 
 /*!
  @discussion Table view for episodes comments.
  */
 @interface EpisodeCommentsViewController : CommentsViewController
 {
-    @private
-    Episode *_episode;
-    @private
-    EpisodeComments *_comments;
+    @private Episode *_episode;
+    @private EpisodeComments *_comments;
 }
 
 /*!

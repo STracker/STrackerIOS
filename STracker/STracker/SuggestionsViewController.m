@@ -8,9 +8,12 @@
 
 #import "SuggestionsViewController.h"
 #import "Suggestion.h"
-#import "TvShowsController.h"
+#import "TvShow.h"
+#import "User.h"
+#import "TvShowsRequests.h"
 #import "TvShowViewController.h"
-#import "UsersController.h"
+#import "UsersRequests.h"
+#import "UserInfoManager.h"
 
 @implementation SuggestionsViewController
 
@@ -28,7 +31,7 @@
     
     [_data removeObjectAtIndex:indexPath.row];
     
-    [UsersController deleteSuggestion:suggestion.tvshow.identifier finish:^(id obj) {
+    [UsersRequests deleteSuggestion:suggestion.tvshow.identifier finish:^(id obj) {
         
         // Search for others suggestions for same tv show.
         NSMutableArray *sugsToRemove = [[NSMutableArray alloc] init];
@@ -42,13 +45,10 @@
         [_tableView reloadData];
         
         // Update the user information for cache purposes.
-        [_app getUser:^(User *me) {
+        [_app.userManager getUser:^(User *user) {
             
-            me.suggestions = _data;
-            me.version++;
-            
-            // Update in DB.
-            [_app.dbController updateAsync:me];
+            user.suggestions = _data;
+            [_app.userManager updateUser:user];
         }];
     }];
 }
@@ -59,7 +59,7 @@
 {
     Suggestion *suggestion = [_data objectAtIndex:indexPath.row];
     
-    [TvShowsController getTvShow:suggestion.tvshow.uri finish:^(id obj) {
+    [TvShowsRequests getTvShow:suggestion.tvshow.uri finish:^(id obj) {
         
         TvShowViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"TvShowView"] initWithTvShow:obj];
         

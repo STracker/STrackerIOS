@@ -7,7 +7,8 @@
 //
 
 #import "BaseTableViewController.h"
-#import "Subscription.h"
+
+@class Subscription;
 
 /*!
  @discussion View for show the subscription, shows the watched episodes.

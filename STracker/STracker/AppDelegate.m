@@ -7,9 +7,10 @@
 //
 
 #import "AppDelegate.h"
-#import "FacebookView.h"
-#import "UIViewController+KNSemiModal.h"
-#import "UsersController.h"
+#import <FacebookSDK/FacebookSDK.h>
+#import "UserInfoManager.h"
+#import "CalendarManager.h"
+#import "AutomaticUpdater.h"
 #import "FXReachability.h"
 
 @implementation AppDelegate
@@ -18,7 +19,7 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-@synthesize storyboard, dbController;
+@synthesize window, storyboard, userManager, calendarManager;
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -81,14 +82,12 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionChange) name:FXReachabilityStatusDidChangeNotification object:nil];
     
-    dbController = [[OfflineUserInfoController alloc] initWithContext:self.managedObjectContext];
-    
-    // Set user information with local information in DB.
-    _user = [dbController read];
-    _oldUser = _user;
-    
-    // Set Hawk credentials.
-    [self setHawkCredentials:_user.identifier];
+    // Set user manager.
+    userManager = [[UserInfoManager alloc] initWithContext:self.managedObjectContext];
+    // Set calendar manager.
+    calendarManager = [[CalendarManager alloc] initWithContext:self.managedObjectContext];
+    // Set updater.
+    updater = [[AutomaticUpdater alloc] init];
     
     return YES;
 }
@@ -98,18 +97,14 @@
     [FBAppCall handleDidBecomeActive];
     
     /*
-     Create looper for getting information from server.
+     Verify user defaults for start the automatic updater.
      */
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL enabled = [defaults boolForKey:@"update_value"];
     if (!enabled)
-    {
-        [_timer invalidate];
-        _timer = nil;
-        return;
-    }
-    
-    [self createLooper];
+        [updater stop];
+    else
+        [updater start];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -214,82 +209,6 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
-#pragma mark - AppDelegate public methods.
-
-- (void)getUpdatedUser:(Finish)finish
-{
-    if (_user == nil)
-    {
-        [self loginWithFacebook:finish];
-        return;
-    }
-    
-    // Only if have connectivity.
-    if ([FXReachability isReachable])
-        /*
-         The user exists, lets get the version number for make a request
-         to server for see if this user is updated.
-         */
-        [self updateUserInformation:finish];
-    else
-        finish(_user);
-}
-
-- (void)getUser:(Finish) finish
-{
-    if (_user != nil)
-    {
-        finish(_user);
-        return;
-    }
-    
-    [self loginWithFacebook:finish];
-}
-
-- (void)deleteUser
-{
-    [FBSession.activeSession close];
-    hawkCredentials = nil;
-    _user = nil;
-    [self.dbController remove];
-}
-
-- (void)getUpdatedCalendar:(Finish)finish
-{
-    [UsersController getUserCalendar:^(UserCalendar *calendar) {
-        
-        _user.calendar = calendar;
-        
-        // Update in DB.
-        [dbController updateAsync:_user];
-        
-        finish(_user.calendar);
-    }];
-}
-
-- (void)getCalendar:(Finish)finish
-{
-    if (_user.calendar != nil)
-    {
-        finish(_user.calendar);
-        return;
-    }
-    
-    [self getUpdatedCalendar:finish];
-}
-
-- (void)setHawkCredentials:(NSString *)userId
-{
-    hawkCredentials = [[HawkCredentials alloc] init];
-    hawkCredentials.identifier = userId;
-    hawkCredentials.key = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"HawkKey"];
-}
-
-- (HawkCredentials *)getHawkCredentials
-{
-    return hawkCredentials;
-}
-
 #pragma mark - AppDelegate class methods.
 
 + (UIAlertView *)getAlertViewForErrors:(NSString *)msgError
@@ -298,56 +217,7 @@
     return alert;
 }
 
-#pragma mark - AppDelegate auxiliary private methods.
-
-/*!
- @discussion Auxiliary method for make a login with Facebook account.
- @param finish  The finish callback.
- */
-- (void)loginWithFacebook:(Finish) finish
-{
-    FacebookView *fb = [[FacebookView alloc] initWithCallback:^(User *user) {
-        
-        [self.window.rootViewController dismissSemiModalView];
-        _user = user;
-        
-        // Save in DB.
-        [self.dbController create:user];
-        
-        // Invoke callback.
-        finish(user);
-    }];
-    
-    [self.window.rootViewController presentSemiView:fb];
-}
-
-/*!
- @discussion Auxiliary method for update _user and user information in DB.
- */
-- (void)updateUserInformation:(Finish) finish
-{
-    [UsersController getMe:_user.identifier finish:^(User *user) {
-        
-        if (user.version > _user.version)
-        {
-            // Set the user information in memory.
-            user.calendar = _user.calendar;
-            _user = user;
-            
-            // Update the user information in DB.
-            /*
-             This update are not async because next to this, can
-             make open the user's controller and the information
-             to show must be updated.
-             */
-            [self.dbController updateAsync:_user];
-        }
-        
-        // Invoke the callback.
-        finish(_user);
-        
-    } withVersion:[NSString stringWithFormat:@"%d", _user.version]];
-}
+#pragma mark - FXReachability selector.
 
 /*!
  @discussion Selector method for see changes in connectivity.
@@ -355,62 +225,14 @@
 - (void)connectionChange
 {
     if (![FXReachability isReachable])
-    {
-        [_timer invalidate];
-        _timer = nil;
-    }
+        [updater stop];
     else
     {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         BOOL enabled = [defaults boolForKey:@"update_value"];
         if (enabled)
-            [self createLooper];
+            [updater start];
     }
-}
-
-#pragma mark - Looper methods.
-
-/*!
- @discussion Auxiliary method for getting periodically information from
- server, like if exists friends requests for user or suggestions from others
- users.
- */
-- (void)createLooper
-{
-    if (_timer != nil)
-        return;
-    
-    // TODO -> put the seconds in users defaults.
-    _timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(looperCall) userInfo:nil repeats:YES];
-}
-
-/*!
- @discussion Method that is invoked when is time for getting 
- the user information from server.
- */
-- (void)looperCall
-{
-    if (_user == nil)
-        return;
-    
-    NSLog(@"debug: looperCall");
-    
-    [self updateUserInformation:^(User *user) {
-        
-        // Update also calendar to...
-        [self getUpdatedCalendar:^(id obj) {
-            
-            // Nothing todo...
-        }];
-        
-        if (_oldUser.friendRequests.count < user.friendRequests.count)
-            [[AppDelegate getAlertViewForErrors:@"New friend request received."] show];
-        
-        if (_oldUser.suggestions.count < user.suggestions.count)
-            [[AppDelegate getAlertViewForErrors:@"New suggestion received."] show];
-        
-        _oldUser = _user;
-    }];
 }
 
 @end

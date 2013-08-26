@@ -8,7 +8,8 @@
 
 #import "BaseViewController.h"
 #import "DLStarRatingControl.h"
-#import "Rating.h"
+
+@class Rating;
 
 /*!
  @discussion Base view controller of all controllers that have 

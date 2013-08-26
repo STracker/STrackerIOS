@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
+
+@class AppDelegate;
 
 #define BACKGROUND @"BackgroundPattern.png"
 

@@ -7,12 +7,16 @@
 //
 
 #import "MyProfileViewController.h"
-#import "UsersController.h"
+#import "TDBadgedCell.h"
+#import "UsersRequests.h"
 #import "SuggestionsViewController.h"
 #import "UserSubscriptionsViewController.h"
 #import "UsersViewController.h"
 #import "UserCalendarViewController.h"
 #import "UserCalendar.h"
+#import "UserInfoManager.h"
+#import "CalendarManager.h"
+#import "User.h"
 
 @implementation MyProfileViewController
 
@@ -39,7 +43,7 @@
  */
 - (void)shakeEvent
 {
-    [_app getUpdatedUser:^(id obj) {
+    [_app.userManager syncUser:^(id obj) {
         
         _user = obj;
         
@@ -101,7 +105,7 @@
  */
 - (void)calendar
 {
-    [_app getCalendar:^(UserCalendar *calendar) {
+    [_app.calendarManager getUserCalendar:^(UserCalendar *calendar) {
         
         UserCalendarViewController *view = [[UserCalendarViewController alloc] initWithData:calendar.entries andTitle:@"Calendar"];
         [self.navigationController pushViewController:view animated:YES];
@@ -153,7 +157,7 @@
  */
 - (void)logout
 {
-    [_app deleteUser];
+    [_app.userManager deleteUser];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
 }

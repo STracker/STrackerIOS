@@ -7,18 +7,17 @@
 //
 
 #import "CommentsViewController.h"
-#import "TvShow.h"
-#import "Comment.h"
+
+@class TvShow;
+@class TvShowComments;
 
 /*!
  @discussion Table of television shows comments.
  */
 @interface TvShowCommentsViewController : CommentsViewController
 {
-    @private
-    TvShow *_tvshow;
-    @private
-    TvShowComments *_comments;
+    @private TvShow *_tvshow;
+    @private TvShowComments *_comments;
 }
 
 /*!

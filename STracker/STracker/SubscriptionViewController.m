@@ -7,10 +7,13 @@
 //
 
 #import "SubscriptionViewController.h"
-#import "TvShowsController.h"
-#import "EpisodesController.h"
+#import "Subscription.h"
+#import "TvShowsRequests.h"
+#import "EpisodesRequests.h"
 #import "TvShowViewController.h"
 #import "EpisodeViewController.h"
+#import "Episode.h"
+#import "TvShow.h"
 
 @implementation SubscriptionViewController
 
@@ -32,21 +35,7 @@
     }
     
     EpisodeSynopsis *episode = [_data objectAtIndex:indexPath.row];
-    
-    NSString *seasonN;
-    if (episode.identifier.seasonNumber < 9)
-        seasonN = [NSString stringWithFormat:@"S0%d", episode.identifier.seasonNumber];
-    else
-        seasonN = [NSString stringWithFormat:@"S%d", episode.identifier.seasonNumber];
-    
-    NSString *episodeN;
-    if (episode.identifier.episodeNumber < 9)
-        episodeN = [NSString stringWithFormat:@"E0%d", episode.identifier.episodeNumber];
-    else
-        episodeN = [NSString stringWithFormat:@"E%d", episode.identifier.episodeNumber];
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"%@%@ - %@",seasonN, episodeN, episode.name];
-    
+    cell.textLabel.text = [episode constructNumber];
     cell.detailTextLabel.text = episode.date;
 }
 
@@ -77,7 +66,7 @@
 {
     if (indexPath.section == 0)
     {
-        [TvShowsController getTvShow:_subscription.tvshow.uri finish:^(id obj) {
+        [TvShowsRequests getTvShow:_subscription.tvshow.uri finish:^(id obj) {
             
             TvShowViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"TvShowView"] initWithTvShow:obj];
             
@@ -89,7 +78,7 @@
     
     EpisodeSynopsis *episode = [_data objectAtIndex:indexPath.row];
     
-    [EpisodesController getEpisode:episode.uri finish:^(id obj) {
+    [EpisodesRequests getEpisode:episode.uri finish:^(id obj) {
         
         EpisodeViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"EpisodeView"] initWithEpisode: obj];
         

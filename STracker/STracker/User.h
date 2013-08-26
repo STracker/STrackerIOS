@@ -7,12 +7,20 @@
 //
 
 #import "Person.h"
-#import "UserCalendar.h"
+
+@class HawkCredentials;
 
 /*!
  @discussion This object defines the user entity object.
  */
 @interface User : Entity <Deserialize, EntityDelegate>
+{
+    /*
+     Needed for perform secure requests to server.
+     Only used for current user.
+     */
+    @private HawkCredentials *_hawkCredentials;
+}
 
 @property(nonatomic, copy) NSString *identifier;
 @property(nonatomic, copy) NSString *name;
@@ -25,8 +33,12 @@
 @property(nonatomic, strong) NSMutableDictionary *subscriptions;
 @property(nonatomic, strong) NSMutableDictionary *friendRequests;
 
-// Only for current user.
-@property(nonatomic, strong) UserCalendar *calendar;
+/*!
+ @discussion Gets the user's hawk credentials.
+ Only used by current user.
+ @return The _hawkCredentials.
+ */
+- (HawkCredentials *)getHawkCredentials;
 
 @end
 

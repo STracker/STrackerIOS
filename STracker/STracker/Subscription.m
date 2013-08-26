@@ -8,6 +8,7 @@
 
 #import "Subscription.h"
 #import "Episode.h"
+#import "TvShow.h"
 
 @implementation Subscription
 

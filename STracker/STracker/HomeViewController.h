@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIViewController+KNSemiModal.h"
 #import "KIImagePager.h"
 #import "BaseViewController.h"
 
@@ -16,15 +15,11 @@
  */
 @interface HomeViewController : BaseViewController <KIImagePagerDelegate, KIImagePagerDataSource, UIActionSheetDelegate, UIAlertViewDelegate>
 {
-    @private
-    __weak IBOutlet KIImagePager *_imagePager;
+    @private __weak IBOutlet KIImagePager *_imagePager;
     
-    @private
-    NSMutableArray *_top;
-    @private
-    UIAlertView *_alertTv;
-    @private
-    UIAlertView *_alertUser;
+    @private NSMutableArray *_top;
+    @private UIAlertView *_alertTv;
+    @private UIAlertView *_alertUser;
 }
 
 /*!

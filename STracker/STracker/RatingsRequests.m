@@ -6,30 +6,33 @@
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "RatingsController.h"
+#import "RatingsRequests.h"
 #import "STrackerServerHttpClient.h"
 #import "Rating.h"
+#import "UserInfoManager.h"
+#import "User.h"
+#import "Episode.h"
 
-@implementation RatingsController
+@implementation RatingsRequests
 
 + (void)getTvShowRating:(NSString *)tvshowId finish:(Finish) finish
 {
-    [RatingsController getRating:[RatingsController constructTvShowUri:tvshowId] finish:finish];
+    [RatingsRequests getRating:[RatingsRequests constructTvShowUri:tvshowId] finish:finish];
 }
 
 + (void)getEpisodeRating:(EpisodeId *)episodeId finish:(Finish) finish
 {
-    [RatingsController getRating:[RatingsController constructEpisodeUri:episodeId] finish:finish];
+    [RatingsRequests getRating:[RatingsRequests constructEpisodeUri:episodeId] finish:finish];
 }
 
 + (void)postTvShowRating:(float)rating tvshowId:(NSString *)tvshowId finish:(Finish)finish
 {
-    [RatingsController postRating:[RatingsController constructTvShowUri:tvshowId] withRating:rating finish:finish];
+    [RatingsRequests postRating:[RatingsRequests constructTvShowUri:tvshowId] withRating:rating finish:finish];
 }
 
 + (void)postEpisodeRating:(float)rating episodeId:(EpisodeId *)episodeId finish:(Finish)finish
 {
-    [RatingsController postRating:[RatingsController constructEpisodeUri:episodeId] withRating:rating finish:finish];
+    [RatingsRequests postRating:[RatingsRequests constructEpisodeUri:episodeId] withRating:rating finish:finish];
 }
 
 #pragma mark - RatingsController private auxiliary methods.
@@ -85,14 +88,19 @@
     NSString * ratingStr = [NSString stringWithFormat:@"%d", (int)rating];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObject:ratingStr] forKeys:[NSArray arrayWithObject:@""]];
     
-    [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
+    // This request requires authentication.
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.userManager getUser:^(User *user) {
         
-        // Invoke callback.
-        finish(nil);
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
+            
+            finish(nil);
+            
+        } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+            
+            [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+            
+        } andHawkCredentials:[user getHawkCredentials]];
     }];
 }
 

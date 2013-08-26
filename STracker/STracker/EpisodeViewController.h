@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "RatingsViewController.h"
-#import "Episode.h"
+
+@class Episode;
 
 /*!
  @discussion This view controller shows the information about 
@@ -16,20 +17,15 @@
  */
 @interface EpisodeViewController : RatingsViewController <UIActionSheetDelegate>
 {
-    @private
-    __weak IBOutlet UIImageView *_poster;
-    @private
-    __weak IBOutlet UILabel *_date;
-    @private
-    IBOutlet UISwipeGestureRecognizer *_swipeGestureDescription;
+    @private __weak IBOutlet UIImageView *_poster;
+    @private __weak IBOutlet UILabel *_date;
+    @private __weak IBOutlet UILabel *_number;
+    @private IBOutlet UISwipeGestureRecognizer *_swipeGestureDescription;
     
-    @private
-    Episode *_episode;
+    @private Episode *_episode;
     
-    @private
-    UIAlertView *_alertWatched;
-    @private
-    UIAlertView *_alertUnWatched;
+    @private UIAlertView *_alertWatched;
+    @private UIAlertView *_alertUnWatched;
 }
 
 /*!

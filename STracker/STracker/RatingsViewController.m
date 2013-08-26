@@ -7,6 +7,7 @@
 //
 
 #import "RatingsViewController.h"
+#import "Rating.h"
 
 @implementation RatingsViewController
 
@@ -45,11 +46,7 @@
 
 -(void)newRating:(DLStarRatingControl *)control :(float)rating
 {
-    // Need to be logged.
-    [_app getUser:^(id obj) {
-        
-        [self postRating:rating];
-    }];
+    [self postRating:rating];
 }
 
 #pragma mark - BaseViewController abstract methods.

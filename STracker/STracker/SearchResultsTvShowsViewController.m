@@ -7,7 +7,8 @@
 //
 
 #import "SearchResultsTvShowsViewController.h"
-#import "TvShowsController.h"
+#import "TvShowsRequests.h"
+#import "Range.h"
 
 @implementation SearchResultsTvShowsViewController
 
@@ -26,7 +27,7 @@
     range.start = [_data count];
     range.end = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerElemsPerSearch"] intValue] + [_data count];
     
-    [TvShowsController getTvShowsByName:_tableTitle withRange:range finish:^(id obj) {
+    [TvShowsRequests getTvShowsByName:_tableTitle withRange:range finish:^(id obj) {
         
         NSMutableArray *tvshows = [[NSMutableArray alloc] initWithArray:_data];
         [tvshows addObjectsFromArray:obj];

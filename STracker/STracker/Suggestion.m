@@ -7,6 +7,8 @@
 //
 
 #import "Suggestion.h"
+#import "TvShow.h"
+#import "User.h"
 
 @implementation Suggestion
 

@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseProfileViewController.h"
-#import "TDBadgedCell.h"
+
+@class TDBadgedCell;
 
 /*!
  @discussion This view controller shows the current user profile options.
@@ -17,10 +18,8 @@
  */
 @interface MyProfileViewController : BaseProfileViewController
 {
-    @private
-    __weak IBOutlet TDBadgedCell *_suggestions;
-    @private
-    __weak IBOutlet TDBadgedCell *_requests;
+    @private __weak IBOutlet TDBadgedCell *_suggestions;
+    @private __weak IBOutlet TDBadgedCell *_requests;
 }
 
 @end

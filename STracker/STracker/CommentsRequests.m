@@ -6,15 +6,18 @@
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "CommentController.h"
+#import "CommentsRequests.h"
 #import "STrackerServerHttpClient.h"
 #import "Comment.h"
+#import "UserInfoManager.h"
+#import "Episode.h"
+#import "User.h"
 
-@implementation CommentController
+@implementation CommentsRequests
 
 + (void)getTvShowComments:(NSString *)tvshowId finish:(Finish) finish
 {
-    NSString *uri = [CommentController constructTvShowUri:tvshowId];
+    NSString *uri = [CommentsRequests constructTvShowUri:tvshowId];
     NSString *version = [[STrackerServerHttpClient sharedClient] tryGeVersionFromtCachedData:uri];
     
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
@@ -33,7 +36,7 @@
 
 + (void)getEpisodeComments:(EpisodeId *)episodeId finish:(Finish) finish
 {
-    NSString *uri = [CommentController constructEpisodeUri:episodeId];
+    NSString *uri = [CommentsRequests constructEpisodeUri:episodeId];
     NSString *version = [[STrackerServerHttpClient sharedClient] tryGeVersionFromtCachedData:uri];
     
     [[STrackerServerHttpClient sharedClient] getRequest:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
@@ -52,24 +55,29 @@
 
 + (void)postTvShowComment:(NSString *)tvshowId comment:(NSString *)comment finish:(Finish)finish
 {
-    [CommentController postComment:[CommentController constructTvShowUri:tvshowId] comment:comment finish:finish];
+    [CommentsRequests postComment:[CommentsRequests constructTvShowUri:tvshowId] comment:comment finish:finish];
 }
 
 + (void)postEpisodeComment:(EpisodeId *)episodeId comment:(NSString *)comment finish:(Finish)finish
 {
-    [CommentController postComment:[CommentController constructEpisodeUri:episodeId] comment:comment finish:finish];
+    [CommentsRequests postComment:[CommentsRequests constructEpisodeUri:episodeId] comment:comment finish:finish];
 }
 
 + (void)deleteComment:(NSString *)uri finish:(Finish)finish
 {
-    [[STrackerServerHttpClient sharedClient] deleteRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+    // This request requires authentication.
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.userManager getUser:^(User *user) {
         
-        // Invoke callback.
-        finish(nil);
-        
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        
-        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        [[STrackerServerHttpClient sharedClient] deleteRequestWithHawkProtocol:uri query:nil success:^(AFJSONRequestOperation *operation, id result) {
+            
+            finish(nil);
+            
+        } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+            
+            [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+            
+        } andHawkCredentials:[user getHawkCredentials]];
     }];
 }
 
@@ -105,14 +113,20 @@
 + (void)postComment:(NSString *)uri comment:(NSString *)comment finish:(Finish) finish
 {
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:comment, @"", nil];
+    
+    // This request requires authentication.
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.userManager getUser:^(User *user) {
         
-    [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
+        [[STrackerServerHttpClient sharedClient] postRequestWithHawkProtocol:uri parameters:parameters success:^(AFJSONRequestOperation *operation, id result) {
             
-        // Invoke callback.
-        finish(nil);
+            finish(nil);
             
-    } failure:^(AFJSONRequestOperation *operation, NSError *error) {
-        [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+        } failure:^(AFJSONRequestOperation *operation, NSError *error) {
+            
+            [[AppDelegate getAlertViewForErrors:error.localizedDescription] show];
+            
+        } andHawkCredentials:[user getHawkCredentials]];
     }];
 }
 

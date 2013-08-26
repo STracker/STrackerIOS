@@ -6,10 +6,12 @@
 //  Copyright (c) 2013 STracker. All rights reserved.
 //
 
-#import "TvShowsController.h"
+#import "TvShowsRequests.h"
 #import "STrackerServerHttpClient.h"
+#import "TvShow.h"
+#import "Range.h"
 
-@implementation TvShowsController
+@implementation TvShowsRequests
 
 + (void)getTvShow:(NSString *)uri finish:(Finish) finish
 {

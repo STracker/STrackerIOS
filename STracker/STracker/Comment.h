@@ -7,8 +7,9 @@
 //
 
 #import "Entity.h"
-#import "User.h"
-#import "Episode.h"
+
+@class UserSynopsis;
+@class EpisodeId;
 
 /*!
  @discussion This object defines the comment object.

@@ -43,7 +43,6 @@
     [self.view addSubview:_tableView];
     
     self.navigationItem.title = _tableTitle;
-    _app = [[UIApplication sharedApplication] delegate];
     
     [self configureViewStyle];
 }

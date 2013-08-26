@@ -8,6 +8,7 @@
 
 #import "PersonsViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "Person.h"
 
 @implementation PersonsViewController
 

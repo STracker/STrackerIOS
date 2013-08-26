@@ -7,14 +7,18 @@
 //
 
 #import "HomeViewController.h"
+#import "AppDelegate.h"
+#import "UserInfoManager.h"
 #import "TvShowViewController.h"
 #import "MyProfileViewController.h"
 #import "GenresViewController.h"
-#import "TvShowsController.h"
-#import "GenresController.h"
-#import "UsersController.h"
+#import "TvShowsRequests.h"
+#import "GenresRequests.h"
+#import "UsersRequests.h"
 #import "SearchResultsUsersViewController.h"
 #import "SearchResultsTvShowsViewController.h"
+#import "Range.h"
+#import "TvShow.h"
 
 @implementation HomeViewController
 
@@ -39,9 +43,9 @@
 
 - (IBAction)userOptions:(id)sender
 {
-    [_app getUpdatedUser:^(User *user) {
+    [_app.userManager getUser:^(id obj) {
         
-        MyProfileViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"MyProfile"] initWithUserInfo:user];
+        MyProfileViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"MyProfile"] initWithUserInfo:obj];
         [self.navigationController pushViewController:view animated:YES];
     }];
 }
@@ -77,7 +81,7 @@
 - (void) imagePager:(KIImagePager *)imagePager didSelectImageAtIndex:(NSUInteger)index
 {
     TvShowSynopsis *synopse = [_top objectAtIndex:index];
-    [TvShowsController getTvShow:synopse.uri finish:^(id obj) {
+    [TvShowsRequests getTvShow:synopse.uri finish:^(id obj) {
         
         TvShowViewController *view = [[self.storyboard instantiateViewControllerWithIdentifier:@"TvShowView"] initWithTvShow:obj];
         [self.navigationController pushViewController:view animated:YES];
@@ -140,7 +144,7 @@
  */
 - (void)getTopRated
 {
-    [TvShowsController getTvShowsTopRated:^(id obj) {
+    [TvShowsRequests getTvShowsTopRated:^(id obj) {
         
         // Set and reload data from imagePager.
         _top = obj;
@@ -154,7 +158,7 @@
  */
 - (void)searchGenres
 {
-    [GenresController getGenres:^(id obj) {
+    [GenresRequests getGenres:^(id obj) {
         
         GenresViewController *view = [[GenresViewController alloc] initWithData:obj andTitle:@"Genres"];
         [self.navigationController pushViewController:view animated:YES];
@@ -179,13 +183,9 @@
  */
 - (void)searchUsers
 {
-    [_app getUser:^(id obj) {
-        
-        _alertUser = [[UIAlertView alloc] initWithTitle:@"Insert the name of the user" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Search", nil];
-        _alertUser.alertViewStyle = UIAlertViewStylePlainTextInput;
-        
-        [_alertUser show];
-    }];
+    _alertUser = [[UIAlertView alloc] initWithTitle:@"Insert the name of the user" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Search", nil];
+    _alertUser.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [_alertUser show];
 }
 
 /*!
@@ -199,7 +199,7 @@
     range.start = 0;
     range.end = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerElemsPerSearch"] intValue];
     
-    [TvShowsController getTvShowsByName:name withRange:range finish:^(id obj) {
+    [TvShowsRequests getTvShowsByName:name withRange:range finish:^(id obj) {
         
         SearchResultsTvShowsViewController *view = [[SearchResultsTvShowsViewController alloc] initWithData:obj andTitle:name];
         [self.navigationController pushViewController:view animated:YES];
@@ -217,7 +217,7 @@
     range.start = 0;
     range.end = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"STrackerElemsPerSearch"] intValue];
         
-    [UsersController searchUser:name withRange:range finish:^(id obj) {
+    [UsersRequests searchUser:name withRange:range finish:^(id obj) {
             
         SearchResultsUsersViewController *view = [[SearchResultsUsersViewController alloc] initWithData:obj andTitle:name];
         [self.navigationController pushViewController:view animated:YES];

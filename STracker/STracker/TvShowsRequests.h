@@ -7,14 +7,15 @@
 //
 
 #import "AppDelegate.h"
-#import "TvShow.h"
-#import "Range.h"
+
+@class Range;
+@class TvShow;
 
 /*!
- @discussion Info controller for manage television show 
+ @discussion Info requests for manage television show 
  information.
  */
-@interface TvShowsController : NSObject
+@interface TvShowsRequests : NSObject
 
 /*!
  @discussion Get one television show.

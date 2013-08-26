@@ -8,6 +8,8 @@
 
 #import "BaseProfileViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "User.h"
+#import "AppDelegate.h"
 
 @implementation BaseProfileViewController
 

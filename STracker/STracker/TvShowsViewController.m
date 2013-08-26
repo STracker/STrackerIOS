@@ -7,7 +7,7 @@
 //
 
 #import "TvShowsViewController.h"
-#import "TvShowsController.h"
+#import "TvShowsRequests.h"
 #import "TvShow.h"
 #import "TvShowViewController.h"
 
@@ -19,7 +19,7 @@
 {
     // Open a particular tvshow controller...
     TvShowSynopsis *synopse = [_data objectAtIndex:indexPath.row];    
-    [TvShowsController getTvShow:synopse.uri finish:^(id obj) {
+    [TvShowsRequests getTvShow:synopse.uri finish:^(id obj) {
         
         TvShowViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"TvShowView"] initWithTvShow:obj];
         [self.navigationController pushViewController:view animated:YES];

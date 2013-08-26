@@ -9,10 +9,10 @@
 #import "AppDelegate.h"
 
 /*!
- @discussion Info controller for manage seasons
+ @discussion Info requests for manage seasons
  information.
  */
-@interface EpisodesController : NSObject
+@interface EpisodesRequests : NSObject
 
 /*!
  @discussion Get one episode from request uri.
