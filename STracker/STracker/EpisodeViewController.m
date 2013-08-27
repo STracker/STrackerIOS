@@ -57,11 +57,19 @@
 
 - (IBAction)openDescription:(id)sender
 {
-    UITextView *text = [[UITextView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, 150)];
+    UITextView *text;
+    if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+    {
+        text = [[UITextView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, 300)];
+        
+        [text setFont:[UIFont fontWithName:@"Helvetica" size:16.0]];
+    }
+    else
+        text = [[UITextView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, 150)];
+    
     text.backgroundColor = nil;
     [text setEditable:NO];
     [text setTextAlignment:NSTextAlignmentCenter];
-    [text setFont:[UIFont fontWithName:@"Futura Medium" size:25.0]];
     [text setTextColor:[UIColor whiteColor]];
     text.text = _episode.description;
     
