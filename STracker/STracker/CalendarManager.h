@@ -50,6 +50,6 @@
 /*!
  @discussion Remove the calendar from memory and DB.
  */
-- (void)removeCalendar;
+- (void)deleteCalendar;
 
 @end

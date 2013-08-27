@@ -24,9 +24,4 @@
     [app.window.rootViewController presentSemiView:fb];
 }
 
-+ (void)logout
-{
-    [FBSession.activeSession closeAndClearTokenInformation];
-}
-
 @end

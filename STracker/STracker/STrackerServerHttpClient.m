@@ -68,12 +68,16 @@
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
+        [self cleanHeaders];
+        
         if (success != nil)
             success((AFJSONRequestOperation *)operation, responseObject);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        [self cleanHeaders];
         
         if (failure != nil)
             failure((AFJSONRequestOperation *)operation, error);
@@ -100,11 +104,15 @@
     [self postPath:uri parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
+        [self cleanHeaders];
+        
         if (success != nil)
             success((AFJSONRequestOperation *)operation, responseObject);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        [self cleanHeaders];
         
         if (failure != nil)
             failure((AFJSONRequestOperation *)operation, error);
@@ -129,11 +137,15 @@
     [self deletePath:uri parameters:query success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
+        [self cleanHeaders];
+        
         if (success != nil)
             success((AFJSONRequestOperation *)operation, responseObject);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        [self cleanHeaders];
         
         if (failure != nil)
             failure((AFJSONRequestOperation *)operation, error);
@@ -194,6 +206,12 @@
     }
     
     return query;
+}
+
+- (void)cleanHeaders
+{
+    [self setDefaultHeader:@"If-None-Match" value:@""];
+    [self setDefaultHeader:@"Authorization" value:@""];
 }
 
 @end

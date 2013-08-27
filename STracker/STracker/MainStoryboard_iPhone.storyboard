@@ -128,7 +128,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B1e-nQ-QoE">
-                                <rect key="frame" x="20" y="304" width="231" height="21"/>
+                                <rect key="frame" x="20" y="304" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -208,9 +208,9 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Top shows" id="QF4-7l-NkF">
-                        <barButtonItem key="leftBarButtonItem" image="User_icon.png" id="YxO-XE-qVL">
+                        <barButtonItem key="leftBarButtonItem" image="User_icon.png" id="yX6-XX-Arp">
                             <connections>
-                                <action selector="userOptions:" destination="cQy-gV-Iy8" id="uwi-0f-XeJ"/>
+                                <action selector="userOptions:" destination="cQy-gV-Iy8" id="da3-kr-J0T"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Search.png" id="Sh0-SU-BsV">
@@ -231,7 +231,7 @@
         <scene sceneID="gdg-4f-aWH">
             <objects>
                 <tableViewController storyboardIdentifier="MyProfile" id="UcH-MT-EUX" customClass="MyProfileViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="RM0-uc-Wyi">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="RM0-uc-Wyi">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

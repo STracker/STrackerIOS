@@ -12,6 +12,7 @@
 #import "EpisodeViewController.h"
 #import "EpisodesRequests.h"
 #import "UsersRequests.h"
+#import "UserInfoManager.h"
 #import "CalendarManager.h"
 
 @implementation UserCalendarViewController
@@ -61,7 +62,7 @@
 
 - (void)shakeEvent
 {
-    [_app.calendarManager syncUserCalendar:^(UserCalendar *calendar) {
+    [_app.userManager.calendarManager syncUserCalendar:^(UserCalendar *calendar) {
         
         _data = (NSMutableArray *)calendar.entries;
         [_tableView reloadData];

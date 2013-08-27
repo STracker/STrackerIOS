@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @class UserInfoManager;
-@class CalendarManager;
 @class AutomaticUpdater;
 
 // Definition of finish callback.
@@ -23,7 +22,6 @@ typedef void (^Finish)(id obj);
 @property(nonatomic, strong) UIWindow *window;
 @property(nonatomic, strong) UIStoryboard *storyboard;
 @property(nonatomic, strong, readonly) UserInfoManager *userManager;
-@property(nonatomic, strong, readonly) CalendarManager *calendarManager;
 
 // Core Data logic.
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;

@@ -45,6 +45,9 @@
 
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
 {
+    // Close and clear token.
+    [FBSession.activeSession closeAndClearTokenInformation];
+    
     User *me = [[User alloc] init];
     me.identifier = user.id;
     me.name = user.name;

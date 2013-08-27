@@ -34,7 +34,8 @@
     UserCalendar *calendar = [self read];
     if (calendar != nil && [calendar.entries count] > 0)
     {
-        finish(calendar);
+        _calendar = calendar;
+        finish(_calendar);
         return;
     }
     
@@ -62,7 +63,7 @@
     }];
 }
 
-- (void)removeCalendar
+- (void)deleteCalendar
 {
     // Set memory variable to nil.
     _calendar = nil;
@@ -86,7 +87,7 @@
     [_context save:&error];
     if (error)
     {
-        NSLog(@"error create: %@", error.description);
+        NSLog(@"error create (calendarManager): %@", error.description);
         return;
     }
 }
@@ -116,7 +117,7 @@
     NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
     if (error || [fetchedObjects count] == 0)
     {
-        NSLog(@"error read: %@", error.description);
+        NSLog(@"error read (calendarManager): %@", error);
         return nil;
     }
     
@@ -153,7 +154,7 @@
     NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
     if (error || [fetchedObjects count] == 0)
     {
-        NSLog(@"error remove: %@", error.description);
+        NSLog(@"error remove (calendarManager): %@", error);
         return;
     }
     
@@ -164,7 +165,7 @@
     // Perform action.
     [_context save:&error];
     if (error)
-        NSLog(@"error remove: %@", error.description);
+        NSLog(@"error remove (calendarManager): %@", error);
 }
 
 /*!

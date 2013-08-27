@@ -105,7 +105,7 @@
  */
 - (void)calendar
 {
-    [_app.calendarManager getUserCalendar:^(UserCalendar *calendar) {
+    [_app.userManager.calendarManager getUserCalendar:^(UserCalendar *calendar) {
         
         UserCalendarViewController *view = [[UserCalendarViewController alloc] initWithData:calendar.entries andTitle:@"Calendar"];
         [self.navigationController pushViewController:view animated:YES];
@@ -157,8 +157,10 @@
  */
 - (void)logout
 {
-    // TODO
-    NSLog(@"TODO");
+    // Remove user info from DB.
+    [_app.userManager deleteUser];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

@@ -24,19 +24,29 @@
     return self;
 }
 
-- (void)start
+- (void)startWithInterval:(float)interval
 {
-    if (_timer != nil)
+    if (interval == 0)
         return;
     
-    // TODO -> put the seconds in users defaults.
-    _timer = [NSTimer scheduledTimerWithTimeInterval:20.0 target:self selector:@selector(looper) userInfo:nil repeats:YES];
+    if (_timer != nil && _timer.timeInterval == interval)
+        return;
+    
+    //Convert to min.
+    interval *= 60;
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(looper) userInfo:nil repeats:YES];
 }
 
 - (void)stop
 {
     [_timer invalidate];
     _timer = nil;
+}
+
+- (BOOL)check
+{
+    return _timer != nil;
 }
 
 /*!
@@ -58,7 +68,7 @@
                 [[AppDelegate getAlertViewForErrors:@"New suggestion received."] show];
         }];
         
-        [_app.calendarManager syncUserCalendar:^(id obj) {
+        [_app.userManager.calendarManager syncUserCalendar:^(id obj) {
             
             // Nothing todo...
             

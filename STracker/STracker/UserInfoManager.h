@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 
 @class User;
+@class CalendarManager;
 
 /*!
  @discussion This class have the CRUD operations for user's persistent data. 
@@ -30,6 +31,8 @@
      */
     @private NSManagedObjectContext *_context;
 }
+
+@property(nonatomic, strong, readonly) CalendarManager *calendarManager;
 
 /*!
  @discussion Initializes the object.

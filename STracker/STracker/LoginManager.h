@@ -21,9 +21,4 @@
  */
 + (void)login:(Finish) finish;
 
-/*!
- @discussion Performs the logout from FB account.
- */
-+ (void)logout;
-
 @end

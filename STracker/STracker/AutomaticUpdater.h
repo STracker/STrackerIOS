@@ -22,12 +22,19 @@
 
 /*!
  @discussion This method starts the timer.
+ @param interval    The value for interval.
  */
-- (void)start;
+- (void)startWithInterval:(float)interval;
 
 /*!
  @discussion This method stops the timer.
  */
 - (void)stop;
+
+/*!
+ @discussion Verify the timer.
+ @return check  Returns true if timer is created.
+ */
+- (BOOL)check;
 
 @end

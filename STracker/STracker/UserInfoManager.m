@@ -13,13 +13,19 @@
 #import "UsersRequests.h"
 #import "LoginManager.h"
 #import "FacebookView.h"
+#import "CalendarManager.h"
 
 @implementation UserInfoManager
+
+@synthesize calendarManager;
 
 - (id)initWithContext:(NSManagedObjectContext *)context
 {
     if (self = [super init])
+    {
         _context = context;
+        calendarManager = [[CalendarManager alloc] initWithContext:_context];
+    }
     
     return self;
 }
@@ -32,12 +38,13 @@
         finish(_user);
         return;
     }
-    
+   
     // Verify in DB.
     User *user = [self read];
     if (user != nil)
     {
-        finish(user);
+        _user = user;
+        finish(_user);
         return;
     }
     
@@ -53,6 +60,12 @@
             // Insert in DB.
             [self createAsync:newUser];
             
+            // Get calendar.
+            [calendarManager getUserCalendar:^(id obj) {
+                
+                // Nothing todo...
+            }];
+                        
             finish(_user);
         }];
     }];
@@ -90,14 +103,14 @@
 
 - (void)deleteUser
 {
-    // Logout from FB.
-    [LoginManager logout];
-    
     // Set memory variable to nil.
     _user = nil;
     
     // Remove from DB.
     [self remove];
+    
+    // Remove calendar.
+    [calendarManager deleteCalendar];
 }
 
 #pragma mark - OfflineUserInfoController auxiliary private methods.
@@ -110,7 +123,7 @@
     NSError *error;
     [_context save:&error];
     if (error)
-        NSLog(@"error create: %@", error.description);
+        NSLog(@"error create (userManager): %@", error);
 }
 
 /*!
@@ -141,7 +154,7 @@
     NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
     if (error || [fetchedObjects count] == 0)
     {
-        NSLog(@"error read: %@", error.description);
+        NSLog(@"error read (userManager): %@", error);
         return nil;
     }
     
@@ -178,7 +191,7 @@
     NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
     if (error || [fetchedObjects count] == 0)
     {
-        NSLog(@"error remove: %@", error.description);
+        NSLog(@"error fetch remove (userManager): %@", error);
         return;
     }
     
@@ -186,10 +199,11 @@
     
     [_context deleteObject:uData];
     
+    error = nil;
     // Perform action.
     [_context save:&error];
     if (error)
-        NSLog(@"error remove: %@", error.description);
+        NSLog(@"error remove (userManager): %@", error);
 }
 
 /*!

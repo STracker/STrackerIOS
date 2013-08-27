@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "UserInfoManager.h"
-#import "CalendarManager.h"
 #import "AutomaticUpdater.h"
 #import "FXReachability.h"
 #import "LoginManager.h"
@@ -20,7 +19,7 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-@synthesize window, storyboard, userManager, calendarManager;
+@synthesize window, storyboard, userManager;
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -85,8 +84,6 @@
     
     // Set user manager.
     userManager = [[UserInfoManager alloc] initWithContext:self.managedObjectContext];
-    // Set calendar manager.
-    calendarManager = [[CalendarManager alloc] initWithContext:self.managedObjectContext];
     // Set updater.
     updater = [[AutomaticUpdater alloc] init];
     
@@ -100,21 +97,13 @@
     /*
      Verify user defaults for start the automatic updater.
      */
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL enabled = [defaults boolForKey:@"update_value"];
-    if (!enabled)
-        [updater stop];
-    else
-        [updater start];
+    [self checkAutomaticUpdater];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
-    
-    // User Logout.
-    [LoginManager logout];
 }
 
 // Core Data logic.
@@ -232,10 +221,26 @@
         [updater stop];
     else
     {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        BOOL enabled = [defaults boolForKey:@"update_value"];
-        if (enabled)
-            [updater start];
+        if (![updater check])
+            [self checkAutomaticUpdater];
+    }
+}
+
+#pragma mark - Auxiliary private methods.
+
+/*!
+ @discussion Auxiliary method for check the automatic updater user settings.
+ */
+- (void)checkAutomaticUpdater
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL enabled = [defaults boolForKey:@"update_value"];
+    if (!enabled)
+        [updater stop];
+    else
+    {
+        float interval = [defaults integerForKey:@"update_slider"];
+        [updater startWithInterval:interval];
     }
 }
 
