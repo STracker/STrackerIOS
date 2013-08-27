@@ -13,7 +13,6 @@
 #import "UsersRequests.h"
 #import "LoginManager.h"
 #import "FacebookView.h"
-#import "UIViewController+KNSemiModal.h"
 
 @implementation UserInfoManager
 
@@ -34,7 +33,7 @@
         return;
     }
     
-    // Verify if have in DB.
+    // Verify in DB.
     User *user = [self read];
     if (user != nil)
     {
@@ -42,11 +41,11 @@
         return;
     }
     
-    // Perform the login. fbU is the user that comes from FB Login (only have email, name and id).
-    [LoginManager loginWithFacebook:^(User *fbU) {
-    
+    // Perform the login. userFromLogin is the user that comes from Login (only have email, name and id).
+    [LoginManager login:^(User *userFromLogin) {
+        
         // Register the user into STracker server.
-        [UsersRequests registUser:fbU finish:^(User *newUser) {
+        [UsersRequests registUser:userFromLogin finish:^(User *newUser) {
             
             // Set memory variable, for fast access.
             _user = newUser;
@@ -57,6 +56,7 @@
             finish(_user);
         }];
     }];
+
 }
 
 - (void)updateUser:(User *)user
@@ -90,16 +90,14 @@
 
 - (void)deleteUser
 {
-    [LoginManager logoutFromFacebook:^(id obj) {
-        
-        // Set memory variable to nil.
-        _user = nil;
-        
-        [[AsyncQueue sharedObject] performAsyncOperation:^{
-            
-            [self remove];
-        }];
-    }];
+    // Logout from FB.
+    [LoginManager logout];
+    
+    // Set memory variable to nil.
+    _user = nil;
+    
+    // Remove from DB.
+    [self remove];
 }
 
 #pragma mark - OfflineUserInfoController auxiliary private methods.

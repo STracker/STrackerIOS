@@ -19,13 +19,11 @@
  @param finish  Callback that was called when login was
  complete.
  */
-+ (void)loginWithFacebook:(Finish) finish;
++ (void)login:(Finish) finish;
 
 /*!
  @discussion Performs the logout from FB account.
- @param finish  Callback that was called when login was
- complete.
  */
-+ (void)logoutFromFacebook:(Finish) finish;
++ (void)logout;
 
 @end

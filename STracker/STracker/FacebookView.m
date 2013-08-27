@@ -35,7 +35,7 @@
 #pragma mark - FBLoginView delegate
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
 {
-    [_fb setHidden:YES];
+        [_fb setHidden:YES];
 }
 
 - (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error

@@ -12,6 +12,7 @@
 #import "CalendarManager.h"
 #import "AutomaticUpdater.h"
 #import "FXReachability.h"
+#import "LoginManager.h"
 
 @implementation AppDelegate
 
@@ -111,6 +112,9 @@
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+    
+    // User Logout.
+    [LoginManager logout];
 }
 
 // Core Data logic.

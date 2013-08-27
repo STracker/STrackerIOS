@@ -12,7 +12,7 @@
 
 @implementation LoginManager
 
-+ (void)loginWithFacebook:(Finish) finish
++ (void)login:(Finish) finish
 {
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     FacebookView *fb = [[FacebookView alloc] initWithCallback:^(id obj) {
@@ -24,17 +24,9 @@
     [app.window.rootViewController presentSemiView:fb];
 }
 
-+ (void)logoutFromFacebook:(Finish)finish
++ (void)logout
 {
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    FacebookView *fb = [[FacebookView alloc] initWithCallback:^(id obj) {
-        
-        [app.window.rootViewController dismissSemiModalView];
-        finish(obj);
-    }];
-    
-    [app.window.rootViewController presentSemiView:fb];
-
+    [FBSession.activeSession closeAndClearTokenInformation];
 }
 
 @end

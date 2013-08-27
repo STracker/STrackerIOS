@@ -153,13 +153,12 @@
 }
 
 /*!
- @discussion Removes user information from application and pop for home view.
+ @discussion Auxiliary method that performs the logout.
  */
 - (void)logout
 {
-    [_app.userManager deleteUser];
-    
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    // TODO
+    NSLog(@"TODO");
 }
 
 @end

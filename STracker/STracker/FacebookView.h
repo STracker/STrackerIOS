@@ -15,15 +15,13 @@
  */
 @interface FacebookView : UIView<FBLoginViewDelegate>
 {
-    @private
-    Finish _finish;
-    @private
-    FBLoginView *_fb;
+    @private Finish _finish;
+    @private FBLoginView *_fb;
 }
 
 /*!
  @discussion Init method that receives the callback for execute code after the login.
- @param finish The finish callback.
+ @param finish  The finish callback.
  @return One instance of FacebookView.
  */
 - (id)initWithCallback:(Finish) finish;

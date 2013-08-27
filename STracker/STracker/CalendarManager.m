@@ -38,7 +38,15 @@
         return;
     }
     
-    [self syncUserCalendar:finish];
+    [UsersRequests getUserCalendar:^(UserCalendar *calendar) {
+    
+        // Set memory variable.
+        _calendar = calendar;
+        // Create in DB.
+        [self createAsync:calendar];
+    
+        finish(_calendar);
+    }];
 }
 
 - (void)syncUserCalendar:(Finish)finish
@@ -59,10 +67,8 @@
     // Set memory variable to nil.
     _calendar = nil;
     
-    [[AsyncQueue sharedObject] performAsyncOperation:^{
-        
-        [self remove];
-    }];
+    // Remove from DB.
+    [self remove];
 }
 
 #pragma mark - UserCalendar auxiliary private methods.
