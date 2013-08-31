@@ -13,6 +13,15 @@
 
 @implementation SeasonViewController
 
+/*
+ Override configure cell hook method for change the title of the cells.
+ */
+- (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
+{
+    EpisodeSynopsis *episode = [_data objectAtIndex:indexPath.row];
+    cell.textLabel.text = [episode constructNumber];
+}
+
 #pragma mark - Table view delegate.
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
