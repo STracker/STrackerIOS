@@ -10,6 +10,7 @@
 #import "TvShow.h"
 #import "Genre.h"
 #import "Subscription.h"
+#import "Suggestion.h"
 #import "User.h"
 #import "UsersRequests.h"
 #import "RatingsRequests.h"
@@ -245,7 +246,20 @@
             
             [user.subscriptions setObject:subscription forKey:_tvshow.identifier];
             
+            // Verify also the suggestions for same tv show.
+            NSMutableArray *sugsToRemove = [[NSMutableArray alloc] init];
+            for (Suggestion *sug in user.suggestions)
+            {
+                if ([sug.tvshow.identifier isEqualToString:_tvshow.identifier])
+                    [sugsToRemove addObject:sug];
+            }
+            
+            [user.suggestions removeObjectsInArray:sugsToRemove];
+
             // Save changes.
+            
+            // Need to increment version because the subscriptions.
+            user.version++;
             [_app.userManager updateUser:user];
         }];
     }];

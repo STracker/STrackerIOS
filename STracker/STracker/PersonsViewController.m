@@ -12,11 +12,6 @@
 
 @implementation PersonsViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
 - (void)configureCellHook:(UITableViewCell *)cell inIndexPath:(NSIndexPath *)indexPath
 {
     [cell setAccessoryType:UITableViewCellAccessoryNone];

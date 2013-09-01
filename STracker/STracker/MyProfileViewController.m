@@ -20,9 +20,18 @@
 
 @implementation MyProfileViewController
 
+/*
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self setBadgesInfo];
+}
+ */
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     [self setBadgesInfo];
 }
