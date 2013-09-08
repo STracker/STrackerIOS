@@ -36,7 +36,7 @@
 	<key>FacebookAppID</key>
 	<string>516839011711939</string>
 	<key>HawkKey</key>
-	<string>werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn</string>
+	<string>mnbvcxzlkjhgfdsapoiuytrewq246813579stracker</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>STrackerElemsPerSearch</key>
@@ -50,7 +50,7 @@
 	<key>STrackerGenresURI</key>
 	<string>genres</string>
 	<key>STrackerServerBaseURL</key>
-	<string>http://strackerserverdev.apphb.com/api</string>
+	<string>http://stracker.apphb.com/api</string>
 	<key>STrackerTopRatedTvShowsURI</key>
 	<string>tvshows/toprated</string>
 	<key>STrackerTopTvShowsNumber</key>
