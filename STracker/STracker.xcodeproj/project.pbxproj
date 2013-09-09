@@ -29,7 +29,7 @@
 		8CF8CCB017C02D2700FF1DD0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF8CC8C17C02D2700FF1DD0 /* Foundation.framework */; };
 		8CF8CCB117C02D2700FF1DD0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF8CC9017C02D2700FF1DD0 /* CoreData.framework */; };
 		8CF8CCB917C02D2700FF1DD0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8CF8CCB717C02D2700FF1DD0 /* InfoPlist.strings */; };
-		8CF8CCBC17C02D2700FF1DD0 /* STrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CCBB17C02D2700FF1DD0 /* STrackerTests.m */; };
+		8CF8CCBC17C02D2700FF1DD0 /* TvShowInformationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8CCBB17C02D2700FF1DD0 /* TvShowInformationTests.m */; };
 		8CF8CCC617C02D5C00FF1DD0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF8CCC517C02D5C00FF1DD0 /* QuartzCore.framework */; };
 		8CF8CCC817C02D6300FF1DD0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF8CCC717C02D6300FF1DD0 /* Security.framework */; };
 		8CF8CCCA17C02D6800FF1DD0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF8CCC917C02D6800FF1DD0 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -149,8 +149,8 @@
 		8CF8CCAD17C02D2700FF1DD0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		8CF8CCB617C02D2700FF1DD0 /* STrackerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "STrackerTests-Info.plist"; sourceTree = "<group>"; };
 		8CF8CCB817C02D2700FF1DD0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		8CF8CCBA17C02D2700FF1DD0 /* STrackerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STrackerTests.h; sourceTree = "<group>"; };
-		8CF8CCBB17C02D2700FF1DD0 /* STrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STrackerTests.m; sourceTree = "<group>"; };
+		8CF8CCBA17C02D2700FF1DD0 /* TvShowInformationTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TvShowInformationTests.h; sourceTree = "<group>"; };
+		8CF8CCBB17C02D2700FF1DD0 /* TvShowInformationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TvShowInformationTests.m; sourceTree = "<group>"; };
 		8CF8CCC517C02D5C00FF1DD0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8CF8CCC717C02D6300FF1DD0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8CF8CCC917C02D6800FF1DD0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -423,8 +423,8 @@
 		8CF8CCB417C02D2700FF1DD0 /* STrackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				8CF8CCBA17C02D2700FF1DD0 /* STrackerTests.h */,
-				8CF8CCBB17C02D2700FF1DD0 /* STrackerTests.m */,
+				8CF8CCBA17C02D2700FF1DD0 /* TvShowInformationTests.h */,
+				8CF8CCBB17C02D2700FF1DD0 /* TvShowInformationTests.m */,
 				8CF8CCB517C02D2700FF1DD0 /* Supporting Files */,
 			);
 			path = STrackerTests;
@@ -944,7 +944,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CF8CCBC17C02D2700FF1DD0 /* STrackerTests.m in Sources */,
+				8CF8CCBC17C02D2700FF1DD0 /* TvShowInformationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

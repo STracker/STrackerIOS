@@ -15,8 +15,7 @@ typedef void (^Block)();
  */
 @interface AsyncQueue : NSObject
 {
-    @private
-    dispatch_queue_t _queue;
+    @private dispatch_queue_t _queue;
 }
 
 /*!
