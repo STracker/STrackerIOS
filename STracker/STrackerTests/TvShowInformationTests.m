@@ -129,4 +129,28 @@
     }
 }
 
+/*!
+ @disucssion Get the top rated television shows.
+ */
+- (void) testTopRated
+{
+    __block BOOL done = NO;
+    __block NSArray *tvshows;
+    
+    [TvShowsRequests getTvShowsTopRated:^(id obj) {
+        tvshows = obj;
+        done = YES;
+    }];
+    
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:30];
+    while (!done && [loopUntil timeIntervalSinceNow] > 0)
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
+    
+    if (done)
+    {
+        NSUInteger max = 8;
+        STAssertEquals(tvshows.count, max, @"number of tvshows in top rated");
+    }
+}
+
 @end
