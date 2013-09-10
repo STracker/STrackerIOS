@@ -43,7 +43,7 @@
     return sharedClient;
 }
 
-- (NSString *)tryGeVersionFromtCachedData:(NSString *)uri
+- (NSString *)tryGetVersionFromtCachedData:(NSString *)uri
 {
     NSURLRequest *request = [self requestWithMethod:@"GET" path:uri parameters:nil];
     NSURLCache *cache = [NSURLCache sharedURLCache];

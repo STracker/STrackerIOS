@@ -39,7 +39,7 @@ typedef void (^Failure)(AFJSONRequestOperation *operation, NSError *error);
  @param uri The entity uri for search in the cache.
  @return The version if the entity exists in cache, or nil if not.
  */
-- (NSString *)tryGeVersionFromtCachedData:(NSString *)uri;
+- (NSString *)tryGetVersionFromtCachedData:(NSString *)uri;
 
 /*!
  @discussion Method for making an HTTP GET request to STracker server.

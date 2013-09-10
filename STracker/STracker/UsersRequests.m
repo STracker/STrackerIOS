@@ -44,7 +44,7 @@
     // if version from database is nil, try get it from local cache data.
     NSString *version = nil;
     if (user.version == 0)
-        version = [[STrackerServerHttpClient sharedClient] tryGeVersionFromtCachedData:uri];
+        version = [[STrackerServerHttpClient sharedClient] tryGetVersionFromtCachedData:uri];
     else
         version = [NSString stringWithFormat:@"%d", user.version];
     
@@ -89,7 +89,7 @@
 
 + (void)getUser:(NSString *)uri finish:(Finish) finish
 {
-    NSString *version = [[STrackerServerHttpClient sharedClient] tryGeVersionFromtCachedData:uri];
+    NSString *version = [[STrackerServerHttpClient sharedClient] tryGetVersionFromtCachedData:uri];
     
     // This request requires authentication.
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
