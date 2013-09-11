@@ -34,7 +34,6 @@
     _userName.text = _comment.user.name;
 
     [_app.userManager getUser:^(User *user) {
-
         if ([user.identifier isEqualToString:_comment.user.identifier])
         {
             // If the comment is from the current user, add the delete option.

@@ -53,8 +53,11 @@
 {
     Comment *comment = [_data objectAtIndex:indexPath.row];
     
-    CommentViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"CommentView"] initWithComment:comment];
+    // Need to be logged in...
+    [_app.userManager getUser:^(id obj) {
+        CommentViewController *view = [[_app.storyboard instantiateViewControllerWithIdentifier:@"CommentView"] initWithComment:comment];
         [self.navigationController pushViewController:view animated:YES];
+    }];
 }
 
 #pragma mark - Selectors.
