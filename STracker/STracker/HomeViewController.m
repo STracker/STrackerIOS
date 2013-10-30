@@ -27,7 +27,7 @@
     [super viewDidLoad];
     
     // Well, without background pattern, this view stays more cool...
-    self.view.backgroundColor = nil;
+    // self.view.backgroundColor = nil;
     
     [self getTopRated];
 }

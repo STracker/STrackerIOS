@@ -10,7 +10,7 @@
 
 @class AppDelegate;
 
-#define BACKGROUND @"BackgroundPattern.png"
+//#define BACKGROUND @"BackgroundPattern.png"
 
 /*!
  @discussion This controller is the base controller of all 

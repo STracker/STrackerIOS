@@ -31,6 +31,7 @@
     if (indexPath.section == 0)
     {
         cell.textLabel.text = _subscription.tvshow.name;
+        cell.detailTextLabel.text = nil;
         return;
     }
     

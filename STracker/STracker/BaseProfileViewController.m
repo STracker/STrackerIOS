@@ -28,8 +28,8 @@
 {
     [super viewDidLoad];
     
-    self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
+    //self.tableView.backgroundView = nil;
+    //self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];    
 }
 

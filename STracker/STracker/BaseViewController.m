@@ -16,7 +16,8 @@
     [super viewDidLoad];
 	
     // Redefine the background pattern color.
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
+    // self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
+    // self.view.backgroundColor = [UIColor grayColor];
     
     _app = [[UIApplication sharedApplication] delegate];
 }

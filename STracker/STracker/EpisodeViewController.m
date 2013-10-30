@@ -142,7 +142,7 @@
  */
 - (void)configureView
 {
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BACKGROUND]];
     self.navigationItem.title = _episode.name;
     
     _date.text = _episode.date;
